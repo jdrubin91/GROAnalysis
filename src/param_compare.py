@@ -33,7 +33,7 @@ def run(file1,file2):
                 
     ST = intervals.comparison((A,B))
     OVERLAPS_0_1 = ST.find_overlaps(0,1)
-    print "Overlap Instances: " + len(OVERLAPS_0_1)
+    print "Overlap Instances: " + str(len(OVERLAPS_0_1))
     for O in OVERLAPS_0_1:
         if not len(O.overlaps.keys()) > 2:
             for interval_original in O.overlaps:
@@ -49,5 +49,5 @@ def run(file1,file2):
 
 if __name__ == "__main__":
     x,y = run(file1,file2)
-    print "x: " + len(x) + "\ny: " + len(y)
+    print "x: " + str(len(x)) + "\ny: " + str(len(y))
     #plot(x,y)
