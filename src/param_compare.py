@@ -6,8 +6,8 @@ import matplotlib.pyplot as plt
 import intervals
 
 
-file1 = '/scratch/Shares/dowell/ENCODE/Rubin2015_DMSO-4_divergent_classifications.bed'
-file2 = '/scratch/Shares/dowell/ENCODE/Rubin2015_DMSO-3_divergent_classifications.bed'
+file1 = '/scratch/Shares/dowell/ENCODE/Allen2014_DMSO2_3-19_divergent_classifications.bed'
+file2 = '/scratch/Shares/dowell/ENCODE/Allen2014_Nutlin2_3-3_divergent_classifications.bed'
 savedir = '/scratch/Users/joru1876/GROAnalysis/figures/'
 
 #Runs interval search over all bed sites in both files, recovers parameters in 
