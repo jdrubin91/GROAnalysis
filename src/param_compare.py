@@ -8,12 +8,11 @@ import intervals
 
 file1 = '/scratch/Shares/dowell/ENCODE/Rubin2015_DMSO-2_divergent_classifications.bed'
 file2 = '/scratch/Shares/dowell/ENCODE/Rubin2015_DMSO-1_divergent_classifications.bed'
-savedir = '/scratch/Users/joru1876/figure.png'
+savedir = '/scratch/Users/joru1876/GROAnalysis/figures/'
 
 #Runs interval search over all bed sites in both files, recovers parameters in 
 #bidirectional model
 def run(file1,file2):
-    index = 1
     x = list()
     y = list()
     d1 = dict()
@@ -39,13 +38,18 @@ def run(file1,file2):
     ST = intervals.comparison((A,B))
     OVERLAPS_0_1 = ST.find_overlaps(0,1)
     print "Overlap Instances: " + str(len(OVERLAPS_0_1))
-    for O in OVERLAPS_0_1:
-        if not len(O.overlaps.keys()) > 2:
-            for interval_original in O.overlaps:
-   	        if 'A' in interval_original.INFO:
-              	    x.append(float(d1[interval_original.INFO[1] + ':' + str(interval_original.start) + '-' + str(interval_original.stop)][index]))
-              	elif 'B' in interval_original.INFO:
-              	    y.append(float(d2[interval_original.INFO[1] + ':' + str(interval_original.start) + '-' + str(interval_original.stop)][index]))
+    for index in range(len(param)):
+        for O in OVERLAPS_0_1:
+            if not len(O.overlaps.keys()) > 2:
+                for interval_original in O.overlaps:
+                    if 'A' in interval_original.INFO:
+                        x.append(float(d1[interval_original.INFO[1] + ':' + str(interval_original.start) + '-' + str(interval_original.stop)][index]))
+                    elif 'B' in interval_original.INFO:
+                        y.append(float(d2[interval_original.INFO[1] + ':' + str(interval_original.start) + '-' + str(interval_original.stop)][index]))
+               	    
+        F = plt.figure()
+        plt.scatter(x,y)
+        plt.savefig(savedir + 'figure' + str(index) + '.png')
     
     return x,y
 #Creates a scatter plot of x and y values
