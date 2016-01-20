@@ -4,7 +4,8 @@ import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import intervals
-
+from scipy.stats import gaussian_kde
+import numpy as np
 
 file1 = '/scratch/Shares/dowell/ENCODE/Allen2014_DMSO2_3-19_divergent_classifications.bed'
 file2 = '/scratch/Shares/dowell/ENCODE/Allen2014_Nutlin2_3-3_divergent_classifications.bed'
@@ -49,7 +50,9 @@ def run(file1,file2):
                         y.append(float(d2[interval_original.INFO[1] + ':' + str(interval_original.start) + '-' + str(interval_original.stop)][index]))
                	    
         F = plt.figure()
-        plt.scatter(x,y,alpha=0.05)
+        xy = np.vstack([x,y])
+        z = gaussian_kde(xy)(xy)
+        plt.scatter(x,y,alpha=0.05,color=z,edgecolor="",s=14)
         plt.savefig(savedir + 'figure' + str(index) + '.png')
     
     return x,y
