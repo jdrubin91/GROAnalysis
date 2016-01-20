@@ -49,5 +49,5 @@ def run(file1,file2):
 
 if __name__ == "__main__":
     x,y = run(file1,file2)
-    print "x: " + str(len(x)) + "\ny: " + str(len(y))
+    print x[0:10]
     #plot(x,y)
