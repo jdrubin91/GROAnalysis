@@ -1,8 +1,8 @@
 __author__ = "Jonathan Rubin"
 
-import intervals
 import matplotlib
 matplotlib.use('Agg')
+import intervals
 
 
 file1 = '/scratch/Shares/dowell/ENCODE/Rubin2015_DMSO-2_divergent_classifications.bed'
