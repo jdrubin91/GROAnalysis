@@ -1,10 +1,14 @@
 __author__ = "Jonathan Rubin"
 
 import intervals
+import matplotlib
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
+
 
 file1 = '/scratch/Shares/dowell/ENCODE/Rubin2015_DMSO-2_divergent_classifications.bed'
 file2 = '/scratch/Shares/dowell/ENCODE/Rubin2015_DMSO-1_divergent_classifications.bed'
+savedir = '/scratch/Users/joru1876/figure.png'
 
 #Runs interval search over all bed sites in both files, recovers parameters in 
 #bidirectional model
@@ -48,7 +52,7 @@ def run(file1,file2):
 def plot(x,y):
     F = plt.figure()
     plt.scatter(x,y)
-    plt.savefig('/scratch/Users/joru1876/figure.png')
+    plt.savefig(savedir)
 
 if __name__ == "__main__":
     x,y = run(file1,file2)
