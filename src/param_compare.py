@@ -49,7 +49,7 @@ def run(file1,file2):
                         y.append(float(d2[interval_original.INFO[1] + ':' + str(interval_original.start) + '-' + str(interval_original.stop)][index]))
                	    
         F = plt.figure()
-        plt.scatter(x,y)
+        plt.scatter(x,y,alpha=0.05)
         plt.savefig(savedir + 'figure' + str(index) + '.png')
     
     return x,y
