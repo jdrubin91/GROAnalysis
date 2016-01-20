@@ -3,7 +3,6 @@ __author__ = "Jonathan Rubin"
 import intervals
 import matplotlib
 matplotlib.use('Agg')
-import matplotlib.pyplot as plt
 
 
 file1 = '/scratch/Shares/dowell/ENCODE/Rubin2015_DMSO-2_divergent_classifications.bed'
@@ -50,9 +49,9 @@ def run(file1,file2):
     return x,y
 #Creates a scatter plot of x and y values
 def plot(x,y):
-    F = plt.figure()
-    plt.scatter(x,y)
-    plt.savefig(savedir)
+    F = matplotlib.pyplot.figure()
+    matplotlib.pyplot.scatter(x,y)
+    matplotlib.pyplot.savefig(savedir)
 
 if __name__ == "__main__":
     x,y = run(file1,file2)
