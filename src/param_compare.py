@@ -2,6 +2,7 @@ __author__ = "Jonathan Rubin"
 
 import matplotlib
 matplotlib.use('Agg')
+import matplotlib.pyplot as plt
 import intervals
 
 
@@ -12,7 +13,7 @@ savedir = '/scratch/Users/joru1876/figure.png'
 #Runs interval search over all bed sites in both files, recovers parameters in 
 #bidirectional model
 def run(file1,file2):
-    index = 0
+    index = 1
     x = list()
     y = list()
     d1 = dict()
@@ -49,11 +50,10 @@ def run(file1,file2):
     return x,y
 #Creates a scatter plot of x and y values
 def plot(x,y):
-    F = matplotlib.pyplot.figure()
-    matplotlib.pyplot.scatter(x,y)
-    matplotlib.pyplot.savefig(savedir)
+    F = plt.figure()
+    plt.scatter(x,y)
+    plt.savefig(savedir)
 
 if __name__ == "__main__":
     x,y = run(file1,file2)
-    print x[0:10],y[0:10]
     plot(x,y)
