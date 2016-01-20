@@ -13,8 +13,7 @@ savedir = '/scratch/Users/joru1876/GROAnalysis/figures/'
 #Runs interval search over all bed sites in both files, recovers parameters in 
 #bidirectional model
 def run(file1,file2):
-    x = list()
-    y = list()
+
     d1 = dict()
     d2 = dict()
     A = list()
@@ -39,6 +38,8 @@ def run(file1,file2):
     OVERLAPS_0_1 = ST.find_overlaps(0,1)
     print "Overlap Instances: " + str(len(OVERLAPS_0_1))
     for index in range(len(param)):
+        x = list()
+        y = list()
         for O in OVERLAPS_0_1:
             if not len(O.overlaps.keys()) > 2:
                 for interval_original in O.overlaps:
