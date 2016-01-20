@@ -38,9 +38,9 @@ def run(file1,file2):
         if not len(O.overlaps.keys()) > 2:
             for interval_original in O.overlaps:
    	        if 'A' in interval_original.INFO:
-              	    x.append(d1[interval_original.INFO[1] + ':' + interval_original.start + '-' + interval_original.stop][param])
+              	    x.append(d1[interval_original.INFO[1] + ':' + str(interval_original.start) + '-' + str(interval_original.stop)][param])
               	elif 'B' in interval_original.INFO:
-              	    y.append(d2[interval_original.INFO[1] + ':' + interval_original.start + '-' + interval_original.stop][param])
+              	    y.append(d2[interval_original.INFO[1] + ':' + str(interval_original.start) + '-' + str(interval_original.stop)][param])
     
     return x,y
 #Creates a scatter plot of x and y values
