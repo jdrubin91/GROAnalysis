@@ -8,7 +8,7 @@ file2 = '/scratch/Shares/dowell/ENCODE/Rubin2015_DMSO-1_divergent_classification
 #Runs interval search over all bed sites in both files, recovers parameters in 
 #bidirectional model
 def run(file1,file2):
-    param = 0
+    index = 0
     x = list()
     y = list()
     d1 = dict()
@@ -37,11 +37,10 @@ def run(file1,file2):
     for O in OVERLAPS_0_1:
         if not len(O.overlaps.keys()) > 2:
             for interval_original in O.overlaps:
-                print param
    	        if 'A' in interval_original.INFO:
-              	    x.append(d1[interval_original.INFO[1] + ':' + str(interval_original.start) + '-' + str(interval_original.stop)][param])
+              	    x.append(d1[interval_original.INFO[1] + ':' + str(interval_original.start) + '-' + str(interval_original.stop)][index])
               	elif 'B' in interval_original.INFO:
-              	    y.append(d2[interval_original.INFO[1] + ':' + str(interval_original.start) + '-' + str(interval_original.stop)][param])
+              	    y.append(d2[interval_original.INFO[1] + ':' + str(interval_original.start) + '-' + str(interval_original.stop)][index])
     
     return x,y
 #Creates a scatter plot of x and y values
