@@ -52,7 +52,7 @@ def run(file1,file2):
         F = plt.figure()
         xy = np.vstack([x,y])
         z = gaussian_kde(xy)(xy)
-        plt.scatter(x,y,alpha=0.05,color=z,edgecolor="",s=14)
+        plt.scatter(x,y,alpha=0.05,c=z,edgecolor="",s=14)
         plt.savefig(savedir + 'figure' + str(index) + '.png')
     
     return x,y
