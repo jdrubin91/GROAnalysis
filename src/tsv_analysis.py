@@ -50,7 +50,7 @@ def run(file1,file2):
     print "avg: " + str(sum(X)/len(X))
     
     for val in X:
-        if val > 50:
+        if val > 10:
             X.pop(X.index(val))
     plt.hist(X,50)
     plt.savefig(savedir + 'tsv_fig.png')
