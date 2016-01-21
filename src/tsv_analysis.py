@@ -86,6 +86,8 @@ def run(file1,file2):
         #print Y
         
         #plt.hist(X,50)
+        print len(x)
+        print len(y)
         plt.scatter(x,y,alpha=0.1)
         xy = np.vstack([x,y])
         z = gaussian_kde(xy)(xy)
