@@ -73,7 +73,7 @@ def run(file1,file2):
                     print i
                     print d1[key][i]
                     print d2[key][i]
-                    if math.isinf(d1[key][i]) and math.isinf(d2[key][i]) and math.isnan(d1[key][i]) and math.isnan(d2[key][i]):
+                    if not (math.isinf(d1[key][i]) and math.isinf(d2[key][i]) and math.isnan(d1[key][i]) and math.isnan(d2[key][i])):
                         x.append(d1[key][i])
                         y.append(d2[key][i])
         #            if d1[key][2] != 0:
