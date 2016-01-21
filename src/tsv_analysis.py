@@ -12,6 +12,8 @@ file2 = '/scratch/Shares/dowell/ENCODE/Rubin2016_genes_CA-1_K_models_MLE.tsv'
 savedir = '/scratch/Users/joru1876/GROAnalysis/figures/'
 index = 6
 cut = 50
+cut1 = 10000
+cut2 = -10000
 
 def is_number(s):
     try:
@@ -62,7 +64,7 @@ def run(file1,file2):
                             d2[gene].append(float(param))
     
     
-    for i in range(2,len(p[2:])):
+    for i in range(2,len(p[2:])+2):
         X = list()
         Y = list()
         x = list()
@@ -71,8 +73,9 @@ def run(file1,file2):
             if key in d2:
                 if d1[key][0] > cut or d1[key][1] > cut and d2[key][0] > cut or d2[key][1] > cut:
                     if not (math.isinf(d1[key][i]) or math.isinf(d2[key][i]) or math.isnan(d1[key][i]) or math.isnan(d2[key][i])):
-                        x.append(d1[key][i])
-                        y.append(d2[key][i])
+                        if cut1 > d1[key][i] > cut2 and cut1 > d2[key][i] > cut2:
+                            x.append(d1[key][i])
+                            y.append(d2[key][i])
         #            if d1[key][2] != 0:
         #                if d2[key][2]-d1[key][2] > .25:
         #                    Y.append(key)
@@ -92,7 +95,7 @@ def run(file1,file2):
         xy = np.vstack([x,y])
         z = gaussian_kde(xy)(xy)
         plt.scatter(x,y,c=z,edgecolor="",s=14)
-        plt.savefig(savedir + 'tsv_fig' + str(i) + '.png')
+        plt.savefig(savedir + 'tsv_fig' + str(i) + '.svg')
     
     return "done"
     
