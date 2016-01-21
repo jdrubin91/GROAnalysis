@@ -12,8 +12,8 @@ file2 = '/scratch/Shares/dowell/ENCODE/Rubin2016_genes_CA-1_K_models_MLE.tsv'
 savedir = '/scratch/Users/joru1876/GROAnalysis/figures/'
 index = 6
 cut = 50
-cut1 = 10000
-cut2 = -10000
+cut1 = 50000
+cut2 = -50000
 
 def is_number(s):
     try:
