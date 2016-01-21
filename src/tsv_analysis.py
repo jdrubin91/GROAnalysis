@@ -47,6 +47,7 @@ def run(file1,file2):
                 
     F = plt.figure()
     plt.hist(X,bins=100)
+    plt.axis([0, 50, 0, 1000])
     plt.savefig(savedir + 'tsv_fig.png')
     
     return "done"
