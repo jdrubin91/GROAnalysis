@@ -38,20 +38,24 @@ def run(file1,file2):
                     d2[gene].append(float(p))
     
     X = list()
+    Y = list()
     for key in d1:
         if key in d2:
             if d1[key][0] > 10 or d1[key][1] > 10 and d2[key][0] > 10 or d2[key][1] > 10:
                 if d2[key][2] != 0:
+                    if d1[key][2]/d2[key][2] > 50:
+                        Y.append(key)
                     X.append(d1[key][2]/d2[key][2])
                     
     print "max: " + str(max(X))
     print "min: " + str(min(X))
     print "length: " + str(len(X))
     print "avg: " + str(sum(X)/len(X))
-    
+    print Y
     for val in X:
         if val > 10:
             X.pop(X.index(val))
+    print max(X)
     plt.hist(X,50)
     plt.savefig(savedir + 'tsv_fig.png')
     
