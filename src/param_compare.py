@@ -43,11 +43,15 @@ def run(file1,file2):
         y = list()
         for O in OVERLAPS_0_1:
             if not len(O.overlaps.keys()) > 2:
+                comparison = list()
                 for interval_original in O.overlaps:
-                    if 'A' in interval_original.INFO:
-                        x.append(float(d1[interval_original.INFO[1] + ':' + str(interval_original.start) + '-' + str(interval_original.stop)][index]))
-                    elif 'B' in interval_original.INFO:
-                        y.append(float(d2[interval_original.INFO[1] + ':' + str(interval_original.start) + '-' + str(interval_original.stop)][index]))
+                    comparison.append(interval_original.INFO[0])
+                if comparison[0] == comparison[1]:
+                    for interval_original in O.overlaps:
+                        if 'A' in interval_original.INFO:
+                            x.append(float(d1[interval_original.INFO[1] + ':' + str(interval_original.start) + '-' + str(interval_original.stop)][index]))
+                        elif 'B' in interval_original.INFO:
+                            y.append(float(d2[interval_original.INFO[1] + ':' + str(interval_original.start) + '-' + str(interval_original.stop)][index]))
                	    
         F = plt.figure()
         xy = np.vstack([x,y])
