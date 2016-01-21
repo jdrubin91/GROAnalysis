@@ -53,12 +53,10 @@ def run(file1,file2):
                         elif 'B' in interval_original.INFO:
                             y.append(float(d2[interval_original.INFO[1] + ':' + str(interval_original.start) + '-' + str(interval_original.stop)][index]))
                             
-        print comparison
-        print len(x),len(y)
         F = plt.figure()
         xy = np.vstack([x,y])
         z = gaussian_kde(xy)(xy)
-        plt.scatter(x,y,alpha=0.05,c=z,edgecolor="",s=14)
+        plt.scatter(x,y,c=z,edgecolor="",s=14)
         plt.savefig(savedir + 'figure' + str(index) + '.png')
     
     return x,y
