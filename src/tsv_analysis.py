@@ -69,7 +69,7 @@ def run(file1,file2):
         for key in d1:
             if key in d2:
                 if d1[key][0] > cut or d1[key][1] > cut and d2[key][0] > cut or d2[key][1] > cut:
-                    if d1[key][i] != np.inf and d2[key][i] != np.inf:
+                    if d1[key][i] != np.inf and d2[key][i] != np.inf and is_number(d1[key][i]) and is_number(d2[key][i]):
                         x.append(d1[key][i])
                         y.append(d2[key][i])
         #            if d1[key][2] != 0:
