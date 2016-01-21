@@ -3,6 +3,7 @@ __author__ = "Jonathan Rubin"
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
+import math
 
 file1 = '/scratch/Shares/dowell/ENCODE/Rubin2016_genes_DMSO-1_K_models_MLE.tsv'
 file2 = '/scratch/Shares/dowell/ENCODE/Rubin2016_genes_CA-1_K_models_MLE.tsv'
@@ -43,7 +44,10 @@ def run(file1,file2):
                 if d2[key][2] != 0:
                     X.append(d1[key][2]/d2[key][2])
                     
-
+    print "max: " + str(max(X))
+    print "min: " + str(min(X))
+    print "length: " + str(len(X))
+    print "avg: " + str(sum(X)/len(X))
     plt.hist(X)
     plt.savefig(savedir + 'tsv_fig.png')
     
