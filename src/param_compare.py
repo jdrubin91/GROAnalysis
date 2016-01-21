@@ -53,6 +53,7 @@ def run(file1,file2):
                         elif 'B' in interval_original.INFO:
                             y.append(float(d2[interval_original.INFO[1] + ':' + str(interval_original.start) + '-' + str(interval_original.stop)][index]))
                             
+        print comparison
         print len(x),len(y)
         F = plt.figure()
         xy = np.vstack([x,y])
