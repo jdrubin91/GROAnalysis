@@ -49,7 +49,7 @@ def run(file1,file2):
                 x.append(d1[key][2])
                 y.append(d2[key][2])
                 if d1[key][2] != 0:
-                    if d2[key][2]/d1[key][2] > 10:
+                    if d2[key][2]-d1[key][2] > .25:
                         Y.append(key)
                     else:
                         X.append(d2[key][2]-d1[key][2])
