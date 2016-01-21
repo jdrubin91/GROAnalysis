@@ -45,7 +45,7 @@ def run(file1,file2):
             if not len(O.overlaps.keys()) > 2:
                 comparison = list()
                 for interval_original in O.overlaps:
-                    comparison.append(interval_original.INFO[0])
+                    comparison.append(interval_original.INFO[1])
                 if comparison[0] == comparison[1]:
                     for interval_original in O.overlaps:
                         if 'A' in interval_original.INFO:

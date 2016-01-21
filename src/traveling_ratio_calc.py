@@ -1,5 +1,9 @@
 __author__ = "Jonathan Rubin"
 
+import matplotlib
+matplotlib.use('Agg')
+import matplotlib.pyplot as plt
+import intervals
 
 annotationdir = '/scratch/Users/joru1876/genome_files/refGene.bed'
 bed1 = '/scratch/Users/joru1876/GROSeqRaw/flipped/bowtie2/sortedbam/genomecoveragebed/fortdf/JDR_DMSO_SS102217_093015_CAGATC_L005_R1_001.flip.fastqbowtie2.sorted.BedGraph.mp.BedGraph'
@@ -26,7 +30,16 @@ def intervalSearch(bed1,bed2,genes,TSS):
     with open(bed1) as F1:
         for line in F1:
             if '#' not in line[0]:
-                line = line.strip().split()
+                chrom, start, stop, coverage = line.strip().split()
+                bed1list.append(int(start),int(stop),float(coverage))
+                
+    with open(bed2) as F2:
+        for line in F2:
+            if '#' not in line[0]:
+                chrom, start, stop, coverage = line.strip().split()
+                bed2list.append(int(start),int(stop),float(coverage))
+                
+    
     
     return
     
