@@ -68,5 +68,5 @@ def plot(x,y):
 
 if __name__ == "__main__":
     x,y = run(file1,file2)
-    #print x[0:10],y[0:10]
+    print len(x),len(y)
     plot(x,y)
