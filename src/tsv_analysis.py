@@ -48,6 +48,10 @@ def run(file1,file2):
     print "min: " + str(min(X))
     print "length: " + str(len(X))
     print "avg: " + str(sum(X)/len(X))
+    
+    for val in X:
+        if val > 50:
+            X.pop(X.index(val))
     plt.hist(X)
     plt.savefig(savedir + 'tsv_fig.png')
     
