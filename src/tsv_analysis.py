@@ -12,6 +12,13 @@ savedir = '/scratch/Users/joru1876/GROAnalysis/figures/'
 index = 6
 cut = 50
 
+def is_number(s):
+    try:
+        float(s)
+        return True
+    except ValueError:
+        return False
+
 def run(file1,file2):
     d1 = dict()
     d2 = dict()
@@ -62,8 +69,9 @@ def run(file1,file2):
         for key in d1:
             if key in d2:
                 if d1[key][0] > cut or d1[key][1] > cut and d2[key][0] > cut or d2[key][1] > cut:
-                    x.append(d1[key][i])
-                    y.append(d2[key][i])
+                    if is_number(d1[key][i]) and is_number(d2[key][i]):
+                        x.append(d1[key][i])
+                        y.append(d2[key][i])
         #            if d1[key][2] != 0:
         #                if d2[key][2]-d1[key][2] > .25:
         #                    Y.append(key)
@@ -84,6 +92,8 @@ def run(file1,file2):
         plt.savefig(savedir + 'tsv_fig' + str(i) + '.png')
     
     return "done"
+    
+
     
 if __name__ == "__main__":
     run(file1,file2)
