@@ -52,7 +52,7 @@ def run(file1,file2):
     for val in X:
         if val > 50:
             X.pop(X.index(val))
-    plt.hist(X)
+    plt.hist(X,50)
     plt.savefig(savedir + 'tsv_fig.png')
     
     return "done"
