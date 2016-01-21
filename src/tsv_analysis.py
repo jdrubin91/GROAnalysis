@@ -62,7 +62,7 @@ def run(file1,file2):
                             d2[gene].append(float(param))
     
     
-    for i in range(len(p[2:])):
+    for i in range(2,len(p[2:])):
         X = list()
         Y = list()
         x = list()
