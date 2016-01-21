@@ -5,6 +5,7 @@ matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 from scipy.stats import gaussian_kde
 import numpy as np
+import math
 
 file1 = '/scratch/Shares/dowell/ENCODE/Rubin2016_genes_DMSO-1_K_models_MLE.tsv'
 file2 = '/scratch/Shares/dowell/ENCODE/Rubin2016_genes_CA-1_K_models_MLE.tsv'
@@ -69,7 +70,7 @@ def run(file1,file2):
         for key in d1:
             if key in d2:
                 if d1[key][0] > cut or d1[key][1] > cut and d2[key][0] > cut or d2[key][1] > cut:
-                    if d1[key][i] != np.inf and d2[key][i] != np.inf and is_number(d1[key][i]) and is_number(d2[key][i]):
+                    if d1[key][i] != math.isinf and d2[key][i] != math.isinf and d1[key][i] != math.isnan and d2[key][i] != math.isnan:
                         x.append(d1[key][i])
                         y.append(d2[key][i])
         #            if d1[key][2] != 0:
