@@ -52,7 +52,8 @@ def run(file1,file2):
                             x.append(float(d1[interval_original.INFO[1] + ':' + str(interval_original.start) + '-' + str(interval_original.stop)][index]))
                         elif 'B' in interval_original.INFO:
                             y.append(float(d2[interval_original.INFO[1] + ':' + str(interval_original.start) + '-' + str(interval_original.stop)][index]))
-               	    
+                            
+        print len(x),len(y)
         F = plt.figure()
         xy = np.vstack([x,y])
         z = gaussian_kde(xy)(xy)
@@ -68,5 +69,4 @@ def plot(x,y):
 
 if __name__ == "__main__":
     x,y = run(file1,file2)
-    print len(x),len(y)
     plot(x,y)
