@@ -46,7 +46,7 @@ def run(file1,file2):
                     X.append(d1[key][2]/d2[key][2])
                 
     F = plt.figure()
-    plt.hist(X,100)
+    plt.hist(X,bins=100)
     plt.savefig(savedir + 'tsv_fig.png')
     
     return "done"
