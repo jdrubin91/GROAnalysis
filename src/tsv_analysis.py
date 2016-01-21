@@ -41,6 +41,8 @@ def run(file1,file2):
         if key in d2:
             if d1[key][0] > 10 or d1[key][1] > 10 and d2[key][0] > 10 or d2[key][1] > 10:
                 if d2[key][2] != 0:
+                    print d1[key][2]
+                    print d2[key][2]
                     X.append(d1[key][2]/d2[key][2])
                 
     F = plt.figure()
