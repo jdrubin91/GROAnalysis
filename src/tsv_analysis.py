@@ -9,6 +9,7 @@ file1 = '/scratch/Shares/dowell/ENCODE/Rubin2016_genes_DMSO-1_K_models_MLE.tsv'
 file2 = '/scratch/Shares/dowell/ENCODE/Rubin2016_genes_CA-1_K_models_MLE.tsv'
 savedir = '/scratch/Users/joru1876/GROAnalysis/figures/'
 index = 6
+cut = 50
 
 def run(file1,file2):
     d1 = dict()
@@ -41,11 +42,11 @@ def run(file1,file2):
     Y = list()
     for key in d1:
         if key in d2:
-            if d1[key][0] > 10 or d1[key][1] > 10 and d2[key][0] > 10 or d2[key][1] > 10:
+            if d1[key][0] > cut or d1[key][1] > cut and d2[key][0] > cut or d2[key][1] > cut:
                 if d2[key][2] != 0:
-                    if d1[key][2]/d2[key][2] > 50:
+                    if d2[key][2]/d1[key][2] > 50:
                         Y.append(key)
-                    X.append(d1[key][2]/d2[key][2])
+                    X.append(d2[key][2]/d1[key][2])
                     
     print "max: " + str(max(X))
     print "min: " + str(min(X))
@@ -54,7 +55,8 @@ def run(file1,file2):
     print Y
     for val in X:
         if val > 10:
-            X.pop(X.index(val))
+            while val in X:
+                X.pop(X.index(val))
     print max(X)
     plt.hist(X,50)
     plt.savefig(savedir + 'tsv_fig.png')
