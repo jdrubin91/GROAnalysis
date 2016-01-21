@@ -24,8 +24,15 @@ def run(file1,file2):
                     fwd, rev = line[2].split(',')
                     d1[gene] = [float(fwd), float(rev)]
                 elif '1' in line[1]:
-                    p = line.strip().split()[index].split(',')[0]
-                    d1[gene].append(float(p))
+                    p = line.strip().split()
+                    for param in p:
+                        if '~' in param:
+                            d1[gene].append(float(param.split(',')[1]))
+                        elif ',' in param:
+                            for moreparam in param.split(','):
+                                d1[gene].append(float(moreparam))
+                        else:
+                            d1[gene].append(float(param))
                     
     with open(file2) as F2:
         for line in F2:
@@ -36,36 +43,45 @@ def run(file1,file2):
                     fwd, rev = line[2].split(',')
                     d2[gene] = [float(fwd),float(rev)]
                 elif '1' in line[1]:
-                    p = line.strip().split()[index].split(',')[0]
-                    d2[gene].append(float(p))
+                    p = line.strip().split()
+                    for param in p:
+                        if '~' in param:
+                            d2[gene].append(float(param.split(',')[1]))
+                        elif ',' in param:
+                            for moreparam in param.split(','):
+                                d2[gene].append(float(moreparam))
+                        else:
+                            d2[gene].append(float(param))
     
-    X = list()
-    Y = list()
-    x = list()
-    y = list()
-    for key in d1:
-        if key in d2:
-            if d1[key][0] > cut or d1[key][1] > cut and d2[key][0] > cut or d2[key][1] > cut:
-                x.append(d1[key][2])
-                y.append(d2[key][2])
-                if d1[key][2] != 0:
-                    if d2[key][2]-d1[key][2] > .25:
-                        Y.append(key)
-                    else:
-                        X.append(d2[key][2]-d1[key][2])
-                    
-    print "max: " + str(max(X))
-    print "min: " + str(min(X))
-    print "length: " + str(len(X))
-    print "avg: " + str(sum(X)/len(X))
-    print Y
     
-    plt.hist(X,50)
-    #plt.scatter(x,y,alpha=0.1)
-    #xy = np.vstack([x,y])
-    #z = gaussian_kde(xy)(xy)
-    #plt.scatter(x,y,c=z,edgecolor="",s=14)
-    plt.savefig(savedir + 'tsv_fig.png')
+    for i in range(len(p[2:])):
+        X = list()
+        Y = list()
+        x = list()
+        y = list()
+        for key in d1:
+            if key in d2:
+                if d1[key][0] > cut or d1[key][1] > cut and d2[key][0] > cut or d2[key][1] > cut:
+                    x.append(d1[key][i])
+                    y.append(d2[key][i])
+        #            if d1[key][2] != 0:
+        #                if d2[key][2]-d1[key][2] > .25:
+        #                    Y.append(key)
+        #                else:
+        #                    X.append(d2[key][2]-d1[key][2])
+        #                
+        #print "max: " + str(max(X))
+        #print "min: " + str(min(X))
+        #print "length: " + str(len(X))
+        #print "avg: " + str(sum(X)/len(X))
+        #print Y
+        
+        #plt.hist(X,50)
+        plt.scatter(x,y,alpha=0.1)
+        xy = np.vstack([x,y])
+        z = gaussian_kde(xy)(xy)
+        plt.scatter(x,y,c=z,edgecolor="",s=14)
+        plt.savefig(savedir + 'tsv_fig' + str(i) + '.png')
     
     return "done"
     
