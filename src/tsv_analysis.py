@@ -44,7 +44,7 @@ def run(file1,file2):
         if key in d2:
             if d1[key][0] > cut or d1[key][1] > cut and d2[key][0] > cut or d2[key][1] > cut:
                 if d1[key][2] != 0:
-                    if d2[key][2]/d1[key][2] > 50:
+                    if d2[key][2]/d1[key][2] > 500:
                         Y.append(key)
                     X.append(d2[key][2]/d1[key][2])
                     
