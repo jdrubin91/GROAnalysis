@@ -70,10 +70,7 @@ def run(file1,file2):
         for key in d1:
             if key in d2:
                 if d1[key][0] > cut or d1[key][1] > cut and d2[key][0] > cut or d2[key][1] > cut:
-                    print i
-                    print d1[key][i]
-                    print d2[key][i]
-                    if not (math.isinf(d1[key][i]) and math.isinf(d2[key][i]) and math.isnan(d1[key][i]) and math.isnan(d2[key][i])):
+                    if not (math.isinf(d1[key][i]) or math.isinf(d2[key][i]) or math.isnan(d1[key][i]) or math.isnan(d2[key][i])):
                         x.append(d1[key][i])
                         y.append(d2[key][i])
         #            if d1[key][2] != 0:
