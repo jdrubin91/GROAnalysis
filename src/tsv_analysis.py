@@ -3,7 +3,8 @@ __author__ = "Jonathan Rubin"
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
-import math
+from scipy.stats import gaussian_kde
+import numpy as np
 
 file1 = '/scratch/Shares/dowell/ENCODE/Rubin2016_genes_DMSO-1_K_models_MLE.tsv'
 file2 = '/scratch/Shares/dowell/ENCODE/Rubin2016_genes_CA-1_K_models_MLE.tsv'
@@ -60,7 +61,10 @@ def run(file1,file2):
     print Y
     
     #plt.hist(X,50)
-    plt.scatter(x,y,alpha=0.1)
+    #plt.scatter(x,y,alpha=0.1)
+    xy = np.vstack([x,y])
+    z = gaussian_kde(xy)(xy)
+    plt.scatter(x,y,c=z,edgecolor="",s=14)
     plt.savefig(savedir + 'tsv_fig.png')
     
     return "done"
