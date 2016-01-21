@@ -40,7 +40,8 @@ def run(file1,file2):
     for key in d1:
         if key in d2:
             if d1[key][0] > 10 or d1[key][1] > 10 and d2[key][0] > 10 or d2[key][1] > 10:
-                X.append(d1[key][2]/d1[key][2])
+                if d2[key][2] != 0:
+                    X.append(d1[key][2]/d2[key][2])
                 
     F = plt.figure()
     plt.hist(X,100)
