@@ -52,7 +52,7 @@ def run(file1,file2):
                     if d2[key][2]/d1[key][2] > 10:
                         Y.append(key)
                     else:
-                        X.append(d2[key][2]/d1[key][2])
+                        X.append(d2[key][2]-d1[key][2])
                     
     print "max: " + str(max(X))
     print "min: " + str(min(X))
@@ -60,11 +60,11 @@ def run(file1,file2):
     print "avg: " + str(sum(X)/len(X))
     print Y
     
-    #plt.hist(X,50)
+    plt.hist(X,50)
     #plt.scatter(x,y,alpha=0.1)
-    xy = np.vstack([x,y])
-    z = gaussian_kde(xy)(xy)
-    plt.scatter(x,y,c=z,edgecolor="",s=14)
+    #xy = np.vstack([x,y])
+    #z = gaussian_kde(xy)(xy)
+    #plt.scatter(x,y,c=z,edgecolor="",s=14)
     plt.savefig(savedir + 'tsv_fig.png')
     
     return "done"
