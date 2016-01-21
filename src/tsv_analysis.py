@@ -40,9 +40,13 @@ def run(file1,file2):
     
     X = list()
     Y = list()
+    x = list()
+    y = list()
     for key in d1:
         if key in d2:
             if d1[key][0] > cut or d1[key][1] > cut and d2[key][0] > cut or d2[key][1] > cut:
+                x.append(d1[key][2])
+                y.append(d2[key][2])
                 if d1[key][2] != 0:
                     if d2[key][2]/d1[key][2] > 10:
                         Y.append(key)
@@ -54,7 +58,9 @@ def run(file1,file2):
     print "length: " + str(len(X))
     print "avg: " + str(sum(X)/len(X))
     print Y
-    plt.hist(X,50)
+    
+    #plt.hist(X,50)
+    plt.scatter(x,y,alpha=0.1)
     plt.savefig(savedir + 'tsv_fig.png')
     
     return "done"
