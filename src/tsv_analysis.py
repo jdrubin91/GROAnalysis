@@ -42,10 +42,9 @@ def run(file1,file2):
             if d1[key][0] > 10 or d1[key][1] > 10 and d2[key][0] > 10 or d2[key][1] > 10:
                 if d2[key][2] != 0:
                     X.append(d1[key][2]/d2[key][2])
-    print X
-    F = plt.figure()
-    plt.hist(X,1,bins=100)
-    plt.axis([0, 500, 0, 20000])
+                    
+
+    plt.hist(X)
     plt.savefig(savedir + 'tsv_fig.png')
     
     return "done"
