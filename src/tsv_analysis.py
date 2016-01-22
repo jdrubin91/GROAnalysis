@@ -130,18 +130,22 @@ def run2(file1,file2):
     
     X = list()
     Y = list()
+    Z = list()
     for key in d1:
         if key in d2:
             if d1[key][0] > cut or d1[key][1] > cut and d2[key][0] > cut or d2[key][1] > cut:
                 if d2[key][2]-d1[key][2] > .25:
                     Y.append(key)
+                if d2[key][2]-d1[key][2] < -.25:
+                    Z.append(key)
                 X.append(d2[key][2]-d1[key][2])
                     
     print "max: " + str(max(X))
     print "min: " + str(min(X))
     print "length: " + str(len(X))
     print "avg: " + str(sum(X)/len(X))
-    print Y
+    print "Y: ",Y
+    print "Z: ",Z
     F = plt.figure()        
     plt.hist(X,50)
     plt.savefig(savedir + 'tsv_fig.png')
