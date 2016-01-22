@@ -58,7 +58,7 @@ def intervalSearch(bed1,bed2,TSS,TSSgene,END,ENDgene):
     for gene in TSS:
         cov = 0
         chrom,strand = TSS[gene][2:4]
-        ST = intervals.comparison((TSS[gene],bed1list[chrom]))
+        ST = intervals.comparison(([TSS[gene]],bed1list[chrom]))
         OVERLAPS_TSS = ST.find_overlaps(0,1)
         for O in OVERLAPS_TSS:
             for interval_original in O.overlaps:
