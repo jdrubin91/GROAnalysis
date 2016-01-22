@@ -54,8 +54,11 @@ def intervalSearch(bed1,bed2,TSS,TSSgene,END,ENDgene):
                 bed2list[chrom].append((int(start),int(stop),float(coverage)))
                 
                           
-    print "Performing First Interval Searches..."          
+    print "Performing First Interval Searches..."
+    count = 0   
     for gene in TSS:
+        print count
+        count+=1
         cov = 0
         chrom,strand = TSS[gene][2:4]
         ST = intervals.comparison(([TSS[gene]],bed1list[chrom]))
