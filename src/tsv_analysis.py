@@ -100,7 +100,56 @@ def run(file1,file2):
     
     return "done"
     
+def run2(file1,file2):
+    d1 = dict()
+    d2 = dict()
+    with open(file1) as F1:
+        for line in F1:
+            if not '#' in line[0]:
+                if '>' in line[0]:
+                    line = line.strip().split('|')
+                    gene = line[0][1:]
+                    fwd, rev = line[2].split(',')
+                    d1[gene] = [float(fwd), float(rev)]
+                elif '1' in line[1]:
+                    p = line.strip().split()[index].split(',')[0]
+                    d1[gene].append(float(p))
+                    
+    with open(file2) as F2:
+        for line in F2:
+            if not '#' in line[0]:
+                if '>' in line[0]:
+                    line = line.strip().split('|')
+                    gene = line[0][1:]
+                    fwd, rev = line[2].split(',')
+                    d2[gene] = [float(fwd),float(rev)]
+                elif '1' in line[1]:
+                    p = line.strip().split()[index].split(',')[0]
+                    d2[gene].append(float(p))
+    
+    
+    for i in range(2,len(p[2:])+2):
+        X = list()
+        Y = list()
+        for key in d1:
+            if key in d2:
+                if d1[key][0] > cut or d1[key][1] > cut and d2[key][0] > cut or d2[key][1] > cut:
+                    if d2[key][2]-d1[key][2] > .25:
+                        Y.append(key)
+                    X.append(d2[key][2]-d1[key][2])
+        #                
+        #print "max: " + str(max(X))
+        #print "min: " + str(min(X))
+        #print "length: " + str(len(X))
+        #print "avg: " + str(sum(X)/len(X))
+        #print Y
+        F = plt.figure()        
+        plt.hist(X,50)
+        plt.savefig(savedir + 'tsv_fig.png')
+    
+    return "done"
+    
 
     
 if __name__ == "__main__":
-    run(file1,file2)
+    run2(file1,file2)
