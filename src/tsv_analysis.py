@@ -167,7 +167,9 @@ def run2(file1,file2):
     print "min: " + str(min(X))
     print "length: " + str(len(X))
     print "avg: " + str(sum(X)/len(X))
-    print "Y: ",Y1
+    #print "Y: ",Y1
+    for item in Y1:
+        print item
     print "Z: ",Z1
     #print "Y: ",sorted(Y, key=lambda x: x[1])
     #print "Z: ",sorted(Z, key=lambda x: x[1])
