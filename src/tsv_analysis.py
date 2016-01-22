@@ -11,7 +11,7 @@ file1 = '/scratch/Shares/dowell/ENCODE/Rubin2016_genes_DMSO-1_K_models_MLE.tsv'
 file2 = '/scratch/Shares/dowell/ENCODE/Rubin2016_genes_CA-1_K_models_MLE.tsv'
 savedir = '/scratch/Users/joru1876/GROAnalysis/figures/'
 index = 6
-cut = 50
+cut = 200
 cut1 = 50000
 cut2 = -50000
 
@@ -135,17 +135,21 @@ def run2(file1,file2):
         if key in d2:
             if d1[key][0] > cut or d1[key][1] > cut and d2[key][0] > cut or d2[key][1] > cut:
                 if d2[key][2]-d1[key][2] > .25:
-                    Y.append((key,d2[key][2]-d1[key][2]))
+                    #Y.append((key,d2[key][2]-d1[key][2]))
+                    Y.append(key)
                 if d2[key][2]-d1[key][2] < -.25:
-                    Z.append((key,d2[key][2]-d1[key][2]))
+                    #Z.append((key,d2[key][2]-d1[key][2]))
+                    Z.append(key)
                 X.append(d2[key][2]-d1[key][2])
                     
     print "max: " + str(max(X))
     print "min: " + str(min(X))
     print "length: " + str(len(X))
     print "avg: " + str(sum(X)/len(X))
-    print "Y: ",sorted(Y, key=lambda x: x[1])
-    print "Z: ",sorted(Z, key=lambda x: x[1])
+    print "Y: ",Y
+    print "Z: ",Z
+    #print "Y: ",sorted(Y, key=lambda x: x[1])
+    #print "Z: ",sorted(Z, key=lambda x: x[1])
     print "len(Y): ",len(Y)
     print "len(Z): ",len(Z)
     F = plt.figure()        
