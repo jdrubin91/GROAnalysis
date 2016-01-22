@@ -137,12 +137,12 @@ def run2(file1,file2):
                     if d2[key][2]-d1[key][2] > .25:
                         Y.append(key)
                     X.append(d2[key][2]-d1[key][2])
-        #                
-        #print "max: " + str(max(X))
-        #print "min: " + str(min(X))
-        #print "length: " + str(len(X))
-        #print "avg: " + str(sum(X)/len(X))
-        #print Y
+                        
+        print "max: " + str(max(X))
+        print "min: " + str(min(X))
+        print "length: " + str(len(X))
+        print "avg: " + str(sum(X)/len(X))
+        print Y
         F = plt.figure()        
         plt.hist(X,50)
         plt.savefig(savedir + 'tsv_fig.png')
