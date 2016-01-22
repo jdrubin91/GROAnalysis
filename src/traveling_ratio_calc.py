@@ -23,10 +23,10 @@ def getLists(file1):
             chrom,start,stop = line[0:3]
             strand = line[5]
             geneName = line[3].split(';')[1]
-            TSS[geneName] = [int(start)+TSSinterval[0],int(start)+TSSinterval[1],chrom,strand]
-            TSSgene[geneName] = [int(start)+TSSinterval[1],int(stop),chrom,strand]
-            END[geneName] = [int(stop)+threeprimeint[0],int(stop)+threeprimeint[1],chrom,strand]
-            ENDgene[geneName] = [int(start),int(stop)+threeprimeint[0],chrom,strand]
+            TSS[geneName] = (int(start)+TSSinterval[0],int(start)+TSSinterval[1],chrom,strand)
+            TSSgene[geneName] = (int(start)+TSSinterval[1],int(stop),chrom,strand)
+            END[geneName] = (int(stop)+threeprimeint[0],int(stop)+threeprimeint[1],chrom,strand)
+            ENDgene[geneName] = (int(start),int(stop)+threeprimeint[0],chrom,strand)
         
     return TSS,TSSgene,END,ENDgene
     
