@@ -168,10 +168,11 @@ def run2(file1,file2):
     print "length: " + str(len(X))
     print "avg: " + str(sum(X)/len(X))
     #print "Y: ",Y1
-    print Y1.join(',')
+    print ','.join(Y1)
     print "================================================================="
-    for item in Z1:
-        print item
+    print ','.join(Z1)
+    #for item in Z1:
+    #    print item
     #print "Z: ",Z1
     #print "Y: ",sorted(Y, key=lambda x: x[1])
     #print "Z: ",sorted(Z, key=lambda x: x[1])
