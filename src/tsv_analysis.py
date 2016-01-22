@@ -27,7 +27,7 @@ def gene_dict(genes):
     genedict = dict()
     with open(genes) as F1:
         for line in F1:
-            key,gene = line.strip().split()[3].split(';')
+            key,gene = line.strip().split()[3].split(';')[0:2]
             genedict[key] = gene
             
     return genedict
