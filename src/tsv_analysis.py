@@ -12,7 +12,7 @@ file2 = '/scratch/Shares/dowell/ENCODE/Rubin2016_genes_CA-1_K_models_MLE.tsv'
 savedir = '/scratch/Users/joru1876/GROAnalysis/figures/'
 genes = '/scratch/Users/joru1876/genome_files/refGene.bed'
 index = 6
-cut = 500
+cut = 200
 cut1 = 50000
 cut2 = -50000
 
