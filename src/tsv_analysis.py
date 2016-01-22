@@ -135,17 +135,17 @@ def run2(file1,file2):
         if key in d2:
             if d1[key][0] > cut or d1[key][1] > cut and d2[key][0] > cut or d2[key][1] > cut:
                 if d2[key][2]-d1[key][2] > .25:
-                    Y.append((d2[key][2]-d1[key][2],key))
+                    Y.append((key,d2[key][2]-d1[key][2]))
                 if d2[key][2]-d1[key][2] < -.25:
-                    Z.append((d2[key][2]-d1[key][2],key))
+                    Z.append((key,d2[key][2]-d1[key][2]))
                 X.append(d2[key][2]-d1[key][2])
                     
     print "max: " + str(max(X))
     print "min: " + str(min(X))
     print "length: " + str(len(X))
     print "avg: " + str(sum(X)/len(X))
-    print "Y: ",Y
-    print "Z: ",Z
+    print "Y: ",sorted(Y, key=lambda x: x[1])
+    print "Z: ",sorted(Z, key=lambda x: x[1])
     print "len(Y): ",len(Y)
     print "len(Z): ",len(Z)
     F = plt.figure()        
