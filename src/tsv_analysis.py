@@ -170,7 +170,10 @@ def run2(file1,file2):
     #print "Y: ",Y1
     for item in Y1:
         print item
-    print "Z: ",Z1
+    print "================================================================="
+    for item in Z1:
+        print item
+    #print "Z: ",Z1
     #print "Y: ",sorted(Y, key=lambda x: x[1])
     #print "Z: ",sorted(Z, key=lambda x: x[1])
     print "len(Y): ",len(Y1)
