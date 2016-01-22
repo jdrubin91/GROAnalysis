@@ -95,7 +95,7 @@ def run(file1,file2):
         xy = np.vstack([x,y])
         z = gaussian_kde(xy)(xy)
         plt.scatter(x,y,c=z,edgecolor="",s=14)
-        plt.savefig(savedir + 'tsv_fig' + str(i) + '.svg')
+        plt.savefig(savedir + 'tsv_fig' + str(i) + '.png')
     
     return "done"
     
