@@ -10,6 +10,7 @@ import math
 file1 = '/scratch/Shares/dowell/ENCODE/Rubin2016_genes_DMSO-1_K_models_MLE.tsv'
 file2 = '/scratch/Shares/dowell/ENCODE/Rubin2016_genes_CA-1_K_models_MLE.tsv'
 savedir = '/scratch/Users/joru1876/GROAnalysis/figures/'
+genes = '/scratch/Users/joru1876/genome_files/refGene.bed'
 index = 6
 cut = 500
 cut1 = 50000
@@ -21,6 +22,15 @@ def is_number(s):
         return True
     except ValueError:
         return False
+
+def gene_dict(genes):
+    genedict = dict()
+    with open(genes) as F1:
+        for line in F1:
+            key,gene = line.strip().split()[3].split(';')
+            genedict[key] = gene
+            
+    return genedict
 
 def run(file1,file2):
     d1 = dict()
@@ -141,17 +151,28 @@ def run2(file1,file2):
                     #Z.append((key,d2[key][2]-d1[key][2]))
                     Z.append(key)
                 X.append(d2[key][2]-d1[key][2])
-                    
+    
+    genedict = gene_dict(genes)
+    Y1 = list()
+    for item in Y:
+        if item in genedict:
+            Y1.append(genedict[item])
+    Z1 = list()
+    for item in Z:
+        if item in genedict:
+            Z1.append(genedict[item])
+    
+    
     print "max: " + str(max(X))
     print "min: " + str(min(X))
     print "length: " + str(len(X))
     print "avg: " + str(sum(X)/len(X))
-    print "Y: ",Y
-    print "Z: ",Z
+    print "Y: ",Y1
+    print "Z: ",Z1
     #print "Y: ",sorted(Y, key=lambda x: x[1])
     #print "Z: ",sorted(Z, key=lambda x: x[1])
-    print "len(Y): ",len(Y)
-    print "len(Z): ",len(Z)
+    print "len(Y): ",len(Y1)
+    print "len(Z): ",len(Z1)
     F = plt.figure()        
     plt.hist(X,50)
     plt.savefig(savedir + 'tsv_fig.png')
