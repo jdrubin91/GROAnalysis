@@ -168,8 +168,7 @@ def run2(file1,file2):
     print "length: " + str(len(X))
     print "avg: " + str(sum(X)/len(X))
     #print "Y: ",Y1
-    for item in Y1:
-        print item
+    print Y1.join(',')
     print "================================================================="
     for item in Z1:
         print item
