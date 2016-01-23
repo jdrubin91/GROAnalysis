@@ -5,7 +5,7 @@ import intervals,load
 #start and stop of the intervals. The rest of the tuple can be there
 #or not and can be any size
 
-A 	= [(1,5, 5), (4,10, "A2"),  (13,15, "A3"), (32, 34, "A4"), (61,68, "A5")]
+A 	= [(1,5, 'hello','hi','+'), (4,10, "A2"),  (13,15, "A3"), (32, 34, "A4"), (61,68, "A5")]
 B 	= [(1,6), (7,15, "B2"),  (16,17, "B3" ), (62,69, "B4") ]
 C 	= [(2,6, "C1"), (18,20, "C2"),  (21,23, "C3"), (25, 29), (31, 35)]
 D 	= [(2,7, "D1"), (12, 17, "D2"), (61,65, "D3")]
