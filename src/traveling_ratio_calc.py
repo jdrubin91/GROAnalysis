@@ -49,12 +49,12 @@ def intervalSearch(bed1,bed2,TSS,TSSgene,END,ENDgene):
                 chrom, start, stop, coverage = line.strip().split()
                 bed2list.append((int(start),int(stop),chrom,float(coverage)))
                 
-    print len(bed1list)
-    print len(bed2list)
-    print len(TSS)
-    print len(TSSgene)
-    print len(END)
-    print len(ENDgene)
+    print bed1list[0:10]
+    print bed2list[0:10]
+    print TSS[0:10]
+    print TSSgene[0:10]
+    print END[0:10]
+    print ENDgene[0:10]
     print "Performing First Interval Searches..."
     ST = intervals.comparison((TSS,TSSgene,bed1list))
     OVERLAPS_TSS = ST.find_overlaps(0,2)
