@@ -4,6 +4,7 @@ import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import intervals
+import time
 
 annotationdir = '/scratch/Users/joru1876/genome_files/refGene.bed'
 bed1 = '/scratch/Users/joru1876/GROSeqRaw/flipped/bowtie2/sortedbam/genomecoveragebed/fortdf/JDR_DMSO_SS102217_093015_CAGATC_L005_R1_001.flip.fastqbowtie2.sorted.BedGraph.mp.BedGraph'
@@ -55,10 +56,109 @@ def intervalSearch(bed1,bed2,TSS,TSSgene,END,ENDgene):
     #print TSSgene[0:10]
     #print END[0:10]
     #print ENDgene[0:10]
-    print "Performing First Interval Searches..."
-    ST = intervals.comparison((TSS,bed1list))
-    OVERLAPS_TSS = ST.find_overlaps(0,1)
-    TSScov = list()
+###############################################################################
+    print "Performing First Interval Search..."
+    start = time.time()
+    ST1 = intervals.comparison((TSS,bed1list))
+    OVERLAPS_TSS = ST1.find_overlaps(0,1)
+    TSScov = dict()
+    print "Finished First Interval Search in: ", time.time() - start
+    start = time.time()
+    for O in OVERLAPS_TSS:
+        cov = 0
+        chromlist = list()
+        for interval_original in O.overlaps:
+            if len(interval_original.INFO) > 2:
+                chrom,gene,strand = interval_original.INFO
+        for interval_original in O.overlaps:
+            if len(interval_original.INFO) < 2:
+                if chrom in interval_original.INFO:
+                    chromlist.append(interval_original)
+        for interval_original in chromlist:
+            if '+' in strand:
+                if interval_original.INFO[0] > 0:
+                    cov += interval_original.INFO[0]
+            else:
+                if interval_original.INFO[0] < 0:
+                    cov += -interval_original.INFO[0]
+        TSScov[gene] = cov
+    
+    print "Finished first interval analysis in: ", time.time() - start
+    ST2 = intervals.comparison((TSSgene,bed1list))
+    OVERLAPS_TSSgene = ST2.find_overlaps(0,1)
+    TSSgenecov = dict()
+    for O in OVERLAPS_TSSgene:
+        cov = 0
+        chromlist = list()
+        for interval_original in O.overlaps:
+            if len(interval_original.INFO) > 2:
+                chrom,gene,strand = interval_original.INFO
+        for interval_original in O.overlaps:
+            if len(interval_original.INFO) < 2:
+                if chrom in interval_original.INFO:
+                    chromlist.append(interval_original)
+        for interval_original in chromlist:
+            if '+' in strand:
+                if interval_original.INFO[0] > 0:
+                    cov += interval_original.INFO[0]
+            else:
+                if interval_original.INFO[0] < 0:
+                    cov += -interval_original.INFO[0]
+        TSSgenecov[gene] = cov
+    
+    ST3 = intervals.comparison((END,bed1list))
+    OVERLAPS_END = ST3.find_overlaps(0,1)
+    ENDcov = list()
+    for O in OVERLAPS_END:
+        cov = 0
+        chromlist = list()
+        for interval_original in O.overlaps:
+            if len(interval_original.INFO) > 2:
+                chrom,gene,strand = interval_original.INFO
+        for interval_original in O.overlaps:
+            if len(interval_original.INFO) < 2:
+                if chrom in interval_original.INFO:
+                    chromlist.append(interval_original)
+        for interval_original in chromlist:
+            if '+' in strand:
+                if interval_original.INFO[0] > 0:
+                    cov += interval_original.INFO[0]
+            else:
+                if interval_original.INFO[0] < 0:
+                    cov += -interval_original.INFO[0]
+        ENDcov[gene] = cov
+        
+    ST4 = intervals.comparison((ENDgene,bed1list))
+    OVERLAPS_ENDgene = ST4.find_overlaps(0,1)
+    ENDgenecov = list()
+    for O in OVERLAPS_ENDgene:
+        cov = 0
+        chromlist = list()
+        for interval_original in O.overlaps:
+            if len(interval_original.INFO) > 2:
+                chrom,gene,strand = interval_original.INFO
+        for interval_original in O.overlaps:
+            if len(interval_original.INFO) < 2:
+                if chrom in interval_original.INFO:
+                    chromlist.append(interval_original)
+        for interval_original in chromlist:
+            if '+' in strand:
+                if interval_original.INFO[0] > 0:
+                    cov += interval_original.INFO[0]
+            else:
+                if interval_original.INFO[0] < 0:
+                    cov += -interval_original.INFO[0]
+        ENDgenecov[gene] = cov
+###############################################################################
+    for gene in TSScov:
+        if gene in TSSgenecov:
+            X1.append(TSScov[gene]/TSSgenecov[gene])
+        if gene in ENDcov and gene in ENDgenecov:
+            Y1. append(ENDcov[gene]/ENDgenecov[gene])
+###############################################################################
+    ST1 = intervals.comparison((TSS,bed2list))
+    OVERLAPS_TSS = ST1.find_overlaps(0,1)
+    TSScov = dict()
     print "Finished First Interval Search"
     for O in OVERLAPS_TSS:
         cov = 0
@@ -77,12 +177,12 @@ def intervalSearch(bed1,bed2,TSS,TSSgene,END,ENDgene):
             else:
                 if interval_original.INFO[0] < 0:
                     cov += -interval_original.INFO[0]
-        TSScov.append((gene,cov))
+        TSScov[gene] = cov
     
-    print "Finished first interval analysis"
-    
-    OVERLAPS_TSSgene = ST.find_overlaps(1,2)
-    TSSgenecov = list()
+
+    ST2 = intervals.comparison((TSSgene,bed2list))
+    OVERLAPS_TSSgene = ST2.find_overlaps(0,1)
+    TSSgenecov = dict()
     for O in OVERLAPS_TSSgene:
         cov = 0
         chromlist = list()
@@ -100,20 +200,70 @@ def intervalSearch(bed1,bed2,TSS,TSSgene,END,ENDgene):
             else:
                 if interval_original.INFO[0] < 0:
                     cov += -interval_original.INFO[0]
-        TSSgenecov.append((gene,cov))
+        TSSgenecov[gene] = cov
+    
+    ST3 = intervals.comparison((END,bed2list))
+    OVERLAPS_END = ST3.find_overlaps(0,1)
+    ENDcov = list()
+    for O in OVERLAPS_END:
+        cov = 0
+        chromlist = list()
+        for interval_original in O.overlaps:
+            if len(interval_original.INFO) > 2:
+                chrom,gene,strand = interval_original.INFO
+        for interval_original in O.overlaps:
+            if len(interval_original.INFO) < 2:
+                if chrom in interval_original.INFO:
+                    chromlist.append(interval_original)
+        for interval_original in chromlist:
+            if '+' in strand:
+                if interval_original.INFO[0] > 0:
+                    cov += interval_original.INFO[0]
+            else:
+                if interval_original.INFO[0] < 0:
+                    cov += -interval_original.INFO[0]
+        ENDcov[gene] = cov
+        
+    ST4 = intervals.comparison((ENDgene,bed2list))
+    OVERLAPS_ENDgene = ST4.find_overlaps(0,1)
+    ENDgenecov = list()
+    for O in OVERLAPS_ENDgene:
+        cov = 0
+        chromlist = list()
+        for interval_original in O.overlaps:
+            if len(interval_original.INFO) > 2:
+                chrom,gene,strand = interval_original.INFO
+        for interval_original in O.overlaps:
+            if len(interval_original.INFO) < 2:
+                if chrom in interval_original.INFO:
+                    chromlist.append(interval_original)
+        for interval_original in chromlist:
+            if '+' in strand:
+                if interval_original.INFO[0] > 0:
+                    cov += interval_original.INFO[0]
+            else:
+                if interval_original.INFO[0] < 0:
+                    cov += -interval_original.INFO[0]
+        ENDgenecov[gene] = cov
+###############################################################################
+    for gene in TSScov:
+        if gene in TSSgenecov:
+            X2.append(TSScov[gene]/TSSgenecov[gene])
+        if gene in ENDcov and gene in ENDgenecov:
+            Y2. append(ENDcov[gene]/ENDgenecov[gene])
+###############################################################################
     
 
+    bins = 100
+    F = plt.figure()
+    plt.hist(X1, bins, alpha=0.5, label='DMSO')
+    plt.hist(X2, bins, alpha=0.5, label='CA')
+    plt.savefig(savedir + 'Traveling Ratio')
+    F2 = plt.figure()
+    plt.hist(Y1, bins, alpha=0.5, label='DMSO')
+    plt.hist(Y2, bins, alpha=0.5, label='CA')
+    plt.savefig(savedir + "3' End Ratio")
     
-    #bins = 100
-    #F = plt.figure()
-    #plt.hist(X1, bins, alpha=0.5, label='DMSO')
-    #plt.hist(X2, bins, alpha=0.5, label='CA')
-    #plt.savefig(savedir + 'Traveling Ratio')
-    #F2 = plt.figure()
-    #plt.hist(Y1, bins, alpha=0.5, label='DMSO')
-    #plt.hist(Y2, bins, alpha=0.5, label='CA')
-    #plt.savefig(savedir + "3' End Ratio")
-    #
     
     
 def run(bed1,bed2,genes):
