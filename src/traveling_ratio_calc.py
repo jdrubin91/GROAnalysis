@@ -108,7 +108,7 @@ def intervalSearch(bed1,bed2,TSS,TSSgene,END,ENDgene):
     
     ST3 = intervals.comparison((END,bed1list))
     OVERLAPS_END = ST3.find_overlaps(0,1)
-    ENDcov = list()
+    ENDcov = dict()
     for O in OVERLAPS_END:
         cov = 0
         chromlist = list()
@@ -130,7 +130,7 @@ def intervalSearch(bed1,bed2,TSS,TSSgene,END,ENDgene):
         
     ST4 = intervals.comparison((ENDgene,bed1list))
     OVERLAPS_ENDgene = ST4.find_overlaps(0,1)
-    ENDgenecov = list()
+    ENDgenecov = dict()
     for O in OVERLAPS_ENDgene:
         cov = 0
         chromlist = list()
@@ -204,7 +204,7 @@ def intervalSearch(bed1,bed2,TSS,TSSgene,END,ENDgene):
     
     ST3 = intervals.comparison((END,bed2list))
     OVERLAPS_END = ST3.find_overlaps(0,1)
-    ENDcov = list()
+    ENDcov = dict()
     for O in OVERLAPS_END:
         cov = 0
         chromlist = list()
@@ -226,7 +226,7 @@ def intervalSearch(bed1,bed2,TSS,TSSgene,END,ENDgene):
         
     ST4 = intervals.comparison((ENDgene,bed2list))
     OVERLAPS_ENDgene = ST4.find_overlaps(0,1)
-    ENDgenecov = list()
+    ENDgenecov = dict()
     for O in OVERLAPS_ENDgene:
         cov = 0
         chromlist = list()
