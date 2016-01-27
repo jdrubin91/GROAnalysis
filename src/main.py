@@ -2,6 +2,7 @@ __author__ = 'Jonathan Rubin'
 
 import sys
 import os
+import reflect_coverage
 import bedtools_create_intersects
 
 #Specify DMSO treated bedgraph directory
@@ -32,5 +33,11 @@ TSS = filedir + '/refTSS.sorted.bed'
 END = filedir + '/ref3END.sorted.bed'
 
 def run():
-    bedtools_create_intersects.run(DMSO,CA,genes,TSS,END,filedir)
+    print "Reflecting coverage values..."
+    reflect_coverage.run(DMSO,CA,filedir)
+    print "done\nCreating intersect files..."
+    DMSOreflect = filedir + '/DMSO.bedgraph'
+    CAreflect = filedir + '/CA.bedgraph'
+    bedtools_create_intersects.run(DMSOreflect,CAreflect,genes,TSS,END,filedir)
+    print "done"
     
