@@ -32,5 +32,5 @@ TSS = filedir + '/refTSS.sorted.bed'
 END = filedir + '/refEND.sorted.bed'
 
 def run():
-    bedtools_create_intersects(DMSO,CA,genes,TSS,END,filedir)
+    bedtools_create_intersects.run(DMSO,CA,genes,TSS,END,filedir)
     
