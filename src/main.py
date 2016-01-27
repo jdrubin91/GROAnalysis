@@ -29,7 +29,7 @@ figuredir = parent_dir(homedir) + '/figures'
 #Directories to reference files
 genes = filedir + '/refGene.sorted.bed'
 TSS = filedir + '/refTSS.sorted.bed'
-END = filedir + '/refEND.sorted.bed'
+END = filedir + '/ref3END.sorted.bed'
 
 def run():
     bedtools_create_intersects.run(DMSO,CA,genes,TSS,END,filedir)
