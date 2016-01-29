@@ -98,17 +98,17 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
     plt.savefig(figuredir + '/EndRatio.png')
     outfile2 = open(filedir + '/GeneList.txt','w')
     outfile2.write("High CA TR = " + str(len(TRgenes)) + "\nHigh DMSO TR = " + str(len(DMSOTRgenes)) + "\nHigh CA ER = " + str(len(ENDgenes)) + "\nHigh DMSO ER = " + str(len(DMSOENDgenes)) + "\n")
+    outfile2.write("High CA TR\n")
     for item in sorted(TRgenes, key=itemgetter(1),reverse=True):
-        outfile2.write("High CA TR\n")
         outfile2.write(item[0] + '\t' + str(item[1]) + '\n')
+    outfile2.write("High DMSO TR\n")
     for item in sorted(DMSOTRgenes, key=itemgetter(1),reverse=True):
-        outfile2.write("High DMSO TR\n")
         outfile2.write(item[0] + '\t' + str(item[1]) + '\n')
+    outfile2.write("High CA ER\n")
     for item in sorted(ENDgenes, key=itemgetter(1),reverse=True):
-        outfile2.write("High CA ER\n")
         outfile2.write(item[0] + '\t' + str(item[1]) + '\n')
+    outfile2.write("High DMSO ER\n")
     for item in sorted(DMSOENDgenes, key=itemgetter(1),reverse=True):
-        outfile2.write("High DMSO ER\n")
         outfile2.write(item[0] + '\t' + str(item[1]) + '\n')
     
     
