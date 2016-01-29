@@ -3,6 +3,7 @@ __author__ = 'Jonathan Rubin'
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
+from operator import itemgetter
 
 def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):    
     d = dict()
@@ -87,9 +88,10 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
     plt.title("End Ratio")
     plt.savefig(figuredir + '/EndRatio.png')
     outfile2 = open(filedir + '/GeneList.txt','w')
-    outfile2.write(TRgenes)
-    outfile2.write('\n')
-    outfile2.write(ENDgenes)
+    for item in sorted(TRgenes, key=itemgetter(1)):
+        outfile2.write(item[0] + '\t' + str(item[1]) + '\n')
+    for item in sorted(ENDgenes, key=itemgetter(1)):
+        outfile2.write(item[0] + '\t' + str(item[1]) + '\n')
     
     
     
