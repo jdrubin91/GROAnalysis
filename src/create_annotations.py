@@ -1,5 +1,7 @@
 __author__ = 'Jonathan Rubin'
 
+import os
+
 def run(genes,filedir):
     TSS = (-300,300)
     END = (-300,300)
@@ -16,3 +18,5 @@ def run(genes,filedir):
     outfile2 = open(filedir + '/END.bed', 'w')
     for item in list2:
         outfile2.write(item[0] + '\t' + str(item[1]) + '\t' + str(item[2]) + '\t' + item[3] + '\t' + item[4] + '\t' + item[5] + '\n')
+    os.system("sort " + filedir + "/TSS.bed -k1,1 -k2,2n > " + filedir + "/TSS.sorted.bed")
+    os.system("sort " + filedir + "/END.bed -k1,1 -k2,2n > " + filedir + "/END.sorted.bed")

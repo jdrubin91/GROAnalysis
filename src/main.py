@@ -38,8 +38,8 @@ figuredir = parent_dir(homedir) + '/figures'
 def run():
     print "Creating annotation files..."
     create_annotations.run(genes,filedir)
-    TSS = filedir + '/TSS.bed'
-    END = filedir + '/END.bed'
+    TSS = filedir + '/TSS.sorted.bed'
+    END = filedir + '/END.sorted.bed'
     print "done\nReflecting coverage values..."
     reflect_coverage.run(DMSO,CA,filedir)
     print "done\nCreating intersect files..."
