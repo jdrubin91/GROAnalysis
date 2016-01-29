@@ -61,7 +61,7 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
         for item in d[gene]:
             outfile.write(item + '\t')
         outfile.write('\n')
-        DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND = d[gene][6:]
+        DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND = d[gene][5:]
         DMSOgenes = float(DMSOgenes)
         DMSOTSS = float(DMSOTSS)
         DMSOEND = float(DMSOEND)
