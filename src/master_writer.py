@@ -79,14 +79,16 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
             ENDlist.append(ER)
     
     F1 = plt.figure()
-    plt.hist(TRlist)
+    plt.hist(TRlist,50)
     plt.title("Travelers Ratio")
     plt.savefig(figuredir + '/TravelersRatio.png')
     F2 = plt.figure()
-    plt.hist(ENDlist)
+    plt.hist(ENDlist,50)
     plt.title("End Ratio")
     plt.savefig(figuredir + '/EndRatio.png')
-    
+    outfile2 = open(filedir + '/GeneList.txt','w')
+    outfile2.write(TRgenes + '\n')
+    outfile2.write(ENDgenes)
     
     
     
