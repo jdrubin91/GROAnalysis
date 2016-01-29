@@ -21,6 +21,7 @@ def run(genes,filedir):
     #os.system("sort " + filedir + "/TSS.bed -k1,1 -k2,2n")
     os.system("sortBed -i " + filedir + "/TSS.bed")
     print "sortBed -i " + filedir + "/TSS.bed"
+    os.system("echo hello")
     #> " + filedir + "/TSS.sorted.bed")
     #> " + filedir + "/TSS.sorted.bed")
     os.system("sort " + filedir + "/END.bed -k1,1 -k2,2n > " + filedir + "/END.sorted.bed")
