@@ -31,7 +31,7 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir):
             chrom,start,stop,gene,number,strand,coverage = line.strip().split()
             d[gene].append(coverage)
     
-    outfile = open(filedir + 'Master.bed','w')
+    outfile = open(filedir + '/Master.bed','w')
     outfile.write('Gene\tChrom\tStart\tStop\tNumber\tStrand\tDMSO gene body\tDMSO TSS\tDMSO END\tCA gene body\tCA TSS\tCA END\n')
     for gene in d:
         outfile.write(gene + '\t')
