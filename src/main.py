@@ -2,6 +2,7 @@ __author__ = 'Jonathan Rubin'
 
 import sys
 import os
+import create_annotations
 import reflect_coverage
 import bedtools_create_intersects
 import master_writer
@@ -11,6 +12,9 @@ DMSO = sys.argv[1]
 
 #Specify CA treated bedgraph directory
 CA = sys.argv[2]
+
+#Specify gene annotations
+genes = sys.argv[3]
 
 #Return parent directory
 def parent_dir(directory):
@@ -29,12 +33,14 @@ filedir = parent_dir(homedir) + '/files'
 figuredir = parent_dir(homedir) + '/figures'
 
 #Directories to reference files
-genes = filedir + '/refGene.sorted.bed'
-TSS = filedir + '/refTSS.sorted.bed'
-END = filedir + '/ref3END.sorted.bed'
+
 
 def run():
-    print "Reflecting coverage values..."
+    print "Creating annotation files..."
+    create_annotations.run(genes)
+    TSS = filedir + '/TSS.bed'
+    END = filedir + '/END.bed'
+    print "done\nReflecting coverage values..."
     reflect_coverage.run(DMSO,CA,filedir)
     print "done\nCreating intersect files..."
     DMSOreflect = filedir + '/DMSO.bedgraph'
