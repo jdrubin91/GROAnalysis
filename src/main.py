@@ -42,12 +42,14 @@ def run():
     bedtools_create_intersects.run(DMSOreflect,CAreflect,genes,TSS,END,filedir)
     os.system("rm " + filedir + "/DMSO.bedgraph")
     os.system("rm " + filedir + "/CA.bedgraph")
-    print "done\nCalculating coverage ratios..."
+    print "done\nGenerating files..."
     DMSOgenes = filedir + '/DMSO.genes.bed'
     DMSOTSS = filedir + '/DMSO.TSS.bed'
     DMSOEND = filedir + '/DMSO.END.bed'
     CAgenes = filedir + '/CA.genes.bed'
     CATSS = filedir + '/CA.TSS.bed'
     CAEND = filedir + '/CA.END.bed'
-    master_writer.run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir)
+    master_writer.run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir)
+    print "done"
+    
     
