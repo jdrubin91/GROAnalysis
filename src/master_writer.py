@@ -5,41 +5,41 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir):
     with open(DMSOgenes) as F1:
         for line in F1:
             chrom,start,stop,gene,number,strand,coverage = line.strip().split()
-            if '.' in coverage:
+            if coverage == '.':
                 coverage = '1'
             d[gene] = [chrom,start,stop,number,strand,coverage]
     with open(DMSOTSS) as F1:
         for line in F1:
             chrom,start,stop,gene,number,strand,coverage = line.strip().split()
-            if '.' in coverage:
+            if coverage == '.':
                 coverage = '1'
             d[gene].append(coverage)
             
     with open(DMSOEND) as F1:
         for line in F1:
             chrom,start,stop,gene,number,strand,coverage = line.strip().split()
-            if '.' in coverage:
+            if coverage == '.':
                 coverage = '1'
             d[gene].append(coverage)
             
     with open(CAgenes) as F1:
         for line in F1:
             chrom,start,stop,gene,number,strand,coverage = line.strip().split()
-            if '.' in coverage:
+            if coverage == '.':
                 coverage = '1'
             d[gene].append(coverage)
             
     with open(CATSS) as F1:
         for line in F1:
             chrom,start,stop,gene,number,strand,coverage = line.strip().split()
-            if '.' in coverage:
+            if coverage == '.':
                 coverage = '1'
             d[gene].append(coverage)
             
     with open(CAEND) as F1:
         for line in F1:
             chrom,start,stop,gene,number,strand,coverage = line.strip().split()
-            if '.' in coverage:
+            if coverage == '.':
                 coverage = '1'
             d[gene].append(coverage)
     
