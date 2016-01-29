@@ -84,3 +84,6 @@ def run2(file1,file2,file3):
     F = plt.figure()
     plt.scatter(x,y)
     plt.savefig(savedir + '/model_parameter_comparison.png')
+    
+if __name__ == "__main__":
+    run2(file1,file2,file3)
