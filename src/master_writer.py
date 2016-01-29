@@ -49,7 +49,6 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
                 coverage = '1'
             d[gene].append(coverage)
             
-    print len(d)
     coveragecutoff = 200
     TRlist = list()
     TRgenes = list()
@@ -60,7 +59,9 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
     
     outfile = open(filedir + '/Master.bed','w')
     outfile.write('Gene\tChrom\tStart\tStop\tNumber\tStrand\tDMSO gene body\tDMSO TSS\tDMSO END\tCA gene body\tCA TSS\tCA END\n')
+    i = 0
     for gene in d:
+        i+=1
         outfile.write(gene + '\t')
         for item in d[gene]:
             outfile.write(item + '\t')
@@ -81,7 +82,7 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
             if ER > cutoff2:
                 ENDgenes.append((gene,ER))
             ENDlist.append(ER)
-    
+    print "i: ",i
     F1 = plt.figure()
     plt.hist(TRlist,50)
     plt.title("Travelers Ratio")
