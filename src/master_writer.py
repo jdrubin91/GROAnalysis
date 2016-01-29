@@ -58,6 +58,7 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
     ENDgenes = list()
     DMSOENDgenes = list()
     cutoff2 = 0.25
+    cutoff3 = 5
     
     outfile = open(filedir + '/Master.bed','w')
     outfile.write('Gene\tChrom\tStart\tStop\tNumber\tStrand\tDMSO gene body\tDMSO TSS\tDMSO END\tCA gene body\tCA TSS\tCA END\n')
@@ -79,21 +80,25 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
                 TRgenes.append((gene,TR))
             if TR < -cutoff1:
                 DMSOTRgenes.append((gene,TR))
-            TRlist.append(TR)
+            if not TR > cutoff3 and not TR < -cutoff3:
+                TRlist.append(TR)
             ER = (CAEND/(CAgenes-CAEND))-(DMSOEND/(DMSOgenes-DMSOEND))
             if ER > cutoff2:
                 ENDgenes.append((gene,ER))
             if ER < -cutoff2:
                 DMSOENDgenes.append((gene,ER))
-            ENDlist.append(ER)
+            if not ER > cutoff3 and not ER < -cutoff3:
+                ENDlist.append(ER)
     F1 = plt.figure()
     TRlist.sort(reverse=True)
-    plt.hist(TRlist[int(len(TRlist)*.2):int(len(TRlist)*.8)],50)
+    #plt.hist(TRlist[int(len(TRlist)*.2):int(len(TRlist)*.8)],50)
+    plt.hist(TRlist,50)
     plt.title("Travelers Ratio")
     plt.savefig(figuredir + '/TravelersRatio.png')
     F2 = plt.figure()
     ENDlist.sort(reverse=True)
-    plt.hist(ENDlist[int(len(ENDlist)*.2):int(len(ENDlist)*.8)],50)
+    #plt.hist(ENDlist[int(len(ENDlist)*.2):int(len(ENDlist)*.8)],50)
+    plt.hist(ENDlist,50)
     plt.title("End Ratio")
     plt.savefig(figuredir + '/EndRatio.png')
     outfile2 = open(filedir + '/GeneList.txt','w')
