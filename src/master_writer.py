@@ -13,6 +13,7 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
             if coverage == '.':
                 coverage = '1'
             d[gene] = [chrom,start,stop,number,strand,coverage]
+    print len(d)
     with open(DMSOTSS) as F1:
         for line in F1:
             chrom,start,stop,gene,number,strand,coverage = line.strip().split()
