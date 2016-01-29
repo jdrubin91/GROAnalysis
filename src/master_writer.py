@@ -13,7 +13,7 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
             if coverage == '.':
                 coverage = '1'
             d[gene] = [chrom,start,stop,number,strand,coverage]
-    print len(d)
+
     with open(DMSOTSS) as F1:
         for line in F1:
             chrom,start,stop,gene,number,strand,coverage = line.strip().split()
@@ -48,7 +48,9 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
             if coverage == '.':
                 coverage = '1'
             d[gene].append(coverage)
-    
+            
+    print len(d)
+    coveragecutoff = 200
     TRlist = list()
     TRgenes = list()
     cutoff1 = 0.25
@@ -70,7 +72,7 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
         CAgenes = float(CAgenes)
         CATSS = float(CATSS)
         CAEND = float(CAEND)
-        if CAgenes-CATSS != 0 and DMSOgenes-DMSOTSS != 0 and CAgenes-CAEND != 0 and DMSOgenes-DMSOEND != 0:
+        if CAgenes-CATSS != 0 and DMSOgenes-DMSOTSS != 0 and CAgenes-CAEND != 0 and DMSOgenes-DMSOEND != 0 and DMSOgenes > coveragecutoff and CAgenes > coveragecutoff:
             TR = (CATSS/(CAgenes-CATSS))-(DMSOTSS/(DMSOgenes-DMSOTSS))
             if TR > cutoff1:
                 TRgenes.append((gene,TR))
