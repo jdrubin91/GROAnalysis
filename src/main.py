@@ -4,6 +4,7 @@ import sys
 import os
 import reflect_coverage
 import bedtools_create_intersects
+import master_writer
 
 #Specify DMSO treated bedgraph directory
 DMSO = sys.argv[1]
@@ -39,5 +40,14 @@ def run():
     DMSOreflect = filedir + '/DMSO.bedgraph'
     CAreflect = filedir + '/CA.bedgraph'
     bedtools_create_intersects.run(DMSOreflect,CAreflect,genes,TSS,END,filedir)
-    print "done"
+    os.system("rm " + filedir + "/DMSO.bedgraph")
+    os.system("rm " + filedir + "/CA.bedgraph")
+    print "done\nCalculating coverage ratios..."
+    DMSOgenes = filedir + 'DMSO.genes.bed'
+    DMSOTSS = filedir + 'DMSO.TSS.bed'
+    DMSOEND = filedir + 'DMSO.END.bed'
+    CAgenes = filedir + 'CA.genes.bed'
+    CATSS = filedir + 'CA.TSS.bed'
+    CAEND = filedir + 'CA.END.bed'
+    master_writer.run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir)
     
