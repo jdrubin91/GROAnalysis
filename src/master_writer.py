@@ -52,16 +52,16 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
     coveragecutoff = 200
     TRlist = list()
     TRgenes = list()
+    DMSOTRgenes = list()
     cutoff1 = 0.25
     ENDlist = list()
     ENDgenes = list()
+    DMSOENDgenes = list()
     cutoff2 = 0.25
     
     outfile = open(filedir + '/Master.bed','w')
     outfile.write('Gene\tChrom\tStart\tStop\tNumber\tStrand\tDMSO gene body\tDMSO TSS\tDMSO END\tCA gene body\tCA TSS\tCA END\n')
-    i = 0
     for gene in d:
-        i+=1
         outfile.write(gene + '\t')
         for item in d[gene]:
             outfile.write(item + '\t')
@@ -77,24 +77,42 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
             TR = (CATSS/(CAgenes-CATSS))-(DMSOTSS/(DMSOgenes-DMSOTSS))
             if TR > cutoff1:
                 TRgenes.append((gene,TR))
+            if TR < -cutoff1:
+                DMSOTRgenes.append((gene,TR))
             TRlist.append(TR)
             ER = (CAEND/(CAgenes-CAEND))-(DMSOEND/(DMSOgenes-DMSOEND))
             if ER > cutoff2:
                 ENDgenes.append((gene,ER))
+            if ER < -cutoff2:
+                DMSOENDgenes.append((gene,ER))
             ENDlist.append(ER)
-    print "i: ",i
     F1 = plt.figure()
-    plt.hist(TRlist,50)
+    TRlist.sort(reverse=True)
+    plt.hist(TRlist[int(len(TRlist)*.1):],50)
     plt.title("Travelers Ratio")
     plt.savefig(figuredir + '/TravelersRatio.png')
     F2 = plt.figure()
-    plt.hist(ENDlist,50)
+    ENDlist.sort(reverse=True)
+    plt.hist(ENDlist[int(len(ENDlist)*.1):],50)
     plt.title("End Ratio")
     plt.savefig(figuredir + '/EndRatio.png')
     outfile2 = open(filedir + '/GeneList.txt','w')
+    outfile2.write("High CA TR = ",len(TRgenes),"\n","High DMSO TR = ",len(DMSOTRgenes),"\n","High CA ER = ",len(ENDgenes),"\n","High DMSO ER = ",len(DMSOENDgenes))
+    outfile2.write('\n')
+    outfile2.write("High DMSO TR = ",len(DMSOTRgenes))
+    outfile2.write('\n')
+    outfile2.write
     for item in sorted(TRgenes, key=itemgetter(1),reverse=True):
+        outfile2.write("High CA TR\n")
+        outfile2.write(item[0] + '\t' + str(item[1]) + '\n')
+    for item in sorted(DMSOTRgenes, key=itemgetter(1),reverse=True):
+        outfile2.write("High DMSO TR\n")
         outfile2.write(item[0] + '\t' + str(item[1]) + '\n')
     for item in sorted(ENDgenes, key=itemgetter(1),reverse=True):
+        outfile2.write("High CA ER\n")
+        outfile2.write(item[0] + '\t' + str(item[1]) + '\n')
+    for item in sorted(DMSOENDgenes, key=itemgetter(1),reverse=True):
+        outfile2.write("High DMSO ER\n")
         outfile2.write(item[0] + '\t' + str(item[1]) + '\n')
     
     
