@@ -88,9 +88,9 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
     plt.title("End Ratio")
     plt.savefig(figuredir + '/EndRatio.png')
     outfile2 = open(filedir + '/GeneList.txt','w')
-    for item in sorted(TRgenes, key=itemgetter(1)):
+    for item in sorted(TRgenes, key=itemgetter(1),reverse=True):
         outfile2.write(item[0] + '\t' + str(item[1]) + '\n')
-    for item in sorted(ENDgenes, key=itemgetter(1)):
+    for item in sorted(ENDgenes, key=itemgetter(1),reverse=True):
         outfile2.write(item[0] + '\t' + str(item[1]) + '\n')
     
     
