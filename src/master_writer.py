@@ -58,7 +58,7 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
     ENDgenes = list()
     DMSOENDgenes = list()
     cutoff2 = 0.25
-    cutoff3 = 0.5
+    cutoff3 = 0.25
     
     outfile = open(filedir + '/Master.bed','w')
     outfile.write('Gene\tChrom\tStart\tStop\tNumber\tStrand\tDMSO gene body\tDMSO TSS\tDMSO END\tCA gene body\tCA TSS\tCA END\n')
