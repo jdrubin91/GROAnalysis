@@ -68,14 +68,15 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
         CAgenes = float(CAgenes)
         CATSS = float(CATSS)
         CAEND = float(CAEND)
-        TR = (CATSS/(CAgenes-CATSS))-(DMSOTSS/(DMSOgenes-DMSOTSS))
-        if TR > cutoff1:
-            TRgenes.append((gene,TR))
-        TRlist.append(TR)
-        ER = (CAEND/(CAgenes-CAEND))-(DMSOEND/(DMSOgenes-DMSOEND))
-        if ER > cutoff2:
-            ENDgenes.append((gene,ER))
-        ENDlist.append(ER)
+        if DMSOgenes > 1 and CAgenes > 1:
+            TR = (CATSS/(CAgenes-CATSS))-(DMSOTSS/(DMSOgenes-DMSOTSS))
+            if TR > cutoff1:
+                TRgenes.append((gene,TR))
+            TRlist.append(TR)
+            ER = (CAEND/(CAgenes-CAEND))-(DMSOEND/(DMSOgenes-DMSOEND))
+            if ER > cutoff2:
+                ENDgenes.append((gene,ER))
+            ENDlist.append(ER)
     
     F1 = plt.figure()
     plt.hist(TRlist)
