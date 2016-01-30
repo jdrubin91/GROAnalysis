@@ -3,6 +3,8 @@ __author = 'Jonathan Rubin'
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
+from scipy.stats import gaussian_kde
+import numpy as np
 
 file1 = '/scratch/Shares/dowell/ENCODE/Rubin2016_genes_DMSO-1_K_models_MLE.tsv'
 file2 = '/scratch/Shares/dowell/ENCODE/Rubin2016_genes_CA-1_K_models_MLE.tsv'
@@ -84,7 +86,9 @@ def run2(file1,file2,file3):
                     x.append(d2[gene][2]-d1[gene][2])
                     y.append(d3[key])
     F = plt.figure()
-    plt.scatter(x,y)
+    xy = np.vstack([x,y])
+    z = gaussian_kde(xy)(xy)
+    plt.scatter(x,y,c=z,edgecolor="",s=14)
     plt.ylim([-1,1])
     plt.xlim([-1,1])
     plt.savefig(savedir + '/model_parameter_comparison.png')
