@@ -82,7 +82,7 @@ def run2(file1,file2,file3):
             for key in d3:
                 if gene in key:
                     x.append(d2[gene][2]-d1[gene][2])
-                    y.append(d3[gene])
+                    y.append(d3[key])
     F = plt.figure()
     plt.scatter(x,y)
     plt.savefig(savedir + '/model_parameter_comparison.png')
