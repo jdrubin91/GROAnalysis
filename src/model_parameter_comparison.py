@@ -90,8 +90,8 @@ def run2(file1,file2,file3):
     xy = np.vstack([x,y])
     z = gaussian_kde(xy)(xy)
     plt.scatter(x,y,c=z,edgecolor="",s=14)
-    plt.ylim([-1,1])
-    plt.xlim([-1,1])
+    plt.ylim([-.1,.1])
+    plt.xlim([-.1,.1])
     plt.savefig(savedir + '/model_parameter_comparison.png')
     
 if __name__ == "__main__":
