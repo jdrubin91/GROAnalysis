@@ -85,6 +85,8 @@ def run2(file1,file2,file3):
                     y.append(d3[key])
     F = plt.figure()
     plt.scatter(x,y)
+    plt.ylim([-1,1])
+    plt.xlim([-1,1])
     plt.savefig(savedir + '/model_parameter_comparison.png')
     
 if __name__ == "__main__":
