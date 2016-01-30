@@ -75,7 +75,7 @@ def run2(file1,file2,file3):
             CAgenes = float(CAgenes)
             CATSS = float(CATSS)
             if CAgenes-CATSS != 0 and DMSOgenes-DMSOTSS != 0 and CAgenes > cut and DMSOgenes > cut:
-                TR = (CATSS/(CAgenes-CATSS))-(DMSOTSS/(DMSOgenes-DMSOTSS))
+                TR = (CATSS/(CAgenes))-(DMSOTSS/(DMSOgenes))
                 d3[gene] = TR
     x = list()
     y = list()
