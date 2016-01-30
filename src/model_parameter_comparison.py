@@ -61,7 +61,7 @@ def run2(file1,file2,file3):
                 elif '1' in line[1]:
                     p = line.strip().split()[index].split(',')[0]
                     d2[gene].append(float(p))
-    
+    cut = 200
     d3 = dict()
     with open(file3) as F3:
         F3.readline()
@@ -79,7 +79,6 @@ def run2(file1,file2,file3):
                 d3[gene] = TR
     x = list()
     y = list()
-    cut = 200
     for gene in d1:
         if gene in d2:
             for key in d3:
