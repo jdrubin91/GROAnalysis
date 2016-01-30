@@ -84,7 +84,7 @@ def run2(file1,file2,file3):
         if gene in d2:
             for key in d3:
                 if gene in key:
-                    if d1[key][0] > cut or d1[key][1] > cut and d2[key][0] > cut or d2[key][1] > cut:
+                    if d1[gene][0] > cut or d1[gene][1] > cut and d2[gene][0] > cut or d2[gene][1] > cut:
                         x.append(d2[gene][2]-d1[gene][2])
                         y.append(d3[key])
     F = plt.figure()
