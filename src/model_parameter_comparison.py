@@ -81,7 +81,7 @@ def run2(file1,file2,file3):
         if gene in d2:
             for key in d3:
                 if gene in key:
-                    x.append(d2[gene]-d1[gene])
+                    x.append(d2[gene][2]-d1[gene][2])
                     y.append(d3[gene])
     F = plt.figure()
     plt.scatter(x,y)
