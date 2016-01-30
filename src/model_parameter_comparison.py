@@ -79,12 +79,14 @@ def run2(file1,file2,file3):
                 d3[gene] = TR
     x = list()
     y = list()
+    cut = 200
     for gene in d1:
         if gene in d2:
             for key in d3:
                 if gene in key:
-                    x.append(d2[gene][2]-d1[gene][2])
-                    y.append(d3[key])
+                    if d1[key][0] > cut or d1[key][1] > cut and d2[key][0] > cut or d2[key][1] > cut:
+                        x.append(d2[gene][2]-d1[gene][2])
+                        y.append(d3[key])
     F = plt.figure()
     xy = np.vstack([x,y])
     z = gaussian_kde(xy)(xy)
