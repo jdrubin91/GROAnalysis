@@ -104,7 +104,7 @@ def run(file1,file2,file3):
     plt.plot(x,CAarray/DMSOarray)
     plt.xlabel('TSS')
     plt.axvline(x=0.,color='k',ls='dashed')
-    plt.axhline(y=0., color = 'k')
+    plt.axhline(y=1., color = 'k')
     plt.title("CA/DMSO")
     plt.savefig(figout + '/metagene_TSS_ratio.png')
     
