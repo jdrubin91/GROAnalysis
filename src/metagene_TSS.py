@@ -25,6 +25,9 @@ def run(file1,file2,file3):
         for i in range(start-window,start+window):
             outfile1.write(chrom + '\t' + str(i) + '\t' + str(i+1) + '\t' + gene + '\n')
     
+    os.system("bedtools map -a " + outdir + "/TSS_BP_Intervals.bed -b " + file1 + " -c 4 -o sum > " + outdir + "/DMSO_TSS_mapped.bed")
+    os.system("bedtools map -a " + outdir + "/TSS_BP_Intervals.bed -b " + file2 + " -c 4 -o sum > " + outdir + "/CA_TSS_mapped.bed")
+    
     return
 
 
