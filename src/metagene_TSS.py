@@ -100,6 +100,12 @@ def run(file1,file2,file3):
     plt.legend(['DMSO', 'CA'], loc='upper left')
     plt.savefig(figout + '/metagene_TSS.png')
     
+    F1 = plt.figure()
+    plt.plot(x,CAarray/DMSOarray)
+    plt.xlabel('TSS')
+    plt.axvline(x=0.,color='k',ls='dashed')
+    plt.title("CA/DMSO")
+    plt.savefig(figout + '/metagene_TSS_ratio.png')
     
     
     
