@@ -18,7 +18,7 @@ def run(file1,file2,file3):
             if float(coverage) > coveragecut:
                 genelist.append(gene)
     
-    outfile1 = open(outdir + '/TSS_BP_Intervals.bed')
+    outfile1 = open(outdir + '/TSS_BP_Intervals.bed','w')
     for gene in genelist:
         start = int(gene.split(';')[2].split('-')[0].split(':')[1])
         chrom = gene.split(';')[2].split('-')[0].split(':')[0]
