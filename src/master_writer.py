@@ -53,7 +53,7 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
     TRlist = list()
     TRgenes = list()
     DMSOTRgenes = list()
-    cutoff1 = 0.25
+    cutoff1 = 0.01
     ENDlist = list()
     ENDgenes = list()
     DMSOENDgenes = list()
