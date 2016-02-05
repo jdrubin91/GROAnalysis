@@ -92,16 +92,17 @@ def run(file1,file2,file3):
             CAarray[i] += CAdict[gene][i]
             
     F = plt.figure()
-    x = np.arange(-window,window,1)
-    plt.plot(x,DMSOarray)
-    plt.plot(x,CAarray)
+    x1 = np.arange(-1000,1000,1)
+    plt.plot(x1,DMSOarray[window-1000:window+1000])
+    plt.plot(x1,CAarray[window-1000:window+1000])
     plt.xlabel('TSS')
     plt.axvline(x=0.,color='k',ls='dashed')
     plt.legend(['DMSO', 'CA'], loc='upper left')
     plt.savefig(figout + '/metagene_TSS.png')
     
     F1 = plt.figure()
-    plt.plot(x,CAarray/DMSOarray)
+    x2 = np.arange(-window,window,1)
+    plt.plot(x2,CAarray/DMSOarray)
     plt.xlabel('TSS')
     plt.axvline(x=0.,color='k',ls='dashed')
     plt.axhline(y=1.,color='k',ls='solid')
