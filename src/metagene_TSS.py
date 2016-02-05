@@ -35,12 +35,14 @@ def run(file1,file2,file3):
     os.system("bedtools map -a " + outdir + "/TSS_BP_Intervals.sorted.bed -b " + file2 + " -c 4 -o collapse > " + outdir + "/CA_TSS_mapped.bed")
     
     DMSOdict = dict()
+    DMSOantidict = dict()
     with open(outdir + "/DMSO_TSS_mapped.bed") as F:
         for line in F:
             chrom, start, stop, gene, cov = line.strip().split()
             strand = gene[-1]
             coveragelist = cov.split(',')
             coverage = 0.0
+            antisense = 0.0
             for item in coveragelist:
                 if item is '.':
                     coverage += 0.0
@@ -48,22 +50,30 @@ def run(file1,file2,file3):
                     if strand is '-':
                         if float(item) < 0:
                             coverage += -float(item)
+                        if float(item) > 0:
+                            antisense += -float(item)
                     else:
                         if float(item) > 0:
                             coverage += float(item)
+                        if float(item) < 0:
+                            antisense += float(item)
             if gene not in DMSOdict:
                 DMSOdict[gene] = np.zeros(window*2)
+                DMSOantidict[gene] = np.zeros(window*2)
             TSS = int(gene.split(';')[2].split('-')[0].split(':')[1])
             index = int(start) + window - TSS
             DMSOdict[gene][index] = coverage
+            DMSOantidict[gene][index] = antisense
             
     CAdict = dict()
+    CAantidict = dict()
     with open(outdir + "/CA_TSS_mapped.bed") as F:
         for line in F:
             chrom, start, stop, gene, cov = line.strip().split()
             strand = gene[-1]
             coveragelist = cov.split(',')
             coverage = 0.0
+            antisense = 0.0
             for item in coveragelist:
                 if item is '.':
                     coverage += 0.0
@@ -71,30 +81,43 @@ def run(file1,file2,file3):
                     if strand is '-':
                         if float(item) < 0:
                             coverage += -float(item)
+                        if float(item) > 0:
+                            antisense += -float(item)
                     else:
                         if float(item) > 0:
                             coverage += float(item)
+                        if float(item) < 0:
+                            antisense += float(item)
             if gene not in CAdict:
                 CAdict[gene] = np.zeros(window*2)
+                CAantidict[gene] = np.zeros(window*2)
             TSS = int(gene.split(';')[2].split('-')[0].split(':')[1])
             index = int(start) + window - TSS
             CAdict[gene][index] = coverage
+            CAantidict[gene][index] = antisense
     
     DMSOarray = np.zeros(window*2)
+    DMSOantiarray = np.zeros(window*2)
     CAarray = np.zeros(window*2)
+    CAantiarray = np.zeros(window*2)
+    
     
     for gene in DMSOdict:
         for i in range(len(DMSOdict[gene])):
             DMSOarray[i] += DMSOdict[gene][i]
+            DMSOantiarray[i] += DMSOantidict[gene][i]
             
     for gene in CAdict:
         for i in range(len(CAdict[gene])):
             CAarray[i] += CAdict[gene][i]
+            CAantiarray[i] += CAantidict[gene][i]
             
     F = plt.figure()
     x1 = np.arange(-1000,1000,1)
-    plt.plot(x1,DMSOarray[window-1000:window+1000])
-    plt.plot(x1,CAarray[window-1000:window+1000])
+    plt.plot(x1,DMSOarray[window-1000:window+1000],color='b')
+    plt.plot(x1,CAarray[window-1000:window+1000],color='g')
+    plt.plot(x1,DMSOantiarray[window-1000:window+1000],color='b')
+    plt.plot(x1,CAantiarray[window-1000:window+1000],color='g')
     plt.xlabel('TSS')
     plt.axvline(x=0.,color='k',ls='dashed')
     plt.legend(['DMSO', 'CA'], loc='upper left')
@@ -103,10 +126,12 @@ def run(file1,file2,file3):
     F1 = plt.figure()
     x2 = np.arange(-window,window,1)
     plt.plot(x2,CAarray/DMSOarray)
+    plt.plot(x2,-CAantiarray/DMSOantiarray)
+    plt.legend(['CA/DMSO','CA/DMSO antisense'], loc='upper left')
     plt.xlabel('TSS')
     plt.axvline(x=0.,color='k',ls='dashed')
     plt.axhline(y=1.,color='k',ls='solid')
-    plt.title("CA/DMSO")
+    plt.title("Coverage Ratio")
     plt.savefig(figout + '/metagene_TSS_ratio.png')
     
     
