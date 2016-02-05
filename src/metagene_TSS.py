@@ -119,13 +119,25 @@ def run(file1,file2,file3):
             maximumanti = np.amin(CAantidict[gene][i])
             if maximumanti != 0:
                 CAantiarray[i] += -CAantidict[gene][i]/maximumanti
+    
+    DMSOmax = np.amax(DMSOarray)
+    DMSOantimax = np.amin(DMSOantiarray)
+    CAmax = np.amax(CAarray)
+    CAantimax = np.amin(CAantiarray)
+    
+    for i in range(window*2):
+        DMSOarray[i] = DMSOarray[i]/DMSOmax
+        DMSOantiarray[i] = -DMSOantiarray[i]/DMSOantimax
+        CAarray[i] = CAarray[i]/CAmax
+        CAantiarray[i] = CAantiarray[i]/CAantimax
+        
             
     F = plt.figure()
     x1 = np.arange(-1000,1000,1)
     plt.plot(x1,DMSOarray[window-1000:window+1000],color='b')
     plt.plot(x1,CAarray[window-1000:window+1000],color='g')
-    plt.plot(x1,DMSOantiarray[window-1000:window+1000],color='b')
-    plt.plot(x1,CAantiarray[window-1000:window+1000],color='g')
+    plt.plot(x1,DMSOantiarray[window-1000:window+1000],color='b',ls='dashed')
+    plt.plot(x1,CAantiarray[window-1000:window+1000],color='g',ls='dashed')
     plt.xlabel('TSS')
     plt.axvline(x=0.,color='k',ls='dashed')
     plt.legend(['DMSO', 'CA'], loc='upper left')
