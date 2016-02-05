@@ -23,7 +23,7 @@ def run(file1,file2,file3):
         start = int(gene.split(';')[2].split('-')[0].split(':')[1])
         chrom = gene.split(';')[2].split('-')[0].split(':')[0]
         for i in range(start-window,start+window):
-            outfile1.write(chrom + '\t' + str(i) + '\t' + str(i+1) + '\n')
+            outfile1.write(chrom + '\t' + str(i) + '\t' + str(i+1) + gene + '\n')
     
     return
 
