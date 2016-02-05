@@ -57,7 +57,7 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
     ENDlist = list()
     ENDgenes = list()
     DMSOENDgenes = list()
-    cutoff2 = 0.25
+    cutoff2 = 0.01
     cutoff3 = 0.25
     i = 0
     
