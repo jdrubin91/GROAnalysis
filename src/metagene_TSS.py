@@ -37,12 +37,12 @@ def run(file1,file2,file3):
     DMSOdict = dict()
     with open(outdir + "/DMSO_TSS_mapped.bed") as F:
         for line in F:
-            chrom, start, stop, gene, coverage = line.strip().split()
+            chrom, start, stop, gene, strand, coverage = line.strip().split()
             if gene not in DMSOdict:
                 DMSOdict[gene] = np.zeros(window*2)
             if coverage is '.':
                 coverage = 0.0
-            if gene[-1] is '-':
+            if strand is '-':
                 coverage = -float(coverage)
             else:
                 coverage = float(coverage)
@@ -53,12 +53,12 @@ def run(file1,file2,file3):
     CAdict = dict()
     with open(outdir + "/CA_TSS_mapped.bed") as F:
         for line in F:
-            chrom, start, stop, gene, coverage = line.strip().split()
+            chrom, start, stop, gene, strand, coverage = line.strip().split()
             if gene not in CAdict:
                 CAdict[gene] = np.zeros(window*2)
             if coverage is '.':
                 coverage = 0.0
-            if gene[-1] is '-':
+            if strand is '-':
                 coverage = -float(coverage)
             else:
                 coverage = float(coverage)
