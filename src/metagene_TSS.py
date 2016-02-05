@@ -44,12 +44,13 @@ def run(file1,file2,file3):
             for item in coveragelist:
                 if item is '.':
                     coverage += 0.0
-                if strand is '-':
-                    if float(item) < 0:
-                        coverage += -float(item)
                 else:
-                    if float(item) > 0:
-                        coverage += float(item)
+                    if strand is '-':
+                        if float(item) < 0:
+                            coverage += -float(item)
+                    else:
+                        if float(item) > 0:
+                            coverage += float(item)
             if gene not in DMSOdict:
                 DMSOdict[gene] = np.zeros(window*2)
             TSS = int(gene.split(';')[2].split('-')[0].split(':')[1])
@@ -66,12 +67,13 @@ def run(file1,file2,file3):
             for item in coveragelist:
                 if item is '.':
                     coverage += 0.0
-                if strand is '-':
-                    if float(item) < 0:
-                        coverage += -float(item)
                 else:
-                    if float(item) > 0:
-                        coverage += float(item)
+                    if strand is '-':
+                        if float(item) < 0:
+                            coverage += -float(item)
+                    else:
+                        if float(item) > 0:
+                            coverage += float(item)
             if gene not in CAdict:
                 CAdict[gene] = np.zeros(window*2)
             TSS = int(gene.split(';')[2].split('-')[0].split(':')[1])
