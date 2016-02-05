@@ -54,6 +54,8 @@ def run(file1,file2,file3):
             chrom, start, stop, gene, coverage = line.strip().split()
             if gene not in CAdict:
                 CAdict[gene] = np.zeros(window*2)
+            if coverage is '.':
+                coverage = 0.0
             if gene[-1] is '-':
                 coverage = -float(coverage)
             else:
