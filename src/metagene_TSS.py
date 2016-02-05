@@ -28,7 +28,7 @@ def run(file1,file2,file3):
         start = int(gene.split(';')[2].split('-')[0].split(':')[1])
         chrom = gene.split(';')[2].split('-')[0].split(':')[0]
         for i in range(start-window,start+window):
-            outfile1.write(chrom + '\t' + str(i) + '\t' + str(i+1) + '\t' + gene + '\t' + gene[-1] + '\n')
+            outfile1.write(chrom + '\t' + str(i) + '\t' + str(i+1) + '\t' + gene + '\t' + str(0) + '\t' + gene[-1] + '\n')
     outfile1.close()
     os.system("sort " + outdir + "/TSS_BP_Intervals.bed -k1,1 -k2,2n > " + outdir + "/TSS_BP_Intervals.sorted.bed")
     os.system("bedtools map -s -a " + outdir + "/TSS_BP_Intervals.sorted.bed -b " + file1 + " -c 4 -o sum > " + outdir + "/DMSO_TSS_mapped.bed")
@@ -37,7 +37,7 @@ def run(file1,file2,file3):
     DMSOdict = dict()
     with open(outdir + "/DMSO_TSS_mapped.bed") as F:
         for line in F:
-            chrom, start, stop, gene, strand, coverage = line.strip().split()
+            chrom, start, stop, gene, num, strand, coverage = line.strip().split()
             if gene not in DMSOdict:
                 DMSOdict[gene] = np.zeros(window*2)
             if coverage is '.':
@@ -53,7 +53,7 @@ def run(file1,file2,file3):
     CAdict = dict()
     with open(outdir + "/CA_TSS_mapped.bed") as F:
         for line in F:
-            chrom, start, stop, gene, strand, coverage = line.strip().split()
+            chrom, start, stop, gene, num, strand, coverage = line.strip().split()
             if gene not in CAdict:
                 CAdict[gene] = np.zeros(window*2)
             if coverage is '.':
