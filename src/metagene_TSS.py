@@ -92,8 +92,11 @@ def run(file1,file2,file3):
             CAarray[i] += CAdict[gene][i]
             
     F = plt.figure()
-    plt.plot(DMSOarray)
-    plt.plot(CAarray)
+    x = np.arange(-1000,1000,1)
+    plt.plot(x,DMSOarray)
+    plt.plot(x,CAarray)
+    plt.set_xlabel('TSS')
+    plt.axvline(x=0.,color='k',ls='dashed')
     plt.legend(['DMSO', 'CA'], loc='upper left')
     plt.savefig(figout + '/metagene_TSS.png')
     
