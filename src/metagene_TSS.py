@@ -13,6 +13,7 @@ def run(file1,file2,file3):
     genelist = list()
     with open(file3) as F:
         for line in F:
+            F.readline()
             gene,chrom,start,stop,number,strand,coverage = line.strip().split()[0:7]
             if float(coverage) > coveragecut:
                 genelist.append(gene)
