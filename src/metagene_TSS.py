@@ -104,13 +104,13 @@ def run(file1,file2,file3):
     
     for gene in DMSOdict:
         for i in range(len(DMSOdict[gene])):
-            DMSOarray[i] += DMSOdict[gene][i]
-            DMSOantiarray[i] += DMSOantidict[gene][i]
+            DMSOarray[i] += DMSOdict[gene][i]/max(DMSOdict[gene][i])
+            DMSOantiarray[i] += DMSOantidict[gene][i]/max(DMSOantidict[gene][i])
             
     for gene in CAdict:
         for i in range(len(CAdict[gene])):
-            CAarray[i] += CAdict[gene][i]
-            CAantiarray[i] += CAantidict[gene][i]
+            CAarray[i] += CAdict[gene][i]/max(CAdict[gene][i])
+            CAantiarray[i] += CAantidict[gene][i]/max(CAantidict[gene][i])
             
     F = plt.figure()
     x1 = np.arange(-1000,1000,1)
