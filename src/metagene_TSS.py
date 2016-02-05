@@ -11,8 +11,8 @@ file2 = '/scratch/Users/joru1876/GROSeqRaw/flipped/bowtie2/sortedbam/genomecover
 file3 = '/scratch/Users/joru1876/GROAnalysis/files/Master.bed'
 outdir = '/scratch/Users/joru1876/GROAnalysis/files'
 figout = '/scratch/Users/joru1876/GROAnalysis/figures'
-coveragecut = 2000
-window = 1000
+coveragecut = 2500
+window = 5000
 
 def run(file1,file2,file3):
     genelist = list()
@@ -92,7 +92,7 @@ def run(file1,file2,file3):
             CAarray[i] += CAdict[gene][i]
             
     F = plt.figure()
-    x = np.arange(-1000,1000,1)
+    x = np.arange(-window,window,1)
     plt.plot(x,DMSOarray)
     plt.plot(x,CAarray)
     plt.xlabel('TSS')
