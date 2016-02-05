@@ -49,7 +49,7 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
                 coverage = '1'
             d[gene].append(coverage)
             
-    coveragecutoff = 500
+    coveragecutoff = 1000
     TRlist = list()
     TRgenes = list()
     DMSOTRgenes = list()
@@ -59,6 +59,7 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
     DMSOENDgenes = list()
     cutoff2 = 0.25
     cutoff3 = 0.25
+    i = 0
     
     outfile = open(filedir + '/Master.bed','w')
     outfile.write('Gene\tChrom\tStart\tStop\tNumber\tStrand\tDMSO gene body\tDMSO TSS\tDMSO END\tCA gene body\tCA TSS\tCA END\n')
@@ -75,6 +76,7 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
         CATSS = float(CATSS)
         CAEND = float(CAEND)
         if CAgenes-CATSS != 0 and DMSOgenes-DMSOTSS != 0 and CAgenes-CAEND != 0 and DMSOgenes-DMSOEND != 0 and DMSOgenes > coveragecutoff and CAgenes > coveragecutoff:
+            i += 1
             TR = (CATSS/(CAgenes-CATSS))-(DMSOTSS/(DMSOgenes-DMSOTSS))
             if TR > cutoff1:
                 TRgenes.append((gene,TR))
@@ -89,6 +91,9 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
                 DMSOENDgenes.append((gene,ER))
             if not ER > cutoff3 and not ER < -cutoff3:
                 ENDlist.append(ER)
+    
+    print "Genes: ",i
+    
     F1 = plt.figure()
     TRlist.sort(reverse=True)
     #plt.hist(TRlist[int(len(TRlist)*.2):int(len(TRlist)*.8)],50)
