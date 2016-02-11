@@ -120,16 +120,16 @@ def run(file1,file2,file3):
             if maximumanti != 0:
                 CAantiarray[i] += -CAantidict[gene][i]/maximumanti
     
-    DMSOmax = np.sum(DMSOarray)
-    DMSOantimax = np.sum(DMSOantiarray)
-    CAmax = np.sum(CAarray)
-    CAantimax = np.sum(CAantiarray)
+    DMSOmax = np.amax(DMSOarray)
+    DMSOantimax = np.amin(DMSOantiarray)
+    CAmax = np.amax(CAarray)
+    CAantimax = np.amin(CAantiarray)
     
     for i in range(window*2):
         DMSOarray[i] = DMSOarray[i]/DMSOmax
-        DMSOantiarray[i] = -DMSOantiarray[i]/DMSOantimax
+        DMSOantiarray[i] = DMSOantiarray[i]/DMSOantimax
         CAarray[i] = CAarray[i]/CAmax
-        CAantiarray[i] = -CAantiarray[i]/CAantimax
+        CAantiarray[i] = CAantiarray[i]/CAantimax
         
             
     F = plt.figure()
