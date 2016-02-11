@@ -131,34 +131,6 @@ def run(file1,file2,file3):
         CAarray[i] = CAarray[i]/CAmax
         CAantiarray[i] = -CAantiarray[i]/CAantimax
         
-            
-    F = plt.figure()
-    x1 = np.arange(-window,window,1)
-    plt.plot(x1,DMSOarray,color='b')
-    plt.plot(x1,CAarray,color='g')
-    plt.plot(x1,DMSOantiarray,color='r')
-    plt.plot(x1,CAantiarray,color='y')
-    plt.xlabel('TSS')
-    plt.axvline(x=0.,color='k',ls='dashed')
-    plt.legend(['DMSO', 'CA', 'DMSO antisense','CA antisense'], fontsize=8, loc='lower right')
-    plt.savefig(figout + '/metagene_TSS.png')
-    
-    F1 = plt.figure()
-    x2 = np.arange(-window,window,1)
-    ax1 = F1.add_subplot(2,1,1)
-    ax1.plot(x2,CAarray-DMSOarray)
-    ax1.set_title('CA-DMSO')
-    ax2 = F1.add_subplot(2,1,2)
-    ax2.plot(x2,CAantiarray-DMSOantiarray,color='r')
-    ax2.set_title('CA-DMSO antisense')
-    #plt.legend(['CA-DMSO','DMSO-CA antisense'], loc='upper left',fontsize=8)
-    plt.xlabel('TSS')
-    ax1.axvline(x=0.,color='k',ls='dashed')
-    ax1.axhline(y=0.,color='k',ls='solid')
-    ax2.axvline(x=0.,color='k',ls='dashed')
-    ax2.axhline(y=0.,color='k',ls='solid')
-    #plt.title("Coverage Ratio")
-    plt.savefig(figout + '/metagene_TSS_ratio.png')
     
     CAtime = 0
     DMSOtime = 0
@@ -177,22 +149,56 @@ def run(file1,file2,file3):
     print "CA integration: ", CAtot
     print "DMSO integration: ", DMSOtot
     
-    CAtime = 0
-    DMSOtime = 0
-    CAtot = 0
-    DMSOtot = 0
+    CAtimea = 0
+    DMSOtimea = 0
+    CAtota = 0
+    DMSOtota = 0
     for val in CAantiarray-DMSOantiarray:
         if val > 0:
-            CAtime += 1
-            CAtot += val
+            CAtimea += 1
+            CAtota += val
         elif val < 0:
-            DMSOtime += 1
-            DMSOtot += -val
+            DMSOtimea += 1
+            DMSOtota += -val
             
-    print "Time in higher CA antisense: ", CAtime
-    print "Time in higher DMSO antisense: ", DMSOtime
-    print "CA integration antisense: ", CAtot
-    print "DMSO integration antisense: ", DMSOtot
+    print "Time in higher CA antisense: ", CAtimea
+    print "Time in higher DMSO antisense: ", DMSOtimea
+    print "CA integration antisense: ", CAtota
+    print "DMSO integration antisense: ", DMSOtota
+                
+    F = plt.figure()
+    x1 = np.arange(-window,window,1)
+    plt.plot(x1,DMSOarray,color='b')
+    plt.plot(x1,CAarray,color='g')
+    plt.plot(x1,DMSOantiarray,color='r')
+    plt.plot(x1,CAantiarray,color='y')
+    plt.xlabel('TSS')
+    plt.axvline(x=0.,color='k',ls='dashed')
+    plt.legend(['DMSO', 'CA', 'DMSO antisense','CA antisense'], fontsize=8, loc='lower right')
+    plt.savefig(figout + '/metagene_TSS.png')
+    
+    F1 = plt.figure()
+    x2 = np.arange(-window,window,1)
+    ax1 = F1.add_subplot(2,2,1)
+    ax1.plot(x2,CAarray-DMSOarray)
+    ax1.set_title('CA-DMSO')
+    ax2 = F1.add_subplot(2,2,2)
+    ax2.text("Time in higher CA: " + CAtime + "\nTime in higher DMSO: " + DMSOtime + "\nCA integration: " + CAtot + "\nDMSO integration: " + DMSOtot)
+    ax3 = F1.add_subplot(2,2,3)
+    ax3.plot(x2,CAantiarray-DMSOantiarray,color='r')
+    ax3.set_title('CA-DMSO antisense')
+    ax4 = F1.add_subplot(2,2,4)
+    ax4.text("Time in higher CA antisense: " + CAtimea + "\nTime in higher DMSO antisense: " + DMSOtimea + "\nCA integration antisense: " + CAtota + "\nDMSO integration antisense: " + DMSOtota)
+    #plt.legend(['CA-DMSO','DMSO-CA antisense'], loc='upper left',fontsize=8)
+    plt.xlabel('TSS')
+    ax1.axvline(x=0.,color='k',ls='dashed')
+    ax1.axhline(y=0.,color='k',ls='solid')
+    ax2.axvline(x=0.,color='k',ls='dashed')
+    ax2.axhline(y=0.,color='k',ls='solid')
+    #plt.title("Coverage Ratio")
+    plt.savefig(figout + '/metagene_TSS_ratio.png')
+    
+    
     
     
     return
