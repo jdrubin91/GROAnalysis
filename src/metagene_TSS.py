@@ -103,24 +103,22 @@ def run(file1,file2,file3):
     
     
     for gene in DMSOdict:
-        maximum = np.sum(DMSOdict[gene]) + np.sum(CAdict[gene])
-        maximumanti = np.sum(DMSOantidict[gene]) + np.sum(CAantidict[gene])
+        maximum = np.amax(DMSOdict[gene])
+        maximumanti = np.amin(DMSOantidict[gene])
         for i in range(len(DMSOdict[gene])):
             if maximum != 0:
                 DMSOarray[i] += DMSOdict[gene][i]/maximum
-                CAarray[i] += CAdict[gene][i]/maximum
             if maximumanti != 0:
                 DMSOantiarray[i] += -DMSOantidict[gene][i]/maximumanti
-                CAantiarray[i] += -CAantidict[gene][i]/maximumanti
             
-    #for gene in CAdict:
-    #    for i in range(len(CAdict[gene])):
-    #        maximum = np.sum(CAdict[gene][i])
-    #        if maximum != 0:
-    #            CAarray[i] += CAdict[gene][i]/maximum
-    #        maximumanti = np.sum(CAantidict[gene][i])
-    #        if maximumanti != 0:
-    #            CAantiarray[i] += -CAantidict[gene][i]/maximumanti
+    for gene in CAdict:
+        maximum = np.amax(CAdict[gene])
+        maximumanti = np.amin(CAantidict[gene])
+        for i in range(len(CAdict[gene])):
+            if maximum != 0:
+                CAarray[i] += CAdict[gene][i]/maximum
+            if maximumanti != 0:
+                CAantiarray[i] += -CAantidict[gene][i]/maximumanti
     
     DMSOmax = np.sum(DMSOarray)
     DMSOantimax = np.sum(DMSOantiarray)
