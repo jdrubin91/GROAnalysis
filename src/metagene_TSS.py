@@ -12,7 +12,7 @@ file3 = '/scratch/Users/joru1876/GROAnalysis/files/Master.bed'
 outdir = '/scratch/Users/joru1876/GROAnalysis/files'
 figout = '/scratch/Users/joru1876/GROAnalysis/figures'
 coveragecut = 2500
-window = 5000
+window = 1000
 
 def run(file1,file2,file3):
     genelist = list()
@@ -133,27 +133,31 @@ def run(file1,file2,file3):
         
             
     F = plt.figure()
-    x1 = np.arange(-1000,1000,1)
-    plt.plot(x1,DMSOarray[window-1000:window+1000],color='b')
-    plt.plot(x1,CAarray[window-1000:window+1000],color='g')
-    plt.plot(x1,DMSOantiarray[window-1000:window+1000],color='r')
-    plt.plot(x1,CAantiarray[window-1000:window+1000],color='y')
+    x1 = np.arange(-window,window,1)
+    plt.plot(x1,DMSOarray,color='b')
+    plt.plot(x1,CAarray,color='g')
+    plt.plot(x1,DMSOantiarray,color='r')
+    plt.plot(x1,CAantiarray,color='y')
     plt.xlabel('TSS')
     plt.axvline(x=0.,color='k',ls='dashed')
     plt.legend(['DMSO', 'CA', 'DMSO antisense','CA antisense'], fontsize=8, loc='lower right')
     plt.savefig(figout + '/metagene_TSS.png')
     
     F1 = plt.figure()
-    ax1 = F1.add_subplot(2,1,1)
     x2 = np.arange(-window,window,1)
+    ax1 = F1.add_subplot(2,1,1)
     ax1.plot(x2,CAarray-DMSOarray)
+    ax1.title('CA-DMSO')
     ax2 = F1.add_subplot(2,1,2)
     ax2.plot(x2,DMSOantiarray-CAantiarray)
-    plt.legend(['CA-DMSO','DMSO-CA antisense'], loc='upper left',fontsize=8)
+    ax2.title('DMSO-CA antisense')
+    #plt.legend(['CA-DMSO','DMSO-CA antisense'], loc='upper left',fontsize=8)
     plt.xlabel('TSS')
-    plt.axvline(x=0.,color='k',ls='dashed')
-    plt.axhline(y=1.,color='k',ls='solid')
-    plt.title("Coverage Ratio")
+    ax1.axvline(x=0.,color='k',ls='dashed')
+    ax1.axhline(y=0.,color='k',ls='solid')
+    ax2.axvline(x=0.,color='k',ls='dashed')
+    ax2.axhline(y=0.,color='k',ls='solid')
+    #plt.title("Coverage Ratio")
     plt.savefig(figout + '/metagene_TSS_ratio.png')
     
     
