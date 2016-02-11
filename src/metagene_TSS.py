@@ -173,7 +173,7 @@ def run(file1,file2,file3):
     plt.plot(x1,DMSOantiarray,color='r')
     plt.plot(x1,CAantiarray,color='y')
     plt.xlabel('TSS')
-    plt.set_title('TSS Metagene Analysis')
+    plt.title('TSS Metagene Analysis')
     plt.axvline(x=0.,color='k',ls='dashed')
     plt.legend(['DMSO', 'CA', 'DMSO antisense','CA antisense'], fontsize=8, loc='lower right')
     plt.savefig(figout + '/metagene_TSS.png')
