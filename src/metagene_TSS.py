@@ -127,27 +127,27 @@ def run(file1,file2,file3):
     
     for i in range(window*2):
         DMSOarray[i] = DMSOarray[i]/DMSOmax
-        DMSOantiarray[i] = DMSOantiarray[i]/DMSOantimax
+        DMSOantiarray[i] = -DMSOantiarray[i]/DMSOantimax
         CAarray[i] = CAarray[i]/CAmax
-        CAantiarray[i] = CAantiarray[i]/CAantimax
+        CAantiarray[i] = -CAantiarray[i]/CAantimax
         
             
     F = plt.figure()
     x1 = np.arange(-1000,1000,1)
     plt.plot(x1,DMSOarray[window-1000:window+1000],color='b')
     plt.plot(x1,CAarray[window-1000:window+1000],color='g')
-    plt.plot(x1,DMSOantiarray[window-1000:window+1000],color='b',ls='dashed')
-    plt.plot(x1,CAantiarray[window-1000:window+1000],color='g',ls='dashed')
+    plt.plot(x1,DMSOantiarray[window-1000:window+1000],color='r')
+    plt.plot(x1,CAantiarray[window-1000:window+1000],color='y')
     plt.xlabel('TSS')
     plt.axvline(x=0.,color='k',ls='dashed')
-    plt.legend(['DMSO', 'CA', 'DMSO antisense','CA antisense'], loc='lower right')
+    plt.legend(['DMSO', 'CA', 'DMSO antisense','CA antisense'], loc='lower left')
     plt.savefig(figout + '/metagene_TSS.png')
     
     F1 = plt.figure()
     x2 = np.arange(-window,window,1)
     plt.plot(x2,CAarray/DMSOarray)
     plt.plot(x2,DMSOantiarray/CAantiarray)
-    plt.legend(['CA/DMSO','DMSO/CA antisense'], loc='upper left')
+    plt.legend(['CA/DMSO','DMSO/CA antisense'], loc='upper left',fontsize=8)
     plt.xlabel('TSS')
     plt.axvline(x=0.,color='k',ls='dashed')
     plt.axhline(y=1.,color='k',ls='solid')
