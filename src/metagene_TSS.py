@@ -160,6 +160,39 @@ def run(file1,file2,file3):
     #plt.title("Coverage Ratio")
     plt.savefig(figout + '/metagene_TSS_ratio.png')
     
+    CAtime = 0
+    DMSOtime = 0
+    CAtot = 0
+    DMSOtot = 0
+    for val in CAarray-DMSOarray:
+        if val > 0:
+            CAtime += 1
+            CAtot += val
+        elif val < 0:
+            DMSOtime += 1
+            DMSOtot += -val
+        
+    print "Time in higher CA: ", CAtime
+    print "Time in higher DMSO: ", DMSOtime
+    print "CA integration: ", CAtot
+    print "DMSO integration: ", DMSOtot
+    
+    CAtime = 0
+    DMSOtime = 0
+    CAtot = 0
+    DMSOtot = 0
+    for val in CAantiarray-DMSOantiarray:
+        if val > 0:
+            CAtime += 1
+            CAtot += val
+        elif val < 0:
+            DMSOtime += 1
+            DMSOtot += -val
+            
+    print "Time in higher CA antisense: ", CAtime
+    print "Time in higher DMSO antisense: ", DMSOtime
+    print "CA integration antisense: ", CAtot
+    print "DMSO integration antisense: ", DMSOtot
     
     
     return
