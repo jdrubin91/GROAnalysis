@@ -145,8 +145,8 @@ def run(file1,file2,file3):
     
     F1 = plt.figure()
     x2 = np.arange(-window,window,1)
-    plt.plot(x2,CAarray/DMSOarray)
-    plt.plot(x2,DMSOantiarray/CAantiarray)
+    plt.plot(x2,CAarray-DMSOarray)
+    plt.plot(x2,DMSOantiarray-CAantiarray)
     plt.legend(['CA/DMSO','DMSO/CA antisense'], loc='upper left',fontsize=8)
     plt.xlabel('TSS')
     plt.axvline(x=0.,color='k',ls='dashed')
