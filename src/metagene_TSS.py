@@ -140,7 +140,7 @@ def run(file1,file2,file3):
     plt.plot(x1,CAantiarray[window-1000:window+1000],color='y')
     plt.xlabel('TSS')
     plt.axvline(x=0.,color='k',ls='dashed')
-    plt.legend(['DMSO', 'CA', 'DMSO antisense','CA antisense'], loc='lower left')
+    plt.legend(['DMSO', 'CA', 'DMSO antisense','CA antisense'], loc='lower right')
     plt.savefig(figout + '/metagene_TSS.png')
     
     F1 = plt.figure()
