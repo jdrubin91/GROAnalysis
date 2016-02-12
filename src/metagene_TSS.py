@@ -187,7 +187,7 @@ def run(file1,file2,file3):
     ax1.get_xaxis().tick_bottom()
     ax1.get_yaxis().tick_left()
     ax2 = F1.add_subplot(2,1,2)
-    ax2.plot(x2,CAantiarray-DMSOantiarray,color='r')
+    ax2.plot(x2,-CAantiarray-(-DMSOantiarray),color='r')
     ax2.set_title('CA-DMSO antisense')
     ax2.text(250,0.3,"Time in higher CA antisense: " + str(CAtimea) + "\nTime in higher DMSO antisense: " + str(DMSOtimea) + "\nCA integration antisense: " + str(CAtota)[:5] + "\nDMSO integration antisense: " + str(DMSOtota)[:5],fontsize=8)
     ax2.get_xaxis().tick_bottom()
