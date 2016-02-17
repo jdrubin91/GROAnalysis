@@ -8,13 +8,13 @@ import bedtools_create_intersects
 import master_writer
 
 #Specify DMSO treated bedgraph directory
-DMSO = sys.argv[1]
+DMSO = '/scratch/Users/joru1876/GROSeqRaw/flipped/bowtie2/sortedbam/genomecoveragebed/fortdf/JDR_DMSO_SS102217_093015_CAGATC_L005_R1_001.flip.fastqbowtie2.sorted.BedGraph.mp.BedGraph'
 
 #Specify CA treated bedgraph directory
-CA = sys.argv[2]
+CA = '/scratch/Users/joru1876/GROSeqRaw/flipped/bowtie2/sortedbam/genomecoveragebed/fortdf/JDR_CA_SS102217_093015_ACTTGA_L005_R1_001.flip.fastqbowtie2.sorted.BedGraph.mp.BedGraph'
 
 #Specify gene annotations
-genes = sys.argv[3]
+genes = '/scratch/Users/joru1876/GROSeqRaw/flipped/bowtie2/sortedbam/genomecoveragebed/fortdf/refGene.sorted.bed'
 
 #Return parent directory
 def parent_dir(directory):
