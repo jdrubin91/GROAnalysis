@@ -84,7 +84,7 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
         CAgenes = float(CAgenes)
         CATSS = float(CATSS)
         CAEND = float(CAEND)
-        if CAgenes-CATSS != 0 and DMSOgenes-DMSOTSS != 0 and CAgenes-CAEND != 0 and DMSOgenes-DMSOEND != 0 and DMSOgenes > coveragecutoff and CAgenes > coveragecutoff:
+        if CAgenes-CATSS > 0 and DMSOgenes-DMSOTSS > 0 and CAgenes-CAEND > 0 and DMSOgenes-DMSOEND > 0 and DMSOgenes > coveragecutoff and CAgenes > coveragecutoff:
             i += 1
             TRx.append(CATSS/(CAgenes-CATSS))
             TRy.append(DMSOTSS/(DMSOgenes-DMSOTSS))
@@ -104,8 +104,6 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
                 DMSOENDgenes.append((gene,ER))
             if not ER > cutoff3 and not ER < -cutoff3:
                 ENDlist.append(ER)
-            if CATSS/(CAgenes-CATSS) < 0:
-                print gene
     print "Genes: ",i
     
     
