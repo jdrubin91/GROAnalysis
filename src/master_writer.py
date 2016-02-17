@@ -51,7 +51,7 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
                 coverage = '1'
             d[gene].append(coverage)
             
-    coveragecutoff = 2000
+    coveragecutoff = 200
     TRlist = list()
     TRgenes = list()
     DMSOTRgenes = list()
@@ -126,10 +126,20 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
     xy = np.vstack([TRx,TRy])
     z = gaussian_kde(xy)(xy)
     ax1.scatter(TRx,TRy,c=z,edgecolor="",s=14)
+    ax1.set_title('Travelers Ratio Scatter')
+    ax1.set_xlabel('CA TR')
+    ax1.set_ylabel('DMSO TR')
+    ax1.get_xaxis().tick_bottom()
+    ax1.get_yaxis().tick_left()
     ax2 = F3.add_subplot(1,2,2)
     xy = np.vstack([TRx,TRy])
     z = gaussian_kde(xy)(xy)
     ax2.scatter(TRx,TRy,c=z,edgecolor="",s=14)
+    ax2.set_title('End Ratio Scatter')
+    ax2.set_xlabel('CA ER')
+    ax2.set_ylabel('DMSO ER')
+    ax2.get_xaxis().tick_bottom()
+    ax2.get_yaxis().tick_left()
     plt.savefig(figuredir + '/Scatter.png')
     for item in sorted(TRgenes, key=itemgetter(1),reverse=True):
         outfile2.write(item[0] + '\t' + str(item[1]) + '\n')
