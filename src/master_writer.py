@@ -2,9 +2,12 @@ __author__ = 'Jonathan Rubin'
 
 import matplotlib
 matplotlib.use('Agg')
+from matplotlib import rcParams
+rcParams.update({'figure.autolayout': True})
 import matplotlib.pyplot as plt
 from operator import itemgetter
 from scipy.stats import gaussian_kde
+
 import numpy as np
 
 def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):    
@@ -101,7 +104,8 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
                 DMSOENDgenes.append((gene,ER))
             if not ER > cutoff3 and not ER < -cutoff3:
                 ENDlist.append(ER)
-    
+            if CATSS/(CAgenes-CATSS) < 0:
+                print gene
     print "Genes: ",i
     
     
