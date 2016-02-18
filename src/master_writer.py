@@ -151,7 +151,7 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
     plt.savefig(figuredir + '/Scatter_reflected_moregenes.png')
     F4 = plt.figure()
     ax1 = F4.add_subplot(111)
-    bp1 = ax1.boxplot([TRlist,ENDlist])
+    bp1 = ax1.boxplot([TRlist,ENDlist],patch_artist=True)
     ax1.set_xticklabels(['Travelers Ratio','End Ratio'],rotation = 45, fontsize=8)
     ax1.get_xaxis().tick_bottom()
     ax1.get_yaxis().tick_left()
