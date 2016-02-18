@@ -54,7 +54,7 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
                 coverage = '0'
             d[gene].append(coverage)
             
-    coveragecutoff = 2000
+    coveragecutoff = 100
     TRlist = list()
     TRgenes = list()
     DMSOTRgenes = list()
@@ -133,9 +133,9 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
     ax1.set_xlabel('DMSO TR')
     ax1.get_xaxis().tick_bottom()
     ax1.get_yaxis().tick_left()
-    ax1.set_xlim([0, 0.5])
-    ax1.set_ylim([0, 0.5])
-    ax1.plot([0,0.5],[0,0.5],color='k')
+    ax1.set_xlim([0, 1])
+    ax1.set_ylim([0, 1])
+    ax1.plot([0,1],[0,1],color='k')
     ax2 = F3.add_subplot(1,2,2)
     xy = np.vstack([ERx,ERy])
     z = gaussian_kde(xy)(xy)
@@ -145,10 +145,10 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
     ax2.set_xlabel('DMSO ER')
     ax2.get_xaxis().tick_bottom()
     ax2.get_yaxis().tick_left()
-    ax2.set_xlim([0, 0.5])
-    ax2.set_ylim([0, 0.5])
-    ax2.plot([0,0.5],[0,0.5],color = 'k')
-    plt.savefig(figuredir + '/Scatter_reflected.png')
+    ax2.set_xlim([0, 1])
+    ax2.set_ylim([0, 1])
+    ax2.plot([0,1],[0,1],color = 'k')
+    plt.savefig(figuredir + '/Scatter_reflected_moregenes.png')
     for item in sorted(TRgenes, key=itemgetter(1),reverse=True):
         outfile2.write(item[0] + '\t' + str(item[1]) + '\n')
     outfile2.write("High DMSO TR\n")
