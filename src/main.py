@@ -32,8 +32,6 @@ filedir = parent_dir(homedir) + '/files'
 #Figure directory
 figuredir = parent_dir(homedir) + '/figures'
 
-#Directories to reference files
-
 
 def run():
     print "Creating annotation files..."
