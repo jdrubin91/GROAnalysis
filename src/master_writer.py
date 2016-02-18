@@ -54,7 +54,7 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
                 coverage = '0'
             d[gene].append(coverage)
             
-    coveragecutoff = 100
+    coveragecutoff = 2000
     TRlist = list()
     TRgenes = list()
     DMSOTRgenes = list()
@@ -148,11 +148,11 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
     ax2.set_xlim([0, 1])
     ax2.set_ylim([0, 1])
     ax2.plot([0,1],[0,1],color = 'k')
-    plt.savefig(figuredir + '/Scatter_reflected_moregenes.png')
+    plt.savefig(figuredir + '/Scatter_reflected.png')
     F4 = plt.figure()
     ax1 = F4.add_subplot(111)
     bp1 = ax1.boxplot([TRlist,ENDlist],patch_artist=True)
-    ax1.set_xticklabels(['Travelers Ratio','End Ratio'],rotation = 45, fontsize=8)
+    ax1.set_xticklabels(['Travelers Ratio','End Ratio'])
     ax1.get_xaxis().tick_bottom()
     ax1.get_yaxis().tick_left()
     ## change outline color, fill color and linewidth of the boxes
