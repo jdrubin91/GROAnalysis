@@ -10,7 +10,7 @@ from scipy.stats import gaussian_kde
 
 import numpy as np
 
-def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):    
+def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir,genelist):    
     d = dict()
     with open(DMSOgenes) as F1:
         for line in F1:
@@ -84,26 +84,28 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
         CAgenes = float(CAgenes)
         CATSS = float(CATSS)
         CAEND = float(CAEND)
-        if CAgenes-CATSS > CATSS and DMSOgenes-DMSOTSS > DMSOTSS and CAgenes-CAEND > CAEND and DMSOgenes-DMSOEND > DMSOEND and DMSOgenes > coveragecutoff and CAgenes > coveragecutoff:
-            i += 1
-            TRy.append(CATSS/(CAgenes-CATSS))
-            TRx.append(DMSOTSS/(DMSOgenes-DMSOTSS))
-            ERy.append(CAEND/(CAgenes-CAEND))
-            ERx.append(DMSOEND/(DMSOgenes-DMSOEND))
-            TR = (CATSS/(CAgenes-CATSS))-(DMSOTSS/(DMSOgenes-DMSOTSS))
-            if TR > cutoff1:
-                TRgenes.append((gene,TR))
-            if TR < -cutoff1:
-                DMSOTRgenes.append((gene,TR))
-            if not TR > cutoff3 and not TR < -cutoff3:
-                TRlist.append(TR)
-            ER = (CAEND/(CAgenes-CAEND))-(DMSOEND/(DMSOgenes-DMSOEND))
-            if ER > cutoff2:
-                ENDgenes.append((gene,ER))
-            if ER < -cutoff2:
-                DMSOENDgenes.append((gene,ER))
-            if not ER > cutoff3 and not ER < -cutoff3:
-                ENDlist.append(ER)
+        for name in genelist:
+            if name in gene:
+                if CAgenes-CATSS > CATSS and DMSOgenes-DMSOTSS > DMSOTSS and CAgenes-CAEND > CAEND and DMSOgenes-DMSOEND > DMSOEND and DMSOgenes > coveragecutoff and CAgenes > coveragecutoff:
+                    i += 1
+                    TRy.append(CATSS/(CAgenes-CATSS))
+                    TRx.append(DMSOTSS/(DMSOgenes-DMSOTSS))
+                    ERy.append(CAEND/(CAgenes-CAEND))
+                    ERx.append(DMSOEND/(DMSOgenes-DMSOEND))
+                    TR = (CATSS/(CAgenes-CATSS))-(DMSOTSS/(DMSOgenes-DMSOTSS))
+                    if TR > cutoff1:
+                        TRgenes.append((gene,TR))
+                    if TR < -cutoff1:
+                        DMSOTRgenes.append((gene,TR))
+                    if not TR > cutoff3 and not TR < -cutoff3:
+                        TRlist.append(TR)
+                    ER = (CAEND/(CAgenes-CAEND))-(DMSOEND/(DMSOgenes-DMSOEND))
+                    if ER > cutoff2:
+                        ENDgenes.append((gene,ER))
+                    if ER < -cutoff2:
+                        DMSOENDgenes.append((gene,ER))
+                    if not ER > cutoff3 and not ER < -cutoff3:
+                        ENDlist.append(ER)
     print "Genes: ",i
     
     
