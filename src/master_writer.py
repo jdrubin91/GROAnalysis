@@ -54,7 +54,7 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
                 coverage = '0'
             d[gene].append(coverage)
             
-    coveragecutoff = 2000
+    coveragecutoff = 200
     TRlist = list()
     TRgenes = list()
     DMSOTRgenes = list()
