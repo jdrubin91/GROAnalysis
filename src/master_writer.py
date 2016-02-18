@@ -85,7 +85,7 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir,genelist
         CATSS = float(CATSS)
         CAEND = float(CAEND)
         for name in genelist:
-            if name in gene:
+            if name is gene.split(';')[1]:
                 print name,gene
                 if CAgenes-CATSS > CATSS and DMSOgenes-DMSOTSS > DMSOTSS and CAgenes-CAEND > CAEND and DMSOgenes-DMSOEND > DMSOEND and DMSOgenes > coveragecutoff and CAgenes > coveragecutoff:
                     i += 1
