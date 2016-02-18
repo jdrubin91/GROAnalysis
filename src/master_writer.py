@@ -16,42 +16,42 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
         for line in F1:
             chrom,start,stop,gene,number,strand,coverage = line.strip().split()
             if coverage == '.':
-                coverage = '1'
+                coverage = '0'
             d[gene] = [chrom,start,stop,number,strand,coverage]
 
     with open(DMSOTSS) as F1:
         for line in F1:
             chrom,start,stop,gene,number,strand,coverage = line.strip().split()
             if coverage == '.':
-                coverage = '1'
+                coverage = '0'
             d[gene].append(coverage)
             
     with open(DMSOEND) as F1:
         for line in F1:
             chrom,start,stop,gene,number,strand,coverage = line.strip().split()
             if coverage == '.':
-                coverage = '1'
+                coverage = '0'
             d[gene].append(coverage)
             
     with open(CAgenes) as F1:
         for line in F1:
             chrom,start,stop,gene,number,strand,coverage = line.strip().split()
             if coverage == '.':
-                coverage = '1'
+                coverage = '0'
             d[gene].append(coverage)
             
     with open(CATSS) as F1:
         for line in F1:
             chrom,start,stop,gene,number,strand,coverage = line.strip().split()
             if coverage == '.':
-                coverage = '1'
+                coverage = '0'
             d[gene].append(coverage)
             
     with open(CAEND) as F1:
         for line in F1:
             chrom,start,stop,gene,number,strand,coverage = line.strip().split()
             if coverage == '.':
-                coverage = '1'
+                coverage = '0'
             d[gene].append(coverage)
             
     coveragecutoff = 500
