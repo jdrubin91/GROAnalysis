@@ -128,9 +128,9 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
     xy = np.vstack([TRx,TRy])
     z = gaussian_kde(xy)(xy)
     ax1.scatter(TRx,TRy,c=z,edgecolor="",s=14)
-    ax1.set_title('Travelers Ratio Scatter')
-    ax1.set_ylabel('CA TR')
-    ax1.set_xlabel('DMSO TR')
+    ax1.set_title('Travelers Ratio')
+    ax1.set_ylabel('CA')
+    ax1.set_xlabel('DMSO')
     ax1.get_xaxis().tick_bottom()
     ax1.get_yaxis().tick_left()
     ax1.set_xlim([0, 1])
@@ -140,15 +140,38 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
     xy = np.vstack([ERx,ERy])
     z = gaussian_kde(xy)(xy)
     ax2.scatter(ERx,ERy,c=z,edgecolor="",s=14)
-    ax2.set_title('End Ratio Scatter')
-    ax2.set_ylabel('CA ER')
-    ax2.set_xlabel('DMSO ER')
+    ax2.set_title('End Ratio')
+    ax2.set_ylabel('CA')
+    ax2.set_xlabel('DMSO')
     ax2.get_xaxis().tick_bottom()
     ax2.get_yaxis().tick_left()
     ax2.set_xlim([0, 1])
     ax2.set_ylim([0, 1])
     ax2.plot([0,1],[0,1],color = 'k')
     plt.savefig(figuredir + '/Scatter_reflected_moregenes.png')
+    F4 = plt.figure()
+    bp1 = plt.boxplot(TRlist,ENDlist)
+    ax1.set_xticklabels(['Travelers Ratio','End Ratio'],rotation = 45, fontsize=8)
+    ax1.get_xaxis().tick_bottom()
+    ax1.get_yaxis().tick_left()
+    ## change outline color, fill color and linewidth of the boxes
+    for box in bp1['boxes']:
+        # change outline color
+        box.set( color='#7570b3', linewidth=2)
+        # change fill color
+        box.set( facecolor = '#1b9e77' )
+    ## change color and linewidth of the whiskers
+    for whisker in bp1['whiskers']:
+        whisker.set(color='#7570b3', linewidth=2)
+    ## change color and linewidth of the caps
+    for cap in bp1['caps']:
+        cap.set(color='#7570b3', linewidth=2)
+    ## change color and linewidth of the medians
+    for median in bp1['medians']:
+        median.set(color='#b2df8a', linewidth=2)
+    ## change the style of fliers and their fill
+    for flier in bp1['fliers']:
+        flier.set(marker='o', color='#e7298a', alpha=0.5)
     for item in sorted(TRgenes, key=itemgetter(1),reverse=True):
         outfile2.write(item[0] + '\t' + str(item[1]) + '\n')
     outfile2.write("High DMSO TR\n")
@@ -160,7 +183,7 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
     outfile2.write("High DMSO ER\n")
     for item in sorted(DMSOENDgenes, key=itemgetter(1),reverse=True):
         outfile2.write(item[0] + '\t' + str(item[1]) + '\n')
-    
+    plt.savefig(figuredir + '/Boxplot.png')
     
     
     
