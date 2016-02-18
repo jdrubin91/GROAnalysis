@@ -135,7 +135,7 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
     ax1.get_yaxis().tick_left()
     ax1.set_xlim([0, 1])
     ax1.set_ylim([0, 1])
-    ax1.plot([0,1])
+    ax1.plot([0,1],color='k')
     ax2 = F3.add_subplot(1,2,2)
     xy = np.vstack([TRx,TRy])
     z = gaussian_kde(xy)(xy)
@@ -147,7 +147,7 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
     ax2.get_yaxis().tick_left()
     ax2.set_xlim([0, 1])
     ax2.set_ylim([0, 1])
-    ax2.plot([0,1])
+    ax2.plot([0,1],color = 'k')
     plt.savefig(figuredir + '/Scatter_reflected.png')
     for item in sorted(TRgenes, key=itemgetter(1),reverse=True):
         outfile2.write(item[0] + '\t' + str(item[1]) + '\n')
