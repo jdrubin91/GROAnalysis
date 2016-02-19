@@ -204,6 +204,7 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
     #        distance2 = np.delete(distance2,distance2[index])
     
     slope1,intercept1 = np.polyfit(TRx, TRy, 1)
+    slope2,intercept2 = np.polyfit(ERx, ERy, 1)
     print slope1,intercept1
     
     F1 = plt.figure()
@@ -248,6 +249,7 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
     ax2.get_yaxis().tick_left()
     ax2.set_xlim([0, 1])
     ax2.set_ylim([0, 1])
+    ax2.plot([0,1/slope2],[intercept2,1],color = 'r')
     ax2.plot([0,1],[0,1],color = 'k')
     plt.savefig(figuredir + '/Scatter_reflected_moregenes.png')
     F4 = plt.figure()
