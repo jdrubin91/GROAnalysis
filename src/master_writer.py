@@ -9,6 +9,7 @@ from operator import itemgetter
 from scipy.stats import gaussian_kde
 from scipy import stats
 import numpy as np
+import matplotlib as mpl
 
 def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):    
     d = dict()
@@ -116,15 +117,19 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
         
     grubbs = True
     alpha = 0.05
+    i=0
     while grubbs == True:
+        i+=1
+        print i
         N = len(distance)
+        M = np.amax(distance)
         t = stats.t.ppf(1-alpha/2, N-1)
         s = np.var(distance)
         mean = np.mean(distance)
-        G = np.absolute(np.amax(distance)-mean)/s
+        G = np.absolute(M-mean)/s
         grubbs = G > ((N-1)/np.sqrt(N))*np.sqrt((t**2)/(N-2+t**2))
         if grubbs == True:
-            distance[distance.index(np.amax(distance))] = True
+            distance[distance.index(M)] = True
     
     for i in range(len(distance)):
         if distance[i] == True:
@@ -149,11 +154,9 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
     outfile2.write("High CA TR = " + str(len(TRgenes)) + "\nHigh DMSO TR = " + str(len(DMSOTRgenes)) + "\nHigh CA ER = " + str(len(ENDgenes)) + "\nHigh DMSO ER = " + str(len(DMSOENDgenes)) + "\n")
     outfile2.write("High CA TR\n")
     F3 = plt.figure()
-    ax1 = F3.add_subplot(111)
-    
+    ax1 = F3.add_subplot(121)
     colors = ['red', 'blue']
     levels = [0, 1]
-    
     cmap, norm = mpl.colors.from_levels_and_colors(levels=levels, colors=colors, extend='max')
     xy = np.vstack([TRx,TRy])
     z = gaussian_kde(xy)(xy)
@@ -166,9 +169,7 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
     ax1.set_xlim([0, 1])
     ax1.set_ylim([0, 1])
     ax1.plot([0,1],[0,1],color='k')
-    plt.savefig(figuredir + '/TravelersRatio_reflected.png')
-    F5 = plt.figure()
-    ax2 = F5.add_subplot(111)
+    ax2 = F3.add_subplot(122)
     xy = np.vstack([ERx,ERy])
     z = gaussian_kde(xy)(xy)
     ax2.scatter(ERx,ERy,c=z,edgecolor="",s=14)
@@ -180,7 +181,7 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
     ax2.set_xlim([0, 1])
     ax2.set_ylim([0, 1])
     ax2.plot([0,1],[0,1],color = 'k')
-    plt.savefig(figuredir + '/EndRatio_reflected.png')
+    plt.savefig(figuredir + '/Scatter_reflected_moregenes.png')
     F4 = plt.figure()
     ax1 = F4.add_subplot(111)
     bp1 = ax1.boxplot([TRlist,ENDlist],patch_artist=True)
