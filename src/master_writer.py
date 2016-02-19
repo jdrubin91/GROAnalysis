@@ -125,7 +125,7 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
         N = len(distance)
         M = np.amax(distance)
         t = stats.t.ppf(1-alpha/2, N-1)
-        s = np.var(distance)
+        s = np.sqrt(np.var(distance))
         mean = np.mean(distance)
         G = np.absolute(M-mean)/s
         grubbs = G > ((N-1)/np.sqrt(N))*np.sqrt((t**2)/(N-2+t**2))
