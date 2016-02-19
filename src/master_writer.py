@@ -131,9 +131,9 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
         grubbs = G > ((N-1)/np.sqrt(N))*np.sqrt((t**2)/(N-2+t**2))
         print N,M,t,s,mean,G,grubbs
         if grubbs == True:
-            distancelist[distance.index(M)] = 1
-            print np.where(distance==M)
-            distance = np.delete(distance,distance[np.where(distance==M)[0][0]])
+            index = np.where(distance==M)[0][0]
+            distancelist[index] = 1
+            distance = np.delete(distance,distance[index])
     
     
     
