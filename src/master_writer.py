@@ -113,6 +113,7 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
         y = TRy[i]
         xy = ((x+y)/2,(x+y)/2)
         d = np.sqrt((x-xy[0])**2+(y-xy[1])**2)
+        print x,y,xy,d
         distance.append(d)
         
     grubbs = True
@@ -121,7 +122,7 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
     distancelist = np.zeros(len(distance))
     while grubbs == True:
         i+=1
-        print i
+        #print i
         N = len(distance)
         M = np.amax(distance)
         t = stats.t.ppf(1-alpha/2, N-1)
@@ -129,8 +130,8 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
         mean = np.mean(distance)
         G = np.absolute(M-mean)/s
         grubbs = G > ((N-1)/np.sqrt(N))*np.sqrt((t**2)/(N-2+t**2))
-        print N,M,t,s,mean,G,grubbs
-        print G,((N-1)/np.sqrt(N))*np.sqrt((t**2)/(N-2+t**2))
+        #print N,M,t,s,mean,G,grubbs
+        #print G,((N-1)/np.sqrt(N))*np.sqrt((t**2)/(N-2+t**2))
         if grubbs == True:
             index = np.where(distance==M)[0][0]
             distancelist[index] = 1
