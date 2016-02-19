@@ -170,7 +170,7 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
     xy = np.vstack([TRx,TRy])
     z = gaussian_kde(xy)(xy)
     ax1.scatter(TRx,TRy,c=z,edgecolor="",s=14)
-    ax1.scatter(TRx2,TRy2,c='red'edgecolor="",s=14)
+    ax1.scatter(TRx2,TRy2,c='red',edgecolor="",s=14)
     ax1.set_title('Travelers Ratio')
     ax1.set_ylabel('CA')
     ax1.set_xlabel('DMSO')
