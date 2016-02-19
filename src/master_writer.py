@@ -119,23 +119,28 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
     grubbs = True
     alpha = 0.05
     i=0
-    distancelist = np.zeros(len(distance))
-    while grubbs == True:
-        i+=1
-        #print i
-        N = len(distance)
-        M = np.amax(distance)
-        t = stats.t.ppf(1-alpha/2, N-1)
-        s = np.sqrt(np.var(distance))
-        mean = np.mean(distance)
-        G = np.absolute(M-mean)/s
-        grubbs = G > ((N-1)/np.sqrt(N))*np.sqrt((t**2)/(N-2+t**2))
-        #print N,M,t,s,mean,G,grubbs
-        #print G,((N-1)/np.sqrt(N))*np.sqrt((t**2)/(N-2+t**2))
-        if grubbs == True:
-            index = np.where(distance==M)[0][0]
-            distancelist[index] = 1
-            distance = np.delete(distance,distance[index])
+    N = len(distance)
+    distancelist = np.zeros(N)
+    s = np.sqrt(np.var(distance))
+    for i in range(N):
+        if distance[i] > 2*s:
+            distancelist[i] = 1
+    #while grubbs == True:
+    #    i+=1
+    #    #print i
+    #    N = len(distance)
+    #    M = np.amax(distance)
+    #    t = stats.t.ppf(1-alpha/2, N-1)
+    #    s = np.sqrt(np.var(distance))
+    #    mean = np.mean(distance)
+    #    G = np.absolute(M-mean)/s
+    #    grubbs = G > ((N-1)/np.sqrt(N))*np.sqrt((t**2)/(N-2+t**2))
+    #    #print N,M,t,s,mean,G,grubbs
+    #    #print G,((N-1)/np.sqrt(N))*np.sqrt((t**2)/(N-2+t**2))
+    #    if grubbs == True:
+    #        index = np.where(distance==M)[0][0]
+    #        distancelist[index] = 1
+    #        distance = np.delete(distance,distance[index])
     
     
     
