@@ -10,7 +10,7 @@ from scipy.stats import gaussian_kde
 from scipy import stats
 import numpy as np
 
-def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir,genelist):    
+def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):    
     d = dict()
     with open(DMSOgenes) as F1:
         for line in F1:
