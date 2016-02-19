@@ -55,7 +55,7 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
                 coverage = '0'
             d[gene].append(coverage)
             
-    coveragecutoff = 100
+    coveragecutoff = 200
     TRlist = list()
     TRgenes = list()
     DMSOTRgenes = list()
@@ -115,22 +115,22 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
         d = np.sqrt((x-xy[0])**2+(y-xy[1])**2)
         print x,y,xy,d
         distance.append(d)
-    #    
-    #grubbs = True
-    #alpha = 0.05
-    #i=0
-    #N = len(distance)
-    #distancelist = np.zeros(N)
-    #s = np.sqrt(np.var(distance))
-    #TRx2 = list()
-    #TRy2 = list()
-    #print N,len(TRx),len(TRy)
-    #for i in range(N):
-    #    if distance[i] > 4*s:
-    #        print i
-    #        TRx2.append(TRx[i])
-    #        TRy2.append(TRy[i])
-    #        
+        
+    grubbs = True
+    alpha = 0.05
+    i=0
+    N = len(distance)
+    distancelist = np.zeros(N)
+    s = np.sqrt(np.var(distance))
+    TRx2 = list()
+    TRy2 = list()
+    print N,len(TRx),len(TRy)
+    for i in range(N):
+        if distance[i] > 4*s:
+            print i
+            TRx2.append(TRx[i])
+            TRy2.append(TRy[i])
+            
     distance2 = list()
     for i in range(len(ERx)):
         x = ERx[i]
@@ -139,69 +139,69 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
         d = np.sqrt((x-xy[0])**2+(y-xy[1])**2)
         print x,y,xy,d
         distance2.append(d)
-    #    
-    #
-    #N = len(distance2)
-    #distancelist = np.zeros(N)
-    #s = np.sqrt(np.var(distance2))
-    #ERx2 = list()
-    #ERy2 = list()
-    #print N,len(ERx),len(ERy)
-    #for i in range(N):
-    #    if distance2[i] > 4*s:
-    #        print i
-    #        ERx2.append(ERx[i])
-    #        ERy2.append(ERy[i])
+        
     
-    TRx2 = list()
-    TRy2 = list()
-    grubbs = True
-    alpha = 0.05
-    distancelist = distance
-    i=0
-    while grubbs == True:
-        i+=1
-        #print i
-        N = len(distance)
-        M = np.amax(distance)
-        t = stats.t.ppf(1-alpha/2, N-1)
-        s = np.sqrt(np.var(distance))
-        mean = np.mean(distance)
-        G = np.absolute(M-mean)/s
-        grubbs = G > ((N-1)/np.sqrt(N))*np.sqrt((t**2)/(N-2+t**2))
-        #print N,M,t,s,mean,G,grubbs
-        #print G,((N-1)/np.sqrt(N))*np.sqrt((t**2)/(N-2+t**2))
-        if grubbs == True:
-            index = np.where(distance==M)[0][0]
-            index2 = np.where(distancelist==M)[0][0]
-            TRx2.append(TRx[index2])
-            TRy2.append(TRy[index2])
-            distance = np.delete(distance,distance[index])
-            
+    N = len(distance2)
+    distancelist = np.zeros(N)
+    s = np.sqrt(np.var(distance2))
     ERx2 = list()
     ERy2 = list()
-    grubbs = True
-    alpha = 0.05
-    distancelist2 = distance2
-    i=0
-    while grubbs == True:
-        i+=1
-        #print i
-        N = len(distance2)
-        M = np.amax(distance2)
-        t = stats.t.ppf(1-alpha/2, N-1)
-        s = np.sqrt(np.var(distance2))
-        mean = np.mean(distance2)
-        G = np.absolute(M-mean)/s
-        grubbs = G > ((N-1)/np.sqrt(N))*np.sqrt((t**2)/(N-2+t**2))
-        #print N,M,t,s,mean,G,grubbs
-        #print G,((N-1)/np.sqrt(N))*np.sqrt((t**2)/(N-2+t**2))
-        if grubbs == True:
-            index = np.where(distance2==M)[0][0]
-            index2 = np.where(distancelist2==M)[0][0]
-            ERx2.append(ERx[index2])
-            ERy2.append(ERy[index2])
-            distance2 = np.delete(distance2,distance2[index])
+    print N,len(ERx),len(ERy)
+    for i in range(N):
+        if distance2[i] > 4*s:
+            print i
+            ERx2.append(ERx[i])
+            ERy2.append(ERy[i])
+    
+    #TRx2 = list()
+    #TRy2 = list()
+    #grubbs = True
+    #alpha = 0.05
+    #distancelist = distance
+    #i=0
+    #while grubbs == True:
+    #    i+=1
+    #    #print i
+    #    N = len(distance)
+    #    M = np.amax(distance)
+    #    t = stats.t.ppf(1-alpha/2, N-1)
+    #    s = np.sqrt(np.var(distance))
+    #    mean = np.mean(distance)
+    #    G = np.absolute(M-mean)/s
+    #    grubbs = G > ((N-1)/np.sqrt(N))*np.sqrt((t**2)/(N-2+t**2))
+    #    #print N,M,t,s,mean,G,grubbs
+    #    #print G,((N-1)/np.sqrt(N))*np.sqrt((t**2)/(N-2+t**2))
+    #    if grubbs == True:
+    #        index = np.where(distance==M)[0][0]
+    #        index2 = np.where(distancelist==M)[0][0]
+    #        TRx2.append(TRx[index2])
+    #        TRy2.append(TRy[index2])
+    #        distance = np.delete(distance,distance[index])
+    #        
+    #ERx2 = list()
+    #ERy2 = list()
+    #grubbs = True
+    #alpha = 0.05
+    #distancelist2 = distance2
+    #i=0
+    #while grubbs == True:
+    #    i+=1
+    #    #print i
+    #    N = len(distance2)
+    #    M = np.amax(distance2)
+    #    t = stats.t.ppf(1-alpha/2, N-1)
+    #    s = np.sqrt(np.var(distance2))
+    #    mean = np.mean(distance2)
+    #    G = np.absolute(M-mean)/s
+    #    grubbs = G > ((N-1)/np.sqrt(N))*np.sqrt((t**2)/(N-2+t**2))
+    #    #print N,M,t,s,mean,G,grubbs
+    #    #print G,((N-1)/np.sqrt(N))*np.sqrt((t**2)/(N-2+t**2))
+    #    if grubbs == True:
+    #        index = np.where(distance2==M)[0][0]
+    #        index2 = np.where(distancelist2==M)[0][0]
+    #        ERx2.append(ERx[index2])
+    #        ERy2.append(ERy[index2])
+    #        distance2 = np.delete(distance2,distance2[index])
     
     
     
