@@ -124,7 +124,7 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir,genelist
         G = np.absolute(np.amax(distance)-mean)/s
         grubbs = G > ((N-1)/np.sqrt(N))*np.sqrt((t**2)/(N-2+t**2))
         if grubbs == True:
-            distance.index(np.amax(distance)) = True
+            distance[distance.index(np.amax(distance))] = True
     
     for i in range(len(distance)):
         if distance[i] == True:
