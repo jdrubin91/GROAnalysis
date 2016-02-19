@@ -126,7 +126,7 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
     TRy2 = list()
     print N,len(TRx),len(TRy)
     for i in range(N):
-        if distance[i] > 3*s:
+        if distance[i] > 4*s:
             print i
             TRx2.append(TRx[i])
             TRy2.append(TRy[i])
@@ -150,7 +150,7 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
     ERy2 = list()
     print N,len(ERx),len(ERy)
     for i in range(N):
-        if distance2[i] > 3*s:
+        if distance2[i] > 4*s:
             print i
             ERx2.append(ERx[i])
             ERy2.append(ERy[i])
