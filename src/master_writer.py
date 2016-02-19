@@ -203,6 +203,7 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
     #        ERy2.append(ERy[index2])
     #        distance2 = np.delete(distance2,distance2[index])
     
+    slope1,intercept1 = np.polyfit(TRx, TRy, 1)
     
     
     F1 = plt.figure()
@@ -226,6 +227,7 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
     z = gaussian_kde(xy)(xy)
     ax1.scatter(TRx,TRy,c=z,edgecolor="",s=14)
     ax1.scatter(TRx2,TRy2,c='red',edgecolor="",s=14)
+    ax1.plot([0,intercept1],[1,intercept1+slope1],color = 'red')
     ax1.set_title('Travelers Ratio')
     ax1.set_ylabel('CA')
     ax1.set_xlabel('DMSO')
