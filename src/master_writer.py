@@ -122,9 +122,12 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
     N = len(distance)
     distancelist = np.zeros(N)
     s = np.sqrt(np.var(distance))
+    TRx2 = list()
+    TRy2 = list()
     for i in range(N):
-        if distance[i] > 2*s:
-            distancelist[i] = 1
+        if distance[i] > 3*s:
+            TRx2.append(TRx[i].pop())
+            TRy2.append(TRy[i].pop())
     #while grubbs == True:
     #    i+=1
     #    #print i
@@ -166,7 +169,8 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
     cmap, norm = mpl.colors.from_levels_and_colors(levels=levels, colors=colors, extend='max')
     xy = np.vstack([TRx,TRy])
     z = gaussian_kde(xy)(xy)
-    ax1.scatter(TRx,TRy,c=distancelist,edgecolor="",s=14,cmap=cmap, norm=norm)
+    ax1.scatter(TRx,TRy,c=z,edgecolor="",s=14)
+    ax1.scatter(TRx2,TRy2,c='red'edgecolor="",s=14)
     ax1.set_title('Travelers Ratio')
     ax1.set_ylabel('CA')
     ax1.set_xlabel('DMSO')
