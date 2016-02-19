@@ -191,7 +191,6 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
     outfile2.write("High CA TR\n")
     F3 = plt.figure()
     ax1 = F3.add_subplot(121)
-    cmap, norm = mpl.colors.from_levels_and_colors(levels=levels, colors=colors, extend='max')
     xy = np.vstack([TRx,TRy])
     z = gaussian_kde(xy)(xy)
     ax1.scatter(TRx,TRy,c=z,edgecolor="",s=14)
