@@ -128,6 +128,7 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
         mean = np.mean(distance)
         G = np.absolute(M-mean)/s
         grubbs = G > ((N-1)/np.sqrt(N))*np.sqrt((t**2)/(N-2+t**2))
+        print N,M,t,s,mean,G,grubbs
         if grubbs == True:
             distance[distance.index(M)] = True
     
