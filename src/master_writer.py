@@ -124,6 +124,7 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
     s = np.sqrt(np.var(distance))
     TRx2 = list()
     TRy2 = list()
+    print len(distance),len(TRx),len(TRy)
     for i in range(N):
         if distance[i] > 3*s:
             TRx2.append(TRx.pop(i))
