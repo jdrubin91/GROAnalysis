@@ -233,7 +233,7 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
     ax1.get_xaxis().tick_bottom()
     ax1.get_yaxis().tick_left()
     #ax1.plot([0,intercept1],[1.0/slope1,1],color = 'r')
-    ax1.plot([0,0.003],[0.912,1],color = 'r')
+    ax1.plot([0,0.003],[0.912,1],color = 'k')
     ax1.set_xlim([0, 1])
     ax1.set_ylim([0, 1])
     #ax1.plot([0,1],[0,1],color='k')
