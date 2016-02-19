@@ -235,7 +235,7 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
     ax1.set_xlim([0, 1])
     ax1.set_ylim([0, 1])
     ax1.plot([0,intercept1],[1,intercept1+slope1],color = 'r')
-    ax1.plot([0,1],[0,1],color='k')
+    #ax1.plot([0,1],[0,1],color='k')
     ax2 = F3.add_subplot(122)
     xy = np.vstack([ERx,ERy])
     z = gaussian_kde(xy)(xy)
