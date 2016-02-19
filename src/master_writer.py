@@ -128,8 +128,9 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
     for i in range(N):
         if distance[i] > 3*s:
             print i
-            TRx2.append(TRx.pop(i))
-            TRy2.append(TRy.pop(i))
+            TRx2.append(TRx[i])
+            TRy2.append(TRy[i])
+            
     #while grubbs == True:
     #    i+=1
     #    #print i
