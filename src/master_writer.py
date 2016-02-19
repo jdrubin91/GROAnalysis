@@ -118,6 +118,7 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
     grubbs = True
     alpha = 0.05
     i=0
+    distancelist = np.zeros(len(distance))
     while grubbs == True:
         i+=1
         print i
@@ -130,13 +131,9 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
         grubbs = G > ((N-1)/np.sqrt(N))*np.sqrt((t**2)/(N-2+t**2))
         print N,M,t,s,mean,G,grubbs
         if grubbs == True:
-            distance[distance.index(M)] = True
+            distancelist[distance.index(M)] = 1
+            distance[distance.index(M)].pop()
     
-    for i in range(len(distance)):
-        if distance[i] == True:
-            distance[i] = 1
-        else:
-            distance[i] = 0
     
     
     F1 = plt.figure()
@@ -161,7 +158,7 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
     cmap, norm = mpl.colors.from_levels_and_colors(levels=levels, colors=colors, extend='max')
     xy = np.vstack([TRx,TRy])
     z = gaussian_kde(xy)(xy)
-    ax1.scatter(TRx,TRy,c=z,edgecolor="",s=14,cmap=cmap, norm=norm)
+    ax1.scatter(TRx,TRy,c=distancelist,edgecolor="",s=14,cmap=cmap, norm=norm)
     ax1.set_title('Travelers Ratio')
     ax1.set_ylabel('CA')
     ax1.set_xlabel('DMSO')
