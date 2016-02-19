@@ -133,7 +133,7 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
         if grubbs == True:
             distancelist[distance.index(M)] = 1
             print np.where(distance==M)
-            distance = np.delete(distance,distance[np.where(distance==M)[1]])
+            distance = np.delete(distance,distance[np.where(distance==M)[0][0]])
     
     
     
