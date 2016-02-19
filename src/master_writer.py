@@ -55,7 +55,7 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
                 coverage = '0'
             d[gene].append(coverage)
             
-    coveragecutoff = 200
+    coveragecutoff = 100
     TRlist = list()
     TRgenes = list()
     DMSOTRgenes = list()
@@ -131,6 +131,30 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
             TRx2.append(TRx[i])
             TRy2.append(TRy[i])
             
+    distance2 = list()
+    for i in range(len(ERx)):
+        x = ERx[i]
+        y = ERy[i]
+        xy = ((x+y)/2,(x+y)/2)
+        d = np.sqrt((x-xy[0])**2+(y-xy[1])**2)
+        print x,y,xy,d
+        distance2.append(d)
+        
+    grubbs = True
+    alpha = 0.05
+    i=0
+    N = len(distance2)
+    distancelist = np.zeros(N)
+    s = np.sqrt(np.var(distance2))
+    ERx2 = list()
+    ERy2 = list()
+    print N,len(ERx),len(ERy)
+    for i in range(N):
+        if distance2[i] > 3*s:
+            print i
+            ERx2.append(ERx[i])
+            ERy2.append(ERy[i])
+            
     #while grubbs == True:
     #    i+=1
     #    #print i
@@ -167,8 +191,6 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
     outfile2.write("High CA TR\n")
     F3 = plt.figure()
     ax1 = F3.add_subplot(121)
-    colors = ['blue', 'red']
-    levels = [0, 1]
     cmap, norm = mpl.colors.from_levels_and_colors(levels=levels, colors=colors, extend='max')
     xy = np.vstack([TRx,TRy])
     z = gaussian_kde(xy)(xy)
@@ -186,6 +208,7 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
     xy = np.vstack([ERx,ERy])
     z = gaussian_kde(xy)(xy)
     ax2.scatter(ERx,ERy,c=z,edgecolor="",s=14)
+    ax2.scatter(ERx2,ERy2,c='red',edgecolor="",s=14)
     ax2.set_title('End Ratio')
     ax2.set_ylabel('CA')
     ax2.set_xlabel('DMSO')
