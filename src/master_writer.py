@@ -132,7 +132,7 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
         print N,M,t,s,mean,G,grubbs
         if grubbs == True:
             distancelist[distance.index(M)] = 1
-            distance[distance.index(M)].pop()
+            distance = np.delete(distance,distance[distance.index(M)])
     
     
     
