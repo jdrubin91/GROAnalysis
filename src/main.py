@@ -17,7 +17,7 @@ CA = '/scratch/Users/joru1876/GROSeqRaw/flipped/bowtie2/sortedbam/genomecoverage
 genes = '/scratch/Users/joru1876/GROSeqRaw/flipped/bowtie2/sortedbam/genomecoveragebed/fortdf/refGene.sorted.bed'
 
 #Specify list of genes to examine
-genelist = ['CYR61','NR4A3','FOS','ATF3','EGR2','FOSB','JUN','NR4A1','DUSP1','NR4A2','DUSP2','EGR3','BTG2','WEE1','THBS1','ZFP36','SNF1LK','EGR1','JUNB','BHLHB2','AXUD1','PTG52','IER2','DUSP5','PLK2','GEM','GDF15','KLF6','SNORD102']
+#genelist = ['CYR61','NR4A3','FOS','ATF3','EGR2','FOSB','JUN','NR4A1','DUSP1','NR4A2','DUSP2','EGR3','BTG2','WEE1','THBS1','ZFP36','SNF1LK','EGR1','JUNB','BHLHB2','AXUD1','PTG52','IER2','DUSP5','PLK2','GEM','GDF15','KLF6','SNORD102']
 
 #Return parent directory
 def parent_dir(directory):
@@ -56,7 +56,7 @@ def run():
     CAgenes = filedir + '/CA.genes.bed'
     CATSS = filedir + '/CA.TSS.bed'
     CAEND = filedir + '/CA.END.bed'
-    master_writer.run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir,genelist)
+    master_writer.run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir)
     print "done"
     
     

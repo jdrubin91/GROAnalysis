@@ -7,7 +7,7 @@ rcParams.update({'figure.autolayout': True})
 import matplotlib.pyplot as plt
 from operator import itemgetter
 from scipy.stats import gaussian_kde
-
+from scipy import stats
 import numpy as np
 
 def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir,genelist):    
@@ -84,31 +84,53 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir,genelist
         CAgenes = float(CAgenes)
         CATSS = float(CATSS)
         CAEND = float(CAEND)
-        for name in genelist:
-            if name == gene.split(';')[1]:
-                print name,gene
-                if CAgenes-CATSS > CATSS and DMSOgenes-DMSOTSS > DMSOTSS and CAgenes-CAEND > CAEND and DMSOgenes-DMSOEND > DMSOEND and DMSOgenes > coveragecutoff and CAgenes > coveragecutoff:
-                    i += 1
-                    TRy.append(CATSS/(CAgenes-CATSS))
-                    TRx.append(DMSOTSS/(DMSOgenes-DMSOTSS))
-                    ERy.append(CAEND/(CAgenes-CAEND))
-                    ERx.append(DMSOEND/(DMSOgenes-DMSOEND))
-                    TR = (CATSS/(CAgenes-CATSS))-(DMSOTSS/(DMSOgenes-DMSOTSS))
-                    if TR > cutoff1:
-                        TRgenes.append((gene,TR))
-                    if TR < -cutoff1:
-                        DMSOTRgenes.append((gene,TR))
-                    if not TR > cutoff3 and not TR < -cutoff3:
-                        TRlist.append(TR)
-                    ER = (CAEND/(CAgenes-CAEND))-(DMSOEND/(DMSOgenes-DMSOEND))
-                    if ER > cutoff2:
-                        ENDgenes.append((gene,ER))
-                    if ER < -cutoff2:
-                        DMSOENDgenes.append((gene,ER))
-                    if not ER > cutoff3 and not ER < -cutoff3:
-                        ENDlist.append(ER)
+        if CAgenes-CATSS > CATSS and DMSOgenes-DMSOTSS > DMSOTSS and CAgenes-CAEND > CAEND and DMSOgenes-DMSOEND > DMSOEND and DMSOgenes > coveragecutoff and CAgenes > coveragecutoff:
+            i += 1
+            TRy.append(CATSS/(CAgenes-CATSS))
+            TRx.append(DMSOTSS/(DMSOgenes-DMSOTSS))
+            ERy.append(CAEND/(CAgenes-CAEND))
+            ERx.append(DMSOEND/(DMSOgenes-DMSOEND))
+            TR = (CATSS/(CAgenes-CATSS))-(DMSOTSS/(DMSOgenes-DMSOTSS))
+            if TR > cutoff1:
+                TRgenes.append((gene,TR))
+            if TR < -cutoff1:
+                DMSOTRgenes.append((gene,TR))
+            if not TR > cutoff3 and not TR < -cutoff3:
+                TRlist.append(TR)
+            ER = (CAEND/(CAgenes-CAEND))-(DMSOEND/(DMSOgenes-DMSOEND))
+            if ER > cutoff2:
+                ENDgenes.append((gene,ER))
+            if ER < -cutoff2:
+                DMSOENDgenes.append((gene,ER))
+            if not ER > cutoff3 and not ER < -cutoff3:
+                ENDlist.append(ER)
     print "Genes: ",i
     
+    distance = list()
+    for i in range(len(TRx)):
+        x = TRx[i]
+        y = TRy[i]
+        xy = ((x+y)/2,(x+y)/2)
+        d = np.sqrt((x-xy[0])**2+(y-xy[1])**2)
+        distance.append(d)
+        
+    grubbs = True
+    alpha = 0.05
+    while grubbs == True:
+        N = len(distance)
+        t = stats.t.ppf(1-alpha/2, N-1)
+        s = np.var(distance)
+        mean = np.mean(distance)
+        G = np.absolute(np.amax(distance)-mean)/s
+        grubbs = G > ((N-1)/np.sqrt(N))*np.sqrt((t**2)/(N-2+t**2))
+        if grubbs == True:
+            distance.index(np.amax(distance)) = True
+    
+    for i in range(len(distance)):
+        if distance[i] == True:
+            distance[i] = 1
+        else:
+            distance[i] = 0
     
     
     F1 = plt.figure()
@@ -128,9 +150,14 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir,genelist
     outfile2.write("High CA TR\n")
     F3 = plt.figure()
     ax1 = F3.add_subplot(111)
+    
+    colors = ['red', 'blue']
+    levels = [0, 1]
+    
+    cmap, norm = mpl.colors.from_levels_and_colors(levels=levels, colors=colors, extend='max')
     xy = np.vstack([TRx,TRy])
     z = gaussian_kde(xy)(xy)
-    ax1.scatter(TRx,TRy,c=z,edgecolor="",s=14)
+    ax1.scatter(TRx,TRy,c=z,edgecolor="",s=14,cmap=cmap, norm=norm)
     ax1.set_title('Travelers Ratio')
     ax1.set_ylabel('CA')
     ax1.set_xlabel('DMSO')
