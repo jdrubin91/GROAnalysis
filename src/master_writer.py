@@ -113,7 +113,7 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
         y = TRy[i]
         xy = ((x+y)/2,(x+y)/2)
         d = np.sqrt((x-xy[0])**2+(y-xy[1])**2)
-        print x,y,xy,d
+        #print x,y,xy,d
         distance.append(d)
         
     grubbs = True
@@ -124,10 +124,10 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
     s = np.sqrt(np.var(distance))
     TRx2 = list()
     TRy2 = list()
-    print N,len(TRx),len(TRy)
+    #print N,len(TRx),len(TRy)
     for i in range(N):
-        if distance[i] > 4*s:
-            print i
+        if distance[i] > 3*s:
+            #print i
             TRx2.append(TRx[i])
             TRy2.append(TRy[i])
             
@@ -137,7 +137,7 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
         y = ERy[i]
         xy = ((x+y)/2,(x+y)/2)
         d = np.sqrt((x-xy[0])**2+(y-xy[1])**2)
-        print x,y,xy,d
+        #print x,y,xy,d
         distance2.append(d)
         
     
@@ -146,10 +146,10 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
     s = np.sqrt(np.var(distance2))
     ERx2 = list()
     ERy2 = list()
-    print N,len(ERx),len(ERy)
+    #print N,len(ERx),len(ERy)
     for i in range(N):
-        if distance2[i] > 4*s:
-            print i
+        if distance2[i] > 3*s:
+            #print i
             ERx2.append(ERx[i])
             ERy2.append(ERy[i])
     
