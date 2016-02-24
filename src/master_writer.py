@@ -255,7 +255,7 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
     F4 = plt.figure()
     ax1 = F4.add_subplot(111)
     bp1 = ax1.boxplot([TRlist,ENDlist],patch_artist=True)
-    ax1.set_xticklabels(['Travelers Ratio','End Ratio'])
+    ax1.set_xticklabels(['Travel Ratio','End Ratio'])
     ax1.get_xaxis().tick_bottom()
     ax1.get_yaxis().tick_left()
     ## change outline color, fill color and linewidth of the boxes
