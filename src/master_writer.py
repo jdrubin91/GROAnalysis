@@ -251,7 +251,7 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
     ax2.set_ylim([0, 1])
     #ax2.plot([0,1/slope2],[intercept2,1],color = 'r')
     ax2.plot([0,1],[0,1],color = 'k')
-    plt.savefig(figuredir + '/Scatter_reflected_moregenes.png')
+    plt.savefig(figuredir + '/Scatter_reflected_moregenes.tiff')
     F4 = plt.figure()
     ax1 = F4.add_subplot(111)
     bp1 = ax1.boxplot([TRlist,ENDlist],patch_artist=True)
