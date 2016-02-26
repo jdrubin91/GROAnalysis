@@ -178,13 +178,15 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
                 ERgenesdwn.append(names[i])
     
     
-    print TRgenesup
+    print "TR tot: ", len(TRx2)
+    print len(TRgenesup),TRgenesup
     print '==============='
-    print TRgenesdwn
+    print len(TRgenesdwn),TRgenesdwn
     print'================'
-    print ERgenesup
+    print "ER tot: ", len(ERx2)
+    print len(ERgenesup),ERgenesup
     print '==============='
-    print ERgenesdwn
+    print len(ERgenesdwn),ERgenesdwn
     #TRx2 = list()
     #TRy2 = list()
     #grubbs = True
