@@ -93,7 +93,7 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
             ERy.append(CAEND/(CAgenes-CAEND))
             ERx.append(DMSOEND/(DMSOgenes-DMSOEND))
             TR = (CATSS/(CAgenes-CATSS))-(DMSOTSS/(DMSOgenes-DMSOTSS))
-            names.append(gene)
+            names.append(gene.split(';')[1])
             if TR > cutoff1:
                 TRgenes.append((gene,TR))
             if TR < -cutoff1:
