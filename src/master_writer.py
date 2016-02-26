@@ -67,6 +67,7 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
     TRy = list()
     ERx = list()
     ERy = list()
+    names = list()
     cutoff2 = 0.01
     cutoff3 = 0.25
     i = 0
@@ -92,6 +93,7 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
             ERy.append(CAEND/(CAgenes-CAEND))
             ERx.append(DMSOEND/(DMSOgenes-DMSOEND))
             TR = (CATSS/(CAgenes-CATSS))-(DMSOTSS/(DMSOgenes-DMSOTSS))
+            names.append(gene)
             if TR > cutoff1:
                 TRgenes.append((gene,TR))
             if TR < -cutoff1:
@@ -108,9 +110,14 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
     print "Genes: ",i
     
     distance = list()
+    direction1 = list()
     for i in range(len(TRx)):
         x = TRx[i]
         y = TRy[i]
+        if y > x:
+            direction1.append(1)
+        else:
+            direction1.append(0)
         xy = ((x+y)/2,(x+y)/2)
         d = np.sqrt((x-xy[0])**2+(y-xy[1])**2)
         #print x,y,xy,d
@@ -124,17 +131,28 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
     s = np.sqrt(np.var(distance))
     TRx2 = list()
     TRy2 = list()
+    TRgenesup = list()
+    TRgenesdwn = list()
     #print N,len(TRx),len(TRy)
     for i in range(N):
         if distance[i] > 3*s:
             #print i
             TRx2.append(TRx[i])
             TRy2.append(TRy[i])
+            if direction1[i] == 1:
+                TRgenesup.append(names[i])
+            else:
+                TRgenesdwn.append(names[i])
             
     distance2 = list()
+    direction = list()
     for i in range(len(ERx)):
         x = ERx[i]
         y = ERy[i]
+        if y > x:
+            direction.append(1)
+        else:
+            direction.append(0)
         xy = ((x+y)/2,(x+y)/2)
         d = np.sqrt((x-xy[0])**2+(y-xy[1])**2)
         #print x,y,xy,d
@@ -146,13 +164,27 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
     s = np.sqrt(np.var(distance2))
     ERx2 = list()
     ERy2 = list()
+    ERgenesup = list()
+    ERgenesdwn = list()
     #print N,len(ERx),len(ERy)
     for i in range(N):
         if distance2[i] > 3*s:
             #print i
             ERx2.append(ERx[i])
             ERy2.append(ERy[i])
+            if direction[i] == 1:
+                ERgenesup.append(names[i])
+            else:
+                ERgenesdwn.append(names[i])
     
+    
+    print TRgenesup
+    print '==============='
+    print TRgenesdwn
+    print'================'
+    print ERgenesup
+    print '==============='
+    print ERgenesdwn
     #TRx2 = list()
     #TRy2 = list()
     #grubbs = True
@@ -251,7 +283,7 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
     ax2.set_ylim([0, 1])
     #ax2.plot([0,1/slope2],[intercept2,1],color = 'r')
     ax2.plot([0,1],[0,1],color = 'k')
-    plt.savefig(figuredir + '/Scatter_reflected_moregenes.tiff')
+    plt.savefig(figuredir + '/Scatter_reflected_moregenes.png')
     F4 = plt.figure()
     ax1 = F4.add_subplot(111)
     bp1 = ax1.boxplot([TRlist,ENDlist],patch_artist=True)
