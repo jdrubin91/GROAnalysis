@@ -7,7 +7,7 @@ import reflect_coverage
 import bedtools_create_intersects
 import master_writer
 
-#Specify DMSO treated bedgraph directory
+#Specify DMSO treated bedgraph directoryl
 DMSO = '/scratch/Users/joru1876/GROSeqRaw/flipped/bowtie2/sortedbam/genomecoveragebed/fortdf/JDR_DMSO_SS102217_093015_CAGATC_L005_R1_001.flip.fastqbowtie2.sorted.BedGraph.mp.BedGraph'
 
 #Specify CA treated bedgraph directory
