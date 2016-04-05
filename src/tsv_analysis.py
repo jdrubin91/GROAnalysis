@@ -225,8 +225,8 @@ def run3(file1,file2):
                 if d2[key][2]-d1[key][2] < -.25:
                     #Z.append((key,d2[key][2]-d1[key][2]))
                     Z.append(key)
-                Y.append(math.log(d2[key][2]/d1[key][2])/math.log(2))
-                X.append(math.log((max(d2[key][0],d2[key][1])+max(d1[key][0],d1[key][1]))/2.0)/math.log(2))
+                Y.append(d2[key][2]/d1[key][2])
+                X.append((max(d2[key][0],d2[key][1])+max(d1[key][0],d1[key][1]))/2.0)
     
     genedict = gene_dict(genes)
     Y1 = list()
@@ -254,8 +254,11 @@ def run3(file1,file2):
     #print "Z: ",sorted(Z, key=lambda x: x[1])
     print "len(Y): ",len(Y1)
     print "len(Z): ",len(Z1)
-    F = plt.figure()        
-    plt.hist(X,50)
+    F = plt.figure() 
+    ax = F.add_subplot()       
+    ax.scatter(X,Y)
+    ax.set_xscale('log', basex=2)
+    ax.set_yscale('log', basey=2)
     plt.savefig(savedir + 'tsv_fig.png')
     
     return "done"
