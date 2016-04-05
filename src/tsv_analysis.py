@@ -231,14 +231,14 @@ def run3(file1,file2):
     M = max(X)
     Z = list()
     size = (M/25)
-    for i in range(min(X),int(int(M)/0.1)):
+    for i in range(int(min(X)),int(int(M)/0.1)):
         window = (i*0.1,i*0.1+size)
         Z.append([])
         for j in range(len(X)):
             if X[j] > window[0] and X[j] < window[1]:
                 Z[i].append(X[j])
     print len(Z)
-    print Z[50:60]
+    print Z[0:10]
         
     
     genedict = gene_dict(genes)
