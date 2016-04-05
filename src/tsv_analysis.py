@@ -255,23 +255,23 @@ def run3(file1,file2):
         else:
             var = X1[len(X1)-1]
         cdf = norm.cdf(Y[i],0,var)
-        p = min(cdf,1-cdf)
-        if p < 0.01:
+        p = min(cdf,1-cdf)*len(X)
+        if p < 0.1:
             X2.append(X[i])
             Y2.append(Y[i])
     
     genedict = gene_dict(genes)
     F = plt.figure() 
-    ax = F.add_subplot(211)
+    ax = F.add_subplot(111)
     xy = np.vstack([X,Y])
     z = gaussian_kde(xy)(xy)
-    plt.scatter(X,Y,c=z,edgecolor="",s=14) 
+    plt.scatter(X,Y,c=z,edgecolor="",alpha=0.5,s=14) 
     plt.scatter(X2,Y2,c='r',edgecolor="",s=14)
     ax.set_xlim([4,20])
     #ax.set_xscale('log', basex=2)
     #ax.set_yscale('log', basey=2)
-    ax2 = F.add_subplot(212)
-    ax2.plot(X1)
+    #ax2 = F.add_subplot(212)
+    #ax2.plot(X1)
     plt.savefig(savedir + 'tsv_fig.png')
     
     return "done"
