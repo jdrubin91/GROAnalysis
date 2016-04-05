@@ -266,7 +266,7 @@ def run3(file1,file2):
         if p < 0.1:
             X2.append(X[i])
             Y2.append(Y[i])
-            siglist.append(genedict[genes[i]])
+            siglist.append(genedict[genelist[i]])
             
     
     F = plt.figure() 
