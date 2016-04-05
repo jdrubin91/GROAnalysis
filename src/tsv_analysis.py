@@ -218,10 +218,10 @@ def run3(file1,file2):
     Z = list()
     for key in d1:
         if key in d2:
-            if d1[key][0] > cut or d1[key][1] > cut and d2[key][0] > cut or d2[key][1] > cut:
-                if d2[key][2]-d1[key][2] > .25:
+            if (d1[key][0] > cut or d1[key][1] > cut) and (d2[key][0] > cut or d2[key][1] > cut) and d2[key][2] > 0 and d1[key][2] > 0:
+                #if d2[key][2]-d1[key][2] > .25:
                     #Y.append((key,d2[key][2]-d1[key][2]))
-                    Y.append(key)
+                    #Y.append(key)
                 if d2[key][2]-d1[key][2] < -.25:
                     #Z.append((key,d2[key][2]-d1[key][2]))
                     Z.append(key)
