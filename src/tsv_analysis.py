@@ -255,7 +255,7 @@ def run3(file1,file2):
     print "len(Y): ",len(Y1)
     print "len(Z): ",len(Z1)
     F = plt.figure() 
-    ax = F.add_subplot()       
+    ax = F.add_subplot(111)       
     ax.scatter(X,Y)
     ax.set_xscale('log', basex=2)
     ax.set_yscale('log', basey=2)
