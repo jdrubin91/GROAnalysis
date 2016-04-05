@@ -268,6 +268,8 @@ def run3(file1,file2):
             Y2.append(Y[i])
             if genelist[i] in genedict:
                 siglist.append(genedict[genelist[i]])
+            else:
+                siglist.append(genelist[i])
             
     
     F = plt.figure() 
@@ -279,7 +281,7 @@ def run3(file1,file2):
     ax.set_xlim([4,20])
     ax.get_xaxis().tick_bottom()
     ax.get_yaxis().tick_left()
-    for l in len(X2):
+    for l in range(len(X2)):
         ax.annotate('{:.0f}'.format(siglist[l]), xy=(X2[l],Y2[l]), xytext=(10, 10), ha='right',
                 textcoords='offset points', 
                 arrowprops=dict(arrowstyle='->', shrinkA=0))
