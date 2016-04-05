@@ -250,7 +250,10 @@ def run3(file1,file2):
     X2 = list()
     Y2 = list()
     for i in range(len(X)):
-        var = X1[int((X[i] - m)*10)]
+        if int((X[i] - m)*10) < len(X1):
+            var = X1[int((X[i] - m)*10)]
+        else:
+            var = X1[len(X1)]
         cdf = norm.cdf(Y[i],0,var)
         p = min(cdf,1-cdf)*len(X)
         if p < 0.01:
