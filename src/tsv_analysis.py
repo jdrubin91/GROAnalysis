@@ -226,7 +226,7 @@ def run3(file1,file2):
                     #Z.append((key,d2[key][2]-d1[key][2]))
                     Z.append(key)
                 Y.append(d2[key][2]-d1[key][2])
-                X.append(math.log((sum(d2[key][0],d2[key][1])+sum(d1[key][0],d1[key][1]))/2.0,2))
+                X.append(math.log((sum((d2[key][0],d2[key][1]))+sum((d1[key][0],d1[key][1])))/2.0,2))
     
     genedict = gene_dict(genes)
     Y1 = list()
