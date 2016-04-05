@@ -197,7 +197,7 @@ def run3(file1,file2):
                     fwd, rev = line[2].split(',')
                     d1[gene] = [float(fwd), float(rev)]
                 elif '1' in line[1]:
-                    p = line.strip().split()[index].split(',')[1]
+                    p = line.strip().split()[index].split(',')[0]
                     d1[gene].append(float(p))
                     
     with open(file2) as F2:
@@ -209,7 +209,7 @@ def run3(file1,file2):
                     fwd, rev = line[2].split(',')
                     d2[gene] = [float(fwd),float(rev)]
                 elif '1' in line[1]:
-                    p = line.strip().split()[index].split(',')[1]
+                    p = line.strip().split()[index].split(',')[0]
                     d2[gene].append(float(p))
     
     
@@ -228,32 +228,20 @@ def run3(file1,file2):
                 Y.append(math.log(d2[key][2]/d1[key][2],2))
                 X.append(math.log((sum((d2[key][0],d2[key][1]))+sum((d1[key][0],d1[key][1])))/2.0,2))
     
+    M = max(X)
+    Z = list()
+    size = (int(M)/25)
+    for i in range(int(M)/0.1):
+        window = (i*0.1,i*0.1+size)
+        Z[i] = list()
+        for j in range(len(X)):
+            if X[j] > window[0] and X[j] < window[1]:
+                Z[i].append(X[j])
+    print len(Z)
+    print Z[0:10]
+        
+    
     genedict = gene_dict(genes)
-    Y1 = list()
-    for item in Y:
-        if item in genedict:
-            Y1.append(genedict[item])
-    Z1 = list()
-    for item in Z:
-        if item in genedict:
-            Z1.append(genedict[item])
-    
-    
-    print "max: " + str(max(X))
-    print "min: " + str(min(X))
-    print "length: " + str(len(X))
-    print "avg: " + str(sum(X)/len(X))
-    #print "Y: ",Y1
-    print ','.join(Y1)
-    print "================================================================="
-    print ','.join(Z1)
-    #for item in Z1:
-    #    print item
-    #print "Z: ",Z1
-    #print "Y: ",sorted(Y, key=lambda x: x[1])
-    #print "Z: ",sorted(Z, key=lambda x: x[1])
-    print "len(Y): ",len(Y1)
-    print "len(Z): ",len(Z1)
     F = plt.figure() 
     ax = F.add_subplot(111)
     xy = np.vstack([X,Y])
