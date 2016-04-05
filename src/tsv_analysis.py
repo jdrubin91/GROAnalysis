@@ -225,8 +225,8 @@ def run3(file1,file2):
                 if d2[key][2]-d1[key][2] < -.25:
                     #Z.append((key,d2[key][2]-d1[key][2]))
                     Z.append(key)
-                Y.append(math.log(d2[key][2]/d1[key][2],2))
-                X.append(math.log((max(d2[key][0],d2[key][1])+max(d1[key][0],d1[key][1]))/2.0,2))
+                Y.append(d2[key][2]-d1[key][2])
+                X.append(math.log((sum(d2[key][0],d2[key][1])+sum(d1[key][0],d1[key][1]))/2.0,2))
     
     genedict = gene_dict(genes)
     Y1 = list()
