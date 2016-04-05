@@ -217,6 +217,7 @@ def run3(file1,file2):
     X = list()
     Y = list()
     Z = list()
+    genes = list()
     for key in d1:
         if key in d2:
             if (d1[key][0] > cut or d1[key][1] > cut) and (d2[key][0] > cut or d2[key][1] > cut) and d2[key][2] > 0 and d1[key][2] > 0:
@@ -228,6 +229,8 @@ def run3(file1,file2):
                     Z.append(key)
                 Y.append(math.log(d2[key][2]/d1[key][2],2))
                 X.append(math.log((sum((d2[key][0],d2[key][1]))+sum((d1[key][0],d1[key][1])))/2.0,2))
+                genes.append(key)
+                
     
     M = max(X)
     m = min(X)
@@ -249,18 +252,23 @@ def run3(file1,file2):
     
     X2 = list()
     Y2 = list()
+    genedict = gene_dict(genes)
+    siglist = list()
     for i in range(len(X)):
         if int((X[i] - m)*10) < len(X1):
-            var = X1[int((X[i] - m)*10)]
+            k = int((X[i] - m)*10)
+            var = X1[k]
         else:
-            var = X1[len(X1)-1]
-        cdf = norm.cdf(Y[i],0,var)
-        p = min(cdf,1-cdf)*len(X)
+            k = len(X1)-1
+            var = X1[k]
+        cdf = norm.cdf(Y[i],0,math.sqrt(var))
+        p = min(cdf,1-cdf)*len(Z[k])
         if p < 0.1:
             X2.append(X[i])
             Y2.append(Y[i])
+            siglist.append(genedict[genes[i]])
+            
     
-    genedict = gene_dict(genes)
     F = plt.figure() 
     ax = F.add_subplot(111)
     xy = np.vstack([X,Y])
@@ -268,6 +276,12 @@ def run3(file1,file2):
     plt.scatter(X,Y,c=z,edgecolor="",alpha=0.5,s=14) 
     plt.scatter(X2,Y2,c='r',edgecolor="",s=14)
     ax.set_xlim([4,20])
+    ax.get_xaxis().tick_bottom()
+    ax.get_yaxis().tick_left()
+    for l in len(X2):
+        ax.annotate('{:.0f}'.format(siglist[l]), xy=(X2[l],Y2[l]), xytext=(10, 10), ha='right',
+                textcoords='offset points', 
+                arrowprops=dict(arrowstyle='->', shrinkA=0))
     #ax.set_xscale('log', basex=2)
     #ax.set_yscale('log', basey=2)
     #ax2 = F.add_subplot(212)
