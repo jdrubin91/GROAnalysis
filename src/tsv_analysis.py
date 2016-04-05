@@ -240,7 +240,11 @@ def run3(file1,file2):
                 Z[i].append(Y[j])
     X1 = list()
     for item in Z:
-        X1.append(np.var(item))
+        var = list()
+        for val in item:
+            var.append(val**2)
+        if len(var) > 2:
+            X1.append(sum(var)/(len(var)-1))
         
     
     genedict = gene_dict(genes)
