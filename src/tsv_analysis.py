@@ -217,7 +217,7 @@ def run3(file1,file2):
     X = list()
     Y = list()
     Z = list()
-    genes = list()
+    genelist = list()
     for key in d1:
         if key in d2:
             if (d1[key][0] > cut or d1[key][1] > cut) and (d2[key][0] > cut or d2[key][1] > cut) and d2[key][2] > 0 and d1[key][2] > 0:
@@ -229,7 +229,7 @@ def run3(file1,file2):
                     Z.append(key)
                 Y.append(math.log(d2[key][2]/d1[key][2],2))
                 X.append(math.log((sum((d2[key][0],d2[key][1]))+sum((d1[key][0],d1[key][1])))/2.0,2))
-                genes.append(key)
+                genelist.append(key)
                 
     
     M = max(X)
