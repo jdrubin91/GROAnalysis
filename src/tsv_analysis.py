@@ -255,7 +255,7 @@ def run3(file1,file2):
         else:
             var = X1[len(X1)-1]
         cdf = norm.cdf(Y[i],0,var)
-        p = min(cdf,1-cdf)*len(X)
+        p = min(cdf,1-cdf)
         if p < 0.01:
             X2.append(X[i])
             Y2.append(Y[i])
@@ -266,7 +266,7 @@ def run3(file1,file2):
     xy = np.vstack([X,Y])
     z = gaussian_kde(xy)(xy)
     plt.scatter(X,Y,c=z,edgecolor="",s=14) 
-    plt.scatter(X2,Y2,c='r',s=14)
+    plt.scatter(X2,Y2,c='r',edgecolor="",s=14)
     ax.set_xlim([4,20])
     #ax.set_xscale('log', basex=2)
     #ax.set_yscale('log', basey=2)
