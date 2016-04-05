@@ -237,7 +237,7 @@ def run3(file1,file2):
         Z.append([])
         for j in range(len(X)):
             if X[j] > window[0] and X[j] < window[1]:
-                Z[i].append(X[j])
+                Z[i].append(Y[j])
     X1 = list()
     for item in Z:
         X1.append(np.var(item))
