@@ -4,6 +4,7 @@ import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 from scipy.stats import gaussian_kde
+from scipy.stats import norm
 import numpy as np
 import math
 
@@ -245,7 +246,16 @@ def run3(file1,file2):
             var.append(val**2)
         if len(var) > 3:
             X1.append(sum(var)/(len(var)-1))
-        
+    
+    X2 = list()
+    Y2 = list()
+    for i in range(len(X)):
+        var = X1[int((X[i] - m)*10)]
+        cdf = norm.cdf(Y[i],0,var)
+        p = min(cdf,1-cdf)*len(X)
+        if p < 0.01:
+            X2.append(X[i])
+            Y2.append(Y[i])
     
     genedict = gene_dict(genes)
     F = plt.figure() 
@@ -253,6 +263,7 @@ def run3(file1,file2):
     xy = np.vstack([X,Y])
     z = gaussian_kde(xy)(xy)
     plt.scatter(X,Y,c=z,edgecolor="",s=14) 
+    plt.scatter(X2,Y2,c='r',s=14)
     ax.set_xlim([4,20])
     #ax.set_xscale('log', basex=2)
     #ax.set_yscale('log', basey=2)
