@@ -236,6 +236,7 @@ def run3(file1,file2):
         Z.append([])
         for j in range(len(X)):
             if X[j] > window[0] and X[j] < window[1]:
+                print 'True'
                 Z[i].append(X[j])
     print len(Z)
     print Z[0:10]
