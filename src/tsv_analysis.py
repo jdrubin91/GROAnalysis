@@ -230,11 +230,12 @@ def run3(file1,file2):
     
     M = max(X)
     Z = list()
-    size = (int(M)/25)
+    size = (M/25)
     for i in range(int(int(M)/0.1)):
         window = (i*0.1,i*0.1+size)
         Z.append([])
         for j in range(len(X)):
+            print X[j],window
             if X[j] > window[0] and X[j] < window[1]:
                 Z[i].append(X[j])
     print len(Z)
