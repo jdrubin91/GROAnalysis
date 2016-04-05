@@ -253,7 +253,7 @@ def run3(file1,file2):
         if int((X[i] - m)*10) < len(X1):
             var = X1[int((X[i] - m)*10)]
         else:
-            var = X1[len(X1)]
+            var = X1[len(X1)-1]
         cdf = norm.cdf(Y[i],0,var)
         p = min(cdf,1-cdf)*len(X)
         if p < 0.01:
