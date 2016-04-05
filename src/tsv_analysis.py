@@ -197,7 +197,7 @@ def run3(file1,file2):
                     fwd, rev = line[2].split(',')
                     d1[gene] = [float(fwd), float(rev)]
                 elif '1' in line[1]:
-                    p = line.strip().split()[index].split(',')[0]
+                    p = line.strip().split()[index].split(',')[1]
                     d1[gene].append(float(p))
                     
     with open(file2) as F2:
@@ -209,7 +209,7 @@ def run3(file1,file2):
                     fwd, rev = line[2].split(',')
                     d2[gene] = [float(fwd),float(rev)]
                 elif '1' in line[1]:
-                    p = line.strip().split()[index].split(',')[0]
+                    p = line.strip().split()[index].split(',')[1]
                     d2[gene].append(float(p))
     
     
