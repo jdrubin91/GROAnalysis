@@ -252,7 +252,7 @@ def run3(file1,file2):
     #ax.set_xscale('log', basex=2)
     #ax.set_yscale('log', basey=2)
     ax2 = F.add_subplot(212)
-    ax2.plot(X)
+    ax2.plot(X1)
     plt.savefig(savedir + 'tsv_fig.png')
     
     return "done"
