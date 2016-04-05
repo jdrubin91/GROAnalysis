@@ -257,6 +257,8 @@ def run3(file1,file2):
     F = plt.figure() 
     ax = F.add_subplot(111)       
     ax.scatter(X,Y)
+    print X
+    print Y
     ax.set_xscale('log', basex=2)
     ax.set_yscale('log', basey=2)
     plt.savefig(savedir + 'tsv_fig.png')
