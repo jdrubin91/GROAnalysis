@@ -231,7 +231,7 @@ def run3(file1,file2):
     M = max(X)
     Z = list()
     size = (M/25)
-    for i in range(int(int(M)/0.1)):
+    for i in range(min(X),int(int(M)/0.1)):
         window = (i*0.1,i*0.1+size)
         Z.append([])
         for j in range(len(X)):
