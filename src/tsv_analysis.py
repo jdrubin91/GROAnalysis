@@ -243,7 +243,7 @@ def run3(file1,file2):
         var = list()
         for val in item:
             var.append(val**2)
-        if len(var) > 2:
+        if len(var) > 3:
             X1.append(sum(var)/(len(var)-1))
         
     
