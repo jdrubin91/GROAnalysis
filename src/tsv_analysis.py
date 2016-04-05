@@ -249,6 +249,7 @@ def run3(file1,file2):
     xy = np.vstack([X,Y])
     z = gaussian_kde(xy)(xy)
     plt.scatter(X,Y,c=z,edgecolor="",s=14) 
+    ax.set_xlim([0,20])
     #ax.set_xscale('log', basex=2)
     #ax.set_yscale('log', basey=2)
     ax2 = F.add_subplot(212)
