@@ -229,16 +229,17 @@ def run3(file1,file2):
                 X.append(math.log((sum((d2[key][0],d2[key][1]))+sum((d1[key][0],d1[key][1])))/2.0,2))
     
     M = max(X)
+    m = min(X)
     Z = list()
     size = (M/25)
-    for i in range(int(min(X)),int(int(M)/0.1)):
-        window = (i*0.1,i*0.1+size)
+    for i in range(int(int(M-m)/0.1)):
+        window = (i*0.1+m,i*0.1+size+m)
         Z.append([])
         for j in range(len(X)):
             if X[j] > window[0] and X[j] < window[1]:
                 Z[i].append(X[j])
     print len(Z)
-    print Z[0:10]
+    print Z
         
     
     genedict = gene_dict(genes)
