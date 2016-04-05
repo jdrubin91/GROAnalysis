@@ -233,7 +233,7 @@ def run3(file1,file2):
     size = (int(M)/25)
     for i in range(int(int(M)/0.1)):
         window = (i*0.1,i*0.1+size)
-        Z[i] = list()
+        Z.append([])
         for j in range(len(X)):
             if X[j] > window[0] and X[j] < window[1]:
                 Z[i].append(X[j])
