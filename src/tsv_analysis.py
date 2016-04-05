@@ -12,7 +12,7 @@ file2 = '/scratch/Shares/dowell/ENCODE/Rubin2016_genes_CA-1_K_models_MLE.tsv'
 savedir = '/scratch/Users/joru1876/GROAnalysis/figures/'
 genes = '/scratch/Users/joru1876/genome_files/refGene.bed'
 index = 6
-cut = 200
+cut = 10
 cut1 = 50000
 cut2 = -50000
 
@@ -185,6 +185,81 @@ def run2(file1,file2):
     return "done"
     
 
+def run3(file1,file2):
+    d1 = dict()
+    d2 = dict()
+    with open(file1) as F1:
+        for line in F1:
+            if not '#' in line[0]:
+                if '>' in line[0]:
+                    line = line.strip().split('|')
+                    gene = line[0][1:]
+                    fwd, rev = line[2].split(',')
+                    d1[gene] = [float(fwd), float(rev)]
+                elif '1' in line[1]:
+                    p = line.strip().split()[index].split(',')[0]
+                    d1[gene].append(float(p))
+                    
+    with open(file2) as F2:
+        for line in F2:
+            if not '#' in line[0]:
+                if '>' in line[0]:
+                    line = line.strip().split('|')
+                    gene = line[0][1:]
+                    fwd, rev = line[2].split(',')
+                    d2[gene] = [float(fwd),float(rev)]
+                elif '1' in line[1]:
+                    p = line.strip().split()[index].split(',')[0]
+                    d2[gene].append(float(p))
+    
+    
+    X = list()
+    Y = list()
+    Z = list()
+    for key in d1:
+        if key in d2:
+            if d1[key][0] > cut or d1[key][1] > cut and d2[key][0] > cut or d2[key][1] > cut:
+                if d2[key][2]-d1[key][2] > .25:
+                    #Y.append((key,d2[key][2]-d1[key][2]))
+                    Y.append(key)
+                if d2[key][2]-d1[key][2] < -.25:
+                    #Z.append((key,d2[key][2]-d1[key][2]))
+                    Z.append(key)
+                Y.append(math.log(d2[key][2]-d1[key][2])/math.log(2))
+                X.append(math.log((max(d2[key][0],d2[key][1])+max(d1[key][0],d1[key][1]))/2.0)/math.log(2))
+    
+    genedict = gene_dict(genes)
+    Y1 = list()
+    for item in Y:
+        if item in genedict:
+            Y1.append(genedict[item])
+    Z1 = list()
+    for item in Z:
+        if item in genedict:
+            Z1.append(genedict[item])
+    
+    
+    print "max: " + str(max(X))
+    print "min: " + str(min(X))
+    print "length: " + str(len(X))
+    print "avg: " + str(sum(X)/len(X))
+    #print "Y: ",Y1
+    print ','.join(Y1)
+    print "================================================================="
+    print ','.join(Z1)
+    #for item in Z1:
+    #    print item
+    #print "Z: ",Z1
+    #print "Y: ",sorted(Y, key=lambda x: x[1])
+    #print "Z: ",sorted(Z, key=lambda x: x[1])
+    print "len(Y): ",len(Y1)
+    print "len(Z): ",len(Z1)
+    F = plt.figure()        
+    plt.hist(X,50)
+    plt.savefig(savedir + 'tsv_fig.png')
+    
+    return "done"
+
     
 if __name__ == "__main__":
-    run2(file1,file2)
+    run3(file1,file2)
