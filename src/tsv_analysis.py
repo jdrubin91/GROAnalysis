@@ -238,18 +238,21 @@ def run3(file1,file2):
         for j in range(len(X)):
             if X[j] > window[0] and X[j] < window[1]:
                 Z[i].append(X[j])
-    print len(Z)
-    print Z
+    X1 = list()
+    for item in Z:
+        X1.append(np.var(item))
         
     
     genedict = gene_dict(genes)
     F = plt.figure() 
-    ax = F.add_subplot(111)
+    ax = F.add_subplot(211)
     xy = np.vstack([X,Y])
     z = gaussian_kde(xy)(xy)
     plt.scatter(X,Y,c=z,edgecolor="",s=14) 
     #ax.set_xscale('log', basex=2)
     #ax.set_yscale('log', basey=2)
+    ax2 = F.add_subplot(212)
+    ax2.plot(X)
     plt.savefig(savedir + 'tsv_fig.png')
     
     return "done"
