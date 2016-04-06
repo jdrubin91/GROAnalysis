@@ -284,10 +284,10 @@ def run3(file1,file2):
     for l in range(len(X2)):
         if Y2[l] < 0:
             textx = 10
-            texty = -40
+            texty = -20
         else:
             textx = 10
-            texty = 40
+            texty = 20
         ax.annotate(siglist[l], xy=(X2[l],Y2[l]), xytext=(textx, texty), ha='right',
                 textcoords='offset points', 
                 arrowprops=dict(arrowstyle='->', shrinkA=0))
