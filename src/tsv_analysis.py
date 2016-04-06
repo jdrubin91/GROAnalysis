@@ -282,12 +282,8 @@ def run3(file1,file2):
     ax.get_xaxis().tick_bottom()
     ax.get_yaxis().tick_left()
     for l in range(len(X2)):
-        if Y2[l] < 0:
-            textx = 10
-            texty = -20
-        else:
-            textx = 10
-            texty = 20
+        textx = np.random(-40,40)
+        texty = np.random(-40,40)
         ax.annotate(siglist[l], xy=(X2[l],Y2[l]), xytext=(textx, texty), ha='right',
                 textcoords='offset points', 
                 arrowprops=dict(arrowstyle='->', shrinkA=0))
