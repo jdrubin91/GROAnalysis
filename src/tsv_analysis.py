@@ -282,7 +282,13 @@ def run3(file1,file2):
     ax.get_xaxis().tick_bottom()
     ax.get_yaxis().tick_left()
     for l in range(len(X2)):
-        ax.annotate(siglist[l], xy=(X2[l],Y2[l]), xytext=(20, 20), ha='right',
+        if Y2[l] < 0:
+            textx = 10
+            texty = -40
+        else:
+            textx = 10
+            texty = 40
+        ax.annotate(siglist[l], xy=(X2[l],Y2[l]), xytext=(textx, texty), ha='right',
                 textcoords='offset points', 
                 arrowprops=dict(arrowstyle='->', shrinkA=0))
     #ax.set_xscale('log', basex=2)
