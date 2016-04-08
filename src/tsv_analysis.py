@@ -241,20 +241,22 @@ def run3(file1,file2):
     M = max(X)
     m = min(X)
     Z = list()
-    size = (M/10)
+    size = ((M-m)/5.0)
     for i in range(int(int(M-m)/0.1)):
         window = (i*0.1+m,i*0.1+size+m)
         Z.append([])
         for j in range(len(X)):
-            if X[j] > window[0] and X[j] < window[1]:
+            if X[j] > window[0] and X[j] <= window[1]:
                 Z[i].append(Y[j])
     X1 = list()
     for item in Z:
         var = list()
         for val in item:
             var.append(val**2)
-        if len(var) > 3:
+        if len(var) > 2:
             X1.append(sum(var)/(len(var)-1))
+        else:
+            X1.append(0.0)
     
     X2 = list()
     Y2 = list()
