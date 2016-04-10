@@ -114,7 +114,8 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
             if not ER > cutoff3 and not ER < -cutoff3:
                 ENDlist.append(ER)
     print "Genes: ",i
-    
+    print pX[0:10]
+    print pY[0:10]
     meanX = np.mean(pX)
     meanY = np.mean(pY)
     num = 0.0
@@ -352,8 +353,8 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
     ax.set_title('Pearson Coefficient')
     ax.set_xlabel('DMSO genes')
     ax.set_ylabel('CA genes')
-    ax.set_xlim([0, .2])
-    ax.set_ylim([0, .2])
+    ax.set_xlim([0, .1])
+    ax.set_ylim([0, .1])
     ax.text(3,8, "Pearson coefficient: " + str(pearsons))
     plt.savefig(figuredir + '/Pearson.png')
     
