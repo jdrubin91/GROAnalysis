@@ -74,6 +74,8 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
     
     outfile = open(filedir + '/Master.bed','w')
     outfile.write('Gene\tChrom\tStart\tStop\tNumber\tStrand\tDMSO gene body\tDMSO TSS\tDMSO END\tCA gene body\tCA TSS\tCA END\n')
+    pX = list()
+    pY = list()
     for gene in d:
         outfile.write(gene + '\t')
         for item in d[gene]:
@@ -87,6 +89,8 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
         CATSS = float(CATSS)
         CAEND = float(CAEND)
         graphcutoff = 20
+        pX.append(DMSOgenes)
+        pY.append(CAgenes)
         #if CAgenes-CATSS > CATSS and DMSOgenes-DMSOTSS > DMSOTSS and CAgenes-CAEND > CAEND and DMSOgenes-DMSOEND > DMSOEND and DMSOgenes > coveragecutoff and CAgenes > coveragecutoff:
         if CAgenes-CATSS > 0 and DMSOgenes-DMSOTSS > 0 and CAgenes-CAEND > 0 and DMSOgenes-DMSOEND > 0 and DMSOgenes > coveragecutoff and CAgenes > coveragecutoff and CATSS/(CAgenes-CATSS) < graphcutoff and DMSOTSS/(DMSOgenes-DMSOTSS) < graphcutoff and CAEND/(CAgenes-CAEND) < graphcutoff and DMSOEND/(DMSOgenes-DMSOEND) < graphcutoff:
             i += 1
@@ -110,6 +114,19 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
             if not ER > cutoff3 and not ER < -cutoff3:
                 ENDlist.append(ER)
     print "Genes: ",i
+    
+    meanX = np.mean(pX)
+    meanY = np.mean(pY)
+    num = 0.0
+    den1 = 0.0
+    den2 = 0.0
+    for i in range(len(pX)):
+        X = pX[i]
+        Y = pY[i]
+        num += ((X - meanX)*(Y - meanY))
+        den1 += np.sqrt((X - meanX)**2)
+        den2 += np.sqrt((Y-meanY)**2)
+    pearsons = num/(den1*den2)
     
     distance = list()
     direction1 = list()
@@ -263,7 +280,7 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
     z = gaussian_kde(xy)(xy)
     ax1.scatter(TRx,TRy,c=z,edgecolor="",s=14)
     ax1.scatter(TRx2,TRy2,c='red',edgecolor="",s=14)
-    ax1.set_title('Travel Ratio')
+    ax1.set_title('Pausing Index')
     ax1.set_ylabel('CA')
     ax1.set_xlabel('DMSO')
     ax1.get_xaxis().tick_bottom()
@@ -324,6 +341,19 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
     outfile2.write("High DMSO ER\n")
     for item in sorted(DMSOENDgenes, key=itemgetter(1),reverse=True):
         outfile2.write(item[0] + '\t' + str(item[1]) + '\n')
+        
+    F5 = plt.figure()
+    ax = F5.add_subplot(111)
+    xy = np.vstack([pX,pY])
+    z = gaussian_kde(xy)(xy)
+    ax.scatter(pX,pY,c=z,edgecolor="",s=14)
+    ax.get_xaxis().tick_bottom()
+    ax.get_yaxis().tick_left()
+    ax.set_title('Pearson Coefficient')
+    ax.set_xlabel('DMSO genes')
+    ax.set_ylabel('CA genes')
+    ax.text(3,8, "Pearson coefficient: " + str(pearsons))
+    plt.savefig(figuredir + '/Pearson.png')
     
     
     
