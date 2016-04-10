@@ -124,9 +124,9 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
         X = pX[i]
         Y = pY[i]
         num += ((X - meanX)*(Y - meanY))
-        den1 += np.sqrt((X - meanX)**2)
-        den2 += np.sqrt((Y-meanY)**2)
-    pearsons = num/(den1*den2)
+        den1 += (X - meanX)**2
+        den2 += (Y-meanY)**2
+    pearsons = num/(np.sqrt(den1)*np.sqrt(den2))
     
     distance = list()
     direction1 = list()
