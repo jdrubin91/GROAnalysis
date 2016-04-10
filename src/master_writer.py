@@ -354,8 +354,8 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
     ax.set_title('Pearson Coefficient')
     ax.set_xlabel('DMSO genes')
     ax.set_ylabel('CA genes')
-    ax.set_xlim([0, 100000])
-    ax.set_ylim([0, 100000])
+    #ax.set_xlim([0, 100000])
+    #ax.set_ylim([0, 100000])
     ax.text(3,8, "Pearson coefficient: " + str(pearsons))
     plt.savefig(figuredir + '/Pearson.png')
     
