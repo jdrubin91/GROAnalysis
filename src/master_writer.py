@@ -89,8 +89,8 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
         CATSS = float(CATSS)
         CAEND = float(CAEND)
         graphcutoff = 20
-        pX.append(DMSOgenes)
-        pY.append(CAgenes)
+        pX.append(DMSOgenes/1000000.0)
+        pY.append(CAgenes/1000000.0)
         #if CAgenes-CATSS > CATSS and DMSOgenes-DMSOTSS > DMSOTSS and CAgenes-CAEND > CAEND and DMSOgenes-DMSOEND > DMSOEND and DMSOgenes > coveragecutoff and CAgenes > coveragecutoff:
         if CAgenes-CATSS > 0 and DMSOgenes-DMSOTSS > 0 and CAgenes-CAEND > 0 and DMSOgenes-DMSOEND > 0 and DMSOgenes > coveragecutoff and CAgenes > coveragecutoff and CATSS/(CAgenes-CATSS) < graphcutoff and DMSOTSS/(DMSOgenes-DMSOTSS) < graphcutoff and CAEND/(CAgenes-CAEND) < graphcutoff and DMSOEND/(DMSOgenes-DMSOEND) < graphcutoff:
             i += 1
@@ -342,7 +342,8 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
     outfile2.write("High DMSO ER\n")
     for item in sorted(DMSOENDgenes, key=itemgetter(1),reverse=True):
         outfile2.write(item[0] + '\t' + str(item[1]) + '\n')
-        
+    
+    
     F5 = plt.figure()
     ax = F5.add_subplot(111)
     xy = np.vstack([pX,pY])
