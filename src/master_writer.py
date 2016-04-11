@@ -401,14 +401,13 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
     N = 4
     ind = np.arange(N)
     width = 0.35
-    F7 = plt.figure()
-    ax1 = F7.add_subplot(111)
+    fig,ax1 = plt.subplots()
     ax1.bar(ind,DMSObarplot,width, color='w')
     ax1.bar(ind+width,CAbarplot,width,color='r')
     ax1.set_ylabel('Pausing Index')
     ax1.set_xticks(ind + width)
     ax1.set_xticklabels(namelist)
-    
+    plt.savefig(figuredir + '/BarPlot.png')
     
     
     
