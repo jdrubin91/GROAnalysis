@@ -411,16 +411,22 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
     ax1.text(115,12, "Pearson = " + str(pearsons)[0:5])
     plt.savefig(figuredir + '/PausingIndex.png')
     
-    N = 4
+    order = ['FOS','EGR1','EGR2','EGR3']
+    PIbarplotsorted = list()
+    Txnbarplotsorted = list()
+    for item in order:
+        PIbarplotsorted.append(PIbarplot[namelist.index(item)])
+        Txnbarplotsorted.append(Txnbarplot[namelist.index(item)])
+    N = len(order)
     ind = np.arange(N)
     width = 0.35
     fig,ax1 = plt.subplots()
-    PI = ax1.bar(ind,PIbarplot,width, color='w')
-    Txn = ax1.bar(ind+width,Txnbarplot,width,color='r')
-    ax1.legend((PI,Txn),('PI','Txn'))
+    PI = ax1.bar(ind,PIbarplotsorted,width, color='b')
+    Txn = ax1.bar(ind+width,Txnbarplotsorted,width,color='r')
+    ax1.legend((PI,Txn),('Pausing Index','Transcription'))
     ax1.set_ylabel('Fold Change')
     ax1.set_xticks(ind + width)
-    ax1.set_xticklabels(namelist)
+    ax1.set_xticklabels(order)
     ax1.get_xaxis().tick_bottom()
     ax1.get_yaxis().tick_left()
     plt.savefig(figuredir + '/BarPlot.png')
