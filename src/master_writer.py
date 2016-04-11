@@ -353,9 +353,9 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
     ax.set_title('Gene Transcription')
     ax.set_xlabel('DMSO')
     ax.set_ylabel('CA')
-    ax.set_xlim([0, 0.5])
-    ax.set_ylim([0, 0.5])
-    ax.text(0.2,0.2, "Pearson: " + str(pearsons))
+    ax.set_xlim([0, 0.1])
+    ax.set_ylim([0, 0.1])
+    ax.text(0.9,0.9, "Pearson: " + str(pearsons))
     plt.savefig(figuredir + '/Pearson.png')
     
     meanX = np.mean(TRx)
@@ -372,7 +372,7 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
     pearsons = num/(np.sqrt(den1)*np.sqrt(den2))
     
     F6 = plt.figure()
-    ax1 = F6.add_subplot(121)
+    ax1 = F6.add_subplot(111)
     xy = np.vstack([TRx,TRy])
     z = gaussian_kde(xy)(xy)
     ax1.scatter(TRx,TRy,c=z,edgecolor="",s=14)
