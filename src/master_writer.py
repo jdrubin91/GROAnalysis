@@ -94,11 +94,14 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
         CAbarplot = list()
         DMSObarplot = list()
         namelist = list()
-        if gene in ['FOS','EGR1','EGR2','EGR3']:
+        name = gene.split(';')[1]
+        if name in ['FOS','EGR1','EGR2','EGR3']:
             DMSObarplot.append(DMSOTSS/(DMSOgenes-DMSOTSS))
             CAbarplot.append(CATSS/(CAgenes-CATSS))
-            namelist.append(gene)
-        
+            namelist.append(name)
+        print name
+        print DMSObarplot
+        print CAbarplot
         #if CAgenes-CATSS > CATSS and DMSOgenes-DMSOTSS > DMSOTSS and CAgenes-CAEND > CAEND and DMSOgenes-DMSOEND > DMSOEND and DMSOgenes > coveragecutoff and CAgenes > coveragecutoff:
         if CAgenes-CATSS > 0 and DMSOgenes-DMSOTSS > 0 and CAgenes-CAEND > 0 and DMSOgenes-DMSOEND > 0 and DMSOgenes > coveragecutoff and CAgenes > coveragecutoff and CATSS/(CAgenes-CATSS) < graphcutoff and DMSOTSS/(DMSOgenes-DMSOTSS) < graphcutoff and CAEND/(CAgenes-CAEND) < graphcutoff and DMSOEND/(DMSOgenes-DMSOEND) < graphcutoff:
             i += 1
