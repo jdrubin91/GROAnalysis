@@ -102,6 +102,8 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
             #    CAprev = CAbarplot[i]
             #    DMSObarplot.append(DMSOTSS/(DMSOgenes-DMSOTSS))
             #    CAbarplot.append(CATSS/(CAgenes-CATSS))
+            for item in d[gene]:
+                print item
             print gene
             print d[gene]
             print DMSOTSS,DMSOgenes

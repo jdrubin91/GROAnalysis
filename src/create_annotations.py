@@ -3,8 +3,8 @@ __author__ = 'Jonathan Rubin'
 import os
 
 def run(genes,filedir):
-    TSS = (-3000,3000)
-    END = (-3000,3000)
+    TSS = (-200,200)
+    END = (-200,200)
     list1 = list()
     list2 = list()
     with open(genes) as F1:
