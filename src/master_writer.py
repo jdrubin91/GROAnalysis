@@ -81,6 +81,7 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
     pY = list()
     pNames = list()
     expressionlist = list()
+    cdf = list()
     for gene in d:
         outfile.write(gene + '\t')
         for item in d[gene]:
@@ -120,8 +121,9 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
             TRx.append(DMSOTSS/(DMSOgenes-DMSOTSS))
             ERy.append(CAEND/(CAgenes-CAEND))
             ERx.append(DMSOEND/(DMSOgenes-DMSOEND))
-            expressionlist.append((np.log2(DMSOgenes)+np.log2(CAgenes))/2.0)
+            expressionlist.append(20.0*(np.log2(DMSOgenes)+np.log2(CAgenes))/2.0)
             TR = (CATSS/(CAgenes-CATSS))-(DMSOTSS/(DMSOgenes-DMSOTSS))
+            cdf.append(TR)
             names.append(gene.split(';')[1])
             if TR > cutoff1:
                 TRgenes.append((gene,TR))
@@ -406,7 +408,7 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
     pearsons = num/(np.sqrt(den1)*np.sqrt(den2))
     
     F6 = plt.figure()
-    ax1 = F6.add_subplot(111)
+    ax1 = F6.add_subplot(121)
     xy = np.vstack([TRx,TRy])
     z = gaussian_kde(xy)(xy)
     ax1.scatter(TRx,TRy,c=z,edgecolor="",s=expressionlist)
@@ -421,6 +423,8 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
     ax1.set_ylim([0, 20])
     ax1.plot([0,50.0],[0,50.0],color='k')
     ax1.text(15,12, "Pearson = " + str(pearsons)[0:5])
+    ax2 = F6.add_subplot(122)
+    ax2.plot(np.sort(cdf),np.linspace(0,1,len(cdf)))
     plt.savefig(figuredir + '/PausingIndex.png')
     
     order = ['FOS','EGR1','EGR2','EGR3','NR4A3']
