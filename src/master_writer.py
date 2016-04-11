@@ -68,6 +68,9 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
     ERx = list()
     ERy = list()
     names = list()
+    CAbarplot = list()
+    DMSObarplot = list()
+    namelist = list()
     cutoff2 = 0.01
     cutoff3 = 0.25
     i = 0
@@ -91,17 +94,12 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
         graphcutoff = 20
         pX.append(DMSOgenes/1000000.0)
         pY.append(CAgenes/1000000.0)
-        CAbarplot = list()
-        DMSObarplot = list()
-        namelist = list()
         name = gene.split(';')[1]
         if name in ['FOS','EGR1','EGR2','EGR3']:
             DMSObarplot.append(DMSOTSS/(DMSOgenes-DMSOTSS))
             CAbarplot.append(CATSS/(CAgenes-CATSS))
             namelist.append(name)
-        print name
-        print DMSObarplot
-        print CAbarplot
+        
         #if CAgenes-CATSS > CATSS and DMSOgenes-DMSOTSS > DMSOTSS and CAgenes-CAEND > CAEND and DMSOgenes-DMSOEND > DMSOEND and DMSOgenes > coveragecutoff and CAgenes > coveragecutoff:
         if CAgenes-CATSS > 0 and DMSOgenes-DMSOTSS > 0 and CAgenes-CAEND > 0 and DMSOgenes-DMSOEND > 0 and DMSOgenes > coveragecutoff and CAgenes > coveragecutoff and CATSS/(CAgenes-CATSS) < graphcutoff and DMSOTSS/(DMSOgenes-DMSOTSS) < graphcutoff and CAEND/(CAgenes-CAEND) < graphcutoff and DMSOEND/(DMSOgenes-DMSOEND) < graphcutoff:
             i += 1
@@ -125,6 +123,9 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
             if not ER > cutoff3 and not ER < -cutoff3:
                 ENDlist.append(ER)
     print "Genes: ",i
+    print namelist
+    print DMSObarplot
+    print CAbarplot
     
     meanX = np.mean(pX)
     meanY = np.mean(pY)
