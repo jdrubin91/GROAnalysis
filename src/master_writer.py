@@ -95,8 +95,8 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
         graphcutoff = 20
         name = gene.split(';')[1]
         if (DMSOgenes+CAgenes)/2 > coveragecutoff:
-            pX.append(DMSOgenes/1000000.0)
-            pY.append(CAgenes/1000000.0)
+            pX.append(DMSOgenes)
+            pY.append(CAgenes)
             pNames.append(name)
         if gene in ['NM_005252;FOS;chr14:75745480-75748937_+','NM_001964;EGR1;chr5:137801180-137805004_+','NM_001136177;EGR2;chr10:64571755-64576126_-','NM_004430;EGR3;chr8:22545173-22550815_-','NM_006981;NR4A3;chr9:102584136-102629173_+']:
             #if name in namelist:
@@ -382,10 +382,10 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
     ax.set_title('Gene Transcription')
     ax.set_xlabel('DMSO')
     ax.set_ylabel('CA')
-    ax.set_xlim([0, 0.02])
-    ax.set_ylim([0, 0.02])
-    ax.plot([0,50.0],[0,50.0],color='k')
-    ax.text(0.014,0.012, "Pearson = " + str(pearsons)[0:5])
+    ax.set_xlim([0, 20000])
+    ax.set_ylim([0, 20000])
+    ax.plot([0,50000.0],[0,50000.0],color='k')
+    ax.text(14000,12000, "Pearson = " + str(pearsons)[0:5])
     plt.savefig(figuredir + '/Pearson.png')
     
     meanX = np.mean(TRx)
@@ -461,13 +461,13 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
     ax.scatter(pX2,pY2,c=z,edgecolor="",s=14)
     ax.get_xaxis().tick_bottom()
     ax.get_yaxis().tick_left()
-    ax.set_xlim([0, 0.001])
-    ax.set_ylim([0, 0.001])
+    ax.set_xlim([0, 1000])
+    ax.set_ylim([0, 1000])
     ax.set_title('Gene Transcription')
     ax.set_xlabel('DMSO')
     ax.set_ylabel('CA')
-    ax.plot([0,50.0],[0,50.0],color='k')
-    ax.text(0.0075,0.007, "Pearson = " + str(pearsons)[0:5])
+    ax.plot([0,50000.0],[0,50000.0],color='k')
+    ax.text(7500,7000, "Pearson = " + str(pearsons)[0:5])
     plt.savefig(figuredir + '/Transcription_UPGenes.png')
     
     
