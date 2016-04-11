@@ -408,7 +408,7 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
     ax1.set_xlim([0, 20])
     ax1.set_ylim([0, 20])
     ax1.plot([0,50.0],[0,50.0],color='k')
-    ax1.text(115,12, "Pearson = " + str(pearsons)[0:5])
+    ax1.text(15,12, "Pearson = " + str(pearsons)[0:5])
     plt.savefig(figuredir + '/PausingIndex.png')
     
     order = ['FOS','EGR1','EGR2','EGR3']
