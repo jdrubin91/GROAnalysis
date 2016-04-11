@@ -353,9 +353,9 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
     ax.set_title('Gene Transcription')
     ax.set_xlabel('DMSO')
     ax.set_ylabel('CA')
-    ax.set_xlim([0, 0.1])
-    ax.set_ylim([0, 0.1])
-    ax.text(0.9,0.9, "Pearson: " + str(pearsons))
+    ax.set_xlim([0, 0.02])
+    ax.set_ylim([0, 0.02])
+    ax.text(0.018,0.018, "Pearson: " + str(pearsons)[0:5])
     plt.savefig(figuredir + '/Pearson.png')
     
     meanX = np.mean(TRx)
@@ -386,7 +386,7 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
     ax1.set_xlim([0, 20])
     ax1.set_ylim([0, 20])
     ax1.plot([0,50.0],[0,50.0],color='k')
-    ax1.text(15,15, "Pearson: " + str(pearsons))
+    ax1.text(15,12, "Pearson: " + str(pearsons)[0:5])
     plt.savefig(figuredir + '/PausingIndex.png')
     
     
