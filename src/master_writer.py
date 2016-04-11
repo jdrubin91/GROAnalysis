@@ -91,6 +91,14 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
         graphcutoff = 20
         pX.append(DMSOgenes/1000000.0)
         pY.append(CAgenes/1000000.0)
+        CAbarplot = list()
+        DMSObarplot = list()
+        namelist = list()
+        if gene in ['FOS','EGR1','EGR2','EGR3']:
+            DMSObarplot.append(DMSOTSS/(DMSOgenes-DMSOTSS))
+            CAbarplot.append(CATSS/(CAgenes-CATSS))
+            namelist.append(gene)
+        
         #if CAgenes-CATSS > CATSS and DMSOgenes-DMSOTSS > DMSOTSS and CAgenes-CAEND > CAEND and DMSOgenes-DMSOEND > DMSOEND and DMSOgenes > coveragecutoff and CAgenes > coveragecutoff:
         if CAgenes-CATSS > 0 and DMSOgenes-DMSOTSS > 0 and CAgenes-CAEND > 0 and DMSOgenes-DMSOEND > 0 and DMSOgenes > coveragecutoff and CAgenes > coveragecutoff and CATSS/(CAgenes-CATSS) < graphcutoff and DMSOTSS/(DMSOgenes-DMSOTSS) < graphcutoff and CAEND/(CAgenes-CAEND) < graphcutoff and DMSOEND/(DMSOgenes-DMSOEND) < graphcutoff:
             i += 1
@@ -356,7 +364,7 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
     ax.set_xlim([0, 0.02])
     ax.set_ylim([0, 0.02])
     ax.plot([0,50.0],[0,50.0],color='k')
-    ax.text(0.015,0.012, "Pearson: " + str(pearsons)[0:5])
+    ax.text(0.014,0.012, "Pearson = " + str(pearsons)[0:5])
     plt.savefig(figuredir + '/Pearson.png')
     
     meanX = np.mean(TRx)
@@ -387,8 +395,19 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
     ax1.set_xlim([0, 20])
     ax1.set_ylim([0, 20])
     ax1.plot([0,50.0],[0,50.0],color='k')
-    ax1.text(16,12, "Pearson: " + str(pearsons)[0:5])
+    ax1.text(115,12, "Pearson = " + str(pearsons)[0:5])
     plt.savefig(figuredir + '/PausingIndex.png')
+    
+    N = 4
+    ind = np.arange(N)
+    width = 0.35
+    F7 = plt.figure()
+    ax1 = F7.add_subplot(111)
+    ax1.bar(ind,DMSObarplot,width, color='w')
+    ax1.bar(ind+width,CAbarplot,width,color='r')
+    ax1.set_ylabel('Pausing Index')
+    ax1.set_xticks(ind + width)
+    ax1.set_xticklabels(namelist)
     
     
     
