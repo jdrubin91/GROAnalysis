@@ -102,9 +102,9 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
             #    CAprev = CAbarplot[i]
             #    DMSObarplot.append(DMSOTSS/(DMSOgenes-DMSOTSS))
             #    CAbarplot.append(CATSS/(CAgenes-CATSS))
-            print gene
-            print str(DMSOTSS/(DMSOgenes-DMSOTSS))
-            print str(CATSS/(CAgenes-CATSS))
+            #print gene
+            #print str(DMSOTSS/(DMSOgenes-DMSOTSS))
+            #print str(CATSS/(CAgenes-CATSS))
             PIbarplot.append(np.log2((CATSS/(CAgenes-CATSS))/(DMSOTSS/(DMSOgenes-DMSOTSS))))
             Txnbarplot.append(np.log2(CAgenes/DMSOgenes))
             namelist.append(name)
@@ -132,9 +132,9 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
             if not ER > cutoff3 and not ER < -cutoff3:
                 ENDlist.append(ER)
     print "Genes: ",i
-    print namelist
-    print PIbarplot
-    print Txnbarplot
+    #print namelist
+    #print PIbarplot
+    #print Txnbarplot
     
     meanX = np.mean(pX)
     meanY = np.mean(pY)
@@ -218,14 +218,14 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
                 ERgenesdwn.append(names[i])
     
     
-#
-#    print TRgenesup
-#    print '==============='
-#    print TRgenesdwn
-#    print'================'
-#    print ERgenesup
-#    print '==============='
-#    print ERgenesdwn
+
+    print TRgenesup
+    print '==============='
+    print TRgenesdwn
+    print'================'
+    print ERgenesup
+    print '==============='
+    print ERgenesdwn
     #TRx2 = list()
     #TRy2 = list()
     #grubbs = True
