@@ -80,6 +80,7 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
     pX = list()
     pY = list()
     pNames = list()
+    expressionlist = list()
     for gene in d:
         outfile.write(gene + '\t')
         for item in d[gene]:
@@ -95,8 +96,8 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
         graphcutoff = 20
         name = gene.split(';')[1]
         if (DMSOgenes+CAgenes)/2 > coveragecutoff:
-            pX.append(DMSOgenes)
-            pY.append(CAgenes)
+            pX.append(np.log(DMSOgenes))
+            pY.append(np.log(CAgenes))
             pNames.append(name)
         if gene in ['NM_005252;FOS;chr14:75745480-75748937_+','NM_001964;EGR1;chr5:137801180-137805004_+','NM_001136177;EGR2;chr10:64571755-64576126_-','NM_004430;EGR3;chr8:22545173-22550815_-','NM_006981;NR4A3;chr9:102584136-102629173_+']:
             #if name in namelist:
@@ -119,6 +120,7 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
             TRx.append(DMSOTSS/(DMSOgenes-DMSOTSS))
             ERy.append(CAEND/(CAgenes-CAEND))
             ERx.append(DMSOEND/(DMSOgenes-DMSOEND))
+            expressionlist.append((np.log(DMSOgenes)+np.log(CAgenes))/2.0)
             TR = (CATSS/(CAgenes-CATSS))-(DMSOTSS/(DMSOgenes-DMSOTSS))
             names.append(gene.split(';')[1])
             if TR > cutoff1:
@@ -178,12 +180,14 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
     pY2 = list()
     TRgenesup = list()
     TRgenesdwn = list()
+    expressionlist2 = list()
     #print N,len(TRx),len(TRy)
     for i in range(N):
         if distance[i] > 3*s:
             #print i
             TRx2.append(TRx[i])
             TRy2.append(TRy[i])
+            expressionlist2.append(expressionlist[i])
             if direction1[i] == 1:
                 TRgenesup.append(names[i])
                 index = pNames.index(names[i])
@@ -307,8 +311,8 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
     ax1 = F3.add_subplot(121)
     xy = np.vstack([TRx,TRy])
     z = gaussian_kde(xy)(xy)
-    ax1.scatter(TRx,TRy,c=z,edgecolor="",s=14)
-    ax1.scatter(TRx2,TRy2,c='red',edgecolor="",s=14)
+    ax1.scatter(TRx,TRy,c=z,edgecolor="",s=expressionlist)
+    ax1.scatter(TRx2,TRy2,c='red',edgecolor="",s=expressionlist2)
     ax1.set_title('Pausing Index')
     ax1.set_ylabel('CA')
     ax1.set_xlabel('DMSO')
@@ -382,9 +386,9 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
     ax.set_title('Gene Transcription')
     ax.set_xlabel('DMSO')
     ax.set_ylabel('CA')
-    ax.set_xlim([0, 20000])
-    ax.set_ylim([0, 20000])
-    ax.plot([0,50000.0],[0,50000.0],color='k')
+    #ax.set_xlim([0, 20000])
+    #ax.set_ylim([0, 20000])
+    #ax.plot([0,50000.0],[0,50000.0],color='k')
     ax.text(14000,12000, "Pearson = " + str(pearsons)[0:5])
     plt.savefig(figuredir + '/Pearson.png')
     
@@ -461,12 +465,12 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
     ax.scatter(pX2,pY2,c=z,edgecolor="",s=14)
     ax.get_xaxis().tick_bottom()
     ax.get_yaxis().tick_left()
-    ax.set_xlim([0, 700])
-    ax.set_ylim([0, 700])
+    #ax.set_xlim([0, 700])
+    #ax.set_ylim([0, 700])
     ax.set_title('Gene Transcription')
     ax.set_xlabel('DMSO')
     ax.set_ylabel('CA')
-    ax.plot([0,50000.0],[0,50000.0],color='k')
+    #ax.plot([0,50000.0],[0,50000.0],color='k')
     ax.text(450,300, "Pearson = " + str(pearsons)[0:5])
     plt.savefig(figuredir + '/Transcription_UPGenes.png')
     
