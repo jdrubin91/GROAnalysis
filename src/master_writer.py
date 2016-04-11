@@ -133,8 +133,8 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
                 ENDlist.append(ER)
     print "Genes: ",i
     print namelist
-    print DMSObarplot
-    print CAbarplot
+    print PIbarplot
+    print Txnbarplot
     
     meanX = np.mean(pX)
     meanY = np.mean(pY)
