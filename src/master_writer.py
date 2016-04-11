@@ -68,8 +68,8 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
     ERx = list()
     ERy = list()
     names = list()
-    CAbarplot = list()
-    DMSObarplot = list()
+    PIbarplot = list()
+    Txnbarplot = list()
     namelist = list()
     cutoff2 = 0.01
     cutoff3 = 0.25
@@ -105,8 +105,8 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
             print gene
             print str(DMSOTSS/(DMSOgenes-DMSOTSS))
             print str(CATSS/(CAgenes-CATSS))
-            DMSObarplot.append(DMSOTSS/(DMSOgenes-DMSOTSS))
-            CAbarplot.append(CATSS/(CAgenes-CATSS))
+            PIbarplot.append(CATSS/(CAgenes-CATSS)/DMSOTSS/(DMSOgenes-DMSOTSS))
+            Txnbarplot.append(CAgenes/DMSOgenes)
             namelist.append(name)
         
         #if CAgenes-CATSS > CATSS and DMSOgenes-DMSOTSS > DMSOTSS and CAgenes-CAEND > CAEND and DMSOgenes-DMSOEND > DMSOEND and DMSOgenes > coveragecutoff and CAgenes > coveragecutoff:
@@ -415,11 +415,14 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
     ind = np.arange(N)
     width = 0.35
     fig,ax1 = plt.subplots()
-    ax1.bar(ind,DMSObarplot,width, color='w')
-    ax1.bar(ind+width,CAbarplot,width,color='r')
-    ax1.set_ylabel('Pausing Index')
+    PI = ax1.bar(ind,PIbarplot,width, color='w')
+    Txn = ax1.bar(ind+width,Txnbarplot,width,color='r')
+    ax1.legend((PI,Txn),('PI','Txn'))
+    ax1.set_ylabel('Fold Change')
     ax1.set_xticks(ind + width)
     ax1.set_xticklabels(namelist)
+    ax1.get_xaxis().tick_bottom()
+    ax1.get_yaxis().tick_left()
     plt.savefig(figuredir + '/BarPlot.png')
     
     
