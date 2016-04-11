@@ -95,7 +95,7 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
         pX.append(DMSOgenes/1000000.0)
         pY.append(CAgenes/1000000.0)
         name = gene.split(';')[1]
-        if name in ['FOS','EGR1','EGR2','EGR3']:
+        if gene in ['NM_005252;FOS;chr14:75745480-75748937_+','NM_001964;EGR1;chr5:137801180-137805004_+','NM_001136177;EGR2;chr10:64571755-64576126_-','NM_004430;EGR3;chr8:22545173-22550815_-']:
             #if name in namelist:
             #    i = namelist.index(name)
             #    DMSOprev = DMSObarplot[i]
