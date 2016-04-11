@@ -121,7 +121,7 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
             TRx.append(DMSOTSS/(DMSOgenes-DMSOTSS))
             ERy.append(CAEND/(CAgenes-CAEND))
             ERx.append(DMSOEND/(DMSOgenes-DMSOEND))
-            expressionlist.append(5.0*(np.log2(DMSOgenes)+np.log2(CAgenes))/2.0)
+            expressionlist.append((np.log2(DMSOgenes)+np.log2(CAgenes))/2.0)
             TR = (CATSS/(CAgenes-CATSS))-(DMSOTSS/(DMSOgenes-DMSOTSS))
             cdf.append(TR)
             names.append(gene.split(';')[1])
@@ -422,9 +422,11 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
     ax1.set_xlim([0, 20])
     ax1.set_ylim([0, 20])
     ax1.plot([0,50.0],[0,50.0],color='k')
-    ax1.text(10,18, "Pearson = " + str(pearsons)[0:5])
+    ax1.text(8,18, "Pearson = " + str(pearsons)[0:5])
     ax2 = F6.add_subplot(122)
     ax2.plot(np.sort(cdf),np.linspace(0,1,len(cdf)))
+    
+    
     plt.savefig(figuredir + '/PausingIndex.png')
     
     order = ['FOS','EGR1','EGR2','EGR3','NR4A3']
