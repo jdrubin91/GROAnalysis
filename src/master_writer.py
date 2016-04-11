@@ -419,10 +419,11 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
         Txnbarplotsorted.append(Txnbarplot[namelist.index(item)])
     N = len(order)
     ind = np.arange(N)
-    width = 0.35
+    width = 0.3
     fig,ax1 = plt.subplots()
     PI = ax1.bar(ind,PIbarplotsorted,width, color='b')
     Txn = ax1.bar(ind+width,Txnbarplotsorted,width,color='r')
+    ax1.plot([0,100],[0,0],color = 'k')
     ax1.legend((PI,Txn),('Pausing Index','Transcription'))
     ax1.set_ylabel('Log$_2$ Fold Change')
     ax1.set_xticks(ind + width)
