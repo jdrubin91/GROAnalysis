@@ -105,8 +105,8 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
             print gene
             print str(DMSOTSS/(DMSOgenes-DMSOTSS))
             print str(CATSS/(CAgenes-CATSS))
-            PIbarplot.append(CATSS/(CAgenes-CATSS)/DMSOTSS/(DMSOgenes-DMSOTSS))
-            Txnbarplot.append(CAgenes/DMSOgenes)
+            PIbarplot.append(np.log2((CATSS/(CAgenes-CATSS))/(DMSOTSS/(DMSOgenes-DMSOTSS))))
+            Txnbarplot.append(np.log2(CAgenes/DMSOgenes))
             namelist.append(name)
         
         #if CAgenes-CATSS > CATSS and DMSOgenes-DMSOTSS > DMSOTSS and CAgenes-CAEND > CAEND and DMSOgenes-DMSOEND > DMSOEND and DMSOgenes > coveragecutoff and CAgenes > coveragecutoff:
