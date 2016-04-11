@@ -467,7 +467,7 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
     ax.set_xlabel('DMSO')
     ax.set_ylabel('CA')
     ax.plot([0,50000.0],[0,50000.0],color='k')
-    ax.text(600,500, "Pearson = " + str(pearsons)[0:5])
+    ax.text(300,450, "Pearson = " + str(pearsons)[0:5])
     plt.savefig(figuredir + '/Transcription_UPGenes.png')
     
     
