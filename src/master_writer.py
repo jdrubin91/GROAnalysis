@@ -95,10 +95,10 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
         CAEND = float(CAEND)
         graphcutoff = 20
         name = gene.split(';')[1]
-        if (DMSOgenes+CAgenes)/2 > coveragecutoff:
-            pX.append(np.log(DMSOgenes))
-            pY.append(np.log(CAgenes))
-            pNames.append(name)
+        #if (DMSOgenes+CAgenes)/2 > coveragecutoff:
+        pX.append(np.log(DMSOgenes))
+        pY.append(np.log(CAgenes))
+        pNames.append(name)
         if gene in ['NM_005252;FOS;chr14:75745480-75748937_+','NM_001964;EGR1;chr5:137801180-137805004_+','NM_001136177;EGR2;chr10:64571755-64576126_-','NM_004430;EGR3;chr8:22545173-22550815_-','NM_006981;NR4A3;chr9:102584136-102629173_+']:
             #if name in namelist:
             #    i = namelist.index(name)
@@ -120,7 +120,7 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
             TRx.append(DMSOTSS/(DMSOgenes-DMSOTSS))
             ERy.append(CAEND/(CAgenes-CAEND))
             ERx.append(DMSOEND/(DMSOgenes-DMSOEND))
-            expressionlist.append((np.log(DMSOgenes)+np.log(CAgenes))/2.0)
+            expressionlist.append((np.log2(DMSOgenes)+np.log(CAgenes))/2.0)
             TR = (CATSS/(CAgenes-CATSS))-(DMSOTSS/(DMSOgenes-DMSOTSS))
             names.append(gene.split(';')[1])
             if TR > cutoff1:
@@ -465,8 +465,8 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
     ax.scatter(pX2,pY2,c=z,edgecolor="",s=14)
     ax.get_xaxis().tick_bottom()
     ax.get_yaxis().tick_left()
-    ax.set_xlim([0, 7])
-    ax.set_ylim([0, 7])
+    ax.set_xlim([3, 7])
+    ax.set_ylim([3, 7])
     ax.set_title('Gene Transcription')
     ax.set_xlabel('DMSO')
     ax.set_ylabel('CA')
