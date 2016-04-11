@@ -461,11 +461,13 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
     ax.scatter(pX2,pY2,c=z,edgecolor="",s=14)
     ax.get_xaxis().tick_bottom()
     ax.get_yaxis().tick_left()
+    ax.set_xlim([0, 0.001])
+    ax.set_ylim([0, 0.001])
     ax.set_title('Gene Transcription')
     ax.set_xlabel('DMSO')
     ax.set_ylabel('CA')
     ax.plot([0,50.0],[0,50.0],color='k')
-    ax.text(ax.get_xlim()[1]*0.75,ax.get_ylim()[1]*0.75, "Pearson = " + str(pearsons)[0:5])
+    ax.text(0.075,0.07, "Pearson = " + str(pearsons)[0:5])
     plt.savefig(figuredir + '/Transcription_UPGenes.png')
     
     
