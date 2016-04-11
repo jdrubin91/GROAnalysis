@@ -433,7 +433,7 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
     Txn = ax1.bar(ind+width,Txnbarplotsorted,width,color='r')
     ax1.plot(ax1.get_xlim(),[0,0],color = 'k')
     ax1.legend((PI,Txn),('Pausing Index','Transcription'))
-    ax1.set_ylabel('Log$_2$ Fold Change')
+    ax1.set_ylabel('Log$_2$ Fold Change $CA/DMSO$')
     ax1.set_xticks(ind + width)
     ax1.set_xticklabels(order)
     ax1.get_xaxis().tick_bottom()
