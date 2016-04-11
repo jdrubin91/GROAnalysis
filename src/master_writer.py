@@ -96,6 +96,15 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
         pY.append(CAgenes/1000000.0)
         name = gene.split(';')[1]
         if name in ['FOS','EGR1','EGR2','EGR3']:
+            #if name in namelist:
+            #    i = namelist.index(name)
+            #    DMSOprev = DMSObarplot[i]
+            #    CAprev = CAbarplot[i]
+            #    DMSObarplot.append(DMSOTSS/(DMSOgenes-DMSOTSS))
+            #    CAbarplot.append(CATSS/(CAgenes-CATSS))
+            print name
+            print DMSOTSS,DMSOgenes,DMSOTSS
+            print CATSS,CAgenes,CATSS
             DMSObarplot.append(DMSOTSS/(DMSOgenes-DMSOTSS))
             CAbarplot.append(CATSS/(CAgenes-CATSS))
             namelist.append(name)
@@ -209,14 +218,14 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
                 ERgenesdwn.append(names[i])
     
     
-
-    print TRgenesup
-    print '==============='
-    print TRgenesdwn
-    print'================'
-    print ERgenesup
-    print '==============='
-    print ERgenesdwn
+#
+#    print TRgenesup
+#    print '==============='
+#    print TRgenesdwn
+#    print'================'
+#    print ERgenesup
+#    print '==============='
+#    print ERgenesdwn
     #TRx2 = list()
     #TRy2 = list()
     #grubbs = True
