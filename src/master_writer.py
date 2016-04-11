@@ -95,7 +95,7 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
         pX.append(DMSOgenes/1000000.0)
         pY.append(CAgenes/1000000.0)
         name = gene.split(';')[1]
-        if gene in ['NM_005252;FOS;chr14:75745480-75748937_+','NM_001964;EGR1;chr5:137801180-137805004_+','NM_001136177;EGR2;chr10:64571755-64576126_-','NM_004430;EGR3;chr8:22545173-22550815_-']:
+        if gene in ['NM_005252;FOS;chr14:75745480-75748937_+','NM_001964;EGR1;chr5:137801180-137805004_+','NM_001136177;EGR2;chr10:64571755-64576126_-','NM_004430;EGR3;chr8:22545173-22550815_-','NM_006981;NR4A3;chr9:102584136-102629173_+']:
             #if name in namelist:
             #    i = namelist.index(name)
             #    DMSOprev = DMSObarplot[i]
@@ -411,7 +411,7 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
     ax1.text(15,12, "Pearson = " + str(pearsons)[0:5])
     plt.savefig(figuredir + '/PausingIndex.png')
     
-    order = ['FOS','EGR1','EGR2','EGR3']
+    order = ['FOS','EGR1','EGR2','EGR3','NR4A3']
     PIbarplotsorted = list()
     Txnbarplotsorted = list()
     for item in order:
