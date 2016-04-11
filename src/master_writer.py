@@ -386,7 +386,7 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
     ax1.set_xlim([0, 20])
     ax1.set_ylim([0, 20])
     ax1.plot([0,50.0],[0,50.0],color='k')
-    ax1.text(0.2,0.2, "Pearson: " + str(pearsons))
+    ax1.text(15,15, "Pearson: " + str(pearsons))
     plt.savefig(figuredir + '/PausingIndex.png')
     
     
