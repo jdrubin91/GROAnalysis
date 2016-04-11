@@ -114,8 +114,7 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
             if not ER > cutoff3 and not ER < -cutoff3:
                 ENDlist.append(ER)
     print "Genes: ",i
-    print pX[0:10]
-    print pY[0:10]
+    
     meanX = np.mean(pX)
     meanY = np.mean(pY)
     num = 0.0
@@ -351,13 +350,44 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
     ax.scatter(pX,pY,c=z,edgecolor="",s=14)
     ax.get_xaxis().tick_bottom()
     ax.get_yaxis().tick_left()
-    ax.set_title('Pearson Coefficient')
-    ax.set_xlabel('DMSO genes')
-    ax.set_ylabel('CA genes')
-    #ax.set_xlim([0, 100000])
-    #ax.set_ylim([0, 100000])
-    ax.text(3,8, "Pearson coefficient: " + str(pearsons))
+    ax.set_title('Gene Transcription')
+    ax.set_xlabel('DMSO')
+    ax.set_ylabel('CA')
+    ax.set_xlim([0, 0.5])
+    ax.set_ylim([0, 0.5])
+    ax.text(0.2,0.2, "Pearson: " + str(pearsons))
     plt.savefig(figuredir + '/Pearson.png')
+    
+    meanX = np.mean(TRx)
+    meanY = np.mean(TRy)
+    num = 0.0
+    den1 = 0.0
+    den2 = 0.0
+    for i in range(len(TRx)):
+        X = TRx[i]
+        Y = TRy[i]
+        num += ((X - meanX)*(Y - meanY))
+        den1 += (X - meanX)**2
+        den2 += (Y-meanY)**2
+    pearsons = num/(np.sqrt(den1)*np.sqrt(den2))
+    
+    F6 = plt.figure()
+    ax1 = F6.add_subplot(121)
+    xy = np.vstack([TRx,TRy])
+    z = gaussian_kde(xy)(xy)
+    ax1.scatter(TRx,TRy,c=z,edgecolor="",s=14)
+    ax1.scatter(TRx2,TRy2,c='red',edgecolor="",s=14)
+    ax1.set_title('Pausing Index')
+    ax1.set_ylabel('CA')
+    ax1.set_xlabel('DMSO')
+    ax1.get_xaxis().tick_bottom()
+    ax1.get_yaxis().tick_left()
+    #ax1.plot([0,1/slope1],[intercept1,1],color = 'r')
+    ax1.set_xlim([0, 20])
+    ax1.set_ylim([0, 20])
+    ax1.plot([0,50.0],[0,50.0],color='k')
+    ax1.text(0.2,0.2, "Pearson: " + str(pearsons))
+    plt.savefig(figuredir + '/PausingIndex.png')
     
     
     
