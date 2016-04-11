@@ -79,6 +79,7 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
     outfile.write('Gene\tChrom\tStart\tStop\tNumber\tStrand\tDMSO gene body\tDMSO TSS\tDMSO END\tCA gene body\tCA TSS\tCA END\n')
     pX = list()
     pY = list()
+    pNames = list()
     for gene in d:
         outfile.write(gene + '\t')
         for item in d[gene]:
@@ -95,6 +96,7 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
         pX.append(DMSOgenes/1000000.0)
         pY.append(CAgenes/1000000.0)
         name = gene.split(';')[1]
+        pNames.append(name)
         if gene in ['NM_005252;FOS;chr14:75745480-75748937_+','NM_001964;EGR1;chr5:137801180-137805004_+','NM_001136177;EGR2;chr10:64571755-64576126_-','NM_004430;EGR3;chr8:22545173-22550815_-','NM_006981;NR4A3;chr9:102584136-102629173_+']:
             #if name in namelist:
             #    i = namelist.index(name)
@@ -171,6 +173,8 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
     s = np.sqrt(np.var(distance))
     TRx2 = list()
     TRy2 = list()
+    pX2 = list()
+    pY2 = list()
     TRgenesup = list()
     TRgenesdwn = list()
     #print N,len(TRx),len(TRy)
@@ -181,6 +185,9 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
             TRy2.append(TRy[i])
             if direction1[i] == 1:
                 TRgenesup.append(names[i])
+                index = pNames.index(names[i])
+                pX2.append(pX[index])
+                pY2.append(pY[index])
             else:
                 TRgenesdwn.append(names[i])
             
@@ -423,7 +430,7 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
     fig,ax1 = plt.subplots()
     PI = ax1.bar(ind,PIbarplotsorted,width, color='b')
     Txn = ax1.bar(ind+width,Txnbarplotsorted,width,color='r')
-    ax1.plot([0,N*width*2],[0,0],color = 'k')
+    ax1.plot(ax1.get_xlim(),[0,0],color = 'k')
     ax1.legend((PI,Txn),('Pausing Index','Transcription'))
     ax1.set_ylabel('Log$_2$ Fold Change')
     ax1.set_xticks(ind + width)
@@ -431,6 +438,36 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
     ax1.get_xaxis().tick_bottom()
     ax1.get_yaxis().tick_left()
     plt.savefig(figuredir + '/BarPlot.png')
+    
+    
+    meanX = np.mean(pX2)
+    meanY = np.mean(pY2)
+    num = 0.0
+    den1 = 0.0
+    den2 = 0.0
+    for i in range(len(pX2)):
+        X = pX2[i]
+        Y = pY2[i]
+        num += ((X - meanX)*(Y - meanY))
+        den1 += (X - meanX)**2
+        den2 += (Y-meanY)**2
+    pearsons = num/(np.sqrt(den1)*np.sqrt(den2))
+    
+    F7 = plt.figure()
+    ax = F7.add_subplot(111)
+    xy = np.vstack([pX2,pY2])
+    z = gaussian_kde(xy)(xy)
+    ax.scatter(pX2,pY2,c=z,edgecolor="",s=14)
+    ax.get_xaxis().tick_bottom()
+    ax.get_yaxis().tick_left()
+    ax.set_title('Gene Transcription')
+    ax.set_xlabel('DMSO')
+    ax.set_ylabel('CA')
+    ax.set_xlim([0, 0.02])
+    ax.set_ylim([0, 0.02])
+    ax.plot([0,50.0],[0,50.0],color='k')
+    ax.text(0.014,0.012, "Pearson = " + str(pearsons)[0:5])
+    plt.savefig(figuredir + '/Transcription_UPGenes.png')
     
     
     
