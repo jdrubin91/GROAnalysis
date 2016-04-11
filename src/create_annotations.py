@@ -3,15 +3,19 @@ __author__ = 'Jonathan Rubin'
 import os
 
 def run(genes,filedir):
-    TSS = (-200,200)
-    END = (-200,200)
+    TSS = (-200,1000)
+    END = (-200,1000)
     list1 = list()
     list2 = list()
     with open(genes) as F1:
         for line in F1:
             chrom,start,stop,gene,number,strand = line.strip().split()
-            list1.append((chrom,int(start) + TSS[0],int(start) + TSS[1],gene,number,strand))
-            list2.append((chrom,int(stop) + END[0],int(stop) + END[1],gene,number,strand))
+            if strand is '+':
+                list1.append((chrom,int(start) + TSS[0],int(start) + TSS[1],gene,number,strand))
+                list2.append((chrom,int(stop) + END[0],int(stop) + END[1],gene,number,strand))
+            else:
+                list2.append((chrom,int(start) + TSS[0],int(start) + TSS[1],gene,number,strand))
+                list1.append((chrom,int(stop) + END[0],int(stop) + END[1],gene,number,strand))
     outfile = open(filedir + '/TSS.bed', 'w')
     for item in list1:
         outfile.write(item[0] + '\t' + str(item[1]) + '\t' + str(item[2]) + '\t' + item[3] + '\t' + item[4] + '\t' + item[5] + '\n')
