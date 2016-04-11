@@ -356,7 +356,7 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
     ax.set_xlim([0, 0.02])
     ax.set_ylim([0, 0.02])
     ax.plot([0,50.0],[0,50.0],color='k')
-    ax.text(0.016,0.012, "Pearson: " + str(pearsons)[0:5])
+    ax.text(0.015,0.012, "Pearson: " + str(pearsons)[0:5])
     plt.savefig(figuredir + '/Pearson.png')
     
     meanX = np.mean(TRx)
