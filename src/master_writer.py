@@ -103,8 +103,9 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
             #    DMSObarplot.append(DMSOTSS/(DMSOgenes-DMSOTSS))
             #    CAbarplot.append(CATSS/(CAgenes-CATSS))
             print name
-            print DMSOTSS,DMSOgenes,DMSOTSS
-            print CATSS,CAgenes,CATSS
+            print d[gene]
+            print DMSOTSS,DMSOgenes
+            print CATSS,CAgenes
             DMSObarplot.append(DMSOTSS/(DMSOgenes-DMSOTSS))
             CAbarplot.append(CATSS/(CAgenes-CATSS))
             namelist.append(name)
