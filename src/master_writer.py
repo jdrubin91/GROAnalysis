@@ -70,6 +70,8 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
     names = list()
     PIbarplot = list()
     Txnbarplot = list()
+    Ibarplot = list()
+    Ebarplot = list()
     namelist = list()
     cutoff2 = 0.01
     cutoff3 = 0.25
@@ -169,7 +171,9 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
         d = np.sqrt((x-xy[0])**2+(y-xy[1])**2)
         #print x,y,xy,d
         distance.append(d)
-        
+    
+    print "Genes up: ",sum(direction1)
+    print "Genes down: ",len(direction1) - sum(direction1)
     grubbs = True
     alpha = 0.05
     i=0
