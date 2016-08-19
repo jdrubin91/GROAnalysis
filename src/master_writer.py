@@ -9,9 +9,10 @@ from operator import itemgetter
 from scipy.stats import gaussian_kde
 from scipy import stats
 import numpy as np
-import matplotlib as mpl
 
-def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):    
+def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir): 
+
+    #Populate dictionary d with each key an annotation with coverage values
     d = dict()
     with open(DMSOgenes) as F1:
         for line in F1:
@@ -55,14 +56,11 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
                 coverage = '0'
             d[gene].append(coverage)
             
+    
+    #Initiate all required lists to store information
     coveragecutoff = 20
     TRlist = list()
-    TRgenes = list()
-    DMSOTRgenes = list()
-    cutoff1 = 0.01
     ENDlist = list()
-    ENDgenes = list()
-    DMSOENDgenes = list()
     TRx = list()
     TRy = list()
     ERx = list()
@@ -70,20 +68,19 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
     names = list()
     PIbarplot = list()
     Txnbarplot = list()
-    Ibarplot = list()
-    Ebarplot = list()
     namelist = list()
-    cutoff2 = 0.01
-    cutoff3 = 0.25
-    i = 0
-    
-    outfile = open(filedir + '/Master.bed','w')
-    outfile.write('Gene\tChrom\tStart\tStop\tNumber\tStrand\tDMSO gene body\tDMSO TSS\tDMSO END\tCA gene body\tCA TSS\tCA END\n')
     pX = list()
     pY = list()
     pNames = list()
     expressionlist = list()
     cdf = list()
+    i = 0
+    
+    #Initiate a Master file to store all pertinent information
+    outfile = open(filedir + '/Master.bed','w')
+    outfile.write('Gene\tChrom\tStart\tStop\tNumber\tStrand\tDMSO gene body\tDMSO TSS\tDMSO END\tCA gene body\tCA TSS\tCA END\n')
+    
+    #Iterate through dictionary d
     for gene in d:
         outfile.write(gene + '\t')
         for item in d[gene]:
@@ -98,25 +95,20 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
         CAEND = float(CAEND)
         graphcutoff = 20
         name = gene.split(';')[1]
+        
+        #Populate lists to perform pearsons coefficient test for transcription across all gene bodies that are above a cutoff
         if (DMSOgenes+CAgenes)/2 > 1:
             pX.append(np.log(DMSOgenes))
             pY.append(np.log(CAgenes))
             pNames.append(name)
+            
+        #Populate lists for loci of interest
         if gene in ['NM_005252;FOS;chr14:75745480-75748937_+','NM_001964;EGR1;chr5:137801180-137805004_+','NM_001136177;EGR2;chr10:64571755-64576126_-','NM_004430;EGR3;chr8:22545173-22550815_-','NM_006981;NR4A3;chr9:102584136-102629173_+']:
-            #if name in namelist:
-            #    i = namelist.index(name)
-            #    DMSOprev = DMSObarplot[i]
-            #    CAprev = CAbarplot[i]
-            #    DMSObarplot.append(DMSOTSS/(DMSOgenes-DMSOTSS))
-            #    CAbarplot.append(CATSS/(CAgenes-CATSS))
-            #print gene
-            #print str(DMSOTSS/(DMSOgenes-DMSOTSS))
-            #print str(CATSS/(CAgenes-CATSS))
             PIbarplot.append(np.log2((CATSS/(CAgenes-CATSS))/(DMSOTSS/(DMSOgenes-DMSOTSS))))
             Txnbarplot.append(np.log2(CAgenes/DMSOgenes))
             namelist.append(name)
         
-        #if CAgenes-CATSS > CATSS and DMSOgenes-DMSOTSS > DMSOTSS and CAgenes-CAEND > CAEND and DMSOgenes-DMSOEND > DMSOEND and DMSOgenes > coveragecutoff and CAgenes > coveragecutoff:
+        #Populate lists for traveler ratio (pausing index) and end ratio
         if CAgenes-CATSS > 0 and DMSOgenes-DMSOTSS > 0 and CAgenes-CAEND > 0 and DMSOgenes-DMSOEND > 0 and DMSOgenes > coveragecutoff and CAgenes > coveragecutoff and CATSS/(CAgenes-CATSS) < graphcutoff and DMSOTSS/(DMSOgenes-DMSOTSS) < graphcutoff and CAEND/(CAgenes-CAEND) < graphcutoff and DMSOEND/(DMSOgenes-DMSOEND) < graphcutoff:
             i += 1
             TRy.append(CATSS/(CAgenes-CATSS))
@@ -126,25 +118,13 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
             expressionlist.append((np.log2(DMSOgenes)+np.log2(CAgenes))/2.0)
             TR = (CATSS/(CAgenes-CATSS))-(DMSOTSS/(DMSOgenes-DMSOTSS))
             cdf.append(TR)
+            TRlist.append(TR)
+            ENDlist.append(CAEND/(CAgenes-CAEND))-(DMSOEND/(DMSOgenes-DMSOEND))
             names.append(gene.split(';')[1])
-            if TR > cutoff1:
-                TRgenes.append((gene,TR))
-            if TR < -cutoff1:
-                DMSOTRgenes.append((gene,TR))
-            if not TR > cutoff3 and not TR < -cutoff3:
-                TRlist.append(TR)
-            ER = (CAEND/(CAgenes-CAEND))-(DMSOEND/(DMSOgenes-DMSOEND))
-            if ER > cutoff2:
-                ENDgenes.append((gene,ER))
-            if ER < -cutoff2:
-                DMSOENDgenes.append((gene,ER))
-            if not ER > cutoff3 and not ER < -cutoff3:
-                ENDlist.append(ER)
+            
     print "Genes: ",i
-    #print namelist
-    #print PIbarplot
-    #print Txnbarplot
     
+    #Perform Pearson coefficient test for all genes
     meanX = np.mean(pX)
     meanY = np.mean(pY)
     num = 0.0
@@ -158,6 +138,7 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
         den2 += (Y-meanY)**2
     pearsons = num/(np.sqrt(den1)*np.sqrt(den2))
     
+    #Determine distance and direction of travel ratio for each gene
     distance = list()
     direction1 = list()
     for i in range(len(TRx)):
@@ -172,13 +153,12 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
         #print x,y,xy,d
         distance.append(d)
     
+    
     print "Genes up: ",sum(direction1)
     print "Genes down: ",len(direction1) - sum(direction1)
-    grubbs = True
-    alpha = 0.05
-    i=0
+
+    #Populate list of significantly higher (>3SD from mean) and lower TR in CA
     N = len(distance)
-    distancelist = np.zeros(N)
     s = np.sqrt(np.var(distance))
     TRx2 = list()
     TRy2 = list()
@@ -187,10 +167,8 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
     TRgenesup = list()
     TRgenesdwn = list()
     expressionlist2 = list()
-    #print N,len(TRx),len(TRy)
     for i in range(N):
         if distance[i] > 3*s:
-            #print i
             TRx2.append(TRx[i])
             TRy2.append(TRy[i])
             expressionlist2.append(expressionlist[i])
@@ -201,7 +179,9 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
                 pY2.append(pY[index])
             else:
                 TRgenesdwn.append(names[i])
-            
+    
+    
+    #Calculate distance and direction for ER
     distance2 = list()
     direction = list()
     for i in range(len(ERx)):
@@ -213,21 +193,17 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
             direction.append(0)
         xy = ((x+y)/2,(x+y)/2)
         d = np.sqrt((x-xy[0])**2+(y-xy[1])**2)
-        #print x,y,xy,d
         distance2.append(d)
         
-    
+    #Populate list of significantly different ER genes
     N = len(distance2)
-    distancelist = np.zeros(N)
     s = np.sqrt(np.var(distance2))
     ERx2 = list()
     ERy2 = list()
     ERgenesup = list()
     ERgenesdwn = list()
-    #print N,len(ERx),len(ERy)
     for i in range(N):
         if distance2[i] > 3*s:
-            #print i
             ERx2.append(ERx[i])
             ERy2.append(ERy[i])
             if direction[i] == 1:
@@ -236,14 +212,7 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
                 ERgenesdwn.append(names[i])
     
     
-
-    print TRgenesup
-    print '==============='
-    print TRgenesdwn
-    print'================'
-    print ERgenesup
-    print '==============='
-    print ERgenesdwn
+#Preliminary Code to apply the Grubbs test for outliers to call significantly different TR and ER genes
     #TRx2 = list()
     #TRy2 = list()
     #grubbs = True
@@ -294,25 +263,28 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
     #        ERy2.append(ERy[index2])
     #        distance2 = np.delete(distance2,distance2[index])
     
+    
+#Code to determine slope and intercept of linear regression lines for empirical data
     slope1,intercept1 = np.polyfit(TRx, TRy, 1)
     slope2,intercept2 = np.polyfit(ERx, ERy, 1)
-    print slope1,intercept1
     
+    #Histogram of TRCA - TRDMSO
     F1 = plt.figure()
     TRlist.sort(reverse=True)
     #plt.hist(TRlist[int(len(TRlist)*.2):int(len(TRlist)*.8)],50)
     plt.hist(TRlist,50)
     plt.title("Travelers Ratio")
     plt.savefig(figuredir + '/TravelersRatio.png')
+    
+    #Histogram of ERCA - ERDMSO
     F2 = plt.figure()
     ENDlist.sort(reverse=True)
     #plt.hist(ENDlist[int(len(ENDlist)*.2):int(len(ENDlist)*.8)],50)
     plt.hist(ENDlist,50)
     plt.title("End Ratio")
     plt.savefig(figuredir + '/EndRatio.png')
-    outfile2 = open(filedir + '/GeneList.txt','w')
-    outfile2.write("High CA TR = " + str(len(TRgenes)) + "\nHigh DMSO TR = " + str(len(DMSOTRgenes)) + "\nHigh CA ER = " + str(len(ENDgenes)) + "\nHigh DMSO ER = " + str(len(DMSOENDgenes)) + "\n")
-    outfile2.write("High CA TR\n")
+    
+    #Scatter plot of TR and ER with significant genes colored red
     F3 = plt.figure()
     ax1 = F3.add_subplot(121)
     xy = np.vstack([TRx,TRy])
@@ -343,6 +315,8 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
     #ax2.plot([0,1/slope2],[intercept2,1],color = 'r')
     ax2.plot([0,50],[0,50],color = 'k')
     plt.savefig(figuredir + '/Scatter_reflected_moregenes.png')
+    
+    #Boxplot of TRCA-TRDMSO and ERCA-ERDMSO
     F4 = plt.figure()
     ax1 = F4.add_subplot(111)
     bp1 = ax1.boxplot([TRlist,ENDlist],patch_artist=True)
@@ -368,20 +342,24 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
     for flier in bp1['fliers']:
         flier.set(marker='o', color='#e7298a', alpha=0.5)
     plt.savefig(figuredir + '/Boxplot.png')
-        
-    for item in sorted(TRgenes, key=itemgetter(1),reverse=True):
+    
+    #Generate file that has significantly different genes
+    outfile2 = open(filedir + '/GeneList.txt','w')
+    outfile2.write("High CA TR = " + str(len(TRgenesup)) + "\nHigh DMSO TR = " + str(len(TRgenesdwn)) + "\nHigh CA ER = " + str(len(ERgenesup)) + "\nHigh DMSO ER = " + str(len(ERgenesdwn)) + "\n")
+    outfile2.write("High CA TR\n")
+    for item in sorted(TRgenesup, key=itemgetter(1),reverse=True):
         outfile2.write(item[0] + '\t' + str(item[1]) + '\n')
     outfile2.write("High DMSO TR\n")
-    for item in sorted(DMSOTRgenes, key=itemgetter(1),reverse=True):
+    for item in sorted(TRgenesdwn, key=itemgetter(1),reverse=True):
         outfile2.write(item[0] + '\t' + str(item[1]) + '\n')
     outfile2.write("High CA ER\n")
-    for item in sorted(ENDgenes, key=itemgetter(1),reverse=True):
+    for item in sorted(ERgenesup, key=itemgetter(1),reverse=True):
         outfile2.write(item[0] + '\t' + str(item[1]) + '\n')
     outfile2.write("High DMSO ER\n")
-    for item in sorted(DMSOENDgenes, key=itemgetter(1),reverse=True):
+    for item in sorted(ERgenesdwn, key=itemgetter(1),reverse=True):
         outfile2.write(item[0] + '\t' + str(item[1]) + '\n')
     
-    
+    #Generate pearson plot for transcription of all genes
     F5 = plt.figure()
     ax = F5.add_subplot(111)
     xy = np.vstack([pX,pY])
@@ -398,6 +376,7 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
     ax.text(14,12, "Pearson = " + str(pearsons)[0:5])
     plt.savefig(figuredir + '/Pearson.png')
     
+    #Generate pearson's coefficient for TR
     meanX = np.mean(TRx)
     meanY = np.mean(TRy)
     num = 0.0
@@ -411,6 +390,7 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
         den2 += (Y-meanY)**2
     pearsons = num/(np.sqrt(den1)*np.sqrt(den2))
     
+    #Plot TR of all genes, include pearson coefficient and cdf plot
     F6 = plt.figure()
     ax1 = F6.add_subplot(121)
     xy = np.vstack([TRx,TRy])
@@ -430,9 +410,10 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
     ax2 = F6.add_subplot(122)
     ax2.plot(np.sort(cdf),np.linspace(0,1,len(cdf)))
     ax2.plot(stats.norm.cdf(np.linspace(min(cdf),max(cdf)),0,np.var(cdf)),np.linspace(0,1,len(cdf)))
-    
     plt.savefig(figuredir + '/PausingIndex.png')
     
+    
+    #Generate loci-specific plot
     order = ['FOS','EGR1','EGR2','EGR3','NR4A3']
     PIbarplotsorted = list()
     Txnbarplotsorted = list()
@@ -454,7 +435,7 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
     ax1.get_yaxis().tick_left()
     plt.savefig(figuredir + '/BarPlot.png')
     
-    
+    #Generate plot with signficantly different genes
     meanX = np.mean(pX2)
     meanY = np.mean(pY2)
     num = 0.0
@@ -467,7 +448,6 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
         den1 += (X - meanX)**2
         den2 += (Y-meanY)**2
     pearsons = num/(np.sqrt(den1)*np.sqrt(den2))
-    
     F7 = plt.figure()
     ax = F7.add_subplot(111)
     xy = np.vstack([pX2,pY2])
