@@ -8,6 +8,7 @@ from matplotlib import rcParams
 rcParams.update({'figure.autolayout': True})
 import matplotlib.pyplot as plt
 import reflect_coverage
+import numpy as np
 
 def run(chipdir,refseq,filedir,DMSO,CA):
 	TSS = (-200,1000)
