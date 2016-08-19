@@ -5,8 +5,7 @@ from pybedtools import BedTool
 def run(chipdir,refseq,filedir):
 	a = BedTool(chipdir)
 	b = a.closest(refseq)
-	b.cut((9,10,11,12,13,14))
-	b.saveas(filedir + '/SRF_closest.bed')
+	b.cut([9,10,11,12,13,14]).saveas(filedir + '/SRF_closest.bed')
 
 
 	return filedir + '/SRF_closest.bed'
