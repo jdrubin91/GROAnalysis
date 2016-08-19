@@ -22,7 +22,7 @@ def run(chipdir,refseq,filedir,DMSO,CA):
 			d[chrom + '\t' + start + '\t' + stop + '\t'] = '\t'.join(line[3:])
 	outfile = open(filedir + '/SRF_closest.rmdup.bed','w')
 	for key in d:
-		outfile.write(key+d[key]='\n')
+		outfile.write(key+d[key]+'\n')
 	a = BedTool(filedir + '/SRF_closest.rmdup.bed')
 	a.sort().saveas(filedir + '/SRF_closest.rmdup.sorted.bed')
 	outfile = open(filedir + '/SRF.TSS.bed','w')
