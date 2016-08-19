@@ -103,7 +103,7 @@ if __name__ == "__main__":
 	figuredir = parent_dir(homedir) + '/figures'
 
 	chipdir = '/scratch/Shares/dowell/ENCODE/old/HCT116/SRF/peak_files/ENCFF001UEM.bed'
-	refseq = '/scratch/Users/joru1876/refFlat_hg19.bed'
+	refseq = '/scratch/Users/joru1876/hg19_reference_files/refFlat_hg19.bed'
 	#Specify DMSO treated bedgraph directory
 	DMSO = '/scratch/Users/joru1876/GROSeqRaw/flipped/bowtie2/sortedbam/genomecoveragebed/fortdf/JDR_DMSO_SS102217_093015_CAGATC_L005_R1_001.flip.fastqbowtie2.sorted.BedGraph.mp.BedGraph'
 
