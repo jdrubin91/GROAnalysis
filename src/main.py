@@ -42,7 +42,8 @@ figuredir = parent_dir(homedir) + '/figures'
 
 def run():
     print "Calculating closest genes to ChIP file..."
-    genes = closest_gene.run(chipdir,genes,filedir)
+    genelist = closest_gene.run(chipdir,genes,filedir)
+    genes = genelist
     print "Creating annotation files..."
     create_annotations.run(genes,filedir)
     TSS = filedir + '/TSS.sorted.bed'
