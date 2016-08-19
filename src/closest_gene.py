@@ -45,8 +45,8 @@ def run(chipdir,refseq,filedir,DMSO,CA):
 	os.system("bedtools map -a " + genes + " -b " + CA + " -c 4 -o sum > " + filedir + "/CA.genes.bed")
 	os.system("bedtools map -a " + TSS + " -b " + CA + " -c 4 -o sum > " + filedir + "/CA.TSS.bed")
 
-    TRx = list()
-    TRy = list()
+	TRx = list()
+	TRy = list()
 
     with open(filedir + "/DMSO.genes.bed") as a, open(filedir + "/DMSO.TSS.bed") as b, open(filedir + "/CA.genes.bed") as c, open(filedir + "/CA.TSS.bed") as d:
     	for line in a:
