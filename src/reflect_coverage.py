@@ -1,6 +1,6 @@
 __author__ = 'Jonathan Rubin'
 
-	def run(DMSO,CA,filedir):
+def run(DMSO,CA,filedir):
 	list1 = list()
 	with open(DMSO) as F1:
 		for line in F1:
