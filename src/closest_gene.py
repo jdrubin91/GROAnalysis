@@ -104,6 +104,12 @@ if __name__ == "__main__":
 
 	chipdir = '/scratch/Shares/dowell/ENCODE/old/HCT116/SRF/peak_files/ENCFF001UEM.bed'
 	refseq = '/scratch/Users/joru1876/refFlat_hg19.bed'
+	#Specify DMSO treated bedgraph directory
+	DMSO = '/scratch/Users/joru1876/GROSeqRaw/flipped/bowtie2/sortedbam/genomecoveragebed/fortdf/JDR_DMSO_SS102217_093015_CAGATC_L005_R1_001.flip.fastqbowtie2.sorted.BedGraph.mp.BedGraph'
+
+	#Specify CA treated bedgraph directory
+	CA = '/scratch/Users/joru1876/GROSeqRaw/flipped/bowtie2/sortedbam/genomecoveragebed/fortdf/JDR_CA_SS102217_093015_ACTTGA_L005_R1_001.flip.fastqbowtie2.sorted.BedGraph.mp.BedGraph'
+
 
 	reflect_coverage.run(DMSO,CA,filedir)
 	DMSOreflect = filedir + '/DMSO.bedgraph'
