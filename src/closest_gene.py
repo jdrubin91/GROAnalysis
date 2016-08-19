@@ -87,10 +87,10 @@ def run(chipdir,refseq,filedir,DMSO,CA):
 if __name__ == "__main__":
 	#Return parent directory
 	def parent_dir(directory):
-	    pathlist = directory.split('/')
-	    newdir = '/'.join(pathlist[0:len(pathlist)-1])
-	    
-	    return newdir
+		pathlist = directory.split('/')
+		newdir = '/'.join(pathlist[0:len(pathlist)-1])
+
+		return newdir
 
 	#Home directory
 	homedir = os.path.dirname(os.path.realpath(__file__))
@@ -105,6 +105,6 @@ if __name__ == "__main__":
 	refseq = '/scratch/Users/joru1876/refFlat_hg19.bed'
 
 	reflect_coverage.run(DMSO,CA,filedir)
-    DMSOreflect = filedir + '/DMSO.bedgraph'
-    CAreflect = filedir + '/CA.bedgraph'
+	DMSOreflect = filedir + '/DMSO.bedgraph'
+	CAreflect = filedir + '/CA.bedgraph'
 	run(chipdir,refseq,filedir,DMSOreflect,CAreflect)
