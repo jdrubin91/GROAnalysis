@@ -65,22 +65,25 @@ def run(chipdir,refseq,filedir,DMSO,CA):
 
 	with open(filedir + "/DMSO.genes.bed") as a, open(filedir + "/DMSO.TSS.bed") as b, open(filedir + "/CA.genes.bed") as c, open(filedir + "/CA.TSS.bed") as d:
 		for line in a:
+			bline = b.readline().strip().split()[-1]
+			cline = c.readline().strip().split()[-1]
+			dline = d.readline().strip().split()[-1]
 			if line.strip().split()[-1] is '.':
 				DMSOgene = 0.0
 			else:
 				DMSOgene = float(line.strip().split()[-1])
-			if b.readline().strip().split()[-1] is '.':
+			if bline is '.':
 				DMSOTSS = 0.0
 			else:
-				DMSOTSS = float(b.readline().strip().split()[-1])
-			if c.readline().strip().split()[-1] is '.':
+				DMSOTSS = float(bline)
+			if cline is '.':
 				CAgene = 0.0
 			else:
-				CAgene = float(c.readline().strip().split()[-1])
-			if d.readline().strip().split()[-1] is '.':
+				CAgene = float(cline)
+			if dline is '.':
 				CATSS = 0.0
 			else:
-				CATSS = float(d.readline().strip().split()[-1])
+				CATSS = float(dline)
 			if DMSOgene == 0.0:
 				TRx.append(0.0)
 			else:
