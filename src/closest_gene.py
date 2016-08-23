@@ -29,7 +29,7 @@ def run(chipdir,refseq,filedir,DMSO,CA):
 	for key in d:
 		outfile.write(key+d[key]+'\n')
 	a = BedTool(filedir + '/SRF_closest.rmdup.bed')
-	a.sort()
+	a.cut([0,1,2]).sort()
 	a.saveas(filedir + '/SRF_closest.rmdup.sorted.bed')
 	outfile = open(filedir + '/SRF.TSS.bed','w')
 	outfile2 = open(filedir + '/SRF.gene.bed','w')
