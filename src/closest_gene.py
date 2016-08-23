@@ -62,6 +62,8 @@ def run(chipdir,refseq,filedir,DMSO,CA):
 			TRx.append((DMSOTSS/DMSOgene))
 			TRy.append((CATSS/CAgene))
 
+	print TRx,TRy
+
 	F6 = plt.figure()
 	ax1 = F6.add_subplot(121)
 	xy = np.vstack([TRx,TRy])
