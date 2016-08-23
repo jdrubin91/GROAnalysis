@@ -56,6 +56,7 @@ def run(chipdir,refseq,filedir,DMSO,CA):
 	with open(filedir + "/DMSO.genes.bed") as a, open(filedir + "/DMSO.TSS.bed") as b, open(filedir + "/CA.genes.bed") as c, open(filedir + "/CA.TSS.bed") as d:
 		for line in a:
 			DMSOgene = float(line.strip().split()[-1])
+			print DMSOgene
 			DMSOTSS = float(b.readline().strip().split()[-1])
 			CAgene = float(c.readline().strip().split()[-1])
 			CATSS = float(d.readline().strip().split()[-1])
