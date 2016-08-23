@@ -65,12 +65,30 @@ def run(chipdir,refseq,filedir,DMSO,CA):
 
 	with open(filedir + "/DMSO.genes.bed") as a, open(filedir + "/DMSO.TSS.bed") as b, open(filedir + "/CA.genes.bed") as c, open(filedir + "/CA.TSS.bed") as d:
 		for line in a:
-			DMSOgene = float(line.strip().split()[-1])
-			DMSOTSS = float(b.readline().strip().split()[-1])
-			CAgene = float(c.readline().strip().split()[-1])
-			CATSS = float(d.readline().strip().split()[-1])
-			TRx.append((DMSOTSS/DMSOgene))
-			TRy.append((CATSS/CAgene))
+			if line.strip().split()[-1] == '.':
+				DMSOgene = 0.0
+			else:
+				DMSOgene = float(line.strip().split()[-1])
+			if b.readline().strip().split()[-1] == '.':
+				DMSOTSS = 0.0
+			else:
+				DMSOTSS = float(b.readline().strip().split()[-1])
+			if c.readline().strip().split()[-1] == '.':
+				CAgene = 0.0
+			else:
+				CAgene = float(c.readline().strip().split()[-1])
+			if d.readline().strip().split()[-1] == '.':
+				CATSS = 0.0
+			else:
+				CATSS = float(d.readline().strip().split()[-1])
+			if DMSOgene == 0.0:
+				TRx.append(0.0)
+			else:
+				TRx.append((DMSOTSS/DMSOgene))
+			if CAgene == 0.0:
+				TRy.append(0.0)
+			else:
+				TRy.append((CATSS/CAgene))
 
 	print TRx,TRy
 
