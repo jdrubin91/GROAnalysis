@@ -62,6 +62,7 @@ def run(chipdir,refseq,filedir,DMSO,CA):
 
 	TRx = list()
 	TRy = list()
+	expressionlist = list()
 
 	with open(filedir + "/DMSO.genes.bed") as a, open(filedir + "/DMSO.TSS.bed") as b, open(filedir + "/CA.genes.bed") as c, open(filedir + "/CA.TSS.bed") as d:
 		for line in a:
@@ -92,15 +93,14 @@ def run(chipdir,refseq,filedir,DMSO,CA):
 				TRy.append(0.0)
 			else:
 				TRy.append((CATSS/CAgene))
-
-	print TRx,TRy
+			expressionlist.append((np.log2(DMSOgenes)+np.log2(CAgenes))/2.0)
 
 	F6 = plt.figure()
-	ax1 = F6.add_subplot(121)
+	ax1 = F6.add_subplot(111)
 	xy = np.vstack([TRx,TRy])
 	z = gaussian_kde(xy)(xy)
 	ax1.scatter(TRx,TRy,c=z,edgecolor="",s=expressionlist)
-	ax1.scatter(TRx2,TRy2,c='red',edgecolor="",s=expressionlist2)
+	# ax1.scatter(TRx2,TRy2,c='red',edgecolor="",s=expressionlist2)
 	ax1.set_title('Pausing Index')
 	ax1.set_ylabel('CA')
 	ax1.set_xlabel('DMSO')
@@ -111,9 +111,9 @@ def run(chipdir,refseq,filedir,DMSO,CA):
 	ax1.set_ylim([0, 20])
 	ax1.plot([0,50.0],[0,50.0],color='k')
 	ax1.text(8,18, "Pearson = " + str(pearsons)[0:5])
-	ax2 = F6.add_subplot(122)
-	ax2.plot(np.sort(cdf),np.linspace(0,1,len(cdf)))
-	ax2.plot(stats.norm.cdf(np.linspace(min(cdf),max(cdf)),0,np.var(cdf)),np.linspace(0,1,len(cdf)))
+	# ax2 = F6.add_subplot(122)
+	# ax2.plot(np.sort(cdf),np.linspace(0,1,len(cdf)))
+	# ax2.plot(stats.norm.cdf(np.linspace(min(cdf),max(cdf)),0,np.var(cdf)),np.linspace(0,1,len(cdf)))
 	plt.savefig(figuredir + '/PausingIndex.png')
 
 			
