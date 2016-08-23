@@ -32,8 +32,7 @@ def run(chipdir,refseq,filedir,DMSO,CA):
 	outfile.close()
 	# os.system("sort -k1,1 -k2,2n " + filedir + "/SRF_closest.rmdup.bed > " + filedir + "/SRF_closest.rmdup.sorted.bed")
 	a = BedTool(filedir + '/SRF_closest.rmdup.bed')
-	a.cut([0,1,2]).sort()
-	a.saveas(filedir + '/SRF_closest.rmdup.sorted.bed')
+	a.sort().saveas(filedir + '/SRF_closest.rmdup.sorted.bed')
 	outfile = open(filedir + '/SRF.TSS.bed','w')
 	outfile2 = open(filedir + '/SRF.gene.bed','w')
 	with open(filedir + '/SRF_closest.rmdup.sorted.bed') as F:
