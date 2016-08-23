@@ -99,7 +99,7 @@ def run(chipdir,refseq,filedir,DMSO,CA):
 	ax1 = F6.add_subplot(111)
 	xy = np.vstack([TRx,TRy])
 	z = gaussian_kde(xy)(xy)
-	ax1.scatter(TRx,TRy,c=z,edgecolor="",s=expressionlist)
+	ax1.scatter(TRx,TRy,c=z,edgecolor="")
 	# ax1.scatter(TRx2,TRy2,c='red',edgecolor="",s=expressionlist2)
 	ax1.set_title('Pausing Index')
 	ax1.set_ylabel('CA')
