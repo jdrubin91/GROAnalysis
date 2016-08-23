@@ -59,8 +59,8 @@ def run(chipdir,refseq,filedir,DMSO,CA):
 			DMSOTSS = float(b.readline().strip().split()[-1])
 			CAgene = float(c.readline().strip().split()[-1])
 			CATSS = float(d.readline().strip().split()[-1])
-			TRx.append(DMSOTSS/DMSOgene)
-			TRy.append(CATSS/CAgene)
+			TRx.append((DMSOTSS/DMSOgene))
+			TRy.append((CATSS/CAgene))
 
 	F6 = plt.figure()
 	ax1 = F6.add_subplot(121)
