@@ -93,7 +93,7 @@ def run(chipdir,refseq,filedir,DMSO,CA):
 				TRy.append(0.0)
 			else:
 				TRy.append((CATSS/CAgene))
-			expressionlist.append((np.log2(DMSOgenes)+np.log2(CAgenes))/2.0)
+			expressionlist.append((np.log2(DMSOgene)+np.log2(CAgene))/2.0)
 
 	F6 = plt.figure()
 	ax1 = F6.add_subplot(111)
