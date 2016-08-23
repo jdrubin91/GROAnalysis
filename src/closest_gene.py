@@ -47,6 +47,10 @@ def run(chipdir,refseq,filedir,DMSO,CA):
 					outfile2.write(chrom+'\t'+start+'\t'+str(int(stop)-TSS[1])+'\n')
 	outfile.close()
 	outfile2.close()
+	a = BedTool(filedir + '/SRF.TSS.bed')
+	a.sort().saveas(filedir + '/SRF.TSS.bed')
+	a = BedTool(filedir + '/SRF.gene.bed')
+	a.sort().saveas(filedir + '/SRF.gene.bed')
 
 	TSS = filedir + '/SRF.TSS.bed'
 	genes = filedir + '/SRF.gene.bed'
