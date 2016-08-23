@@ -44,6 +44,8 @@ def run(chipdir,refseq,filedir,DMSO,CA):
 			else:
 				outfile.write(chrom+'\t'+str(int(stop)-TSS[1])+'\t'+str(int(stop)-TSS[0])+'\n')
 				outfile2.write(chrom+'\t'+start+'\t'+str(int(stop)-TSS[1])+'\n')
+	outfile.close()
+	outfile2.close()
 
 	TSS = filedir + '/SRF.TSS.bed'
 	genes = filedir + '/SRF.gene.bed'
