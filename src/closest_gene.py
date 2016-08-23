@@ -29,11 +29,11 @@ def run(chipdir,refseq,filedir,DMSO,CA):
 	for key in d:
 		if '.' not in key.split():
 			outfile.write(key+d[key]+'\n')
-	os.system("sort -k1,1 -k2,2n " + filedir + "/SRF_closest.rmdup.bed > " + filedir + "/SRF_closest.rmdup.sorted.bed")
-	# a = BedTool(filedir + '/SRF_closest.rmdup.bed')
-	# print(a)
-	# a.cut([0,1,2]).sort()
-	# a.saveas(filedir + '/SRF_closest.rmdup.sorted.bed')
+	# os.system("sort -k1,1 -k2,2n " + filedir + "/SRF_closest.rmdup.bed > " + filedir + "/SRF_closest.rmdup.sorted.bed")
+	a = BedTool(filedir + '/SRF_closest.rmdup.bed')
+	print(a)
+	a.cut([0,1,2]).sort()
+	a.saveas(filedir + '/SRF_closest.rmdup.sorted.bed')
 	outfile = open(filedir + '/SRF.TSS.bed','w')
 	outfile2 = open(filedir + '/SRF.gene.bed','w')
 	with open(filedir + '/SRF_closest.rmdup.sorted.bed') as F:
