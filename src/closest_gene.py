@@ -18,7 +18,8 @@ def run(chipdir,refseq,filedir,DMSO,CA):
 
 	a = BedTool(chipdir)
 	b = a.closest(refseq, d=True)
-	b.cut([9,10,11,12,13,14]).saveas(filedir + '/SRF_closest.bed')
+	# b.cut([9,10,11,12,13,14]).saveas(filedir + '/SRF_closest.bed')
+	b.saveas(filedir + '/SRF_closest.bed')
 	d = dict()
 	with open(filedir + '/SRF_closest.bed') as F:
 		for line in F:
