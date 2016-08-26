@@ -38,8 +38,8 @@ def run(chipdir,refseq,filedir,DMSO,CA):
 	outfile2 = open(filedir + '/SRF.gene.bed','w')
 	with open(filedir + '/SRF_closest.rmdup.sorted.bed') as F:
 		for line in F:
-			chrom,start,stop,gene,number,strand = line.strip().split()
-			if int(stop) - int(start) > 2000:
+			chrom,start,stop,gene,number,strand,distance = line.strip().split()
+			if int(stop) - int(start) > 2000 and int(distance) > 10000:
 				if strand is '+':
 					outfile.write(chrom+'\t'+str(int(start)+TSS[0])+'\t'+str(int(start)+TSS[1])+'\n')
 					outfile2.write(chrom+'\t'+str(int(start)+TSS[1])+'\t'+stop+'\n')
