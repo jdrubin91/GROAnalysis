@@ -17,7 +17,7 @@ def run(chipdir,refseq,filedir,DMSO,CA):
 	TSS = (-200,1000)
 
 	a = BedTool(chipdir)
-	b = a.closest(refseq)
+	b = a.closest(refseq, d=True)
 	b.cut([9,10,11,12,13,14]).saveas(filedir + '/SRF_closest.bed')
 	d = dict()
 	with open(filedir + '/SRF_closest.bed') as F:
