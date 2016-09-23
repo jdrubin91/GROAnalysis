@@ -70,12 +70,12 @@ def plot(TSS1,TSS2,END1,END2,Body1,Body2,genes,figdir):
             Y.append((abs(Body1)+abs(Body2)/2))
             if strand == '+':
                 try:
-                    X.append(math.log(TSS1/(TSS1-Body1))-math.log(TSS2/(TSS2-Body2)))
+                    X.append(math.log(TSS1/(Body1-TSS1))-math.log(TSS2/(Body2-TSS2)))
                 except ZeroDivisionError:
                     X.append(0.0)
             else:
                 try:
-                    X.append(math.log(abs(END1/(END1-Body1))-math.log(abs(END2/(END2-Body2)))))
+                    X.append(math.log(abs(END1/(Body1-END1))-math.log(abs(END2/(Body2-END2)))))
                 except ZeroDivisionError:
                     X.append(0.0)
 
