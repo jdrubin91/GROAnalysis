@@ -1,7 +1,7 @@
 __author__ = "Jonathan Rubin"
 
-import matplotlib
-matplotlib.use('Agg')
+# import matplotlib
+# matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 from scipy.stats import gaussian_kde
 from scipy.stats import norm
@@ -12,10 +12,15 @@ import math
 #file2 = '/scratch/Shares/dowell/ENCODE/Rubin2016_genes_CA-1_K_models_MLE.tsv'
 #savedir = '/scratch/Users/joru1876/GROAnalysis/figures/'
 #genes = '/scratch/Users/joru1876/genome_files/refGene.bed'
-file1 = 'C:/cygwin64/home/Jonathan/Rubin2016_genes_DMSO-1_K_models_MLE.tsv'
-file2 = 'C:/cygwin64/home/Jonathan/Rubin2016_genes_CA-1_K_models_MLE.tsv'
-savedir = 'C:/cygwin64/home/Jonathan/GROAnalysis/figures/'
-genes = 'C:/cygwin64/home/Jonathan/refGene.bed'
+# file1 = 'C:/cygwin64/home/Jonathan/Rubin2016_genes_DMSO-1_K_models_MLE.tsv'
+# file2 = 'C:/cygwin64/home/Jonathan/Rubin2016_genes_CA-1_K_models_MLE.tsv'
+# savedir = 'C:/cygwin64/home/Jonathan/GROAnalysis/figures/'
+# genes = 'C:/cygwin64/home/Jonathan/refGene.bed'
+file1 = '/Users/jonathanrubin/Google Drive/Colorado University/Jonathan/Rubin2016_genes_DMSO-1_K_models_MLE.tsv'
+file2 = '/Users/jonathanrubin/Google Drive/Colorado University/Jonathan/Rubin2016_genes_CA-1_K_models_MLE.tsv'
+savedir = '/Users/jonathanrubin/Google Drive/Colorado University/Jonathan/GROAnalysis/figures/'
+genes = '/Users/jonathanrubin/Google Drive/Colorado University/Jonathan/refGene.bed'
+
 index = 6
 cut = 16
 cut1 = 50000
@@ -282,7 +287,7 @@ def run3(file1,file2):
                 siglist.append(genelist[i])
                 bedlist.append(d1[genelist[i]][2])
             
-    outfile = open('C:/cygwin64/home/Jonathan/GROAnalysis/files/tsv_analysis.bed','w')
+    outfile = open('/Users/jonathanrubin/Google Drive/Colorado University/Jonathan/GROAnalysis/files/tsv_analysis.bed','w')
     window = (200)
     for item in bedlist:
         item = item.split(':')
@@ -319,6 +324,7 @@ def run3(file1,file2):
     #ax.set_yscale('log', basey=2)
     #ax2 = F.add_subplot(212)
     #ax2.plot(X1)
+    plt.show()
     plt.savefig(savedir + 'tsv_fig.png')
     
     return "done"
