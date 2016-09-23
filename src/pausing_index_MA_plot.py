@@ -63,11 +63,11 @@ if __name__ == "__main__":
     bam2 = '/scratch/Users/joru1876/GROSeqRaw/flipped/bowtie2/sortedbam/JDR_DMSO_SS102217_093015_CAGATC_L005_R1_001.flip.fastqbowtie2.sorted.bam'
     figdir = '/scratch/Users/joru1876/GROAnalysis/figures/'
     filedir = '/scratch/Users/joru1876/GROAnalysis/files/'
-    # run(genedir,bam1,bam2,figdir,filedir)
+    run(genedir,bam1,bam2,figdir,filedir)
 
     TSS1='1_TSS.count.bed'
     TSS2='2_TSS.count.bed'
     Body1='1_Body.count.bed'
     Body2='2_Body.count.bed'
     genes='Gene_info.txt'
-    plot(TSS1,TSS2,Body1,Body2,genes)
+    # plot(TSS1,TSS2,Body1,Body2,genes)
