@@ -33,10 +33,12 @@ def run(genedir,bam1,bam2,figdir,filedir):
     TSS = filedir+'TSS.bed'
     END = filedir+'END.bed'
     Body = filedir+'Body.bed'
-    features = ((bam1,TSS,filedir+'1_TSS.count.bed'),(bam1,END,filedir+'1_END.count.bed'),(bam1,Body,filedir+'1_Body.count.bed'),(bam2,TSS,filedir+'2_TSS.count.bed'),(bam2,END,filedir+'2_END.count.bed'),(bam2,Body,filedir+'2_Body.count.bed'))
-    # feature1=
+    # features = ((bam1,TSS,filedir+'1_TSS.count.bed'),(bam1,END,filedir+'1_END.count.bed'),(bam1,Body,filedir+'1_Body.count.bed'),(bam2,TSS,filedir+'2_TSS.count.bed'),(bam2,END,filedir+'2_END.count.bed'),(bam2,Body,filedir+'2_Body.count.bed'))
+    feature1=(bam1,bam1,bam1,bam2,bam2,bam2)
+    feature2=(TSS,END,Body,TSS,END,Body)
+    feature3=(filedir+'1_TSS.count.bed',filedir+'1_END.count.bed',filedir+'1_Body.count.bed',filedir+'2_TSS.count.bed',filedir+'2_END.count.bed',filedir+'2_Body.count.bed')
 
-    results = pool.map(intersect, features)
+    results = pool.map(intersect, feature1, feature2, feature3)
 
     # Bam1.intersect(b=TSS,stream=True).count().saveas(filedir+'1_TSS.count.bed')
     # Bam1.intersect(b=Body,stream=True).count().saveas(filedir+'1_Body.count.bed')
