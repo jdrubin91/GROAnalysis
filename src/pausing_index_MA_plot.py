@@ -6,7 +6,7 @@ from pybedtools import BedTool
 
 def intersect(bam,bed,filename):
     print filename
-    return BedTool(bam).intersect(b=bed,stream=True).count().saveas(filename)
+    return BedTool(bam).map(b=bed,stream=True).saveas(filename)
 
 def run(genedir,bam1,bam2,figdir,filedir):
     TSS = open(filedir+'TSS.bed','w')
@@ -68,8 +68,8 @@ def plot(TSS1,TSS2,Body1,Body2,genes):
 
 if __name__ == "__main__":
     genedir = '/scratch/Users/joru1876/genome_files/refGene.bed'
-    bam1 = '/scratch/Users/joru1876/GROSeqRaw/flipped/bowtie2/sortedbam/JDR_CA_SS102217_093015_ACTTGA_L005_R1_001.flip.fastqbowtie2.sorted.bam'
-    bam2 = '/scratch/Users/joru1876/GROSeqRaw/flipped/bowtie2/sortedbam/JDR_DMSO_SS102217_093015_CAGATC_L005_R1_001.flip.fastqbowtie2.sorted.bam'
+    bam1 = '/scratch/Users/joru1876/GROSeqRaw/flipped/bowtie2/sortedbam/genomecoveragebed/fortdf/JDR_CA_SS102217_093015_ACTTGA_L005_R1_001.flip.fastqbowtie2.sorted.BedGraph.mp.BedGraph'
+    bam2 = '/scratch/Users/joru1876/GROSeqRaw/flipped/bowtie2/sortedbam/genomecoveragebed/fortdf/JDR_DMSO_SS102217_093015_CAGATC_L005_R1_001.flip.fastqbowtie2.sorted.BedGraph.mp.BedGraph'
     figdir = '/scratch/Users/joru1876/GROAnalysis/figures/'
     filedir = '/scratch/Users/joru1876/GROAnalysis/files/'
     run(genedir,bam1,bam2,figdir,filedir)
