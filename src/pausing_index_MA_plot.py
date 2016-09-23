@@ -75,7 +75,7 @@ def plot(TSS1,TSS2,END1,END2,Body1,Body2,genes,figdir):
                     X.append(0.0)
             else:
                 try:
-                    X.append(math.log(END1/(END1-Body1))-math.log(END2/(END2-Body2)))
+                    X.append(math.log(abs(END1/(END1-Body1))-math.log(abs(END2/(END2-Body2)))))
                 except ZeroDivisionError:
                     X.append(0.0)
 
