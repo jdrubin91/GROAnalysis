@@ -65,6 +65,7 @@ def plot(TSS1,TSS2,END1,END2,Body1,Body2,genes,figdir):
             Body1=0.0 if '.' in F3.readline().strip().split()[-1] else float(F3.readline().strip().split()[-1])
             Body2=0.0 if '.' in F4.readline().strip().split()[-1] else float(F4.readline().strip().split()[-1])
             END1=0.0 if '.' in F6.readline().strip().split()[-1] else float(F6.readline().strip().split()[-1])
+            print '.' in F7.readline().strip().split()[-1]
             END2=0.0 if '.' in F7.readline().strip().split()[-1] else float(F7.readline().strip().split()[-1])
             gene,strand=F5.readline().strip().split()
             Y.append((abs(Body1)+abs(Body2)/2))
