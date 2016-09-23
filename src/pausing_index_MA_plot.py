@@ -6,7 +6,7 @@ from pybedtools import BedTool
 
 def intersect(bam,bed,filename):
     print filename
-    return pybedtools.BedTool(bam).intersect(b=bed,stream=True).count().saveas(filename)
+    return BedTool(bam).intersect(b=bed,stream=True).count().saveas(filename)
 
 def run(genedir,bam1,bam2,figdir,filedir):
     TSS = open(filedir+'TSS.bed','w')
