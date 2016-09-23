@@ -63,7 +63,6 @@ def plot(TSS1,TSS2,END1,END2,Body1,Body2,genes,figdir):
             line2=F2.readline().strip().split()
             line3=F3.readline().strip().split()
             line4=F4.readline().strip().split()
-            line5=F5.readline().strip().split()
             line6=F6.readline().strip().split()
             line7=F7.readline().strip().split()
             TSS1=0.0 if line1.strip().split()[-1] is '.' else float(line1.strip().split()[-1])
@@ -76,7 +75,6 @@ def plot(TSS1,TSS2,END1,END2,Body1,Body2,genes,figdir):
             Y.append((abs(Body1)+abs(Body2)/2))
             if strand == '+':
                 try:
-                    print abs(TSS1/(Body1-TSS1)),abs(TSS2/(Body2-TSS2))
                     X.append(math.log(abs(TSS1/(Body1-TSS1)))-math.log(abs(TSS2/(Body2-TSS2))))
                 except (ZeroDivisionError, ValueError):
                     X.append(0.0)
