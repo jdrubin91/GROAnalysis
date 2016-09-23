@@ -37,4 +37,4 @@ if __name__ == "__main__":
     bam2 = '/scratch/Users/joru1876/GROSeqRaw/flipped/bowtie2/sortedbam/JDR_DMSO_SS102217_093015_CAGATC_L005_R1_001.flip.fastqbowtie2.sorted.bam'
     figdir = '/scratch/Users/joru1876/GROAnalysis/figures/'
     filedir = '/scratch/Users/joru1876/GROAnalysis/files/'
-    run(genedir,bed1,bed2,figdir,filedir)
+    run(genedir,bam1,bam2,figdir,filedir)
