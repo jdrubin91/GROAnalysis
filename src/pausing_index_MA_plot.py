@@ -72,12 +72,12 @@ def plot(TSS1,TSS2,END1,END2,Body1,Body2,genes,figdir):
                 try:
                     print abs(TSS1/(Body1-TSS1)),abs(TSS2/(Body2-TSS2))
                     X.append(math.log(abs(TSS1/(Body1-TSS1)))-math.log(abs(TSS2/(Body2-TSS2))))
-                except ZeroDivisionError,ValueError:
+                except ZeroDivisionError or ValueError:
                     X.append(0.0)
             else:
                 try:
                     X.append(math.log(abs(END1/(Body1-END1))-math.log(abs(END2/(Body2-END2)))))
-                except ZeroDivisionError,ValueError:
+                except ZeroDivisionError or ValueError:
                     X.append(0.0)
 
     F = plt.plot(X,Y)
