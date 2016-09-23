@@ -60,7 +60,7 @@ def plot(TSS1,TSS2,Body1,Body2,genes,figdir):
     Y = list()
     with open(TSS1) as F1, open(TSS2) as F2, open(Body1) as F3, open(Body2) as F4, open(genes) as F5:
         for line1 in F1:
-            TSS1=0.0 if line.strip().split()[-1] == '.' else float(line1.strip().split()[-1])
+            TSS1=0.0 if line1.strip().split()[-1] == '.' else float(line1.strip().split()[-1])
             TSS2=0.0 if F2.readline().strip().split()[-1] == '.' else float(F2.readline().strip().split()[-1])
             Body1=0.0 if F3.readline().strip().split()[-1] == '.' else float(F3.readline().strip().split()[-1])
             Body2=0.0 if F4.readline().strip().split()[-1] == '.' else float(F4.readline().strip().split()[-1])
