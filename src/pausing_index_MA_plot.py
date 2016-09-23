@@ -35,6 +35,8 @@ def run(genedir,bam1,bam2,figdir,filedir):
     Body = filedir+'Body.bed'
     features = [(bam1,TSS,filedir+'1_TSS.count.bed'),(bam1,END,filedir+'1_END.count.bed'),(bam1,Body,filedir+'1_Body.count.bed'),(bam2,TSS,filedir+'2_TSS.count.bed'),(bam2,END,filedir+'2_END.count.bed'),(bam2,Body,filedir+'2_Body.count.bed')]
 
+    results = pool.map(intersect, features)
+
     # Bam1.intersect(b=TSS,stream=True).count().saveas(filedir+'1_TSS.count.bed')
     # Bam1.intersect(b=Body,stream=True).count().saveas(filedir+'1_Body.count.bed')
 
