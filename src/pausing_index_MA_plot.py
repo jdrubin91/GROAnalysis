@@ -67,7 +67,15 @@ def plot(TSS1,TSS2,Body1,Body2,genes,figdir):
             gene,strand=F5.readline().strip().split()
             Y.append((abs(Body1)+abs(Body2)/2))
             if strand == '+':
-                X.append(math.log(TSS1/(TSS1-Body1))-math.log(TSS2/(TSS2-Body2)))
+                try:
+                    X.append(math.log(TSS1/(TSS1-Body1))-math.log(TSS2/(TSS2-Body2)))
+                except ZeroDivisionError:
+                    X.append(0.0)
+            else:
+                try:
+                    X.append(math.log(END1/(END1-Body1))-math.log(END2/(END2-Body2)))
+                except ZeroDivisionError:
+                    X.append(0.0)
 
     F = plt.plot(X,Y)
     F.savefig(figdir+'PI_MA_plot.png')
