@@ -85,7 +85,7 @@ def plot(TSS1,TSS2,END1,END2,Body1,Body2,genes,figdir):
                     X.append(0.0)
 
     F = plt.plot(X,Y)
-    F.savefig(figdir+'PI_MA_plot.png')
+    plt.savefig(figdir+'PI_MA_plot.png')
 
 
 
