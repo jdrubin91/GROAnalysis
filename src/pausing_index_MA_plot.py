@@ -33,7 +33,8 @@ def run(genedir,bam1,bam2,figdir,filedir):
     TSS = filedir+'TSS.bed'
     END = filedir+'END.bed'
     Body = filedir+'Body.bed'
-    features = [(bam1,TSS,filedir+'1_TSS.count.bed'),(bam1,END,filedir+'1_END.count.bed'),(bam1,Body,filedir+'1_Body.count.bed'),(bam2,TSS,filedir+'2_TSS.count.bed'),(bam2,END,filedir+'2_END.count.bed'),(bam2,Body,filedir+'2_Body.count.bed')]
+    features = ((bam1,TSS,filedir+'1_TSS.count.bed'),(bam1,END,filedir+'1_END.count.bed'),(bam1,Body,filedir+'1_Body.count.bed'),(bam2,TSS,filedir+'2_TSS.count.bed'),(bam2,END,filedir+'2_END.count.bed'),(bam2,Body,filedir+'2_Body.count.bed'))
+    # feature1=
 
     results = pool.map(intersect, features)
 
