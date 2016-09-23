@@ -2,6 +2,10 @@ __author__='Jonathan Rubin'
 
 import sys
 import multiprocessing
+import math
+import matplotlib
+matplotlib.use('Agg')
+import matplotlib.pyplot as plt
 from pybedtools import BedTool
 
 def intersect(bam,bed,filename):
@@ -51,16 +55,24 @@ def run(genedir,bam1,bam2,figdir,filedir):
     # Bam2.intersect(b=Body,stream=True).count().saveas(filedir+'2_Body.count.bed')
 
 
-def plot(TSS1,TSS2,Body1,Body2,genes):
+def plot(TSS1,TSS2,Body1,Body2,genes,figdir):
     X = list()
     Y = list()
     with open(TSS1),open(TSS2),open(Body1),open(Body2),open(genes) as F1,F2,F3,F4,F5:
         for line1 in F1:
-            TSS1=float(line1.strip().split()[-1])
-            TSS2=float(F2.readline().strip().split()[-1])
-            Body1=float(F3.readline().strip().split()[-1])
-            Body2=float(F4.readline().strip().split()[-1])
+            TSS1=0.0 if line.strip().split()[-1] == '.' else float(line1.strip().split()[-1])
+            TSS2=0.0 if F2.readline().strip().split()[-1] == '.' else float(F2.readline().strip().split()[-1])
+            Body1=0.0 if F3.readline().strip().split()[-1] == '.' else float(F3.readline().strip().split()[-1])
+            Body2=0.0 if F4.readline().strip().split()[-1] == '.' else float(F4.readline().strip().split()[-1])
             gene,strand=F5.readline().strip().split()
+            Y.append((abs(Body1)+abs(Body2)/2))
+            if strand == '+':
+                X.append(math.log(TSS1/(TSS1-Body1))-math.log(TSS2/(TSS2-Body2)))
+
+    F = plt.plot(X,Y)
+    F.savefig(figdir+'PI_MA_plot.png')
+
+
 
 
 
@@ -74,9 +86,9 @@ if __name__ == "__main__":
     filedir = '/scratch/Users/joru1876/GROAnalysis/files/'
     run(genedir,bam1,bam2,figdir,filedir)
 
-    TSS1='1_TSS.count.bed'
-    TSS2='2_TSS.count.bed'
-    Body1='1_Body.count.bed'
-    Body2='2_Body.count.bed'
-    genes='Gene_info.txt'
-    # plot(TSS1,TSS2,Body1,Body2,genes)
+    TSS1=filedir+'1_TSS.count.bed'
+    TSS2=filedir+'2_TSS.count.bed'
+    Body1=filedir+'1_Body.count.bed'
+    Body2=filedir+'2_Body.count.bed'
+    genes=filedir+'Gene_info.txt'
+    plot(TSS1,TSS2,Body1,Body2,genes,figdir)
