@@ -60,13 +60,12 @@ def plot(TSS1,TSS2,END1,END2,Body1,Body2,genes,figdir):
     Y = list()
     with open(TSS1) as F1, open(TSS2) as F2, open(Body1) as F3, open(Body2) as F4, open(genes) as F5, open(END1) as F6, open(END2) as F7:
         for line1 in F1:
-            TSS1=0.0 if '.' in line1.strip().split()[-1] else float(line1.strip().split()[-1])
-            TSS2=0.0 if '.' in F2.readline().strip().split()[-1] else float(F2.readline().strip().split()[-1])
-            Body1=0.0 if '.' in F3.readline().strip().split()[-1] else float(F3.readline().strip().split()[-1])
-            Body2=0.0 if '.' in F4.readline().strip().split()[-1] else float(F4.readline().strip().split()[-1])
-            END1=0.0 if '.' in F6.readline().strip().split()[-1] else float(F6.readline().strip().split()[-1])
-            print '.' in F7.readline().strip().split()[-1]
-            END2=0.0 if '.' in F7.readline().strip().split()[-1] else float(F7.readline().strip().split()[-1])
+            TSS1=0.0 if line1.strip().split()[-1] is '.' else float(line1.strip().split()[-1])
+            TSS2=0.0 if F2.readline().strip().split()[-1] is '.' else float(F2.readline().strip().split()[-1])
+            Body1=0.0 if F3.readline().strip().split()[-1] is '.' else float(F3.readline().strip().split()[-1])
+            Body2=0.0 if F4.readline().strip().split()[-1] is '.' else float(F4.readline().strip().split()[-1])
+            END1=0.0 if F6.readline().strip().split()[-1] is '.' else float(F6.readline().strip().split()[-1])
+            END2=0.0 if F7.readline().strip().split()[-1] is '.' else float(F7.readline().strip().split()[-1])
             gene,strand=F5.readline().strip().split()
             Y.append((abs(Body1)+abs(Body2)/2))
             if strand == '+':
