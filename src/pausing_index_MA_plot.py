@@ -37,7 +37,7 @@ def run(genedir,bam1,bam2,figdir,filedir):
 
 
     for item in features:
-        intersect(item)
+        intersect(item[0],item[1],item[2])
     # feature1=(bam1,bam1,bam1,bam2,bam2,bam2)
     # feature2=(TSS,END,Body,TSS,END,Body)
     # feature3=(filedir+'1_TSS.count.bed',filedir+'1_END.count.bed',filedir+'1_Body.count.bed',filedir+'2_TSS.count.bed',filedir+'2_END.count.bed',filedir+'2_Body.count.bed')
