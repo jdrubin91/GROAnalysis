@@ -119,7 +119,7 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
             TR = (CATSS/(CAgenes-CATSS))-(DMSOTSS/(DMSOgenes-DMSOTSS))
             cdf.append(TR)
             TRlist.append(TR)
-            ENDlist.append(CAEND/(CAgenes-CAEND))-(DMSOEND/(DMSOgenes-DMSOEND))
+            # ENDlist.append(CAEND/(CAgenes-CAEND))-(DMSOEND/(DMSOgenes-DMSOEND))
             names.append(gene.split(';')[1])
             
     print "Genes: ",i
@@ -276,13 +276,13 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
     plt.title("Travelers Ratio")
     plt.savefig(figuredir + '/TravelersRatio.png')
     
-    #Histogram of ERCA - ERDMSO
-    F2 = plt.figure()
-    ENDlist.sort(reverse=True)
-    #plt.hist(ENDlist[int(len(ENDlist)*.2):int(len(ENDlist)*.8)],50)
-    plt.hist(ENDlist,50)
-    plt.title("End Ratio")
-    plt.savefig(figuredir + '/EndRatio.png')
+    # #Histogram of ERCA - ERDMSO
+    # F2 = plt.figure()
+    # ENDlist.sort(reverse=True)
+    # #plt.hist(ENDlist[int(len(ENDlist)*.2):int(len(ENDlist)*.8)],50)
+    # plt.hist(ENDlist,50)
+    # plt.title("End Ratio")
+    # plt.savefig(figuredir + '/EndRatio.png')
     
     #Scatter plot of TR and ER with significant genes colored red
     F3 = plt.figure()
@@ -316,32 +316,32 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
     ax2.plot([0,50],[0,50],color = 'k')
     plt.savefig(figuredir + '/Scatter_reflected_moregenes.png')
     
-    #Boxplot of TRCA-TRDMSO and ERCA-ERDMSO
-    F4 = plt.figure()
-    ax1 = F4.add_subplot(111)
-    bp1 = ax1.boxplot([TRlist,ENDlist],patch_artist=True)
-    ax1.set_xticklabels(['Travel Ratio','End Ratio'])
-    ax1.get_xaxis().tick_bottom()
-    ax1.get_yaxis().tick_left()
-    ## change outline color, fill color and linewidth of the boxes
-    for box in bp1['boxes']:
-        # change outline color
-        box.set( color='#7570b3', linewidth=2)
-        # change fill color
-        box.set( facecolor = '#1b9e77' )
-    ## change color and linewidth of the whiskers
-    for whisker in bp1['whiskers']:
-        whisker.set(color='#7570b3', linewidth=2)
-    ## change color and linewidth of the caps
-    for cap in bp1['caps']:
-        cap.set(color='#7570b3', linewidth=2)
-    ## change color and linewidth of the medians
-    for median in bp1['medians']:
-        median.set(color='#b2df8a', linewidth=2)
-    ## change the style of fliers and their fill
-    for flier in bp1['fliers']:
-        flier.set(marker='o', color='#e7298a', alpha=0.5)
-    plt.savefig(figuredir + '/Boxplot.png')
+    # #Boxplot of TRCA-TRDMSO and ERCA-ERDMSO
+    # F4 = plt.figure()
+    # ax1 = F4.add_subplot(111)
+    # bp1 = ax1.boxplot([TRlist,ENDlist],patch_artist=True)
+    # ax1.set_xticklabels(['Travel Ratio','End Ratio'])
+    # ax1.get_xaxis().tick_bottom()
+    # ax1.get_yaxis().tick_left()
+    # ## change outline color, fill color and linewidth of the boxes
+    # for box in bp1['boxes']:
+    #     # change outline color
+    #     box.set( color='#7570b3', linewidth=2)
+    #     # change fill color
+    #     box.set( facecolor = '#1b9e77' )
+    # ## change color and linewidth of the whiskers
+    # for whisker in bp1['whiskers']:
+    #     whisker.set(color='#7570b3', linewidth=2)
+    # ## change color and linewidth of the caps
+    # for cap in bp1['caps']:
+    #     cap.set(color='#7570b3', linewidth=2)
+    # ## change color and linewidth of the medians
+    # for median in bp1['medians']:
+    #     median.set(color='#b2df8a', linewidth=2)
+    # ## change the style of fliers and their fill
+    # for flier in bp1['fliers']:
+    #     flier.set(marker='o', color='#e7298a', alpha=0.5)
+    # plt.savefig(figuredir + '/Boxplot.png')
     
     #Generate file that has significantly different genes
     outfile2 = open(filedir + '/GeneList.txt','w')

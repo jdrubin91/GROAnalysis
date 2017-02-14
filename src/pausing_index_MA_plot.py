@@ -3,8 +3,8 @@ __author__='Jonathan Rubin'
 import sys
 import multiprocessing
 import math
-import matplotlib
-matplotlib.use('Agg')
+# import matplotlib
+# matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 from pybedtools import BedTool
 
@@ -72,20 +72,24 @@ def plot(TSS1,TSS2,END1,END2,Body1,Body2,genes,figdir):
             END1=0.0 if line6[-1] is '.' else float(line6[-1])
             END2=0.0 if line7[-1] is '.' else float(line7[-1])
             gene,strand=F5.readline().strip().split()
-            Y.append((abs(Body1)+abs(Body2)/2))
+            X.append((abs(Body1)+abs(Body2))/2)
             if strand == '+':
                 try:
-                    X.append(math.log(abs(TSS1/(Body1-TSS1)))-math.log(abs(TSS2/(Body2-TSS2))))
+                    Y.append(math.log(abs(TSS1/(Body1-TSS1)))-math.log(abs(TSS2/(Body2-TSS2))))
                 except (ZeroDivisionError, ValueError):
-                    X.append(0.0)
+                    Y.append(0.0)
             else:
                 try:
-                    X.append(math.log(abs(END1/(Body1-END1))-math.log(abs(END2/(Body2-END2)))))
+                    Y.append(math.log(abs(END1/(Body1-END1))-math.log(abs(END2/(Body2-END2)))))
                 except (ZeroDivisionError, ValueError):
-                    X.append(0.0)
+                    Y.append(0.0)
 
-    F = plt.plot(X,Y)
-    plt.savefig(figdir+'PI_MA_plot.png')
+    F = plt.figure()
+    ax1 = F.add_subplot(111)
+
+    ax1.scatter(X,Y)
+    ax1.set_xscale("symlog")
+    plt.show()
 
 
 
@@ -101,6 +105,8 @@ if __name__ == "__main__":
     filedir = '/scratch/Users/joru1876/GROAnalysis/files/'
     # run(genedir,bam1,bam2,figdir,filedir)
 
+    figdir='/Users/jonathanrubin/Google Drive/Colorado University/Jonathan/GROAnalysis/figures/'
+    filedir='/Users/jonathanrubin/Google Drive/Colorado University/Jonathan/GROAnalysis/files/'
     TSS1=filedir+'1_TSS.count.bed'
     TSS2=filedir+'2_TSS.count.bed'
     END1=filedir+'1_END.count.bed'
