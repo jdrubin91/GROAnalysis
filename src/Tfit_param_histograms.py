@@ -47,7 +47,7 @@ def run(folder):
                                     for l in range(len(w)):
                                         values[k+l].append(float(w[l]))
                                 elif k > 5:
-                                    values[k+2].append(float(line[k]))
+                                    values[k+1].append(float(line[k]))
                                 else:
                                     values[k].append(float(line[k]))
                         i+=1
