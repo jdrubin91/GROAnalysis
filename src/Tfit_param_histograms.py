@@ -50,7 +50,7 @@ def run(folder):
                         else:
                             i+=1
 
-        length = len(values)
+        length = len(names)
         subplotmatrix = int(length)
         F = plt.figure()
         F.suptitle(file1, fontsize=14)
