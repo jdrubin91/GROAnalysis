@@ -31,6 +31,7 @@ def run(folder):
     values = [[] for i in range(len(names))]
     for file1 in os.listdir(folder):
         if 'K_models_MLE.tsv' in file1:
+            print file1
             with open(folder + file1) as F:
                 for line in F:
                     if '#' not in line[0]:
@@ -46,13 +47,11 @@ def run(folder):
                                 else:
                                     values[k].append(float(line[k]))
                         i+=1
-        print values
         length = len(names)
         subplotmatrix = int(length)
         F = plt.figure()
         F.suptitle(file1, fontsize=14)
         for i in range(length):
-            print i,len(values)
             ax = F.add_subplot(subplotmatrix,subplotmatrix,i)
             plt.hist(values[i],bins=100)
             ax.set_title(names[i])
