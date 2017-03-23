@@ -53,6 +53,7 @@ def run(folder):
         subplotmatrix = int(length)
         F = plt.figure()
         F.suptitle(file1, fontsize=14)
+        print values[6]
         for i in range(length):
             print i
             ax = F.add_subplot(subplotmatrix,subplotmatrix,i)
