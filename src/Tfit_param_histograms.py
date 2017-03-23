@@ -36,7 +36,7 @@ def run(folder):
                     if '#' not in line[0]:
                         if '>' in line[0]:
                             i = 0
-                        elif i == 2:
+                        if i == 2:
                             line = line.strip().split()[1:]
                             w = line[4].split(',')
                             for k in range(len(line)):
@@ -47,8 +47,7 @@ def run(folder):
                                     values[k+2].append(float(line[k]))
                                 else:
                                     values[k].append(float(line[k]))
-                        else:
-                            i+=1
+                        i+=1
         print values
         length = len(names)
         subplotmatrix = int(length)
