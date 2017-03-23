@@ -5,6 +5,8 @@ import sys
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
+from matplotlib import rcParams
+rcParams.update({'figure.autolayout': True})
 from scipy.stats import gaussian_kde
 from scipy.stats import norm
 import numpy as np
