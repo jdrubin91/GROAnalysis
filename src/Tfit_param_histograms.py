@@ -28,7 +28,7 @@ figuredir = parent_dir(homedir) + '/figures/'
 
 def run(folder):
     names = ['mu_k', 'sigma_k lambda_k', 'pi_k', 'fp_k', 'w_[p,k]', 'w_[f,k]', 'w_[r,k]', 'b_[f,k]', 'a_[r,k]']
-    values = [[] for i in range(len(names))]
+    values = [[] for i in range(len(names)-1)]
     for file1 in os.listdir(folder):
         if 'K_models_MLE.tsv' in file1:
             print file1
@@ -53,7 +53,6 @@ def run(folder):
         F.suptitle(file1, fontsize=14)
         for i in range(length):
             ax = F.add_subplot(subplotmatrix,subplotmatrix,i)
-            print values[i]
             plt.hist(values[i],bins=100)
             ax.set_title(names[i])
 
