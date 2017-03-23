@@ -49,7 +49,7 @@ def run(folder):
                                     values[k].append(float(line[k]))
                         else:
                             i+=1
-
+        print values
         length = len(names)
         subplotmatrix = int(length)
         F = plt.figure()
