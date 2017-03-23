@@ -40,6 +40,7 @@ def run(folder):
                         if i == 2:
                             line = line.strip().split()[1:]
                             w = line[4].split(',')
+                            print w
                             for k in range(len(line)):
                                 if k == 5:
                                     for l in range(len(w)):
