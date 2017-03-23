@@ -36,7 +36,7 @@ def run(folder):
                     if '#' not in line[0]:
                         if '>' in line[0]:
                             i = 0
-                        elif i = 2:
+                        elif i == 2:
                             line = line.strip().split()[1:]
                             w = line[4].split(',')
                             for k in range(len(line)):
