@@ -43,10 +43,10 @@ def run(folder):
                             w = line[4].split(',')
                             for k in range(len(line)):
                                 print k
-                                if k == 4:
+                                if k == 5:
                                     for l in range(len(w)):
                                         values[k+l].append(float(w[l]))
-                                elif k > 4:
+                                elif k > 5:
                                     values[k+2].append(float(line[k]))
                                 else:
                                     values[k].append(float(line[k]))
