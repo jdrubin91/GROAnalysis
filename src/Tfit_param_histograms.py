@@ -56,7 +56,6 @@ def run(folder):
         F.suptitle(file1, fontsize=14)
         for i in range(length):
             ax = F.add_subplot(subplotmatrix,subplotmatrix,i)
-            print values[i]
             plt.hist(values[i],bins=100)
             ax.set_title(names[i])
 
