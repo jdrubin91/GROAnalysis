@@ -54,6 +54,7 @@ def run(folder):
         subplotmatrix = int(length)
         F = plt.figure()
         F.suptitle(file1, fontsize=14)
+        print values[8]
         for i in range(length):
             ax = F.add_subplot(subplotmatrix,subplotmatrix,i)
             plt.hist(values[i],bins=100)
