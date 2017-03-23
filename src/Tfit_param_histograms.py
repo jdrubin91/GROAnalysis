@@ -29,6 +29,7 @@ figuredir = parent_dir(homedir) + '/figures/'
 def run(folder):
     names = ['mu_k', 'sigma_k lambda_k', 'pi_k', 'fp_k', 'w_[p,k]', 'w_[f,k]', 'w_[r,k]', 'b_[f,k]', 'a_[r,k]']
     values = [[] for i in range(len(names)-1)]
+    print len(names),len(values)
     for file1 in os.listdir(folder):
         if 'K_models_MLE.tsv' in file1:
             print file1
