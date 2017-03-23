@@ -29,7 +29,7 @@ filedir = parent_dir(homedir) + '/files'
 figuredir = parent_dir(homedir) + '/figures/'
 
 def run(folder):
-    names = ['mu_k', 'sigma_k lambda_k', 'pi_k', 'fp_k', 'w_[p,k]', 'w_[f,k]', 'w_[r,k]', 'b_[f,k]', 'a_[r,k]']
+    names = ['mu_k', 'sigma_k', 'lambda_k', 'pi_k', 'fp_k', 'w_[p,k]', 'w_[f,k]', 'w_[r,k]', 'b_[f,k]', 'a_[r,k]']
     values = [[] for i in range(len(names))]
     for file1 in os.listdir(folder):
         if 'K_models_MLE.tsv' in file1:
@@ -47,7 +47,7 @@ def run(folder):
                                     for l in range(len(w)):
                                         values[k+l].append(float(w[l]))
                                 elif k > 5:
-                                    values[k+1].append(float(line[k]))
+                                    values[k+2].append(float(line[k]))
                                 else:
                                     values[k].append(float(line[k]))
                         i+=1
