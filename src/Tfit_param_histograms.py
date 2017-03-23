@@ -52,12 +52,11 @@ def run(folder):
                                     values[k].append(float(line[k]))
                         i+=1
             length = len(names)
-            subplotmatrix = length/3
+            subplotmatrix = math.ceil(length/3)
             F = plt.figure()
             F.suptitle(file1, fontsize=14)
-            # print values[6]
             for i in range(length):
-                ax = F.add_subplot(subplotmatrix,subplotmatrix,i)
+                ax = F.add_subplot(subplotmatrix,subplotmatrix,i+1)
                 plt.hist(values[i],bins=100)
                 ax.set_title(names[i])
 
