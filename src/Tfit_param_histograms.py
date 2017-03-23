@@ -52,6 +52,7 @@ def run(folder):
                                     values[k].append(float(line[k]))
                         i+=1
             length = len(names)
+            print length
             subplotmatrix = math.ceil(length/3)
             print subplotmatrix
             F = plt.figure()
