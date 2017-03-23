@@ -49,17 +49,17 @@ def run(folder):
                                 else:
                                     values[k].append(float(line[k]))
                         i+=1
-        length = len(names)
-        subplotmatrix = int(length)
-        F = plt.figure()
-        F.suptitle(file1, fontsize=14)
-        # print values[6]
-        for i in range(length):
-            ax = F.add_subplot(subplotmatrix,subplotmatrix,i)
-            plt.hist(values[i],bins=100)
-            ax.set_title(names[i])
+            length = len(names)
+            subplotmatrix = int(length/2)
+            F = plt.figure()
+            F.suptitle(file1, fontsize=14)
+            # print values[6]
+            for i in range(length):
+                ax = F.add_subplot(subplotmatrix,subplotmatrix,i)
+                plt.hist(values[i],bins=100)
+                ax.set_title(names[i])
 
-        plt.savefig(figuredir + file1 + '.png')
+            plt.savefig(figuredir + file1 + '.png')
 
 
     
