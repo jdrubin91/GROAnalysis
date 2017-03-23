@@ -40,7 +40,7 @@ def run(folder):
                         if i == 2:
                             line = line.strip().split()[1:]
                             w = line[4].split(',')
-                            for k in range(len(line)):
+                            for k in range(len(line)+1):
                                 print k,line[k]
                                 if k == 5:
                                     for l in range(len(w)):
@@ -54,7 +54,7 @@ def run(folder):
         subplotmatrix = int(length)
         F = plt.figure()
         F.suptitle(file1, fontsize=14)
-        print values[8]
+        print values[9]
         for i in range(length):
             ax = F.add_subplot(subplotmatrix,subplotmatrix,i)
             plt.hist(values[i],bins=100)
