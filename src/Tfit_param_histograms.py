@@ -53,6 +53,7 @@ def run(folder):
                         i+=1
             length = len(names)
             subplotmatrix = math.ceil(length/3)
+            print subplotmatrix
             F = plt.figure()
             F.suptitle(file1, fontsize=14)
             for i in range(length):
