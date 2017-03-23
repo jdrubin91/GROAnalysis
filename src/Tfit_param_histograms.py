@@ -39,12 +39,10 @@ def run(folder):
                             i = 0
                         if i == 2:
                             line = line.strip().split()[1:]
-                            w = line[4].split(',')
-                            print w
+                            w = line[5].split(',')
                             for k in range(len(line)):
                                 if k == 5:
                                     for l in range(len(w)):
-                                        print k+l
                                         values[k+l].append(float(w[l]))
                                 elif k > 5:
                                     values[k+1].append(float(line[k]))
