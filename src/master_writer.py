@@ -392,7 +392,7 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
     
     #Plot TR of all genes, include pearson coefficient and cdf plot
     F6 = plt.figure()
-    ax1 = F6.add_subplot(121)
+    ax1 = F6.add_subplot(111)
     xy = np.vstack([TRx,TRy])
     z = gaussian_kde(xy)(xy)
     ax1.scatter(TRx,TRy,c=z,edgecolor="",s=expressionlist)
@@ -407,9 +407,9 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
     ax1.set_ylim([0, 20])
     ax1.plot([0,50.0],[0,50.0],color='k')
     ax1.text(8,18, "Pearson = " + str(pearsons)[0:5])
-    ax2 = F6.add_subplot(122)
-    ax2.plot(np.sort(cdf),np.linspace(0,1,len(cdf)))
-    ax2.plot(stats.norm.cdf(np.linspace(min(cdf),max(cdf)),0,np.var(cdf)),np.linspace(0,1,len(cdf)))
+    # ax2 = F6.add_subplot(122)
+    # ax2.plot(np.sort(cdf),np.linspace(0,1,len(cdf)))
+    # ax2.plot(stats.norm.cdf(np.linspace(min(cdf),max(cdf)),0,np.var(cdf)),np.linspace(0,1,len(cdf)))
     plt.savefig(figuredir + '/PausingIndex.png')
     
     
