@@ -8,17 +8,17 @@ import reflect_coverage
 import bedtools_create_intersects
 import master_writer
 
-#Specify DMSO treated bedgraph directory
-DMSO = '/scratch/Users/joru1876/GROSeqRaw/flipped/bowtie2/sortedbam/genomecoveragebed/fortdf/JDR_DMSO_SS102217_093015_CAGATC_L005_R1_001.flip.fastqbowtie2.sorted.BedGraph.mp.BedGraph'
+# #Specify DMSO treated bedgraph directory
+# DMSO = '/scratch/Users/joru1876/GROSeqRaw/flipped/bowtie2/sortedbam/genomecoveragebed/fortdf/JDR_DMSO_SS102217_093015_CAGATC_L005_R1_001.flip.fastqbowtie2.sorted.BedGraph.mp.BedGraph'
 
-#Specify CA treated bedgraph directory
-CA = '/scratch/Users/joru1876/GROSeqRaw/flipped/bowtie2/sortedbam/genomecoveragebed/fortdf/JDR_CA_SS102217_093015_ACTTGA_L005_R1_001.flip.fastqbowtie2.sorted.BedGraph.mp.BedGraph'
+# #Specify CA treated bedgraph directory
+# CA = '/scratch/Users/joru1876/GROSeqRaw/flipped/bowtie2/sortedbam/genomecoveragebed/fortdf/JDR_CA_SS102217_093015_ACTTGA_L005_R1_001.flip.fastqbowtie2.sorted.BedGraph.mp.BedGraph'
 
-#Specify gene annotations
-genes = '/scratch/Users/joru1876/GROSeqRaw/flipped/bowtie2/sortedbam/genomecoveragebed/fortdf/refGene.sorted.bed'
+# #Specify gene annotations
+# genes = '/scratch/Users/joru1876/GROSeqRaw/flipped/bowtie2/sortedbam/genomecoveragebed/fortdf/refGene.sorted.bed'
 
-#ChIP directory to get closest genes - currently set at SRF ChIP dataset
-chipdir = '/scratch/Shares/dowell/ENCODE/old/HCT116/SRF/peak_files/ENCFF001UEM.bed'
+# #ChIP directory to get closest genes - currently set at SRF ChIP dataset
+# chipdir = '/scratch/Shares/dowell/ENCODE/old/HCT116/SRF/peak_files/ENCFF001UEM.bed'
 
 #Specify list of genes to examine
 #genelist = ['CYR61','NR4A3','FOS','ATF3','EGR2','FOSB','JUN','NR4A1','DUSP1','NR4A2','DUSP2','EGR3','BTG2','WEE1','THBS1','ZFP36','SNF1LK','EGR1','JUNB','BHLHB2','AXUD1','PTG52','IER2','DUSP5','PLK2','GEM','GDF15','KLF6','SNORD102']
@@ -68,18 +68,20 @@ def run():
     # print "Calculating closest genes to ChIP file..."
     # genelist = closest_gene.run(chipdir,genes,filedir)
     # genes = genelist
-    print "Creating annotation files..."
-    create_annotations.run(genes,filedir)
-    TSS = filedir + '/TSS.sorted.bed'
-    END = filedir + '/END.sorted.bed'
-    print "done\nReflecting coverage values..."
-    reflect_coverage.run(DMSO,CA,filedir)
-    print "done\nCreating intersect files..."
-    DMSOreflect = filedir + '/DMSO.bedgraph'
-    CAreflect = filedir + '/CA.bedgraph'
-    bedtools_create_intersects.run(DMSOreflect,CAreflect,genes,TSS,END,filedir)
-    os.system("rm " + filedir + "/DMSO.bedgraph")
-    os.system("rm " + filedir + "/CA.bedgraph")
+
+    
+    # print "Creating annotation files..."
+    # create_annotations.run(genes,filedir)
+    # TSS = filedir + '/TSS.sorted.bed'
+    # END = filedir + '/END.sorted.bed'
+    # print "done\nReflecting coverage values..."
+    # reflect_coverage.run(DMSO,CA,filedir)
+    # print "done\nCreating intersect files..."
+    # DMSOreflect = filedir + '/DMSO.bedgraph'
+    # CAreflect = filedir + '/CA.bedgraph'
+    # bedtools_create_intersects.run(DMSOreflect,CAreflect,genes,TSS,END,filedir)
+    # os.system("rm " + filedir + "/DMSO.bedgraph")
+    # os.system("rm " + filedir + "/CA.bedgraph")
     print "done\nGenerating files..."
     DMSOgenes = filedir + '/DMSO.genes.bed'
     DMSOTSS = filedir + '/DMSO.TSS.bed'

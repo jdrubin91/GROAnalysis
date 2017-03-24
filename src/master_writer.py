@@ -93,7 +93,7 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
         CAgenes = float(CAgenes)
         CATSS = float(CATSS)
         CAEND = float(CAEND)
-        graphcutoff = 20
+        graphcutoff = 100
         name = gene.split(';')[1]
         
         #Populate lists to perform pearsons coefficient test for transcription across all gene bodies that are above a cutoff
