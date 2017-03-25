@@ -70,18 +70,18 @@ def run():
     # genes = genelist
 
 
-    # print "Creating annotation files..."
-    # create_annotations.run(genes,filedir)
-    # TSS = filedir + '/TSS.sorted.bed'
-    # END = filedir + '/END.sorted.bed'
-    # print "done\nReflecting coverage values..."
-    # reflect_coverage.run(DMSO,CA,filedir)
-    # print "done\nCreating intersect files..."
-    # DMSOreflect = filedir + '/DMSO.bedgraph'
-    # CAreflect = filedir + '/CA.bedgraph'
-    # bedtools_create_intersects.run(DMSOreflect,CAreflect,genes,TSS,END,filedir)
-    # os.system("rm " + filedir + "/DMSO.bedgraph")
-    # os.system("rm " + filedir + "/CA.bedgraph")
+    print "Creating annotation files..."
+    create_annotations.run(genes,filedir)
+    TSS = filedir + '/TSS.sorted.bed'
+    END = filedir + '/END.sorted.bed'
+    print "done\nReflecting coverage values..."
+    reflect_coverage.run(DMSO,CA,filedir)
+    print "done\nCreating intersect files..."
+    DMSOreflect = filedir + '/DMSO.bedgraph'
+    CAreflect = filedir + '/CA.bedgraph'
+    bedtools_create_intersects.run(DMSOreflect,CAreflect,genes,TSS,END,filedir)
+    os.system("rm " + filedir + "/DMSO.bedgraph")
+    os.system("rm " + filedir + "/CA.bedgraph")
     print "done\nGenerating files..."
     DMSOgenes = filedir + '/DMSO.genes.bed'
     DMSOTSS = filedir + '/DMSO.TSS.bed'
