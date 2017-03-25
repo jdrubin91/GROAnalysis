@@ -42,10 +42,10 @@ figuredir = parent_dir(homedir) + '/figures'
 
 def run():
     #Specify DMSO treated bedgraph directory
-    DMSO = '/projects/dowellLab/Taatjes/170207_K00262_0069_AHHMHVBBXX/cat/trimmed/flipped/bowtie2/sortedbam/genomecoveragebed/fortdf/J32_trimmed.flip.fastq.bowtie2.sorted.BedGraph.mp.BedGraph'
+    DMSO = '/projects/dowellLab/Taatjes/170207_K00262_0069_AHHMHVBBXX/cat/trimmed/flipped/bowtie2/sortedbam/genomecoveragebed/fortdf/J12_trimmed.flip.fastq.bowtie2.sorted.BedGraph.mp.BedGraph'
 
     #Specify CA treated bedgraph directory
-    CA = '/projects/dowellLab/Taatjes/170207_K00262_0069_AHHMHVBBXX/cat/trimmed/flipped/bowtie2/sortedbam/genomecoveragebed/fortdf/J42_trimmed.flip.fastq.bowtie2.sorted.BedGraph.mp.BedGraph'
+    CA = '/projects/dowellLab/Taatjes/170207_K00262_0069_AHHMHVBBXX/cat/trimmed/flipped/bowtie2/sortedbam/genomecoveragebed/fortdf/J22_trimmed.flip.fastq.bowtie2.sorted.BedGraph.mp.BedGraph'
     
     #Specify gene annotations
     genes = '/scratch/Users/joru1876/GROSeqRaw/flipped/bowtie2/sortedbam/genomecoveragebed/fortdf/refGene.sorted.bed'
@@ -69,19 +69,19 @@ def run():
     # genelist = closest_gene.run(chipdir,genes,filedir)
     # genes = genelist
 
-    
-    # print "Creating annotation files..."
-    # create_annotations.run(genes,filedir)
-    # TSS = filedir + '/TSS.sorted.bed'
-    # END = filedir + '/END.sorted.bed'
-    # print "done\nReflecting coverage values..."
-    # reflect_coverage.run(DMSO,CA,filedir)
-    # print "done\nCreating intersect files..."
-    # DMSOreflect = filedir + '/DMSO.bedgraph'
-    # CAreflect = filedir + '/CA.bedgraph'
-    # bedtools_create_intersects.run(DMSOreflect,CAreflect,genes,TSS,END,filedir)
-    # os.system("rm " + filedir + "/DMSO.bedgraph")
-    # os.system("rm " + filedir + "/CA.bedgraph")
+
+    print "Creating annotation files..."
+    create_annotations.run(genes,filedir)
+    TSS = filedir + '/TSS.sorted.bed'
+    END = filedir + '/END.sorted.bed'
+    print "done\nReflecting coverage values..."
+    reflect_coverage.run(DMSO,CA,filedir)
+    print "done\nCreating intersect files..."
+    DMSOreflect = filedir + '/DMSO.bedgraph'
+    CAreflect = filedir + '/CA.bedgraph'
+    bedtools_create_intersects.run(DMSOreflect,CAreflect,genes,TSS,END,filedir)
+    os.system("rm " + filedir + "/DMSO.bedgraph")
+    os.system("rm " + filedir + "/CA.bedgraph")
     print "done\nGenerating files..."
     DMSOgenes = filedir + '/DMSO.genes.bed'
     DMSOTSS = filedir + '/DMSO.TSS.bed'
