@@ -58,7 +58,7 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
             
     
     #Initiate all required lists to store information
-    coveragecutoff = 20
+    coveragecutoff = 100
     TRlist = list()
     ENDlist = list()
     TRx = list()
@@ -348,16 +348,16 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
     outfile2.write("High CA TR = " + str(len(TRgenesup)) + "\nHigh DMSO TR = " + str(len(TRgenesdwn)) + "\nHigh CA ER = " + str(len(ERgenesup)) + "\nHigh DMSO ER = " + str(len(ERgenesdwn)) + "\n")
     outfile2.write("High CA TR\n")
     for item in sorted(TRgenesup, key=itemgetter(1),reverse=True):
-        outfile2.write(item + '\t' + str(item[1]) + '\n')
+        outfile2.write(item + '\t' + '\n')
     outfile2.write("High DMSO TR\n")
     for item in sorted(TRgenesdwn, key=itemgetter(1),reverse=True):
-        outfile2.write(item + '\t' + str(item[1]) + '\n')
+        outfile2.write(item + '\t' + '\n')
     outfile2.write("High CA ER\n")
     for item in sorted(ERgenesup, key=itemgetter(1),reverse=True):
-        outfile2.write(item + '\t' + str(item[1]) + '\n')
+        outfile2.write(item + '\t' + '\n')
     outfile2.write("High DMSO ER\n")
     for item in sorted(ERgenesdwn, key=itemgetter(1),reverse=True):
-        outfile2.write(item + '\t' + str(item[1]) + '\n')
+        outfile2.write(item + '\t' + '\n')
     
     #Generate pearson plot for transcription of all genes
     F5 = plt.figure()
@@ -397,16 +397,14 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
     z = gaussian_kde(xy)(xy)
     ax1.scatter(TRx,TRy,c=z,edgecolor="",s=expressionlist)
     ax1.scatter(TRx2,TRy2,c='red',edgecolor="",s=expressionlist2)
-    ax1.set_yscale('log')
-    ax1.set_xscale('log')
     ax1.set_title('Pausing Index')
     ax1.set_ylabel('CA')
     ax1.set_xlabel('DMSO')
     ax1.get_xaxis().tick_bottom()
     ax1.get_yaxis().tick_left()
     #ax1.plot([0,1/slope1],[intercept1,1],color = 'r')
-    # ax1.set_xlim([0, 20])
-    # ax1.set_ylim([0, 20])
+    ax1.set_xlim([0, 20])
+    ax1.set_ylim([0, 20])
     ax1.plot([0,50.0],[0,50.0],color='k')
     ax1.text(8,18, "Pearson = " + str(pearsons)[0:5])
     # ax2 = F6.add_subplot(122)
