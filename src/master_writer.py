@@ -348,16 +348,16 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
     outfile2.write("High CA TR = " + str(len(TRgenesup)) + "\nHigh DMSO TR = " + str(len(TRgenesdwn)) + "\nHigh CA ER = " + str(len(ERgenesup)) + "\nHigh DMSO ER = " + str(len(ERgenesdwn)) + "\n")
     outfile2.write("High CA TR\n")
     for item in sorted(TRgenesup, key=itemgetter(1),reverse=True):
-        outfile2.write(item[0] + '\t' + str(item[1]) + '\n')
+        outfile2.write(item + '\t' + str(item[1]) + '\n')
     outfile2.write("High DMSO TR\n")
     for item in sorted(TRgenesdwn, key=itemgetter(1),reverse=True):
-        outfile2.write(item[0] + '\t' + str(item[1]) + '\n')
+        outfile2.write(item + '\t' + str(item[1]) + '\n')
     outfile2.write("High CA ER\n")
     for item in sorted(ERgenesup, key=itemgetter(1),reverse=True):
-        outfile2.write(item[0] + '\t' + str(item[1]) + '\n')
+        outfile2.write(item + '\t' + str(item[1]) + '\n')
     outfile2.write("High DMSO ER\n")
     for item in sorted(ERgenesdwn, key=itemgetter(1),reverse=True):
-        outfile2.write(item[0] + '\t' + str(item[1]) + '\n')
+        outfile2.write(item + '\t' + str(item[1]) + '\n')
     
     #Generate pearson plot for transcription of all genes
     F5 = plt.figure()
