@@ -406,7 +406,7 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
     ax1.set_xlim([0, 50])
     ax1.set_ylim([0, 50])
     ax1.plot([0,50.0],[0,50.0],color='k')
-    ax1.text(8,18, "Pearson = " + str(pearsons)[0:5])
+    # ax1.text(8,18, "Pearson = " + str(pearsons)[0:5])
     # ax2 = F6.add_subplot(122)
     # ax2.plot(np.sort(cdf),np.linspace(0,1,len(cdf)))
     # ax2.plot(stats.norm.cdf(np.linspace(min(cdf),max(cdf)),0,np.var(cdf)),np.linspace(0,1,len(cdf)))
