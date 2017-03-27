@@ -58,7 +58,7 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
             
     
     #Initiate all required lists to store information
-    coveragecutoff = 20
+    coveragecutoff = 50
     TRlist = list()
     ENDlist = list()
     TRx = list()
@@ -397,7 +397,7 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
     z = gaussian_kde(xy)(xy)
     ax1.scatter(TRx,TRy,c=z,edgecolor="",s=expressionlist)
     ax1.scatter(TRx2,TRy2,c='red',edgecolor="",s=expressionlist2)
-    ax1.set_title('Pausing Index t=15min')
+    ax1.set_title('Pausing Index t=0min')
     ax1.set_ylabel('CA')
     ax1.set_xlabel('DMSO')
     ax1.get_xaxis().tick_bottom()
