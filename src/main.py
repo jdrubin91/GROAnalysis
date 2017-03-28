@@ -114,9 +114,19 @@ if __name__ == "__main__":
         outfile.write('d2' + '\t' + key + '\t' + str(d2[key]) + '\n')
     for key in d3:
         outfile.write('d3' + '\t' + key + '\t' + str(d3[key]) + '\n')
-    # outfile.write(d1)
-    # outfile.write(d2)
-    # outfile.write(d3)
+
+
+    # d1,d2,d3 = dict(),dict(),dict()
+    # with open('/Users/jonathanrubin/Google Drive/Colorado University/Jonathan/GROAnalysis/files' + '/all_timepoints.txt') as F:
+    #     for line in F:
+    #         line = line.strip().split()
+    #         if 'd1' == line[0]:
+    #             d1[line[1]] = float(line[2])
+    #         if 'd2' == line[0]:
+    #             d2[line[1]] = float(line[2])
+    #         if 'd3' == line[0]:
+    #             d3[line[1]] = float(line[2])
+
 
     pausing_index_boxplots.run(d1,d2,d3,figuredir)
 

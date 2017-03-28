@@ -59,7 +59,7 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
             
     
     #Initiate all required lists to store information
-    coveragecutoff = 50
+    coveragecutoff = 100
     TRlist = list()
     ENDlist = list()
     TRx = list()

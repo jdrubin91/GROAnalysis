@@ -1,9 +1,9 @@
 __author__ = 'Jonathan Rubin'
 
-import matplotlib
-matplotlib.use('Agg')
-from matplotlib import rcParams
-rcParams.update({'figure.autolayout': True})
+# import matplotlib
+# matplotlib.use('Agg')
+# from matplotlib import rcParams
+# rcParams.update({'figure.autolayout': True})
 import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
 
@@ -44,51 +44,52 @@ def run(d1,d2,d3,figuredir):
     boxplot = [[] for i in range(3)]
     for gene in d1:
         boxplot[0].append(d1[gene])
+    for gene in d2:
         boxplot[1].append(d2[gene])
+    for gene in d3:
         boxplot[2].append(d3[gene])
 
 
 
     t0 = [[] for i in range(4)]
     for key in d1:
-        for PI in d1[key]:
-            gene = key.split(';')[1]
-            if gene in g15up:
-                t0[0].append(PI)
-            if gene in g45up:
-                t0[1].append(PI)
-            if gene in g45do:
-                t0[2].append(PI)
-            if gene in g45up:
-                t0[3].append(PI)
+        gene = key.split(';')[1]
+        PI = d1[key]
+        if gene in g15up:
+            t0[0].append(PI)
+        if gene in g45up:
+            t0[1].append(PI)
+        if gene in g45do:
+            t0[2].append(PI)
+        if gene in g45up:
+            t0[3].append(PI)
 
     t15 = [[] for i in range(4)]
     for key in d2:
-        for PI in d2[key]:
-            gene = key.split(';')[1]
-            if gene in g15up:
-                t15[0].append(PI)
-            if gene in g45up:
-                t15[1].append(PI)
-            if gene in g45do:
-                t15[2].append(PI)
-            if gene in g45up:
-                t15[3].append(PI)
+        gene = key.split(';')[1]
+        PI = d2[key]
+        if gene in g15up:
+            t15[0].append(PI)
+        if gene in g45up:
+            t15[1].append(PI)
+        if gene in g45do:
+            t15[2].append(PI)
+        if gene in g45up:
+            t15[3].append(PI)
 
 
     t45 = [[] for i in range(4)]
     for key in d3:
-        for PI in d3[key]:
-            gene = key.split(';')[1]
-            if gene in g15up:
-                t45[0].append(PI)
-            if gene in g45up:
-                t45[1].append(PI)
-            if gene in g45do:
-                t45[2].append(PI)
-            if gene in g45up:
-                t45[3].append(PI)
-    print t0
+        gene = key.split(';')[1]
+        PI = d3[key]
+        if gene in g15up:
+            t45[0].append(PI)
+        if gene in g45up:
+            t45[1].append(PI)
+        if gene in g45do:
+            t45[2].append(PI)
+        if gene in g45up:
+            t45[3].append(PI)
 
     F = plt.figure()
     ax = F.add_subplot(111)
@@ -98,7 +99,7 @@ def run(d1,d2,d3,figuredir):
     ax.get_xaxis().tick_bottom()
     ax.get_yaxis().tick_left()
     # plt.axhline(0, color='black')
-    bp = ax.boxplot(boxplot, patch_artist=True,whis=5)
+    bp = ax.boxplot(boxplot, patch_artist=True,whis=50)
     ## change outline color, fill color and linewidth of the boxes
     for box in bp['boxes']:
         # change outline color
@@ -126,7 +127,6 @@ def run(d1,d2,d3,figuredir):
     ax.set_axisbelow(True)
     F.savefig(figuredir + '/CA_PI_Differences.png', dpi=1200)
 
-
     F = plt.figure()
     ax = F.add_subplot(111)
     ax.set_title('CA-dependent Pausing Index Differences Subset')
@@ -135,11 +135,11 @@ def run(d1,d2,d3,figuredir):
     ax.get_xaxis().tick_bottom()
     ax.get_yaxis().tick_left()
     # plt.axhline(0, color='black')
-    bp = ax.boxplot(t0, positions = [1,2,3,4], patch_artist=True,whis=5)
+    bp = ax.boxplot(t0, positions = [1,2,3,4], patch_artist=True,whis=50)
     setBoxColors(bp)
-    bp2 = ax.boxplot(t15, positions = [6,7,8,9], patch_artist=True,whis=5)
+    bp2 = ax.boxplot(t15, positions = [6,7,8,9], patch_artist=True,whis=50)
     setBoxColors(bp2)
-    bp3 = ax.boxplot(t45, positions = [11,12,13,14], patch_artist=True,whis=5)
+    bp3 = ax.boxplot(t45, positions = [11,12,13,14], patch_artist=True,whis=50)
     setBoxColors(bp3)
     ax.set_xlim([0, 15])
     plt.xticks([2.5,7.5,12.5], ['0','15','45'])
