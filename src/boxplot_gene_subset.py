@@ -7,22 +7,37 @@ import numpy as np
 
 def setBoxColors(bp):    
     ## change outline color, fill color and linewidth of the boxes
-    # change outline color
-    for box in bp['boxes']:
-        box.set( color='#7570b3', linewidth=2)
     # change fill color
     bp['boxes'][0].set( facecolor = 'green' )
     bp['boxes'][1].set( facecolor = 'blue' )
     bp['boxes'][2].set( facecolor = 'magenta' )
     bp['boxes'][3].set( facecolor = 'red' )
+    # change outline color
+    bp['boxes'][0].set( color='green', linewidth=2)
+    bp['boxes'][1].set( color='blue', linewidth=2)
+    bp['boxes'][2].set( color='magenta', linewidth=2)
+    bp['boxes'][3].set( color='red', linewidth=2)
 
     ## change color and linewidth of the whiskers
-    for whisker in bp['whiskers']:
-        whisker.set(color='#7570b3', linewidth=2)
+    bp['whiskers'][0].set(color='green', linewidth=2)
+    bp['whiskers'][1].set(color='green', linewidth=2)
+    bp['whiskers'][2].set(color='blue', linewidth=2)
+    bp['whiskers'][3].set(color='blue', linewidth=2)
+    bp['whiskers'][4].set(color='magenta', linewidth=2)
+    bp['whiskers'][5].set(color='magenta', linewidth=2)
+    bp['whiskers'][6].set(color='red', linewidth=2)
+    bp['whiskers'][7].set(color='red', linewidth=2)
+
 
     ## change color and linewidth of the caps
-    for cap in bp['caps']:
-        cap.set(color='#7570b3', linewidth=2)
+    bp['caps'][0].set(color='green', linewidth=2)
+    bp['caps'][1].set(color='green', linewidth=2)
+    bp['caps'][2].set(color='blue', linewidth=2)
+    bp['caps'][3].set(color='blue', linewidth=2)
+    bp['caps'][4].set(color='magenta', linewidth=2)
+    bp['caps'][5].set(color='magenta', linewidth=2)
+    bp['caps'][6].set(color='red', linewidth=2)
+    bp['caps'][7].set(color='red', linewidth=2)
 
     ## change color and linewidth of the medians
     for median in bp['medians']:

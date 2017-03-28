@@ -15,6 +15,12 @@ import pausing_index_boxplots
 # #Specify CA treated bedgraph directory
 # CA = '/scratch/Users/joru1876/GROSeqRaw/flipped/bowtie2/sortedbam/genomecoveragebed/fortdf/JDR_CA_SS102217_093015_ACTTGA_L005_R1_001.flip.fastqbowtie2.sorted.BedGraph.mp.BedGraph'
 
+#Specify DMSO treated bedgraph directory
+DMSO = '/projects/dowellLab/Taatjes/170207_K00262_0069_AHHMHVBBXX/cat/trimmed/flipped/bowtie2/sortedbam/genomecoveragebed/fortdf/J12_trimmed.flip.fastq.bowtie2.sorted.BedGraph.mp.BedGraph'
+
+#Specify CA treated bedgraph directory
+CA = '/projects/dowellLab/Taatjes/170207_K00262_0069_AHHMHVBBXX/cat/trimmed/flipped/bowtie2/sortedbam/genomecoveragebed/fortdf/J32_trimmed.flip.fastq.bowtie2.sorted.BedGraph.mp.BedGraph'
+
 # #Specify gene annotations
 # genes = '/scratch/Users/joru1876/GROSeqRaw/flipped/bowtie2/sortedbam/genomecoveragebed/fortdf/refGene.sorted.bed'
 
@@ -95,37 +101,37 @@ def run(DMSO,CA):
     print "done"
 
 if __name__ == "__main__":
-    DMSO = '/projects/dowellLab/Taatjes/170207_K00262_0069_AHHMHVBBXX/cat/trimmed/flipped/bowtie2/sortedbam/genomecoveragebed/fortdf/J12_trimmed.flip.fastq.bowtie2.sorted.BedGraph.mp.BedGraph'
-    CA = '/projects/dowellLab/Taatjes/170207_K00262_0069_AHHMHVBBXX/cat/trimmed/flipped/bowtie2/sortedbam/genomecoveragebed/fortdf/J22_trimmed.flip.fastq.bowtie2.sorted.BedGraph.mp.BedGraph'
-    d1 = run(DMSO,CA)
+    # DMSO = '/projects/dowellLab/Taatjes/170207_K00262_0069_AHHMHVBBXX/cat/trimmed/flipped/bowtie2/sortedbam/genomecoveragebed/fortdf/J12_trimmed.flip.fastq.bowtie2.sorted.BedGraph.mp.BedGraph'
+    # CA = '/projects/dowellLab/Taatjes/170207_K00262_0069_AHHMHVBBXX/cat/trimmed/flipped/bowtie2/sortedbam/genomecoveragebed/fortdf/J22_trimmed.flip.fastq.bowtie2.sorted.BedGraph.mp.BedGraph'
+    # d1 = run(DMSO,CA)
 
-    DMSO = '/projects/dowellLab/Taatjes/170207_K00262_0069_AHHMHVBBXX/cat/trimmed/flipped/bowtie2/sortedbam/genomecoveragebed/fortdf/J32_trimmed.flip.fastq.bowtie2.sorted.BedGraph.mp.BedGraph'
-    CA = '/projects/dowellLab/Taatjes/170207_K00262_0069_AHHMHVBBXX/cat/trimmed/flipped/bowtie2/sortedbam/genomecoveragebed/fortdf/J42_trimmed.flip.fastq.bowtie2.sorted.BedGraph.mp.BedGraph'
-    d2 = run(DMSO,CA)
+    # DMSO = '/projects/dowellLab/Taatjes/170207_K00262_0069_AHHMHVBBXX/cat/trimmed/flipped/bowtie2/sortedbam/genomecoveragebed/fortdf/J32_trimmed.flip.fastq.bowtie2.sorted.BedGraph.mp.BedGraph'
+    # CA = '/projects/dowellLab/Taatjes/170207_K00262_0069_AHHMHVBBXX/cat/trimmed/flipped/bowtie2/sortedbam/genomecoveragebed/fortdf/J42_trimmed.flip.fastq.bowtie2.sorted.BedGraph.mp.BedGraph'
+    # d2 = run(DMSO,CA)
 
-    DMSO = '/projects/dowellLab/Taatjes/170207_K00262_0069_AHHMHVBBXX/cat/trimmed/flipped/bowtie2/sortedbam/genomecoveragebed/fortdf/J52_trimmed.flip.fastq.bowtie2.sorted.BedGraph.mp.BedGraph'
-    CA = '/projects/dowellLab/Taatjes/170207_K00262_0069_AHHMHVBBXX/cat/trimmed/flipped/bowtie2/sortedbam/genomecoveragebed/fortdf/J62_trimmed.flip.fastq.bowtie2.sorted.BedGraph.mp.BedGraph'
-    d3 = run(DMSO,CA)
+    # DMSO = '/projects/dowellLab/Taatjes/170207_K00262_0069_AHHMHVBBXX/cat/trimmed/flipped/bowtie2/sortedbam/genomecoveragebed/fortdf/J52_trimmed.flip.fastq.bowtie2.sorted.BedGraph.mp.BedGraph'
+    # CA = '/projects/dowellLab/Taatjes/170207_K00262_0069_AHHMHVBBXX/cat/trimmed/flipped/bowtie2/sortedbam/genomecoveragebed/fortdf/J62_trimmed.flip.fastq.bowtie2.sorted.BedGraph.mp.BedGraph'
+    # d3 = run(DMSO,CA)
 
-    outfile = open(filedir + '/all_timepoints.txt','w')
-    for key in d1:
-        outfile.write('d1' + '\t' + key + '\t' + str(d1[key]) + '\n')
-    for key in d2:
-        outfile.write('d2' + '\t' + key + '\t' + str(d2[key]) + '\n')
-    for key in d3:
-        outfile.write('d3' + '\t' + key + '\t' + str(d3[key]) + '\n')
+    # outfile = open(filedir + '/all_timepoints.txt','w')
+    # for key in d1:
+    #     outfile.write('d1' + '\t' + key + '\t' + str(d1[key]) + '\n')
+    # for key in d2:
+    #     outfile.write('d2' + '\t' + key + '\t' + str(d2[key]) + '\n')
+    # for key in d3:
+    #     outfile.write('d3' + '\t' + key + '\t' + str(d3[key]) + '\n')
 
 
-    # d1,d2,d3 = dict(),dict(),dict()
-    # with open('/Users/jonathanrubin/Google Drive/Colorado University/Jonathan/GROAnalysis/files' + '/all_timepoints.txt') as F:
-    #     for line in F:
-    #         line = line.strip().split()
-    #         if 'd1' == line[0]:
-    #             d1[line[1]] = float(line[2])
-    #         if 'd2' == line[0]:
-    #             d2[line[1]] = float(line[2])
-    #         if 'd3' == line[0]:
-    #             d3[line[1]] = float(line[2])
+    d1,d2,d3 = dict(),dict(),dict()
+    with open('/Users/jonathanrubin/Google Drive/Colorado University/Jonathan/GROAnalysis/files' + '/all_timepoints.txt') as F:
+        for line in F:
+            line = line.strip().split()
+            if 'd1' == line[0]:
+                d1[line[1]] = float(line[2])
+            if 'd2' == line[0]:
+                d2[line[1]] = float(line[2])
+            if 'd3' == line[0]:
+                d3[line[1]] = float(line[2])
 
 
     pausing_index_boxplots.run(d1,d2,d3,figuredir)
