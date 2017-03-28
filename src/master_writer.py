@@ -14,6 +14,7 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
 
     #Populate dictionary d with each key an annotation with coverage values
     d = dict()
+    d1 = dict()
     with open(DMSOgenes) as F1:
         for line in F1:
             chrom,start,stop,gene,number,strand,coverage = line.strip().split()
@@ -121,6 +122,8 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
             TRlist.append(TR)
             # ENDlist.append(CAEND/(CAgenes-CAEND))-(DMSOEND/(DMSOgenes-DMSOEND))
             names.append(gene.split(';')[1])
+            if gene not in d1:
+                d[gene] = [TRy-TRx]
             
     print "Genes: ",i
     
@@ -464,5 +467,6 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
     ax.text(5.5,4, "Pearson = " + str(pearsons)[0:5])
     plt.savefig(figuredir + '/Transcription_UPGenes.png')
     
+    return d1
     
     

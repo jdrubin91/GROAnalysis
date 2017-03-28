@@ -89,8 +89,9 @@ def run(folder,savedir):
                                 y45do.append(d[key][i-1][1])
 
 
-    for item in g45up:
-        print item
+    # for item in g15up:
+    #     print item
+    print g45do
     # F = plt.figure()
     # ax = F.add_subplot(111)
     # ax.set_title('Serum Induction Timecourse')
@@ -122,7 +123,7 @@ def run(folder,savedir):
     # red_patch = mpatches.Patch(color='red', label='Genes down at 15min')
     # blue_patch = mpatches.Patch(color='blue', label='Genes up at 45min')
     # magenta_patch = mpatches.Patch(color='magenta', label='Genes down at 45min')
-    # ax.legend([green_patch,red_patch,blue_patch,magenta_patch],['Genes up at 15min','Genes down at 15min','Genes up at 45min','Genes down at 45min'],loc=3,fontsize=10)
+    # ax.legend([green_patch,blue_patch,magenta_patch,red_patch],['Genes up at 15min','Genes up at 45min','Genes down at 45min','Genes down at 15min'],loc=3,fontsize=10)
     # F.savefig(savedir + 'serum_timecourse.png', dpi=1200)
 
 

@@ -7,6 +7,7 @@ import create_annotations
 import reflect_coverage
 import bedtools_create_intersects
 import master_writer
+import pausing_index_boxplots
 
 # #Specify DMSO treated bedgraph directory
 # DMSO = '/scratch/Users/joru1876/GROSeqRaw/flipped/bowtie2/sortedbam/genomecoveragebed/fortdf/JDR_DMSO_SS102217_093015_CAGATC_L005_R1_001.flip.fastqbowtie2.sorted.BedGraph.mp.BedGraph'
@@ -40,12 +41,12 @@ filedir = parent_dir(homedir) + '/files'
 figuredir = parent_dir(homedir) + '/figures'
 
 
-def run():
-    #Specify DMSO treated bedgraph directory
-    DMSO = '/projects/dowellLab/Taatjes/170207_K00262_0069_AHHMHVBBXX/cat/trimmed/flipped/bowtie2/sortedbam/genomecoveragebed/fortdf/J32_trimmed.flip.fastq.bowtie2.sorted.BedGraph.mp.BedGraph'
+def run(DMSO,CA):
+    # #Specify DMSO treated bedgraph directory
+    # DMSO = '/projects/dowellLab/Taatjes/170207_K00262_0069_AHHMHVBBXX/cat/trimmed/flipped/bowtie2/sortedbam/genomecoveragebed/fortdf/J32_trimmed.flip.fastq.bowtie2.sorted.BedGraph.mp.BedGraph'
 
-    #Specify CA treated bedgraph directory
-    CA = '/projects/dowellLab/Taatjes/170207_K00262_0069_AHHMHVBBXX/cat/trimmed/flipped/bowtie2/sortedbam/genomecoveragebed/fortdf/J42_trimmed.flip.fastq.bowtie2.sorted.BedGraph.mp.BedGraph'
+    # #Specify CA treated bedgraph directory
+    # CA = '/projects/dowellLab/Taatjes/170207_K00262_0069_AHHMHVBBXX/cat/trimmed/flipped/bowtie2/sortedbam/genomecoveragebed/fortdf/J42_trimmed.flip.fastq.bowtie2.sorted.BedGraph.mp.BedGraph'
     
     #Specify gene annotations
     genes = '/scratch/Users/joru1876/GROSeqRaw/flipped/bowtie2/sortedbam/genomecoveragebed/fortdf/refGene.sorted.bed'
@@ -89,7 +90,30 @@ def run():
     CAgenes = filedir + '/CA.genes.bed'
     CATSS = filedir + '/CA.TSS.bed'
     CAEND = filedir + '/CA.END.bed'
-    master_writer.run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir)
+    d1 = master_writer.run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir)
+    return d1
     print "done"
+
+if __name__ == "__main__":
+    DMSO = '/projects/dowellLab/Taatjes/170207_K00262_0069_AHHMHVBBXX/cat/trimmed/flipped/bowtie2/sortedbam/genomecoveragebed/fortdf/J12_trimmed.flip.fastq.bowtie2.sorted.BedGraph.mp.BedGraph'
+    CA = '/projects/dowellLab/Taatjes/170207_K00262_0069_AHHMHVBBXX/cat/trimmed/flipped/bowtie2/sortedbam/genomecoveragebed/fortdf/J22_trimmed.flip.fastq.bowtie2.sorted.BedGraph.mp.BedGraph'
+    d1 = run(DMSO,CA)
+
+    DMSO = '/projects/dowellLab/Taatjes/170207_K00262_0069_AHHMHVBBXX/cat/trimmed/flipped/bowtie2/sortedbam/genomecoveragebed/fortdf/J32_trimmed.flip.fastq.bowtie2.sorted.BedGraph.mp.BedGraph'
+    CA = '/projects/dowellLab/Taatjes/170207_K00262_0069_AHHMHVBBXX/cat/trimmed/flipped/bowtie2/sortedbam/genomecoveragebed/fortdf/J42_trimmed.flip.fastq.bowtie2.sorted.BedGraph.mp.BedGraph'
+    d2 = run(DMSO,CA)
+
+    DMSO = '/projects/dowellLab/Taatjes/170207_K00262_0069_AHHMHVBBXX/cat/trimmed/flipped/bowtie2/sortedbam/genomecoveragebed/fortdf/J52_trimmed.flip.fastq.bowtie2.sorted.BedGraph.mp.BedGraph'
+    CA = '/projects/dowellLab/Taatjes/170207_K00262_0069_AHHMHVBBXX/cat/trimmed/flipped/bowtie2/sortedbam/genomecoveragebed/fortdf/J62_trimmed.flip.fastq.bowtie2.sorted.BedGraph.mp.BedGraph'
+    d3 = run(DMSO,CA)
+
+
+
+    pausing_index_boxplots.run(d1,d2,d3,figuredir)
+
+    outfile = open(filedir + '/all_timepoints.txt','w')
+    outfile.write(d1)
+    outfile.write(d2)
+    outfile.write(d3)
     
     
