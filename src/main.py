@@ -110,7 +110,9 @@ if __name__ == "__main__":
     outfile = open(filedir + '/all_timepoints.txt','w')
     for key in d1:
         outfile.write('d1' + '\t' + key + '\t' + str(d1[key]) + '\n')
+    for key in d2:
         outfile.write('d2' + '\t' + key + '\t' + str(d2[key]) + '\n')
+    for key in d3:
         outfile.write('d3' + '\t' + key + '\t' + str(d3[key]) + '\n')
     # outfile.write(d1)
     # outfile.write(d2)
