@@ -107,13 +107,17 @@ if __name__ == "__main__":
     CA = '/projects/dowellLab/Taatjes/170207_K00262_0069_AHHMHVBBXX/cat/trimmed/flipped/bowtie2/sortedbam/genomecoveragebed/fortdf/J62_trimmed.flip.fastq.bowtie2.sorted.BedGraph.mp.BedGraph'
     d3 = run(DMSO,CA)
 
-    # outfile = open(filedir + '/all_timepoints.txt','w')
+    outfile = open(filedir + '/all_timepoints.txt','w')
+    for key in d1:
+        outfile.write('d1' + '\t' + key + '\t' + str(d1[key]) + '\n')
+        outfile.write('d2' + '\t' + key + '\t' + str(d2[key]) + '\n')
+        outfile.write('d3' + '\t' + key + '\t' + str(d3[key]) + '\n')
     # outfile.write(d1)
     # outfile.write(d2)
     # outfile.write(d3)
 
     pausing_index_boxplots.run(d1,d2,d3,figuredir)
 
-    
+
     
     

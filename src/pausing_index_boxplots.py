@@ -88,34 +88,7 @@ def run(d1,d2,d3,figuredir):
                 t45[2].append(PI)
             if gene in g45up:
                 t45[3].append(PI)
-
-
-    F = plt.figure()
-    ax = F.add_subplot(111)
-    ax.set_title('CA-dependent Pausing Index Differences Subset')
-    ax.set_ylabel('Difference in Pausing Index (CA-DMSO)')
-    ax.set_xlabel('Time after Serum Induction (min)')
-    ax.get_xaxis().tick_bottom()
-    ax.get_yaxis().tick_left()
-    # plt.axhline(0, color='black')
-    bp = ax.boxplot(t0, positions = [1,2,3,4], patch_artist=True,whis=5)
-    setBoxColors(bp)
-    bp2 = ax.boxplot(t15, positions = [6,7,8,9], patch_artist=True,whis=5)
-    setBoxColors(bp2)
-    bp3 = ax.boxplot(t45, positions = [11,12,13,14], patch_artist=True,whis=5)
-    setBoxColors(bp3)
-    ax.set_xlim([0, 15])
-    plt.xticks([2.5,7.5,12.5], ['0','15','45'])
-    plt.axhline(0, color='black',alpha=0.3)
-    ax.set_axisbelow(True)
-
-    # green_patch = mpatches.Patch(color='green', label='UP at 15min')
-    # red_patch = mpatches.Patch(color='red', label='DOWN at 15min')
-    # blue_patch = mpatches.Patch(color='blue', label='UP at 45min')
-    # magenta_patch = mpatches.Patch(color='magenta', label='DOWN at 45min')
-    # ax.legend([green_patch,blue_patch,magenta_patch,red_patch],['Genes up at 15min','Genes up at 45min','Genes down at 45min','Genes down at 15min'],bbox_to_anchor=(0, 0),loc=3,fontsize=10)
-    F.savefig(figuredir + 'CA_PI_Differences_Subset.png', dpi=1200)
-
+    print t0
 
     F = plt.figure()
     ax = F.add_subplot(111)
@@ -152,4 +125,34 @@ def run(d1,d2,d3,figuredir):
     plt.axhline(0, color='black',alpha=0.3)
     ax.set_axisbelow(True)
     F.savefig(figuredir + 'CA_PI_Differences.png', dpi=1200)
+
+
+    F = plt.figure()
+    ax = F.add_subplot(111)
+    ax.set_title('CA-dependent Pausing Index Differences Subset')
+    ax.set_ylabel('Difference in Pausing Index (CA-DMSO)')
+    ax.set_xlabel('Time after Serum Induction (min)')
+    ax.get_xaxis().tick_bottom()
+    ax.get_yaxis().tick_left()
+    # plt.axhline(0, color='black')
+    bp = ax.boxplot(t0, positions = [1,2,3,4], patch_artist=True,whis=5)
+    setBoxColors(bp)
+    bp2 = ax.boxplot(t15, positions = [6,7,8,9], patch_artist=True,whis=5)
+    setBoxColors(bp2)
+    bp3 = ax.boxplot(t45, positions = [11,12,13,14], patch_artist=True,whis=5)
+    setBoxColors(bp3)
+    ax.set_xlim([0, 15])
+    plt.xticks([2.5,7.5,12.5], ['0','15','45'])
+    plt.axhline(0, color='black',alpha=0.3)
+    ax.set_axisbelow(True)
+
+    # green_patch = mpatches.Patch(color='green', label='UP at 15min')
+    # red_patch = mpatches.Patch(color='red', label='DOWN at 15min')
+    # blue_patch = mpatches.Patch(color='blue', label='UP at 45min')
+    # magenta_patch = mpatches.Patch(color='magenta', label='DOWN at 45min')
+    # ax.legend([green_patch,blue_patch,magenta_patch,red_patch],['Genes up at 15min','Genes up at 45min','Genes down at 45min','Genes down at 15min'],bbox_to_anchor=(0, 0),loc=3,fontsize=10)
+    F.savefig(figuredir + 'CA_PI_Differences_Subset.png', dpi=1200)
+
+
+
 

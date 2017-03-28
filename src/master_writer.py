@@ -123,7 +123,6 @@ def run(DMSOgenes,DMSOTSS,DMSOEND,CAgenes,CATSS,CAEND,filedir,figuredir):
             # ENDlist.append(CAEND/(CAgenes-CAEND))-(DMSOEND/(DMSOgenes-DMSOEND))
             names.append(gene.split(';')[1])
             if gene not in d1:
-                print gene
                 d[gene] = [TR]
             
     print "Genes: ",i
