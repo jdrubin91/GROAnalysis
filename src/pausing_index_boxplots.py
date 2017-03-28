@@ -124,7 +124,7 @@ def run(d1,d2,d3,figuredir):
     plt.xticks([0,1,2], ['0','15','45'])
     plt.axhline(0, color='black',alpha=0.3)
     ax.set_axisbelow(True)
-    F.savefig(figuredir + 'CA_PI_Differences.png', dpi=1200)
+    F.savefig(figuredir + '/CA_PI_Differences.png', dpi=1200)
 
 
     F = plt.figure()
@@ -151,7 +151,7 @@ def run(d1,d2,d3,figuredir):
     # blue_patch = mpatches.Patch(color='blue', label='UP at 45min')
     # magenta_patch = mpatches.Patch(color='magenta', label='DOWN at 45min')
     # ax.legend([green_patch,blue_patch,magenta_patch,red_patch],['Genes up at 15min','Genes up at 45min','Genes down at 45min','Genes down at 15min'],bbox_to_anchor=(0, 0),loc=3,fontsize=10)
-    F.savefig(figuredir + 'CA_PI_Differences_Subset.png', dpi=1200)
+    F.savefig(figuredir + '/CA_PI_Differences_Subset.png', dpi=1200)
 
 
 
