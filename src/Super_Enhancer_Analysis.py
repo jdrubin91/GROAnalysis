@@ -30,7 +30,7 @@ def run(bedgraph1,bedgraph2,SEs,figdir,filedir):
     with open(filedir + 'SE_Counts.bed') as F:
         for line in F:
             line = line.strip().split()
-            if np.log(float(line[-2])/float(line[-1])) == 'nan':
+            if np.log(float(line[-2])/float(line[-1])) == nan:
                 d[line[3]] = 0
             else:
                 d[line[3]] = np.log(float(line[-2])/float(line[-1]))
