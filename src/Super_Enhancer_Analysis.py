@@ -16,7 +16,7 @@ def run(bedgraph1,bedgraph2,SEs,figdir,filedir):
     b2name = bedgraph2.split('/')[-1]
     b1 = BedTool(bedgraph1)
     b2 = BedTool(bedgraph2)
-    s = BedTool(SEs)
+    s = BedTool(SEs).sort()
     s.map(b1,o="sum").saveas(filedir + b1name + '_SE.bed')
     s.map(b2,o="sum").saveas(filedir + b2name + '_SE.bed')
     column_add(filedir + b1name + '_SE.bed',filedir + b2name + '_SE.bed', filedir + 'SE_Counts.bed')
