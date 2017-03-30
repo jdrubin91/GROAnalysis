@@ -36,6 +36,7 @@ def run(bedgraph1,bedgraph2,SEs,figdir,filedir):
                 d[line[3]] = 0
     F = plt.figure()
     ax = F.add_subplot(111)
+    print d.values()
     ax.hist(d.values())
     plt.savefig(figdir + 'SE_analysis.png')
 
