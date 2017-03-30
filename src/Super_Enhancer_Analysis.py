@@ -1,6 +1,12 @@
 __author__ = 'Jonathan Rubin'
 
+import matplotlib
+matplotlib.use('Agg')
+from matplotlib import rcParams
+rcParams.update({'figure.autolayout': True})
+import matplotlib.pyplot as plt
 from pybedtools import BedTool
+import numpy as np
 
 def column_add(file1,file2,name):
     outfile = open(name,'w')
@@ -12,14 +18,24 @@ def column_add(file1,file2,name):
                 outfile.write(line)
 
 def run(bedgraph1,bedgraph2,SEs,figdir,filedir):
-    b1name = bedgraph1.split('/')[-1]
-    b2name = bedgraph2.split('/')[-1]
-    a = BedTool(bedgraph1)
-    b = BedTool(bedgraph2)
-    s = BedTool(SEs).sort()
-    s.map(a,c="4",o="sum").saveas(filedir + b1name + '_SE.bed')
-    s.map(b,c="4",o="sum").saveas(filedir + b2name + '_SE.bed')
-    column_add(filedir + b1name + '_SE.bed',filedir + b2name + '_SE.bed', filedir + 'SE_Counts.bed')
+    # b1name = bedgraph1.split('/')[-1]
+    # b2name = bedgraph2.split('/')[-1]
+    # a = BedTool(bedgraph1)
+    # b = BedTool(bedgraph2)
+    # s = BedTool(SEs).sort()
+    # s.map(a,c="4",o="sum").saveas(filedir + b1name + '_SE.bed')
+    # s.map(b,c="4",o="sum").saveas(filedir + b2name + '_SE.bed')
+    # column_add(filedir + b1name + '_SE.bed',filedir + b2name + '_SE.bed', filedir + 'SE_Counts.bed')
+    d = dict()
+    with open(filedir + 'SE_Counts.bed') as F:
+        for line in F:
+            line = line.strip().split()
+            d[line[3]] = np.log(float(line[-2])/float(line[-1]))
+    F = plt.figure()
+    ax = F.subplot(111)
+    ax.hist(d.values())
+    plt.savefig(figdir + 'SE_analysis.png')
+
 
 
 if __name__ == "__main__":
