@@ -6,7 +6,7 @@ from matplotlib import rcParams
 rcParams.update({'figure.autolayout': True})
 import matplotlib.pyplot as plt
 from pybedtools import BedTool
-import numpy as np
+import math
 
 def column_add(file1,file2,name):
     outfile = open(name,'w')
@@ -30,10 +30,10 @@ def run(bedgraph1,bedgraph2,SEs,figdir,filedir):
     with open(filedir + 'SE_Counts.bed') as F:
         for line in F:
             line = line.strip().split()
-            if np.log(float(line[-2])/float(line[-1])) == nan:
+            try:
+                d[line[3]] = math.log(float(line[-2])/float(line[-1]),10)
+            except:
                 d[line[3]] = 0
-            else:
-                d[line[3]] = np.log(float(line[-2])/float(line[-1]))
     F = plt.figure()
     ax = F.add_subplot(111)
     print d.values()
