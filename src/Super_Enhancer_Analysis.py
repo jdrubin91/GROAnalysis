@@ -30,7 +30,10 @@ def run(bedgraph1,bedgraph2,SEs,figdir,filedir):
     with open(filedir + 'SE_Counts.bed') as F:
         for line in F:
             line = line.strip().split()
-            d[line[3]] = np.log(float(line[-2])/float(line[-1]))
+            try:
+                d[line[3]] = np.log(float(line[-2])/float(line[-1]))
+            except:
+                d[line[3]] = 0
     F = plt.figure()
     ax = F.add_subplot(111)
     ax.hist(d.values())
