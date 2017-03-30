@@ -23,12 +23,12 @@ def plot_MA(x,y,sig1,sig2,name,savedir,siglist):
     ax.set_xlabel('Mean Overlap Events (log10)')
     ax.get_xaxis().tick_bottom()
     ax.get_yaxis().tick_left()
-    for l in range(len(siglist)):
-        ax.annotate(siglist[l], xy=(sig1[l],sig2[l]), xytext=(textx, texty), ha='right',
-                    textcoords='offset points', 
-                    arrowprops=dict(arrowstyle='->', shrinkA=0))
+    # for l in range(len(siglist)):
+    #     ax.annotate(siglist[l], xy=(sig1[l],sig2[l]), xytext=(textx, texty), ha='right',
+    #                 textcoords='offset points', 
+    #                 arrowprops=dict(arrowstyle='->', shrinkA=0))
     plt.show()
-    plt.savefig(savedir + name + 'MA_plot.png')
+    # plt.savefig(savedir + name + 'MA_plot.png')
 
 def run(MDS1,MDS2,savedir):
     d = dict()
@@ -60,7 +60,8 @@ def run(MDS1,MDS2,savedir):
         diff = list()
         siglist = list()
         genelist = list()
-        alpha = 0.1
+        ps = list()
+        zs = list()
         for key in d:
             mdj=d[key][1][i]
             mdk=d[key][3][i]
@@ -73,23 +74,25 @@ def run(MDS1,MDS2,savedir):
             Nk=float(d[key][2][i])
             if (Nj+Nk)/2.0 > 10:
                 p=((mdj*Nj)+(mdk*Nk))/(Nj+Nk)
-                SE=(p*(1-p))/((1/Nj)+(1/Nk))
+                SE=(p*(1-p))*((1/Nj)+(1/Nk))
                 Y.append(mdj-mdk-mean)
                 X.append(math.log((Nj+Nk)/2.0,10))
                 genelist.append(key)
-                # print SE
-                if SE == 0:
-                    print SE
-                    cdf = norm.cdf(0,0,1)
-                else:
-                    print (mdj-mdk-mean)/math.sqrt(SE)
-                    cdf=norm.cdf((mdj-mdk-mean)/math.sqrt(SE),0,1)
-                p=min(cdf,1-cdf)
-                if p < 0.05:
+                try:
+                    z = (mdj-mdk-mean)/math.sqrt(SE)
+                except ZeroDivisionError:
+                    z=0
+                zs.append(z)
+                cdf=norm.cdf(z,0,1)
+                p=min(cdf,1-cdf)*2
+                ps.append(p)
+                if p < 0.0001:
                     X2.append(math.log((Nj+Nk)/2.0,10))
                     Y2.append(mdj-mdk-mean)
                     siglist.append(key.split('.')[0].split('_')[0])
         plot_MA(X,Y,X2,Y2,name,savedir,siglist)
+        # plt.hist(ps)
+        # plt.show()
 
 
 if __name__ == "__main__":
@@ -99,9 +102,10 @@ if __name__ == "__main__":
     #File directory
     filedir = parent_dir(homedir) + '/files'
     MDS1 = parent_dir(homedir) + '/MDS_files/J12_MDS.tsv'
+    print MDS1
     MDS2 = parent_dir(homedir) + '/MDS_files/J32_MDS.tsv'
     savedir = parent_dir(homedir) + '/figures'
-    run(MDS1,MDS2,savedir)
+    run(MDS2,MDS1,savedir)
 
     
 
