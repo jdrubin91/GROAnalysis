@@ -37,7 +37,7 @@ def convert_joeydeseq_to_bed(file1):
     with open(file1) as F:
         for line in F:
             line = line.strip().split(',')
-            if 'baseMean' not in line[0]:
+            if 'baseMean' not in line[0] and 'NA' not in line[-1]:
                 if float(line[-1]) < 0.01:
                     chrom = line[0].split(':')[0]
                     start = line[0].split(':')[1].split('-')[0]
@@ -67,7 +67,7 @@ if __name__ == "__main__":
 
     #File directory
     filedir = parent_dir(homedir) + '/files/'
-    figuredir = parent_dir(homedir) + '/figures/'
+    figuredir = parent_dir(homedir) + '/figures/'r
     scriptdir = parent_dir(homedir) + '/scripts/'
     outdir = parent_dir(homedir) + '/MEME/'
     hg19fasta = '/scratch/Users/joru1876/hg19_reference_files/hg19_all.fa'
