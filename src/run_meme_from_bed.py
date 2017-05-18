@@ -18,14 +18,13 @@ def convert_deseqgenes_to_tssbed(file1):
             line = line.strip().split()
             if "id" not in line[0] and "NA" not in line[0]:
                 line = line[1].split(';')[-1]
-                print line
                 chrom = line.split(':')[0]
                 if line.split('_')[-1] == '+':
-                    start = str(int(line.split(':')[1].split('-')[0])-200)
-                    stop = str(int(line.split(':')[1].split('-')[0])+200)
+                    start = str(int(line.split(':')[1].split('_')[0].split('-')[0])-200)
+                    stop = str(int(line.split(':')[1].split('_')[0].split('-')[0])+200)
                 else:
-                    start = str(int(line.split(':')[1].split('-')[1])-200)
-                    stop = str(int(line.split(':')[1].split('-')[1])+200)
+                    start = str(int(line.split(':')[1].split('_')[0].split('-')[1])-200)
+                    stop = str(int(line.split(':')[1].split('_')[0].split('-')[1])+200)
 
                 bedfile.append([chrom,start,stop])
 
