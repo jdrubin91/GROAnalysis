@@ -9,6 +9,7 @@ import matplotlib.cm as cm
 from matplotlib import rcParams
 rcParams.update({'figure.autolayout': True})
 import os
+import math
 
 def parent_dir(directory):
     pathlist = directory.split('/')
@@ -29,9 +30,11 @@ def run(A2N,ACN,chromsizes,figuredir):
     a = BedTool(A2N)
     b = BedTool(ACN)
 
+    print "intersecting..."
     counts1 = (a+b).map(a,c='4',o='sum',null="0")
     counts2 = (a+b).map(b,c='4',o='sum',null="0")
 
+    print "done\ncalculating fold change..."
     newbed = list()
     for i in range(len(counts1)):
         int1 = counts1[i]
@@ -40,7 +43,10 @@ def run(A2N,ACN,chromsizes,figuredir):
         val2 = float(int2[-1])
         newbed.append(int1[:-1].append(math.log(val2/val1)))
 
+    print "done\ncreating and saving bedtool..."
     newbedtool = BedTool(newbed).saveas(parent_dir(A2N) + '/ACN_A2N_fold_change.BedGraph')
+
+    print "done"
 
 
 
