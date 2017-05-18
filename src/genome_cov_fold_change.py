@@ -30,6 +30,8 @@ def run(A2N,ACN,chromsizes,figuredir):
     a = BedTool(BedTool(A2N)[:100])
     b = BedTool(BedTool(ACN)[:100])
 
+    print a
+
     print "intersecting..."
     counts1 = (a+b).map(a,c='4',o='sum',null="0")
     counts2 = (a+b).map(b,c='4',o='sum',null="0")
