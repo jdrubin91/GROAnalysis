@@ -67,7 +67,7 @@ if __name__ == "__main__":
 
     #File directory
     filedir = parent_dir(homedir) + '/files/'
-    figuredir = parent_dir(homedir) + '/figures/'r
+    figuredir = parent_dir(homedir) + '/figures/'
     scriptdir = parent_dir(homedir) + '/scripts/'
     outdir = parent_dir(homedir) + '/MEME/'
     hg19fasta = '/scratch/Users/joru1876/hg19_reference_files/hg19_all.fa'
