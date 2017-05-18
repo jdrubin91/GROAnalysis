@@ -27,12 +27,15 @@ def make_chromsize_dict(chromsizes):
     return d
 
 def run(A2N,ACN,chromsizes,figuredir):
-    a = BedTool(A2N)
-    b = BedTool(ACN)
+    a = BedTool(A2N)[:100]
+    b = BedTool(ACN)[:100]
 
     print "intersecting..."
     counts1 = (a+b).map(a,c='4',o='sum',null="0")
     counts2 = (a+b).map(b,c='4',o='sum',null="0")
+
+    print counts1[:10]
+    print counts2[:10]
 
     print "done\ncalculating fold change..."
     newbed = list()
