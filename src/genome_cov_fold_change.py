@@ -39,11 +39,11 @@ def run(A2N,ACN,chromsizes,figuredir):
     for i in range(len(counts1)):
         int1 = counts1[i]
         int2 = counts2[i]
-        if val1 != "0":
+        if int1[-1] != "0":
             val1 = float(int1[-1])
         else:
             val1 = 0.001
-        if val2 != "0":
+        if int2[-1] != "0":
             val2 = float(int2[-1])
         else:
             val2 = 0.001
