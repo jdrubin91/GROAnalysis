@@ -15,6 +15,7 @@ def convert_deseqgenes_to_tssbed(file1):
     bedfile = list()
     with open(file1) as F:
         for line in F:
+            line = line.strip().split()
             if "id" not in line[0] and "NA" not in line[0]:
                 line = line[1].split(';')[-1]
                 print line
