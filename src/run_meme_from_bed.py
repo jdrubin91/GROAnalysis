@@ -32,6 +32,22 @@ def convert_deseqgenes_to_tssbed(file1):
 
     return file1 + '.tss.bed'
 
+def convert_joeydeseq_to_bed(file1):
+    bedfile = list()
+    with open(file1) as F:
+        for line in F:
+            line = line.strip().split(',')
+            if 'baseMean' not in line[0]:
+                if float(line[-1]) < 0.01:
+                    chrom = line[0].split(':')[0]
+                    start = line[0].split(':')[1].split('-')[0]
+                    stop = line[0].split(':')[1].split('-')[1]
+                    bedfile.append([chrom,start,stop])
+
+    BedTool(bedfile).saveas(file1 + '.bed')
+
+    return file1 + '.bed'
+
 
 def run_MEME(fastafile,outdir,scriptdir):
     os.system("qsub -v fastafile=" + fastafile + ",output=" + outdir + " " + scriptdir + "MEME_run.sh")
@@ -56,8 +72,10 @@ if __name__ == "__main__":
     outdir = parent_dir(homedir) + '/MEME/'
     hg19fasta = '/scratch/Users/joru1876/hg19_reference_files/hg19_all.fa'
 
-    bed = '/projects/dowellLab/Taatjes/170413_K00262_0087_AHJLW5BBXX/cat/trimmed/flipped/bowtie2/sortedbam/genomecoveragebed/fortdf/DE-Seq/A2N_ACN.genes.bed.count.bed.A2NACNnascent.resSig_pvalue.txt'
+    # bed = '/projects/dowellLab/Taatjes/170413_K00262_0087_AHJLW5BBXX/cat/trimmed/flipped/bowtie2/sortedbam/genomecoveragebed/fortdf/DE-Seq/A2N_ACN.genes.bed.count.bed.A2NACNnascent.resSig_pvalue.txt'
+    # bedfile = convert_deseqgenes_to_tssbed(bed)
 
-    bedfile = convert_deseqgenes_to_tssbed(bed)
+    joeyfile = '/scratch/Users/joru1876/ButcherDrugRes/DEseq/out/Enhancers.csv'
+    bedfile = convert_joeydeseq_to_bed(joeyfile)
 
     run(bedfile,hg19fasta,outdir,filedir,scriptdir)
