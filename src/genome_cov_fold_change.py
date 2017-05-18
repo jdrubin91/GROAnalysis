@@ -8,6 +8,7 @@ import matplotlib.pyplot as plt
 import matplotlib.cm as cm
 from matplotlib import rcParams
 rcParams.update({'figure.autolayout': True})
+import os
 
 def parent_dir(directory):
     pathlist = directory.split('/')
