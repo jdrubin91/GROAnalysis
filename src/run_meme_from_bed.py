@@ -44,6 +44,7 @@ def convert_joeydeseq_to_bed(file1):
                     stop = line[0].split(':')[1].split('-')[1]
                     bedfile.append([chrom,start,stop])
 
+    print bedfile[0:10]
     BedTool(bedfile).saveas(file1 + '.bed')
 
     return file1 + '.bed'
