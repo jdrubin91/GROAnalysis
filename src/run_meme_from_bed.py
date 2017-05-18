@@ -28,7 +28,9 @@ def convert_deseqgenes_to_tssbed(file1):
 
                 bedfile.append([chrom,start,stop])
 
-    return bedfile
+    BedTool(bedfile).saveas(file1 + '.tss.bed')
+
+    return file1 + '.tss.bed'
 
 
 def run_MEME(fastafile,outdir,scriptdir):
