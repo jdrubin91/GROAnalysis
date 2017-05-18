@@ -39,9 +39,9 @@ def convert_joeydeseq_to_bed(file1):
             line = line.strip().split(',')
             if 'baseMean' not in line[0] and 'NA' not in line[-1]:
                 if float(line[-1]) < 0.01:
-                    chrom = line[0].split(':')[0]
+                    chrom = line[0].split(':')[0][1:]
                     start = line[0].split(':')[1].split('-')[0]
-                    stop = line[0].split(':')[1].split('-')[1]
+                    stop = line[0].split(':')[1].split('-')[1][:-1]
                     bedfile.append([chrom,start,stop])
 
     print bedfile[0:10]
