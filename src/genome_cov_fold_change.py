@@ -27,10 +27,8 @@ def make_chromsize_dict(chromsizes):
     return d
 
 def run(A2N,ACN,chromsizes,figuredir):
-    a = BedTool(BedTool(A2N)[:100])
-    b = BedTool(BedTool(ACN)[:100])
-
-    print a
+    a = BedTool(A2N)
+    b = BedTool(ACN)
 
     print "intersecting..."
     counts1 = (a+b).map(a,c='4',o='sum',null="0")
