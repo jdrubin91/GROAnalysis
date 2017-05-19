@@ -66,6 +66,16 @@ def run(bg1,bg2,genes,histones,figuredir):
     ax.set_ylabel('A2780cis Log10(FPKM)')
     ax.set_xlabel('A2780 Log10(FPKM)')
     ax.scatter(x,y)
+    lims = [
+        np.min([ax.get_xlim(), ax.get_ylim()]),  # min of both axes
+        np.max([ax.get_xlim(), ax.get_ylim()]),  # max of both axes
+        ]
+
+    # now plot both limits against eachother
+    ax.plot(lims, lims, 'k-', alpha=0.75, zorder=0)
+    ax.set_aspect('equal')
+    ax.set_xlim(lims)
+    ax.set_ylim(lims)
     plt.savefig(figuredir + 'Histone_genes_fpkm.png',dpi=1200)
 
 
