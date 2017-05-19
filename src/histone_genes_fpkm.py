@@ -48,7 +48,7 @@ def run(bg1,bg2,genes,histones,figuredir):
     x = list()
     for item in m:
         try:
-            x.append(math.log(item[-1]))
+            x.append(math.log(float(item[-1])))
         except:
             x.append(0)
 
@@ -57,7 +57,7 @@ def run(bg1,bg2,genes,histones,figuredir):
     y = list()
     for item in n:
         try:
-            y.append(math.log(item[-1]))
+            y.append(math.log(float(item[-1])))
         except:
             y.append(0)
 
