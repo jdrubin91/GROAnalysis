@@ -49,6 +49,30 @@ def convert_joeydeseq_to_bed(file1):
 
     return file1 + '.bed'
 
+def convert_histone_genes_to_tssbed(histones, genes):
+    names = list()
+    with open(histones) as F:
+        F.readline()
+        for line in F:
+            line = line.strip().split()
+            names.append(line[-5])
+
+    bed = list()
+    with open(genes) as F:
+        for line in F:
+            line = line.strip().split()
+            geneName = line[3].split(';')[0]
+            if geneName in names:
+                strand = line[3].split('_')[-1]
+                chrom,start,stop = line[:3]
+                if strand == '+':
+                    bed.append([chrom,int(start)-200,int(start)+200,geneName])
+                else:
+                    bed.append([chrom,int(stop)-200,int(stop)+200,geneName])
+
+    BedTool(bedfile).saveas(histones + '.tss.bed')
+    return histones + '.tss.bed'
+
 
 def run_MEME(fastafile,outdir,scriptdir):
     os.system("qsub -v fastafile=" + fastafile + ",output=" + outdir + " " + scriptdir + "MEME_run.sh")
@@ -76,7 +100,11 @@ if __name__ == "__main__":
     # bed = '/projects/dowellLab/Taatjes/170413_K00262_0087_AHJLW5BBXX/cat/trimmed/flipped/bowtie2/sortedbam/genomecoveragebed/fortdf/DE-Seq/A2N_ACN.genes.bed.count.bed.A2NACNnascent.resSig_pvalue.txt'
     # bedfile = convert_deseqgenes_to_tssbed(bed)
 
-    joeyfile = '/scratch/Users/joru1876/ButcherDrugRes/DEseq/out/Enhancers.csv'
-    bedfile = convert_joeydeseq_to_bed(joeyfile)
+    # joeyfile = '/scratch/Users/joru1876/ButcherDrugRes/DEseq/out/Enhancers.csv'
+    # bedfile = convert_joeydeseq_to_bed(joeyfile)
+
+    genes = filedir + 'refGene.sorted.bed'
+    histones = filedir + 'histone_names.txt'
+    bedfile = convert_histone_genes_to_tssbed(histones, genes)
 
     run(bedfile,hg19fasta,outdir,filedir,scriptdir)
