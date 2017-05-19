@@ -42,6 +42,8 @@ def run(bg1,bg2,genes,histones,figuredir):
 
     bed = BedTool(get_histone_bed(histones,genes))
 
+    print len(bed)
+
     x = list()
     for item in bed.map(b,c=4,o="sum"):
         try:
@@ -55,6 +57,8 @@ def run(bg1,bg2,genes,histones,figuredir):
             y.append(math.log(item[-1]))
         except:
             y.append(0)
+
+    print len(x),len(y)
 
     F = plt.figure()
     ax = F.add_subplot(111)
