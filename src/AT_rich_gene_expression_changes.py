@@ -81,7 +81,7 @@ def run(memefile,deseqfile,bg1,bg2,figuredir):
     ax2.set_title('non AT-rich genes')
     ax2.set_ylabel('Count')
     ax2.set_xlabel('Fold Change')
-    ax2.bins(df,bins=100)
+    ax2.hist(df,bins=100)
     plt.savefig(figuredir + 'AT_rich_gene_expression_changes_hist.png',dpi=1200)
 
 
