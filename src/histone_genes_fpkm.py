@@ -10,6 +10,7 @@ import sys
 import pybedtools
 from pybedtools import BedTool
 import math
+import numpy as np
 
 def parent_dir(directory):
     pathlist = directory.split('/')
