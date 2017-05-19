@@ -117,6 +117,7 @@ def separate_genes(fastafile,genes,figuredir):
     F = plt.figure()
     ax = F.add_subplot(111)
     ax.hist(gc_content,bins=100)
+    ax.setxlim([0,1])
     plt.savefig(figuredir + 'promoter_gc_content.png',dpi=1200)
 
 def run2(atrich,gcrich,bg1,bg2,figuredir):
