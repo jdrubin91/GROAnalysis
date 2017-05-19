@@ -55,8 +55,8 @@ def convert_deseq_to_bed(deseqfile):
 
 
 def run(memefile,deseqfile,bg1,bg2,figuredir):
-    meme = BedTool(memefile)
-    deseq = BedTool(deseqfile)
+    meme = BedTool(memefile).sort()
+    deseq = BedTool(deseqfile).sort()
     meme = deseq.intersect(meme,wa=True)
     a = BedTool(bg1)
     b = BedTool(bg2)
