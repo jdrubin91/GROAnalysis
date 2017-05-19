@@ -41,11 +41,11 @@ def convert_deseq_to_bed(deseqfile):
     bed = list()
     with open(deseqfile) as F:
         for line in F:
-            line.strip().split()
+            line = line.strip().split()
             if 'id' not in line[0] and 'NA' not in line[0]:
-                print line
+                # print line
                 item = line[1].split(';')[-1]
-                print item
+                # print item
                 chrom = item.split(':')[0]
                 start = item.split(':')[1].split('-')[0]
                 stop = item.split(':')[1].split('-')[1].split('_')[0]
