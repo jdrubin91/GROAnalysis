@@ -66,8 +66,8 @@ def run(memefile,deseqfile,bg1,bg2,figuredir):
     bcm = meme.map(b,c=4,o="sum")
     bcd = (deseq-meme).map(b,c=4,o="sum")
 
-    mf = [float(m[-1])/float(n[-1]) for m,n in zip(acm,bcm) if m[-1] != '.' and n[-1] != '.']
-    df = [float(m[-1])/float(n[-1]) for m,n in zip(acd,bcd) if m[-1] != '.' and n[-1] != '.']
+    mf = [math.log(float(m[-1])/float(n[-1]),2) for m,n in zip(acm,bcm) if m[-1] != '.' and n[-1] != '.']
+    df = [math.log(float(m[-1])/float(n[-1]),2) for m,n in zip(acd,bcd) if m[-1] != '.' and n[-1] != '.']
 
 
     F = plt.figure()
