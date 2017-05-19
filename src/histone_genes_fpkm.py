@@ -52,6 +52,7 @@ def run(bg1,bg2,genes,histones,figuredir):
 
     y = list()
     for item in bed.map(b,c=4,o="sum"):
+        print item
         try:
             y.append(math.log(item[-1]))
         except:
