@@ -46,16 +46,17 @@ def run(bg1,bg2,genes,histones,figuredir):
     bed = BedTool(get_histone_bed(histones,genes))
 
     print bed
+    print bed.map(a,c=4,o="sum")
 
     x = list()
-    for item in bed.map(b,c=4,o="sum"):
+    for item in bed.map(a,c=4,o="sum"):
         try:
             x.append(math.log(item[-1]))
         except:
             x.append(0)
 
     y = list()
-    for item in bed.map(a,c=4,o="sum"):
+    for item in bed.map(b,c=4,o="sum"):
         try:
             y.append(math.log(item[-1]))
         except:
