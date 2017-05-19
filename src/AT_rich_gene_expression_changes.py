@@ -35,6 +35,7 @@ def convert_meme_to_bed(memefile):
             if 'Motif 1 block diagrams' in line:
                 break
 
+    print bed[:20]
     return bed
 
 def convert_deseq_to_bed(deseqfile):
