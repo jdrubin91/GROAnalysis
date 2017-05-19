@@ -56,6 +56,7 @@ def run(bg1,bg2,genes,histones,figuredir):
 
     y = list()
     for item in n:
+        print item
         try:
             y.append(math.log(float(item[-1])))
         except:
