@@ -44,7 +44,7 @@ def run(bg1,bg2,genes,histones,figuredir):
 
     m = bed.map(a,c=4,o="sum")
     n = bed.map(b,c=4,o="sum")
-    print len(bed.map(b,c=4,o="sum"))
+    print len(b)
 
     x = list()
     for item in m:
@@ -52,8 +52,6 @@ def run(bg1,bg2,genes,histones,figuredir):
             x.append(math.log(float(item[-1])))
         except:
             x.append(0)
-
-    print x
 
     y = list()
     for item in n:
