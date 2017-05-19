@@ -25,12 +25,15 @@ def get_histone_bed(histones,genes):
             line = line.strip().split()
             names.append(line[-3])
 
+    print names
+
     bed = list()
     with open(genes) as F:
         for line in F:
             line = line.strip().split()
             geneName = line[3].split(';')[0]
             if geneName in names:
+                print geneName
                 chrom,start,stop = line[:3]
                 bed.append([chrom,start,stop])
 
