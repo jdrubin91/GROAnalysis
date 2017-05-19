@@ -45,7 +45,7 @@ def run(bg1,bg2,genes,histones,figuredir):
 
     bed = BedTool(get_histone_bed(histones,genes))
 
-    print len(bed)
+    print bed
 
     x = list()
     for item in bed.map(b,c=4,o="sum"):
