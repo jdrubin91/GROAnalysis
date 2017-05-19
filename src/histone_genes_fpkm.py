@@ -52,6 +52,8 @@ def run(bg1,bg2,genes,histones,figuredir):
         except:
             x.append(0)
 
+    print x
+
     y = list()
     for item in n:
         try:
