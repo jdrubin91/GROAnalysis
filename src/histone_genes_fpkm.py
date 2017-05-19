@@ -32,7 +32,7 @@ def get_histone_bed(histones,genes):
             geneName = line[3].split(';')[0]
             if geneName in names:
                 chrom,start,stop = line[:3]
-                bed.append([chrom,start,stop])
+                bed.append([chrom,start,stop,geneName])
 
     return bed
 
@@ -49,18 +49,16 @@ def run(bg1,bg2,genes,histones,figuredir):
     for item in m:
         try:
             x.append(math.log(float(item[-1])))
+            print item[-2],math.log(float(item[-1]))
         except:
             x.append(0)
 
     y = list()
     for item in n:
-        print item
         try:
             y.append(math.log(float(item[-1])))
         except:
             y.append(0)
-
-    print len(x),len(y)
 
     F = plt.figure()
     ax = F.add_subplot(111)
