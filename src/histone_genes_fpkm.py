@@ -23,7 +23,7 @@ def get_histone_bed(histones,genes):
         F.readline()
         for line in F:
             line = line.strip().split()
-            names.append(line[-3])
+            names.append(line[-5])
 
     print names
 
