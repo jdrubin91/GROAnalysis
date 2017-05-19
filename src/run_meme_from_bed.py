@@ -70,7 +70,7 @@ def convert_histone_genes_to_tssbed(histones, genes):
                 else:
                     bed.append([chrom,int(stop)-200,int(stop)+200,geneName])
 
-    BedTool(bedfile).saveas(histones + '.tss.bed')
+    BedTool(bed).saveas(histones + '.tss.bed')
     return histones + '.tss.bed'
 
 
