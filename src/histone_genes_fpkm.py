@@ -31,7 +31,6 @@ def get_histone_bed(histones,genes):
             line = line.strip().split()
             geneName = line[3].split(';')[0]
             if geneName in names:
-                print geneName
                 chrom,start,stop = line[:3]
                 bed.append([chrom,start,stop])
 
@@ -43,10 +42,9 @@ def run(bg1,bg2,genes,histones,figuredir):
 
     bed = BedTool(get_histone_bed(histones,genes))
 
-    print bed.map(a,c="4",o="sum")
-
     x = list()
     for item in bed.map(a,c=4,o="sum"):
+        print item
         try:
             x.append(math.log(item[-1]))
         except:
