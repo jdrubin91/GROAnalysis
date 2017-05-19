@@ -75,14 +75,14 @@ def run(memefile,deseqfile,bg1,bg2,figuredir):
     ax.set_title('AT-rich genes')
     ax.set_ylabel('Count')
     ax.set_xlabel('Fold Change')
-    ax.boxplot(mf)
+    ax.hist(mf,bins=100)
 
     ax2 = F.add_subplot(122)
     ax2.set_title('non AT-rich genes')
     ax2.set_ylabel('Count')
     ax2.set_xlabel('Fold Change')
-    ax2.boxplot(df)
-    plt.savefig(figuredir + 'AT_rich_gene_expression_changes.png',dpi=1200)
+    ax2.bins(df,bins=100)
+    plt.savefig(figuredir + 'AT_rich_gene_expression_changes_hist.png',dpi=1200)
 
 
 
