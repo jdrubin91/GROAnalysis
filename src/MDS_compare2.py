@@ -34,15 +34,15 @@ def plot_MA(x,y,sig1,sig2,sig3,sig4,savedir,siglist1,siglist2,name1,name2,geneli
     #         ax.annotate(siglist1[i],xy=(sig1[i],sig2[i]),xytext = (3.7,0.1),arrowprops=dict(facecolor='black', shrink=0.1,width = 1,headwidth=5))
     #     if siglist1[i] == 'RARA':
     #         ax.annotate(siglist1[i],xy=(sig1[i],sig2[i]),xytext = (5.2,0.09),arrowprops=dict(facecolor='black', shrink=0.1,width = 1,headwidth=5))
-    # for i in range(len(genelist)):
-    #     if genelist[i] =='VDR' and x[i] > 3:
-    #         ax.annotate(genelist[i],xy=(x[i],y[i]),xytext = (5.5,0.05),arrowprops=dict(facecolor='black', shrink=0.1,width = 1,headwidth=5))
-    #     if genelist[i] =='RARG' and x[i] > 3:
-    #         ax.annotate(genelist[i],xy=(x[i],y[i]),xytext = (4.5,0.1),arrowprops=dict(facecolor='black', shrink=0.1,width = 1,headwidth=5))
-    #     if genelist[i] =='RARB' and x[i] > 3:
-    #         ax.annotate(genelist[i],xy=(x[i],y[i]),xytext = (3.7,0.1),arrowprops=dict(facecolor='black', shrink=0.1,width = 1,headwidth=5))
-    #     if genelist[i] =='RARA' and x[i] > 3:
-    #         ax.annotate(genelist[i],xy=(x[i],y[i]),xytext = (5.2,0.09),arrowprops=dict(facecolor='black', shrink=0.1,width = 1,headwidth=5))
+    for i in range(len(genelist)):
+        if genelist[i] =='CPEB1' and x[i] > 3:
+            ax.annotate(genelist[i],xy=(x[i],y[i]),xytext = (5.5,0.05),arrowprops=dict(facecolor='black', shrink=0.1,width = 1,headwidth=5))
+        # if genelist[i] =='RARG' and x[i] > 3:
+        #     ax.annotate(genelist[i],xy=(x[i],y[i]),xytext = (4.5,0.1),arrowprops=dict(facecolor='black', shrink=0.1,width = 1,headwidth=5))
+        # if genelist[i] =='RARB' and x[i] > 3:
+        #     ax.annotate(genelist[i],xy=(x[i],y[i]),xytext = (3.7,0.1),arrowprops=dict(facecolor='black', shrink=0.1,width = 1,headwidth=5))
+        # if genelist[i] =='RARA' and x[i] > 3:
+        #     ax.annotate(genelist[i],xy=(x[i],y[i]),xytext = (5.2,0.09),arrowprops=dict(facecolor='black', shrink=0.1,width = 1,headwidth=5))
 
     print siglist1
     print siglist2
@@ -50,8 +50,8 @@ def plot_MA(x,y,sig1,sig2,sig3,sig4,savedir,siglist1,siglist2,name1,name2,geneli
         print item
     for item in siglist2:
         print item
-    # plt.show()
-    plt.savefig(savedir + 'MA_plot_' + name1 + '-' + name2 + '.png',dpi=1200)
+    plt.show()
+    # plt.savefig(savedir + 'MA_plot_' + name1 + '-' + name2 + '.png',dpi=1200)
 
 #Takes in a list of ints and returns h/H and H
 def compute_MDS(histlist):
@@ -141,7 +141,7 @@ if __name__ == "__main__":
 
     #File directory
     filedir = parent_dir(homedir) + '/files/'
-    MDS1 = parent_dir(homedir) + '/MDS_files/ACN_MDS.csv'
+    MDS1 = parent_dir(homedir) + '/MDS_files/A2D_MDS.csv'
     MDS2 = parent_dir(homedir) + '/MDS_files/ACD_MDS.csv'
     savedir = parent_dir(homedir) + '/figures/'
     run(MDS2,MDS1,savedir)
