@@ -30,12 +30,11 @@ def convert_meme_to_bed(memefile):
                     line = line.strip().split()
                     chrom = line[0].split(':')[0]
                     start = line[0].split(':')[1].split('-')[0]
-                    stop = line[0].split(':')[1].split('-')[1]
+                    stop = str(int(start) + 400)
                     bed.append([chrom,start,stop])
             if 'Motif 1 block diagrams' in line:
                 break
 
-    print bed[:20]
     return bed
 
 def convert_deseq_to_bed(deseqfile):
@@ -44,9 +43,7 @@ def convert_deseq_to_bed(deseqfile):
         for line in F:
             line = line.strip().split()
             if 'id' not in line[0] and 'NA' not in line[0]:
-                # print line
                 item = line[1].split(';')[-1]
-                # print item
                 chrom = item.split(':')[0]
                 start = item.split(':')[1].split('-')[0]
                 stop = item.split(':')[1].split('-')[1].split('_')[0]
