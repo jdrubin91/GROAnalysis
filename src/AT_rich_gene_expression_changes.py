@@ -167,7 +167,7 @@ if __name__ == "__main__":
 
     memefile = convert_meme_to_bed(memefile)
     deseqfile = convert_deseq_to_bed(deseqfile)
-    run(memefile,deseqfile,bg1,bg2,figuredir)
+    # run(memefile,deseqfile,bg1,bg2,figuredir)
 
     fastafile = '/projects/dowellLab/Taatjes/170413_K00262_0087_AHJLW5BBXX/cat/trimmed/flipped/bowtie2/sortedbam/genomecoveragebed/fortdf/DE-Seq/A2N_ACN.genes.bed.count.bed.A2NACNnascent.resSig_pvalue.txt.tss.bed.fasta'
     genes = filedir + 'refGene.sorted.bed'
