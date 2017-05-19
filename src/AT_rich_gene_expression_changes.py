@@ -97,7 +97,7 @@ def calculate_gc_content(sequence):
     return gc/total
 
 
-def separate_genes(fastafile,genes):
+def separate_genes(fastafile,genes,figuredir):
     atrich = list()
     gcrich = list()
     bed = list()
@@ -113,6 +113,11 @@ def separate_genes(fastafile,genes):
     std = np.std(gc_content)
 
     print mean,std
+
+    F = plt.figure()
+    ax = F.add_subplot(111)
+    ax.hist(gc_content,bins=100)
+    plt.savefig(figuredir + 'promoter_gc_content.png',dpi=1200)
 
 def run2(atrich,gcrich,bg1,bg2,figuredir):
     meme = BedTool(memefile).sort()
@@ -171,4 +176,4 @@ if __name__ == "__main__":
 
     fastafile = '/projects/dowellLab/Taatjes/170413_K00262_0087_AHJLW5BBXX/cat/trimmed/flipped/bowtie2/sortedbam/genomecoveragebed/fortdf/DE-Seq/A2N_ACN.genes.bed.count.bed.A2NACNnascent.resSig_pvalue.txt.tss.bed.fasta'
     genes = filedir + 'refGene.sorted.bed'
-    separate_genes(fastafile,genes)
+    separate_genes(fastafile,genes,figuredir)
