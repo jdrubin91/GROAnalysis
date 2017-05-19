@@ -84,6 +84,69 @@ def run(memefile,deseqfile,bg1,bg2,figuredir):
     ax2.hist(df,bins=100)
     plt.savefig(figuredir + 'AT_rich_gene_expression_changes_hist.png',dpi=1200)
 
+def calculate_gc_content(sequence):
+    total = float(len(sequence))
+    gc = 0.0
+    at = 0.0
+    for char in sequence:
+        if char == 'G' or char == 'C':
+            gc += 1.0
+        else:
+            at += 1.0
+
+    return gc/total
+
+
+def separate_genes(fastafile,genes):
+    atrich = list()
+    gcrich = list()
+    bed = list()
+    gc_content = list()
+    with open(fastafile) as F:
+        for line in F:
+            if '>' not in line[0]:
+                gc_content.append(calculate_gc_content(line))
+            else:
+                bed.append(line)
+
+    mean = sum(gc_content)/len(gc_content)
+    std = np.std(gc_content)
+
+    print mean,std
+
+def run2(atrich,gcrich,bg1,bg2,figuredir):
+    meme = BedTool(memefile).sort()
+    deseq = BedTool(deseqfile).sort()
+    meme = deseq.intersect(meme,wa=True)
+    a = BedTool(bg1)
+    b = BedTool(bg2)
+
+
+    acm = meme.map(a,c=4,o="sum")
+    acd = (deseq-meme).map(a,c=4,o="sum")
+
+    bcm = meme.map(b,c=4,o="sum")
+    bcd = (deseq-meme).map(b,c=4,o="sum")
+
+    mf = [math.log(float(m[-1])/float(n[-1]),2) for m,n in zip(acm,bcm) if m[-1] != '.' and n[-1] != '.']
+    df = [math.log(float(m[-1])/float(n[-1]),2) for m,n in zip(acd,bcd) if m[-1] != '.' and n[-1] != '.']
+
+
+    F = plt.figure()
+    ax = F.add_subplot(121)
+    ax.set_title('AT-rich genes')
+    ax.set_ylabel('Count')
+    ax.set_xlabel('Fold Change')
+    ax.hist(mf,bins=100)
+
+    ax2 = F.add_subplot(122)
+    ax2.set_title('non AT-rich genes')
+    ax2.set_ylabel('Count')
+    ax2.set_xlabel('Fold Change')
+    ax2.hist(df,bins=100)
+    plt.savefig(figuredir + 'AT_rich_gene_expression_changes_hist.png',dpi=1200)
+
+
 
 
 
@@ -105,3 +168,7 @@ if __name__ == "__main__":
     memefile = convert_meme_to_bed(memefile)
     deseqfile = convert_deseq_to_bed(deseqfile)
     run(memefile,deseqfile,bg1,bg2,figuredir)
+
+    fastafile = '/projects/dowellLab/Taatjes/170413_K00262_0087_AHJLW5BBXX/cat/trimmed/flipped/bowtie2/sortedbam/genomecoveragebed/fortdf/DE-Seq/A2N_ACN.genes.bed.count.bed.A2NACNnascent.resSig_pvalue.txt.tss.bed.fasta'
+    genes = filedir + 'refGene.sorted.bed'
+    separate_genes(fastafile,genes)
