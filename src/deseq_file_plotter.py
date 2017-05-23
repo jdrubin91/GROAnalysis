@@ -31,6 +31,8 @@ def run(deseqfile,cond1,cond2,figuredir):
                     sigx = math.log(float(line[2]))
                     sigy = float(line[-3])
 
+    print basemean
+    print log2fc
     F = plt.figure()
     ax = F.add_subplot(111)
     ax.scatter(basemean,log2fc,alpha=0.5)
