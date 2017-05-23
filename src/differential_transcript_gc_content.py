@@ -67,7 +67,6 @@ def bulk_gc_content(fastafile):
     gc_content = list()
     for line in open(fastafile.seqfn):
         if '>' not in line:
-            print line
             gc_content.append(calculate_gc_content(line))
 
     return gc_content
@@ -85,8 +84,8 @@ def run(hg19fasta,genes,deseqfile,figuredir):
 
     F = plt.figure()
     ax = F.add_subplot(111)
-    ax.hist(bulk_gc_content(u),alpha=0.5,color='red')
-    ax.hist(bulk_gc_content(d),alpha=0.5,color='green')
+    ax.hist(bulk_gc_content(u),alpha=0.5,color='red',bins=100)
+    ax.hist(bulk_gc_content(d),alpha=0.5,color='green',bins=100)
     plt.savefig(figuredir + 'differential_transcription_gc_content.png',dpi=1200)
 
 
