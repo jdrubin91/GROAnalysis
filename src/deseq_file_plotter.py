@@ -110,6 +110,7 @@ if __name__ == "__main__":
     genes = filedir + 'refGene.sorted.bed'
     histones = filedir + 'histone_names.txt'
     cell_cycle = filedir + 'cell_cycle_genes.txt'
+    S_phase = filedir + 'Sphase_genes.txt'
 
     cond1 = 'A2N'
     cond2 = 'ACN'
@@ -118,6 +119,7 @@ if __name__ == "__main__":
 
     histone_names = get_histone_bed(histones)
     cell_cycle_names = get_cell_cycle_names(cell_cycle)
+    Sphase_names = get_cell_cycle_names(S_phase)
 
-    run(deseqfile,cond1,cond2,figuredir,histone_names,cell_cycle_names)
+    run(deseqfile,cond1,cond2,figuredir,histone_names,Sphase_names)
 
