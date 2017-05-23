@@ -38,7 +38,7 @@ def get_cell_cycle_names(cell_cycle):
 
     return names
 
-def run(deseqfile,cond1,cond2,figuredir,histone_names,cell_cycle_names,DNArepair_names):
+def run(deseqfile,cond1,cond2,figuredir,histone_names,cell_cycle_names,Sphase_names,DNArepair_names):
     x = list()
     y = list()
     sigx = list()
@@ -60,12 +60,18 @@ def run(deseqfile,cond1,cond2,figuredir,histone_names,cell_cycle_names,DNArepair
                 if p < 0.01:
                     sigx.append(math.log(float(line[2])))
                     sigy.append(float(line[-3]))
-                if geneName in cell_cycle_names:
-                    ccx.append(math.log(float(line[2])))
-                    ccy.append(float(line[-3]))
+                # if geneName in cell_cycle_names:
+                #     ccx.append(math.log(float(line[2])))
+                #     ccy.append(float(line[-3]))
                 # if gene in histone_names:
                 #     hisx.append(math.log(float(line[2])))
                 #     hisy.append(float(line[-3]))
+                # if geneName in Sphase_names:
+                #     ccx.append(math.log(float(line[2])))
+                #     ccy.append(float(line[-3]))
+                if geneName in DNArepair_names:
+                    ccx.append(math.log(float(line[2])))
+                    ccy.append(float(line[-3]))
 
 
     name1 = 'A2780'
@@ -96,6 +102,7 @@ def run(deseqfile,cond1,cond2,figuredir,histone_names,cell_cycle_names,DNArepair
     ax.set_xlim([min(x),max(x)])
     # plt.savefig(figuredir + deseqfile.split('/')[-1] + '_histones.png', dpi=1200)
     # plt.savefig(figuredir + deseqfile.split('/')[-1] + '_cell_cycle.png', dpi=1200)
+    # plt.savefig(figuredir + deseqfile.split('/')[-1] + '_S_phase.png', dpi=1200)
     # plt.savefig(figuredir + deseqfile.split('/')[-1] + '.png', dpi=1200)
     plt.savefig(figuredir + deseqfile.split('/')[-1] + '_DNA_repair.png', dpi=1200)
 
@@ -124,5 +131,5 @@ if __name__ == "__main__":
     Sphase_names = get_cell_cycle_names(S_phase)
     DNArepair_names = get_cell_cycle_names(DNA_repair)
 
-    run(deseqfile,cond1,cond2,figuredir,histone_names,Sphase_names,DNArepair_names)
+    run(deseqfile,cond1,cond2,figuredir,histone_names,cell_cycle_names,Sphase_names,DNArepair_names)
 
