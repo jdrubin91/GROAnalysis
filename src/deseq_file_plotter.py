@@ -42,7 +42,7 @@ def run(deseqfile,cond1,cond2,figuredir):
     ax.set_title('Gene Transcription')
     ax.set_ylabel('Log2 Fold Change ' + cond2 + '/' + cond1)
     ax.set_xlabel('Log10 Mean Transcription')
-    ax.set_xlim([0,17])
+    ax.set_xlim([min(x),max(x)])
     plt.savefig(figuredir + deseqfile.split('/')[-1] + '.png', dpi=1200)
 
 
