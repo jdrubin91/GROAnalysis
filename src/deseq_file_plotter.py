@@ -25,7 +25,7 @@ def run(deseqfile,cond1,cond2,figuredir):
         F.readline()
         for line in F:
             line = line.strip().split()
-            if 'NA' not in line[0]:
+            if 'NA' not in line[-1]:
                 p = float(line[-1])
                 x.append(math.log(float(line[2])))
                 y.append(float(line[-3]))
