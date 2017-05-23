@@ -118,6 +118,7 @@ if __name__ == "__main__":
 
     histone_names = get_histone_bed(histones)
     cell_cycle_names = get_cell_cycle_names(cell_cycle)
+    print cell_cycle_names
 
     run(deseqfile,cond1,cond2,figuredir,histone_names,cell_cycle_names)
 
