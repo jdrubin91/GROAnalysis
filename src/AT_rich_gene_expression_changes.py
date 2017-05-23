@@ -118,7 +118,7 @@ def separate_genes(fastafile,genes,figuredir):
     ax = F.add_subplot(111)
     ax.hist(gc_content,bins=100)
     ax.set_xlim([0,1])
-    ax.set_title('All Genes')
+    ax.set_title('Differentially Transcribed Genes')
     ax.set_ylabel('Count')
     ax.set_xlabel('Promoter GC content')
     plt.axvline(0.5, color='red',alpha=0.5)
