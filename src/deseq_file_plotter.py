@@ -18,22 +18,47 @@ def parent_dir(directory):
     
     return newdir
 
-def run(deseqfile,cond1,cond2,figuredir):
+def get_histone_bed(histones,genes):
+    names = list()
+    with open(histones) as F:
+        F.readline()
+        for line in F:
+            line = line.strip().split()
+            names.append(line[-5])
+
+    bed = list()
+    with open(genes) as F:
+        for line in F:
+            line = line.strip().split()
+            geneName = line[3].split(';')[0]
+            if geneName in names:
+                chrom,start,stop = line[:3]
+                bed.append(geneName)
+
+    return bed
+
+def run(deseqfile,cond1,cond2,figuredir,histones):
     x = list()
     y = list()
     sigx = list()
     sigy = list()
+    hisx = list()
+    hisy = list()
     with open(deseqfile) as F:
         F.readline()
         for line in F:
             line = line.strip().split()
             if 'NA' not in line[-1]:
+                gene = line[1].split(';')[0]
                 p = float(line[-2])
                 x.append(math.log(float(line[2])))
                 y.append(float(line[-3]))
                 if p < 0.01:
                     sigx.append(math.log(float(line[2])))
                     sigy.append(float(line[-3]))
+                if gene in histones:
+                    hisx.append(math.log(float(line[2])))
+                    hisy.append(float(line[-3]))
 
 
     name1 = 'A2780'
@@ -60,7 +85,7 @@ def run(deseqfile,cond1,cond2,figuredir):
     ax.set_ylabel('Log2 Fold Change ' + name2 + '/' + name1)
     ax.set_xlabel('Log10 Mean Transcription')
     ax.set_xlim([min(x),max(x)])
-    plt.savefig(figuredir + deseqfile.split('/')[-1] + '.png', dpi=1200)
+    plt.savefig(figuredir + deseqfile.split('/')[-1] + '_histones.png', dpi=1200)
 
 
 if __name__ == "__main__":
@@ -70,11 +95,15 @@ if __name__ == "__main__":
     #File directory
     filedir = parent_dir(homedir) + '/files/'
     figuredir = parent_dir(homedir) + '/figures/'
+    genes = filedir + 'refGene.sorted.bed'
+    histones = filedir + 'histone_names.txt'
 
     cond1 = 'A2N'
     cond2 = 'ACN'
 
     deseqfile = '/projects/dowellLab/Taatjes/170413_K00262_0087_AHJLW5BBXX/cat/trimmed/flipped/bowtie2/sortedbam/genomecoveragebed/fortdf/DE-Seq/'+cond1+'_'+cond2+'.genes.bed.count.bed.'+cond1+cond2+'nascent.res.txt'
 
-    run(deseqfile,cond1,cond2,figuredir)
+    histones = get_histone_bed(histones,genes)
+
+    run(deseqfile,cond1,cond2,figuredir,histones)
 
