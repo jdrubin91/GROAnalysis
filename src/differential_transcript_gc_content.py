@@ -36,9 +36,9 @@ def get_tss(bedtool):
         chrom,start,stop = interval[:3]
         strand = interval[-1]
         if strand == '+':
-            newbedtool.append([chrom,str(int(start)-100),str(int(start)+100)])
+            newbedtool.append([chrom,str(int(start)-75),str(int(start)+75)])
         else:
-            newbedtool.append([chrom,str(int(stop)-100),str(int(stop)+100)])
+            newbedtool.append([chrom,str(int(stop)-75),str(int(stop)+75)])
 
     return BedTool(newbedtool)
 
