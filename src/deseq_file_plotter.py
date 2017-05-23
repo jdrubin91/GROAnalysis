@@ -26,7 +26,6 @@ def get_histone_bed(histones):
             line = line.strip().split()
             names.append(line[-5])
 
-    print names
     return names
 
 def run(deseqfile,cond1,cond2,figuredir,histone_names):
@@ -49,6 +48,7 @@ def run(deseqfile,cond1,cond2,figuredir,histone_names):
                     sigx.append(math.log(float(line[2])))
                     sigy.append(float(line[-3]))
                 if gene in histone_names:
+                    print gene
                     hisx.append(math.log(float(line[2])))
                     hisy.append(float(line[-3]))
 
