@@ -36,6 +36,8 @@ def get_cell_cycle_names(cell_cycle):
         for line in F:
             names.append(line)
 
+    return names
+
 def run(deseqfile,cond1,cond2,figuredir,histone_names,cell_cycle_names):
     x = list()
     y = list()
@@ -93,7 +95,7 @@ def run(deseqfile,cond1,cond2,figuredir,histone_names,cell_cycle_names):
     ax.set_xlabel('Log10 Mean Transcription')
     ax.set_xlim([min(x),max(x)])
     # plt.savefig(figuredir + deseqfile.split('/')[-1] + '_histones.png', dpi=1200)
-    plt.savefig(figuredir + deseqfile.split('/')[-1] + '_cell_cycle.png', dpi=1200)
+    plt.savefig(figuredir + deseqfile.split('/')[-1] + '_cell_cycled.png', dpi=1200)
     plt.savefig(figuredir + deseqfile.split('/')[-1] + '.png', dpi=1200)
 
 
