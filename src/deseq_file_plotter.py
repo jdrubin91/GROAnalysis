@@ -26,21 +26,21 @@ def run(deseqfile,cond1,cond2,figuredir):
         for line in F:
             line = line.strip().split()
             if 'NA' not in line[-1]:
-                p = float(line[-1])
+                p = float(line[-2])
                 x.append(math.log(float(line[2])))
                 y.append(float(line[-3]))
-                if p < 0.1:
+                if p < 0.01:
                     sigx = math.log(float(line[2]))
                     sigy = float(line[-3])
 
     F = plt.figure()
     ax = F.add_subplot(111)
-    ax.scatter(x,y,alpha=0.5,edgecolor='')
+    ax.scatter(x,y,edgecolor='')
     ax.scatter(sigx,sigy,c='r',edgecolor='')
     ax.set_title('Gene Transcription')
     ax.set_ylabel('Log2 Fold Change ' + cond2 + '/' + cond1)
     ax.set_xlabel('Log10 Mean Transcription')
-    ax.set_xlim([0,20])
+    ax.set_xlim([0,17])
     plt.savefig(figuredir + deseqfile.split('/')[-1] + '.png', dpi=1200)
 
 
