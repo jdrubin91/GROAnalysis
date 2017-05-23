@@ -77,7 +77,6 @@ def run(deseqfile,cond1,cond2,figuredir,histone_names):
     ax.set_ylabel('Log2 Fold Change ' + name2 + '/' + name1)
     ax.set_xlabel('Log10 Mean Transcription')
     ax.set_xlim([min(x),max(x)])
-    ax.set_ylim([min(y),max(y)])
     plt.savefig(figuredir + deseqfile.split('/')[-1] + '_histones.png', dpi=1200)
 
 
