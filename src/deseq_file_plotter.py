@@ -19,14 +19,16 @@ def parent_dir(directory):
     return newdir
 
 def run(deseqfile,cond1,cond2,figuredir):
+    x = list()
+    y = list()
     with open(deseqfile) as F:
         F.readline()
         for line in F:
             line = line.strip().split()
             if 'NA' not in line[0]:
                 p = float(line[-1])
-                basemean = math.log(float(line[2]))
-                log2fc = float(line[-3])
+                x.append(math.log(float(line[2])))
+                y.append(float(line[-3]))
                 if p < 0.01:
                     sigx = math.log(float(line[2]))
                     sigy = float(line[-3])
@@ -35,7 +37,7 @@ def run(deseqfile,cond1,cond2,figuredir):
     print log2fc
     F = plt.figure()
     ax = F.add_subplot(111)
-    ax.scatter(basemean,log2fc,alpha=0.5)
+    ax.scatter(x,y,alpha=0.5)
     ax.scatter(sigx,sigy,c='r')
     ax.set_title('Gene Transcription')
     ax.set_ylabel('Log$_2$ Fold Change $' + cond2 + '/' + cond1 + '$')
