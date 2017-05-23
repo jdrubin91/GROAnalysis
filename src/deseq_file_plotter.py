@@ -48,7 +48,6 @@ def run(deseqfile,cond1,cond2,figuredir,histone_names):
                     sigx.append(math.log(float(line[2])))
                     sigy.append(float(line[-3]))
                 if gene in histone_names:
-                    print gene
                     hisx.append(math.log(float(line[2])))
                     hisy.append(float(line[-3]))
 
@@ -73,11 +72,12 @@ def run(deseqfile,cond1,cond2,figuredir,histone_names):
     ax = F.add_subplot(111)
     ax.scatter(x,y,edgecolor='')
     ax.scatter(sigx,sigy,c='r',edgecolor='')
-    ax.scatter(hisx,hisy,c='g',edgecolor='')
+    ax.scatter(hisx,hisy,c='g')
     ax.set_title('Gene Transcription ' + name2 + ' vs. ' + name1)
     ax.set_ylabel('Log2 Fold Change ' + name2 + '/' + name1)
     ax.set_xlabel('Log10 Mean Transcription')
     ax.set_xlim([min(x),max(x)])
+    ax.set_ylim([min(y),max(y)])
     plt.savefig(figuredir + deseqfile.split('/')[-1] + '_histones.png', dpi=1200)
 
 
