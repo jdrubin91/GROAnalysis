@@ -65,7 +65,7 @@ def split_deseq_file(deseqfile):
 
 def bulk_gc_content(fastafile):
     gc_content = list()
-    for line in open(fastafile.seqfn).read():
+    for line in open(fastafile.seqfn):
         if '>' not in line:
             print line
             gc_content.append(calculate_gc_content(line))
