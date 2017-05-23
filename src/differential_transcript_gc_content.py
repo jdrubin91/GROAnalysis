@@ -87,6 +87,7 @@ def run(hg19fasta,genes,deseqfile,figuredir):
     # ax.hist(bulk_gc_content(d),alpha=0.5,color='green',bins=100)
     # plt.savefig(figuredir + 'differential_transcription_gc_content.png',dpi=1200)
     ax.hist(bulk_gc_content(g),bins=100)
+    plt.savefig(figuredir + 'promoter_all_genes_gc_content.png',dpi=1200)
 
 
 
