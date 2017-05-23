@@ -76,17 +76,19 @@ def split_joey_deseq_file(joeydeseqfile):
     return "something"
 
 def run(hg19fasta,genes,deseqfile,figuredir):
-    g = BedTool(genes)
-
     up,down = split_deseq_file(deseqfile)
     u = get_tss(BedTool(up)).sequence(fi=hg19fasta)
     d = get_tss(BedTool(down)).sequence(fi=hg19fasta)
+    g = get_tss(BedTool(genes)).sequence(fi=hg19fasta)
 
     F = plt.figure()
     ax = F.add_subplot(111)
-    ax.hist(bulk_gc_content(u),alpha=0.5,color='red',bins=100)
-    ax.hist(bulk_gc_content(d),alpha=0.5,color='green',bins=100)
-    plt.savefig(figuredir + 'differential_transcription_gc_content.png',dpi=1200)
+    # ax.hist(bulk_gc_content(u),alpha=0.5,color='red',bins=100)
+    # ax.hist(bulk_gc_content(d),alpha=0.5,color='green',bins=100)
+    # plt.savefig(figuredir + 'differential_transcription_gc_content.png',dpi=1200)
+    ax.hist(bulk_gc_content(g),bins=100)
+
+
 
 
 
