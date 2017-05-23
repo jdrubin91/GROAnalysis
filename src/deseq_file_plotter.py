@@ -28,25 +28,39 @@ def get_histone_bed(histones):
 
     return names
 
-def run(deseqfile,cond1,cond2,figuredir,histone_names):
+def get_cell_cycle_names(cell_cycle):
+    with open(cell_cycle) as F:
+        names = list()
+        F.readline()
+        F.readline()
+        for line in F:
+            names.append(line)
+
+def run(deseqfile,cond1,cond2,figuredir,histone_names,cell_cycle_names):
     x = list()
     y = list()
     sigx = list()
     sigy = list()
     hisx = list()
     hisy = list()
+    ccx = list()
+    ccy = list()
     with open(deseqfile) as F:
         F.readline()
         for line in F:
             line = line.strip().split()
             if 'NA' not in line[-1]:
                 gene = line[1].split(';')[0][1:]
+                geneName = line[1].split(';')[1]
                 p = float(line[-2])
                 x.append(math.log(float(line[2])))
                 y.append(float(line[-3]))
                 if p < 0.01:
                     sigx.append(math.log(float(line[2])))
                     sigy.append(float(line[-3]))
+                if geneName in cell_cycle_names:
+                    ccx.append(math.log(float(line[2])))
+                    ccy.append(float(line[-3]))
                 # if gene in histone_names:
                 #     hisx.append(math.log(float(line[2])))
                 #     hisy.append(float(line[-3]))
@@ -73,11 +87,13 @@ def run(deseqfile,cond1,cond2,figuredir,histone_names):
     ax.scatter(x,y,edgecolor='')
     ax.scatter(sigx,sigy,c='r',edgecolor='')
     # ax.scatter(hisx,hisy,c='g')
+    ax.scatter(ccx,ccy,c='y')
     ax.set_title('Gene Transcription ' + name2 + ' vs. ' + name1)
     ax.set_ylabel('Log2 Fold Change ' + name2 + '/' + name1)
     ax.set_xlabel('Log10 Mean Transcription')
     ax.set_xlim([min(x),max(x)])
     # plt.savefig(figuredir + deseqfile.split('/')[-1] + '_histones.png', dpi=1200)
+    plt.savefig(figuredir + deseqfile.split('/')[-1] + '_cell_cycle.png', dpi=1200)
     plt.savefig(figuredir + deseqfile.split('/')[-1] + '.png', dpi=1200)
 
 
@@ -91,6 +107,7 @@ if __name__ == "__main__":
     figuredir = parent_dir(homedir) + '/figures/'
     genes = filedir + 'refGene.sorted.bed'
     histones = filedir + 'histone_names.txt'
+    cell_cycle = filedir + 'cell_cycle_genes.txt'
 
     cond1 = 'A2N'
     cond2 = 'A2C'
@@ -98,6 +115,7 @@ if __name__ == "__main__":
     deseqfile = '/projects/dowellLab/Taatjes/170413_K00262_0087_AHJLW5BBXX/cat/trimmed/flipped/bowtie2/sortedbam/genomecoveragebed/fortdf/DE-Seq/'+cond1+'_'+cond2+'.genes.bed.count.bed.'+cond1+cond2+'nascent.res.txt'
 
     histone_names = get_histone_bed(histones)
+    cell_cycle_names = get_cell_cycle_names(cell_cycle)
 
-    run(deseqfile,cond1,cond2,figuredir,histone_names)
+    run(deseqfile,cond1,cond2,figuredir,histone_names,cell_cycle_names)
 
