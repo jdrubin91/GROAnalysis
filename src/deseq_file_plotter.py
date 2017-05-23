@@ -47,9 +47,9 @@ def run(deseqfile,cond1,cond2,figuredir,histone_names):
                 if p < 0.01:
                     sigx.append(math.log(float(line[2])))
                     sigy.append(float(line[-3]))
-                if gene in histone_names:
-                    hisx.append(math.log(float(line[2])))
-                    hisy.append(float(line[-3]))
+                # if gene in histone_names:
+                #     hisx.append(math.log(float(line[2])))
+                #     hisy.append(float(line[-3]))
 
 
     name1 = 'A2780'
@@ -72,12 +72,14 @@ def run(deseqfile,cond1,cond2,figuredir,histone_names):
     ax = F.add_subplot(111)
     ax.scatter(x,y,edgecolor='')
     ax.scatter(sigx,sigy,c='r',edgecolor='')
-    ax.scatter(hisx,hisy,c='g')
+    # ax.scatter(hisx,hisy,c='g')
     ax.set_title('Gene Transcription ' + name2 + ' vs. ' + name1)
     ax.set_ylabel('Log2 Fold Change ' + name2 + '/' + name1)
     ax.set_xlabel('Log10 Mean Transcription')
     ax.set_xlim([min(x),max(x)])
-    plt.savefig(figuredir + deseqfile.split('/')[-1] + '_histones.png', dpi=1200)
+    # plt.savefig(figuredir + deseqfile.split('/')[-1] + '_histones.png', dpi=1200)
+    plt.savefig(figuredir + deseqfile.split('/')[-1] + '.png', dpi=1200)
+
 
 
 if __name__ == "__main__":
@@ -91,7 +93,7 @@ if __name__ == "__main__":
     histones = filedir + 'histone_names.txt'
 
     cond1 = 'A2N'
-    cond2 = 'ACN'
+    cond2 = 'A2C'
 
     deseqfile = '/projects/dowellLab/Taatjes/170413_K00262_0087_AHJLW5BBXX/cat/trimmed/flipped/bowtie2/sortedbam/genomecoveragebed/fortdf/DE-Seq/'+cond1+'_'+cond2+'.genes.bed.count.bed.'+cond1+cond2+'nascent.res.txt'
 
