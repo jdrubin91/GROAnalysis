@@ -35,12 +35,33 @@ def run(deseqfile,cond1,cond2,figuredir):
                     sigx.append(math.log(float(line[2])))
                     sigy.append(float(line[-3]))
 
+
+    name1 = 'A2780'
+    if cond1[1] == 'C':
+        name1 = name1 + 'cis'
+    if cond1[2] == 'N':
+        name1 = name1 + ' NoTreat'
+    if cond1[2] == 'C':
+        name1 = name1 + ' Cis'
+    if cond1[2] == 'D':
+        name1 = name1 + ' Dox'
+
+    name2 = 'A2780'
+    if cond2[1] == 'C':
+        name2 = name2 + 'cis'
+    if cond2[2] == 'N':
+        name2 = name2 + ' NoTreat'
+    if cond2[2] == 'C':
+        name2 = name2 + ' Cis'
+    if cond2[2] == 'D':
+        name2 = name2 + ' Dox'
+
     F = plt.figure()
     ax = F.add_subplot(111)
     ax.scatter(x,y,edgecolor='')
     ax.scatter(sigx,sigy,c='r',edgecolor='')
-    ax.set_title('Gene Transcription')
-    ax.set_ylabel('Log2 Fold Change ' + cond2 + '/' + cond1)
+    ax.set_title('Gene Transcription ' + name2 + ' vs. ' + name1)
+    ax.set_ylabel('Log2 Fold Change ' + name2 + '/' + name1)
     ax.set_xlabel('Log10 Mean Transcription')
     ax.set_xlim([min(x),max(x)])
     plt.savefig(figuredir + deseqfile.split('/')[-1] + '.png', dpi=1200)
