@@ -88,6 +88,10 @@ def run(hg19fasta,genes,deseqfile,figuredir):
     # plt.savefig(figuredir + 'differential_transcription_gc_content.png',dpi=1200)
     ax.hist(bulk_gc_content(g),bins=100)
     ax.set_xlim([0,1])
+    ax.set_title('All Genes')
+    ax.set_ylabel('Count')
+    ax.set_xlabel('Promoter GC content')
+    plt.axvline(0.5, color='red',alpha=0.5)
     plt.savefig(figuredir + 'promoter_all_genes_gc_content.png',dpi=1200)
 
 
