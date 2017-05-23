@@ -81,6 +81,7 @@ def run(deseqfile,cond1,cond2,figuredir,histones):
     ax = F.add_subplot(111)
     ax.scatter(x,y,edgecolor='')
     ax.scatter(sigx,sigy,c='r',edgecolor='')
+    ax.scatter(hisx,hisy,c='g',edgecolor='')
     ax.set_title('Gene Transcription ' + name2 + ' vs. ' + name1)
     ax.set_ylabel('Log2 Fold Change ' + name2 + '/' + name1)
     ax.set_xlabel('Log10 Mean Transcription')
