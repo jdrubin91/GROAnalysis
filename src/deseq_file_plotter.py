@@ -31,7 +31,7 @@ def run(deseqfile,cond1,cond2,figuredir):
                 p = float(line[-2])
                 x.append(math.log(float(line[2])))
                 y.append(float(line[-3]))
-                if p < 0.05:
+                if p < 0.01:
                     sigx.append(math.log(float(line[2])))
                     sigy.append(float(line[-3]))
 
