@@ -95,8 +95,8 @@ def run(deseqfile,cond1,cond2,figuredir,histone_names,cell_cycle_names):
     ax.set_xlabel('Log10 Mean Transcription')
     ax.set_xlim([min(x),max(x)])
     # plt.savefig(figuredir + deseqfile.split('/')[-1] + '_histones.png', dpi=1200)
-    plt.savefig(figuredir + deseqfile.split('/')[-1] + '_cell_cycled.png', dpi=1200)
-    plt.savefig(figuredir + deseqfile.split('/')[-1] + '.png', dpi=1200)
+    plt.savefig(figuredir + deseqfile.split('/')[-1] + '_cell_cycle.png', dpi=1200)
+    # plt.savefig(figuredir + deseqfile.split('/')[-1] + '.png', dpi=1200)
 
 
 
@@ -112,7 +112,7 @@ if __name__ == "__main__":
     cell_cycle = filedir + 'cell_cycle_genes.txt'
 
     cond1 = 'A2N'
-    cond2 = 'A2C'
+    cond2 = 'ACN'
 
     deseqfile = '/projects/dowellLab/Taatjes/170413_K00262_0087_AHJLW5BBXX/cat/trimmed/flipped/bowtie2/sortedbam/genomecoveragebed/fortdf/DE-Seq/'+cond1+'_'+cond2+'.genes.bed.count.bed.'+cond1+cond2+'nascent.res.txt'
 
