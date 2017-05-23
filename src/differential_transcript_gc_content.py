@@ -69,6 +69,8 @@ def bulk_gc_content(fastafile):
         if '>' not in line:
             gc_content.append(calculate_gc_content(line))
 
+    print gc_content
+
     return gc_content
 
 
