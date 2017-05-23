@@ -50,15 +50,16 @@ def split_deseq_file(deseqfile):
         F.readline()
         for line in F:
             line = line.strip().split()
-            interval = line[1].split(';')[-1]
-            chrom = interval.split(':')[0]
-            start = interval.split(':')[1].split('-')[0]
-            stop = interval.split(':')[1].split('-')[0].split('_')[0]
-            strand = interval.split('_')[1]
-            if float(line[-3]) < 0:
-                down.append([chrom,start,stop,strand])
-            else:
-                up.append([chrom,start,stop,strand])
+            if 'NA' not in line[0]:
+                interval = line[1].split(';')[-1]
+                chrom = interval.split(':')[0]
+                start = interval.split(':')[1].split('-')[0]
+                stop = interval.split(':')[1].split('-')[0].split('_')[0]
+                strand = interval.split('_')[1]
+                if float(line[-3]) < 0:
+                    down.append([chrom,start,stop,strand])
+                else:
+                    up.append([chrom,start,stop,strand])
 
     return up,down
 
