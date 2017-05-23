@@ -21,6 +21,8 @@ def parent_dir(directory):
 def run(deseqfile,cond1,cond2,figuredir):
     x = list()
     y = list()
+    sigx = list()
+    sigy = list()
     with open(deseqfile) as F:
         F.readline()
         for line in F:
@@ -30,8 +32,8 @@ def run(deseqfile,cond1,cond2,figuredir):
                 x.append(math.log(float(line[2])))
                 y.append(float(line[-3]))
                 if p < 0.1:
-                    sigx = math.log(float(line[2]))
-                    sigy = float(line[-3])
+                    sigx.append(math.log(float(line[2])))
+                    sigy.append(float(line[-3]))
 
     F = plt.figure()
     ax = F.add_subplot(111)
