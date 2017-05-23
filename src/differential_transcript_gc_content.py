@@ -36,9 +36,9 @@ def get_tss(bedtool):
         chrom,start,stop = interval[:3]
         strand = interval[-1]
         if strand == '+':
-            newbedtool.append([chrom,str(int(start)-75),str(int(start)+75)])
+            newbedtool.append([chrom,str(int(start)-200),str(int(start)+200)])
         else:
-            newbedtool.append([chrom,str(int(stop)-75),str(int(stop)+75)])
+            newbedtool.append([chrom,str(int(stop)-200),str(int(stop)+200)])
 
     return BedTool(newbedtool)
 
@@ -87,6 +87,7 @@ def run(hg19fasta,genes,deseqfile,figuredir):
     # ax.hist(bulk_gc_content(d),alpha=0.5,color='green',bins=100)
     # plt.savefig(figuredir + 'differential_transcription_gc_content.png',dpi=1200)
     ax.hist(bulk_gc_content(g),bins=100)
+    ax.set_xlim([0,1])
     plt.savefig(figuredir + 'promoter_all_genes_gc_content.png',dpi=1200)
 
 
