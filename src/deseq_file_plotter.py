@@ -29,8 +29,8 @@ def get_histone_bed(histones):
     return names
 
 def get_cell_cycle_names(cell_cycle):
+    names = list()
     with open(cell_cycle) as F:
-        names = list()
         F.readline()
         F.readline()
         for line in F:
@@ -61,7 +61,6 @@ def run(deseqfile,cond1,cond2,figuredir,histone_names,cell_cycle_names):
                     sigx.append(math.log(float(line[2])))
                     sigy.append(float(line[-3]))
                 if geneName in cell_cycle_names:
-                    print geneName
                     ccx.append(math.log(float(line[2])))
                     ccy.append(float(line[-3]))
                 # if gene in histone_names:
