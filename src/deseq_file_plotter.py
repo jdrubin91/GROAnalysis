@@ -40,8 +40,7 @@ def run(deseqfile,cond1,cond2,figuredir,histone_names):
         for line in F:
             line = line.strip().split()
             if 'NA' not in line[-1]:
-                gene = line[1].split(';')[0]
-                print gene
+                gene = line[1].split(';')[0][1:]
                 p = float(line[-2])
                 x.append(math.log(float(line[2])))
                 y.append(float(line[-3]))
