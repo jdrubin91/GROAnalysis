@@ -35,6 +35,7 @@ def get_histone_bed(histones,genes):
                 chrom,start,stop = line[:3]
                 bed.append(geneName)
 
+    print bed
     return bed
 
 def run(deseqfile,cond1,cond2,figuredir,histones):
