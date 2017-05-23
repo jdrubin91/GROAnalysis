@@ -18,7 +18,7 @@ def parent_dir(directory):
     
     return newdir
 
-def get_histone_bed(histones,genes):
+def get_histone_bed(histones):
     names = list()
     with open(histones) as F:
         F.readline()
@@ -26,19 +26,10 @@ def get_histone_bed(histones,genes):
             line = line.strip().split()
             names.append(line[-5])
 
-    bed = list()
-    with open(genes) as F:
-        for line in F:
-            line = line.strip().split()
-            geneName = line[3].split(';')[0]
-            if geneName in names:
-                chrom,start,stop = line[:3]
-                bed.append(geneName)
+    print names
+    return names
 
-    print bed
-    return bed
-
-def run(deseqfile,cond1,cond2,figuredir,histones):
+def run(deseqfile,cond1,cond2,figuredir,histone_names):
     x = list()
     y = list()
     sigx = list()
@@ -57,7 +48,7 @@ def run(deseqfile,cond1,cond2,figuredir,histones):
                 if p < 0.01:
                     sigx.append(math.log(float(line[2])))
                     sigy.append(float(line[-3]))
-                if gene in histones:
+                if gene in histone_names:
                     hisx.append(math.log(float(line[2])))
                     hisy.append(float(line[-3]))
 
@@ -105,7 +96,7 @@ if __name__ == "__main__":
 
     deseqfile = '/projects/dowellLab/Taatjes/170413_K00262_0087_AHJLW5BBXX/cat/trimmed/flipped/bowtie2/sortedbam/genomecoveragebed/fortdf/DE-Seq/'+cond1+'_'+cond2+'.genes.bed.count.bed.'+cond1+cond2+'nascent.res.txt'
 
-    histones = get_histone_bed(histones,genes)
+    histone_names = get_histone_bed(histones)
 
-    run(deseqfile,cond1,cond2,figuredir,histones)
+    run(deseqfile,cond1,cond2,figuredir,histone_names)
 
