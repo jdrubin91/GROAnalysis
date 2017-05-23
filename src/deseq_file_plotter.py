@@ -38,8 +38,8 @@ def run(deseqfile,cond1,cond2,figuredir):
     ax.scatter(x,y,alpha=0.5)
     ax.scatter(sigx,sigy,c='r')
     ax.set_title('Gene Transcription')
-    ax.set_ylabel('Log$_2$ Fold Change $' + cond2 + '/' + cond1 + '$')
-    ax.set_xlabel('Log$_10$ Mean Transcription')
+    ax.set_ylabel('Log2 Fold Change ' + cond2 + '/' + cond1)
+    ax.set_xlabel('Log10 Mean Transcription')
     plt.savefig(figuredir + deseqfile.split('/')[-1] + '.png', dpi=1200)
 
 
@@ -54,7 +54,7 @@ if __name__ == "__main__":
     cond1 = 'A2N'
     cond2 = 'ACN'
 
-    deseqfile = '/projects/dowellLab/Taatjes/170413_K00262_0087_AHJLW5BBXX/cat/trimmed/flipped/bowtie2/sortedbam/genomecoveragebed/fortdf/DE-Seq/'+cond1+'_'+cond2+'.genes.bed.count.bed.'+cond1+cond2+'nascent.resSig_pvalue.txt'
+    deseqfile = '/projects/dowellLab/Taatjes/170413_K00262_0087_AHJLW5BBXX/cat/trimmed/flipped/bowtie2/sortedbam/genomecoveragebed/fortdf/DE-Seq/'+cond1+'_'+cond2+'.genes.bed.count.bed.'+cond1+cond2+'nascent.res.txt'
 
     run(deseqfile,cond1,cond2,figuredir)
 
