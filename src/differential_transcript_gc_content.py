@@ -54,7 +54,7 @@ def split_deseq_file(deseqfile):
             chrom = interval.split(':')[0]
             start = interval.split(':')[1].split('-')[0]
             stop = interval.split(':')[1].split('-')[0].split('_')[0]
-            strand = interval.split(':')[1].split('-')[0].split('_')[1]
+            strand = interval.split('_')[1]
             if float(line[-3]) < 0:
                 down.append([chrom,start,stop,strand])
             else:
