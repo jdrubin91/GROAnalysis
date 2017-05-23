@@ -38,7 +38,7 @@ def get_cell_cycle_names(cell_cycle):
 
     return names
 
-def run(deseqfile,cond1,cond2,figuredir,histone_names,cell_cycle_names):
+def run(deseqfile,cond1,cond2,figuredir,histone_names,cell_cycle_names,DNArepair_names):
     x = list()
     y = list()
     sigx = list()
@@ -95,8 +95,9 @@ def run(deseqfile,cond1,cond2,figuredir,histone_names,cell_cycle_names):
     ax.set_xlabel('Log10 Mean Transcription')
     ax.set_xlim([min(x),max(x)])
     # plt.savefig(figuredir + deseqfile.split('/')[-1] + '_histones.png', dpi=1200)
-    plt.savefig(figuredir + deseqfile.split('/')[-1] + '_cell_cycle.png', dpi=1200)
+    # plt.savefig(figuredir + deseqfile.split('/')[-1] + '_cell_cycle.png', dpi=1200)
     # plt.savefig(figuredir + deseqfile.split('/')[-1] + '.png', dpi=1200)
+    plt.savefig(figuredir + deseqfile.split('/')[-1] + '_DNA_repair.png', dpi=1200)
 
 
 
@@ -111,6 +112,7 @@ if __name__ == "__main__":
     histones = filedir + 'histone_names.txt'
     cell_cycle = filedir + 'cell_cycle_genes.txt'
     S_phase = filedir + 'Sphase_genes.txt'
+    DNA_repair = filedir + 'DNA_repair.txt'
 
     cond1 = 'A2N'
     cond2 = 'ACN'
@@ -120,6 +122,7 @@ if __name__ == "__main__":
     histone_names = get_histone_bed(histones)
     cell_cycle_names = get_cell_cycle_names(cell_cycle)
     Sphase_names = get_cell_cycle_names(S_phase)
+    DNArepair_names = get_cell_cycle_names(DNA_repair)
 
-    run(deseqfile,cond1,cond2,figuredir,histone_names,Sphase_names)
+    run(deseqfile,cond1,cond2,figuredir,histone_names,Sphase_names,DNArepair_names)
 
