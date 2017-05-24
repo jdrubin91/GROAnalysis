@@ -63,15 +63,15 @@ def run(deseqfile,cond1,cond2,figuredir,histone_names,cell_cycle_names,Sphase_na
                 # if geneName in cell_cycle_names:
                 #     ccx.append(math.log(float(line[2])))
                 #     ccy.append(float(line[-3]))
-                # if gene in histone_names:
-                #     hisx.append(math.log(float(line[2])))
-                #     hisy.append(float(line[-3]))
+                if gene in histone_names:
+                    hisx.append(math.log(float(line[2])))
+                    hisy.append(float(line[-3]))
                 # if geneName in Sphase_names:
                 #     ccx.append(math.log(float(line[2])))
                 #     ccy.append(float(line[-3]))
-                if geneName in DNArepair_names:
-                    ccx.append(math.log(float(line[2])))
-                    ccy.append(float(line[-3]))
+                # if geneName in DNArepair_names:
+                #     ccx.append(math.log(float(line[2])))
+                #     ccy.append(float(line[-3]))
 
 
     name1 = 'A2780'
@@ -101,11 +101,11 @@ def run(deseqfile,cond1,cond2,figuredir,histone_names,cell_cycle_names,Sphase_na
     ax.set_xlabel('Log10 Mean Transcription')
     ax.set_xlim([min(x),max(x)])
     plt.axhline(0, color='black',alpha=0.5)
-    # plt.savefig(figuredir + deseqfile.split('/')[-1] + '_histones.png', dpi=1200)
+    plt.savefig(figuredir + deseqfile.split('/')[-1] + '_histones.png', dpi=1200)
     # plt.savefig(figuredir + deseqfile.split('/')[-1] + '_cell_cycle.png', dpi=1200)
     # plt.savefig(figuredir + deseqfile.split('/')[-1] + '_S_phase.png', dpi=1200)
     # plt.savefig(figuredir + deseqfile.split('/')[-1] + '.png', dpi=1200)
-    plt.savefig(figuredir + deseqfile.split('/')[-1] + '_DNA_repair.png', dpi=1200)
+    # plt.savefig(figuredir + deseqfile.split('/')[-1] + '_DNA_repair.png', dpi=1200)
 
 
 
@@ -122,8 +122,8 @@ if __name__ == "__main__":
     S_phase = filedir + 'Sphase_genes.txt'
     DNA_repair = filedir + 'DNA_repair.txt'
 
-    cond1 = 'A2N'
-    cond2 = 'ACN'
+    cond1 = 'ACN'
+    cond2 = 'ACC'
 
     deseqfile = '/projects/dowellLab/Taatjes/170413_K00262_0087_AHJLW5BBXX/cat/trimmed/flipped/bowtie2/sortedbam/genomecoveragebed/fortdf/DE-Seq/'+cond1+'_'+cond2+'.genes.bed.count.bed.'+cond1+cond2+'nascent.res.txt'
 
