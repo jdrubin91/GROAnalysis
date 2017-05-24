@@ -100,7 +100,7 @@ def run(deseqfile,cond1,cond2,figuredir,histone_names,cell_cycle_names,Sphase_na
     ax.set_ylabel('Log2 Fold Change ' + name2 + '/' + name1)
     ax.set_xlabel('Log10 Mean Transcription')
     ax.set_xlim([min(x),max(x)])
-    plt.axvline(0, color='black',alpha=0.5)
+    plt.axhline(0, color='black',alpha=0.5)
     plt.savefig(figuredir + deseqfile.split('/')[-1] + '_histones.png', dpi=1200)
     # plt.savefig(figuredir + deseqfile.split('/')[-1] + '_cell_cycle.png', dpi=1200)
     # plt.savefig(figuredir + deseqfile.split('/')[-1] + '_S_phase.png', dpi=1200)
