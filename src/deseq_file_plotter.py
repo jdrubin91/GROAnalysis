@@ -123,7 +123,7 @@ if __name__ == "__main__":
     DNA_repair = filedir + 'DNA_repair.txt'
 
     cond1 = 'ACN'
-    cond2 = 'ACC'
+    cond2 = 'ACD'
 
     deseqfile = '/projects/dowellLab/Taatjes/170413_K00262_0087_AHJLW5BBXX/cat/trimmed/flipped/bowtie2/sortedbam/genomecoveragebed/fortdf/DE-Seq/'+cond1+'_'+cond2+'.genes.bed.count.bed.'+cond1+cond2+'nascent.res.txt'
 
