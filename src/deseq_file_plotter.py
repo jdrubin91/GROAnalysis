@@ -66,12 +66,12 @@ def run(deseqfile,cond1,cond2,figuredir,histone_names,cell_cycle_names,Sphase_na
                 # if gene in histone_names:
                 #     hisx.append(math.log(float(line[2])))
                 #     hisy.append(float(line[-3]))
-                if geneName in Sphase_names:
-                    ccx.append(math.log(float(line[2])))
-                    ccy.append(float(line[-3]))
-                # if geneName in DNArepair_names:
+                # if geneName in Sphase_names:
                 #     ccx.append(math.log(float(line[2])))
                 #     ccy.append(float(line[-3]))
+                if geneName in DNArepair_names:
+                    ccx.append(math.log(float(line[2])))
+                    ccy.append(float(line[-3]))
 
 
     name1 = 'A2780'
@@ -103,9 +103,9 @@ def run(deseqfile,cond1,cond2,figuredir,histone_names,cell_cycle_names,Sphase_na
     plt.axhline(0, color='black',alpha=0.5)
     # plt.savefig(figuredir + deseqfile.split('/')[-1] + '_histones.png', dpi=1200)
     # plt.savefig(figuredir + deseqfile.split('/')[-1] + '_cell_cycle.png', dpi=1200)
-    plt.savefig(figuredir + deseqfile.split('/')[-1] + '_S_phase.png', dpi=1200)
+    # plt.savefig(figuredir + deseqfile.split('/')[-1] + '_S_phase.png', dpi=1200)
     # plt.savefig(figuredir + deseqfile.split('/')[-1] + '.png', dpi=1200)
-    # plt.savefig(figuredir + deseqfile.split('/')[-1] + '_DNA_repair.png', dpi=1200)
+    plt.savefig(figuredir + deseqfile.split('/')[-1] + '_DNA_repair.png', dpi=1200)
 
 
 
