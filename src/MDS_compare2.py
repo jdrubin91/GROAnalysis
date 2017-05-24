@@ -141,7 +141,7 @@ if __name__ == "__main__":
 
     #File directory
     filedir = parent_dir(homedir) + '/files/'
-    MDS1 = parent_dir(homedir) + '/MDS_files/A2D_MDS.csv'
-    MDS2 = parent_dir(homedir) + '/MDS_files/ACD_MDS.csv'
+    MDS1 = parent_dir(homedir) + '/MDS_files/A2N_MDS.csv'
+    MDS2 = parent_dir(homedir) + '/MDS_files/ACN_MDS.csv'
     savedir = parent_dir(homedir) + '/figures/'
     run(MDS2,MDS1,savedir)

@@ -26,7 +26,7 @@ def plot_MA(x,y,sig1,sig2,sig3,sig4,name,savedir,siglist1,siglist2,name1,name2,g
     ax.get_yaxis().tick_left()
     ax.set_ylim([-0.25,0.25])
     for i in range(len(siglist1)):
-        if siglist1[i] == 'VDR':
+        if siglist1[i] == 'VDR' and x[i] > 3:
             ax.annotate(siglist1[i],xy=(sig1[i],sig2[i]),xytext = (4.6,0.06),arrowprops=dict(facecolor='black', shrink=0.1,width = 1,headwidth=5))
         if siglist1[i] == 'RARG':
             ax.annotate(siglist1[i],xy=(sig1[i],sig2[i]),xytext = (3.7,0.1),arrowprops=dict(facecolor='black', shrink=0.1,width = 1,headwidth=5))
@@ -162,8 +162,8 @@ if __name__ == "__main__":
 
     #File directory
     filedir = parent_dir(homedir) + '/files/'
-    MDS1 = parent_dir(homedir) + '/MDS_files/A2D_MDS.tsv'
-    MDS2 = parent_dir(homedir) + '/MDS_files/ACD_MDS.tsv'
+    MDS1 = parent_dir(homedir) + '/MDS_files/A2N_MDS.tsv'
+    MDS2 = parent_dir(homedir) + '/MDS_files/ACN_MDS.tsv'
     savedir = parent_dir(homedir) + '/figures/'
     run(MDS2,MDS1,savedir)
 
