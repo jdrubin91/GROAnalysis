@@ -60,12 +60,12 @@ def run(deseqfile,cond1,cond2,figuredir,histone_names,cell_cycle_names,Sphase_na
                 if p < 0.01:
                     sigx.append(math.log(float(line[2])))
                     sigy.append(float(line[-3]))
-                # if geneName in cell_cycle_names:
-                #     ccx.append(math.log(float(line[2])))
-                #     ccy.append(float(line[-3]))
-                if gene in histone_names:
-                    hisx.append(math.log(float(line[2])))
-                    hisy.append(float(line[-3]))
+                if geneName in cell_cycle_names:
+                    ccx.append(math.log(float(line[2])))
+                    ccy.append(float(line[-3]))
+                # if gene in histone_names:
+                #     hisx.append(math.log(float(line[2])))
+                #     hisy.append(float(line[-3]))
                 # if geneName in Sphase_names:
                 #     ccx.append(math.log(float(line[2])))
                 #     ccy.append(float(line[-3]))
@@ -121,7 +121,7 @@ if __name__ == "__main__":
     cell_cycle = filedir + 'cell_cycle_genes.txt'
     S_phase = filedir + 'Sphase_genes.txt'
     DNA_repair = filedir + 'DNA_repair.txt'
-    histones = filedir + 'fatty_acid_metabolism.txt'
+    cell_cycle = filedir + 'fatty_acid_metabolism.txt'
 
     cond1 = 'ACN'
     cond2 = 'ACD'
