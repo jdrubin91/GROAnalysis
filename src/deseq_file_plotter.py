@@ -129,7 +129,8 @@ if __name__ == "__main__":
     # deseqfile = '/projects/dowellLab/Taatjes/170413_K00262_0087_AHJLW5BBXX/cat/trimmed/flipped/bowtie2/sortedbam/genomecoveragebed/fortdf/DE-Seq/'+cond1+'_'+cond2+'.genes.bed.count.bed.'+cond1+cond2+'nascent.res.txt'
     deseqfile = '/projects/dowellLab/Taatjes/170207_K00262_0069_AHHMHVBBXX/cat/trimmed/flipped/bowtie2/sortedbam/genomecoveragebed/fortdf/DE-Seq/45.genes.bed.count.bed.DMSOCAnascent.res.txt'
 
-    histone_names = get_histone_bed(histones)
+    # histone_names = get_histone_bed(histones)
+    histone_names = get_cell_cycle_names(histones)
     cell_cycle_names = get_cell_cycle_names(cell_cycle)
     Sphase_names = get_cell_cycle_names(S_phase)
     DNArepair_names = get_cell_cycle_names(DNA_repair)
