@@ -13,7 +13,24 @@ def parent_dir(directory):
     
     return newdir
 
-def plot_MA(x,y,sig1,sig2,sig3,sig4,name,savedir,siglist1,siglist2,name1,name2,genelist):
+def plot_MA(x,y,sig1,sig2,sig3,sig4,name,savedir,siglist1,siglist2,cond1,cond2,genelist):
+
+    name1 = 'A2780'
+    if cond1[1] == 'C':
+        name1 = name1 + 'cis'
+    if cond1[2] == 'C':
+        name1 = name1 + '+C'
+    if cond1[2] == 'D':
+        name1 = name1 + '+D'
+
+    name2 = 'A2780'
+    if cond2[1] == 'C':
+        name2 = name2 + 'cis'
+    if cond2[2] == 'C':
+        name2 = name2 + '+C'
+    if cond2[2] == 'D':
+        name2 = name2 + '+D'
+
     F = plt.figure() 
     ax = F.add_subplot(111)
     plt.scatter(x,y,edgecolor="",s=14) 
@@ -25,24 +42,26 @@ def plot_MA(x,y,sig1,sig2,sig3,sig4,name,savedir,siglist1,siglist2,name1,name2,g
     ax.get_xaxis().tick_bottom()
     ax.get_yaxis().tick_left()
     ax.set_ylim([-0.25,0.25])
-    for i in range(len(siglist1)):
-        if siglist1[i] == 'VDR' and x[i] > 3:
-            ax.annotate(siglist1[i],xy=(sig1[i],sig2[i]),xytext = (4.6,0.06),arrowprops=dict(facecolor='black', shrink=0.1,width = 1,headwidth=5))
-        if siglist1[i] == 'RARG':
-            ax.annotate(siglist1[i],xy=(sig1[i],sig2[i]),xytext = (3.7,0.1),arrowprops=dict(facecolor='black', shrink=0.1,width = 1,headwidth=5))
-        if siglist1[i] == 'RARB':
-            ax.annotate(siglist1[i],xy=(sig1[i],sig2[i]),xytext = (3.5,0.07),arrowprops=dict(facecolor='black', shrink=0.1,width = 1,headwidth=5))
-        if siglist1[i] == 'RARA':
-            ax.annotate(siglist1[i],xy=(sig1[i],sig2[i]),xytext = (4.4,0.09),arrowprops=dict(facecolor='black', shrink=0.1,width = 1,headwidth=5))
-    # for i in range(len(genelist)):
-    #     if genelist[i] =='VDR' and x[i] > 3:
-    #         ax.annotate(genelist[i],xy=(x[i],y[i]),xytext = (4.5,0.05),arrowprops=dict(facecolor='black', shrink=0.1,width = 1,headwidth=5))
-    #     if genelist[i] =='RARG' and x[i] > 3:
-    #         ax.annotate(genelist[i],xy=(x[i],y[i]),xytext = (3.7,0.1),arrowprops=dict(facecolor='black', shrink=0.1,width = 1,headwidth=5))
-    #     if genelist[i] =='RARB' and x[i] > 3:
-    #         ax.annotate(genelist[i],xy=(x[i],y[i]),xytext = (3.5,0.07),arrowprops=dict(facecolor='black', shrink=0.1,width = 1,headwidth=5))
-    #     if genelist[i] =='RARA' and x[i] > 3:
-    #         ax.annotate(genelist[i],xy=(x[i],y[i]),xytext = (4.4,0.09),arrowprops=dict(facecolor='black', shrink=0.1,width = 1,headwidth=5))
+    # for i in range(len(siglist1)):
+    #     if siglist1[i] == 'VDR' and x[i] > 3:
+    #         ax.annotate(siglist1[i],xy=(sig1[i],sig2[i]),xytext = (4.6,0.06),arrowprops=dict(facecolor='black', shrink=0.1,width = 1,headwidth=5))
+    #     if siglist1[i] == 'RARG':
+    #         ax.annotate(siglist1[i],xy=(sig1[i],sig2[i]),xytext = (3.7,0.1),arrowprops=dict(facecolor='black', shrink=0.1,width = 1,headwidth=5))
+    #     if siglist1[i] == 'RARB':
+    #         ax.annotate(siglist1[i],xy=(sig1[i],sig2[i]),xytext = (3.5,0.07),arrowprops=dict(facecolor='black', shrink=0.1,width = 1,headwidth=5))
+    #     if siglist1[i] == 'RARA':
+    #         ax.annotate(siglist1[i],xy=(sig1[i],sig2[i]),xytext = (4.25,0.09),arrowprops=dict(facecolor='black', shrink=0.1,width = 1,headwidth=5))
+    for i in range(len(genelist)):
+        if genelist[i] =='VDR' and x[i] > 3:
+            ax.annotate(genelist[i],xy=(x[i],y[i]),xytext = (4.6,0.06),arrowprops=dict(facecolor='black', shrink=0.1,width = 1,headwidth=5))
+        if genelist[i] =='RARG' and x[i] > 3:
+            ax.annotate(genelist[i],xy=(x[i],y[i]),xytext = (3.7,0.1),arrowprops=dict(facecolor='black', shrink=0.1,width = 1,headwidth=5))
+        if genelist[i] =='RARB' and x[i] > 3:
+            ax.annotate(genelist[i],xy=(x[i],y[i]),xytext = (3.5,0.07),arrowprops=dict(facecolor='black', shrink=0.1,width = 1,headwidth=5))
+        if genelist[i] =='RARA' and x[i] > 3:
+            ax.annotate(genelist[i],xy=(x[i],y[i]),xytext = (4.25,0.09),arrowprops=dict(facecolor='black', shrink=0.1,width = 1,headwidth=5))
+
+
 
     print siglist1
     print siglist2
@@ -163,7 +182,7 @@ if __name__ == "__main__":
     #File directory
     filedir = parent_dir(homedir) + '/files/'
     MDS1 = parent_dir(homedir) + '/MDS_files/A2N_MDS.tsv'
-    MDS2 = parent_dir(homedir) + '/MDS_files/ACN_MDS.tsv'
+    MDS2 = parent_dir(homedir) + '/MDS_files/A2D_MDS.tsv'
     savedir = parent_dir(homedir) + '/figures/'
     run(MDS2,MDS1,savedir)
 

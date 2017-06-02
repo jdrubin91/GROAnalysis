@@ -78,17 +78,17 @@ def run(deseqfile,cond1,cond2,figuredir,histone_names,cell_cycle_names,Sphase_na
     if cond1[1] == 'C':
         name1 = name1 + 'cis'
     if cond1[2] == 'C':
-        name1 = name1 + ' +Cis'
+        name1 = name1 + '+C'
     if cond1[2] == 'D':
-        name1 = name1 + ' +Dox'
+        name1 = name1 + '+D'
 
     name2 = 'A2780'
     if cond2[1] == 'C':
         name2 = name2 + 'cis'
     if cond2[2] == 'C':
-        name2 = name2 + ' +Cis'
+        name2 = name2 + '+C'
     if cond2[2] == 'D':
-        name2 = name2 + ' +Dox'
+        name2 = name2 + '+D'
 
     F = plt.figure()
     ax = F.add_subplot(111)
@@ -101,7 +101,7 @@ def run(deseqfile,cond1,cond2,figuredir,histone_names,cell_cycle_names,Sphase_na
     ax.set_xlabel('Log10 Mean Transcription')
     ax.set_xlim([min(x),max(x)])
     plt.axhline(0, color='black',alpha=0.5)
-    plt.savefig(figuredir + deseqfile.split('/')[-1] + '_histones.png', dpi=1200)
+    plt.savefig(figuredir + deseqfile.split('/')[-1] + '_fatty_acid_metabolism.png', dpi=1200)
     # plt.savefig(figuredir + deseqfile.split('/')[-1] + '_cell_cycle.png', dpi=1200)
     # plt.savefig(figuredir + deseqfile.split('/')[-1] + '_S_phase.png', dpi=1200)
     # plt.savefig(figuredir + deseqfile.split('/')[-1] + '.png', dpi=1200)
@@ -121,11 +121,13 @@ if __name__ == "__main__":
     cell_cycle = filedir + 'cell_cycle_genes.txt'
     S_phase = filedir + 'Sphase_genes.txt'
     DNA_repair = filedir + 'DNA_repair.txt'
+    histones = filedir + 'fatty_acid_metabolism.txt'
 
     cond1 = 'ACN'
     cond2 = 'ACD'
 
-    deseqfile = '/projects/dowellLab/Taatjes/170413_K00262_0087_AHJLW5BBXX/cat/trimmed/flipped/bowtie2/sortedbam/genomecoveragebed/fortdf/DE-Seq/'+cond1+'_'+cond2+'.genes.bed.count.bed.'+cond1+cond2+'nascent.res.txt'
+    # deseqfile = '/projects/dowellLab/Taatjes/170413_K00262_0087_AHJLW5BBXX/cat/trimmed/flipped/bowtie2/sortedbam/genomecoveragebed/fortdf/DE-Seq/'+cond1+'_'+cond2+'.genes.bed.count.bed.'+cond1+cond2+'nascent.res.txt'
+    deseqfile = '/projects/dowellLab/Taatjes/170207_K00262_0069_AHHMHVBBXX/cat/trimmed/flipped/bowtie2/sortedbam/genomecoveragebed/fortdf/DE-Seq/45.genes.bed.count.bed.DMSOCAnascent.res.txt'
 
     histone_names = get_histone_bed(histones)
     cell_cycle_names = get_cell_cycle_names(cell_cycle)
