@@ -21,7 +21,7 @@ def concatenate_files(file1,file2):
 def create_bidir_interval_file(filelist,filedir,condition1bam,condition2bam):
     os.system("cat " + " ".join(filelist) + " > " + filedir + "all_preliminary_bidir.bed")
     os.system("sort -k1,1 -k2,2n " + filedir + "all_preliminary_bidir.bed > " + filedir + "all_preliminary_bidir.sort.bed")
-    os.system("bedtools merge -i " + filedir + "all_preliminary_bidir.sort.bed > all_preliminary_bidir.merge.bed")
+    os.system("bedtools merge -i " + filedir + "all_preliminary_bidir.sort.bed > " + filedir + "all_preliminary_bidir.merge.bed")
     os.system("sort -k1,1 -k2,2n " + filedir + "all_preliminary_bidir.merge.bed > " + filedir + "all_preliminary_bidir.merge.sort.bed")
     os.system("bedtools multicov -bams " + condition1bam + " " + condition2bam + " -bed " + filedir + "all_preliminary_bidir.merge.sort.bed >" + filedir + "all_preliminary_bidir.merge.sort.count.bed")
 
@@ -60,6 +60,7 @@ if __name__ == "__main__":
     bamfolder = '/projects/dowellLab/Taatjes/170207_K00262_0069_AHHMHVBBXX/cat/trimmed/flipped/bowtie2/sortedbam/'
     condition1bam = 'J52_trimmed.flip.fastq.bowtie2.sorted.bam'
     condition2bam = 'J62_trimmed.flip.fastq.bowtie2.sorted.bam'
+    path_to_PSSMs = ''
 
 
 
