@@ -3,6 +3,17 @@ __author__ = 'Jonathan Rubin'
 import os
 import sys
 
+def add_header(header,file1):
+    lines = list()
+    with open(file1) as F:
+        for line in F:
+            lines.append(line)
+
+    outfile = open(file1,'w')
+    outfile.write(header)
+    for line in lines:
+        outfile.write(line)
+
 def concatenate_files(file1,file2):
     all_lines = list()
     with open(file1) as F:
@@ -28,16 +39,18 @@ def create_bidir_interval_file(filelist,filedir,condition1bam,condition2bam):
     return filedir + "all_preliminary_bidir.merge.sort.count.bed"
 
 def create_intersect_file(interval_file,path_to_PSSMs,filedir):
-    header = list()
+    header = ['chrom','start','stop','cond1counts','cond2counts']
     i = 0
     for TF in os.listdir(path_to_PSSMs):
         header.append(TF)
         if i == 0:
-            os.system("bedtools intersect -u -a " + interval_file + " -b " + path_to_PSSMs + TF + " > " + filedir + "all_preliminary_bidir.merge.sort.count.intersect.bed")
+            os.system("bedtools intersect -c -a " + interval_file + " -b " + path_to_PSSMs + TF + " > " + filedir + "all_preliminary_bidir.merge.sort.count.intersect.bed")
         else:
-            os.system("bedtools intersect -u -a " + interval_file + " -b " + path_to_PSSMs + TF + " > " + filedir + "temp.bed")
+            os.system("bedtools intersect -c -a " + interval_file + " -b " + path_to_PSSMs + TF + " > " + filedir + "temp.bed")
             concatenate_files(filedir + "all_preliminary_bidir.merge.sort.count.intersect.bed", filedir + "temp.bed")
         i += 1
+
+    add_header(header, filedir + "all_preliminary_bidir.merge.sort.count.intersect.bed")
 
 
 
