@@ -58,8 +58,8 @@ if __name__ == "__main__":
                 folder2+'foot_print_testing-6_prelim_bidir_hits.bed']
     filedir = "/Users/joru1876/scratch_backup/GROAnalysis/files/"
     bamfolder = '/projects/dowellLab/Taatjes/170207_K00262_0069_AHHMHVBBXX/cat/trimmed/flipped/bowtie2/sortedbam/'
-    condition1bam = 'J52_trimmed.flip.fastq.bowtie2.sorted.bam'
-    condition2bam = 'J62_trimmed.flip.fastq.bowtie2.sorted.bam'
+    condition1bam = bamfolder + 'J52_trimmed.flip.fastq.bowtie2.sorted.bam'
+    condition2bam = bamfolder + 'J62_trimmed.flip.fastq.bowtie2.sorted.bam'
     path_to_PSSMs = '/scratch/Shares/dowell/md_score_paper/PSSM_hits_genome_wide/pval-7/'
 
 
