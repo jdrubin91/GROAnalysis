@@ -60,7 +60,7 @@ if __name__ == "__main__":
     bamfolder = '/projects/dowellLab/Taatjes/170207_K00262_0069_AHHMHVBBXX/cat/trimmed/flipped/bowtie2/sortedbam/'
     condition1bam = 'J52_trimmed.flip.fastq.bowtie2.sorted.bam'
     condition2bam = 'J62_trimmed.flip.fastq.bowtie2.sorted.bam'
-    path_to_PSSMs = ''
+    path_to_PSSMs = '/scratch/Shares/dowell/md_score_paper/PSSM_hits_genome_wide/pval-7/'
 
 
 
