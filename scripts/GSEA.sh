@@ -1,17 +1,19 @@
 ###Name the job
-#PBS -N name your job
+#PBS -N GSEA
 ### Specify the number of nodes/cores
 #PBS -l nodes=1:ppn=1
 
 ### Allocate the amount of memory needed
-#PBS -l mem=10gb
+#PBS -l mem=8gb
 
 ### Set your expected walltime
-#PBS -l walltime=100:00:00
+#PBS -l walltime=05:00:00
+
+#PBS -q short8gb
 
 ### Setting to mail when the job is complete
-#PBS -e /scratch/Users/joru1876/qsub_errors/
-#PBS -o /scratch/Users/joru1876/qsub_stdo/  
+#PBS -e /Users/joru1876/qsub_errors/
+#PBS -o /Users/joru1876/qsub_stdo/  
 
 ### Set your email address
 #PBS -m ae
@@ -27,7 +29,7 @@ module load bedtools2_2.22.0
 
 ### now call your program
 
-src=/Users/joru1876/scratch_backup/GROAnalysis/GSEA.py
+src=/Users/joru1876/scratch_backup/GROAnalysis/src/GSEA.py
 
 python $src
 
