@@ -20,7 +20,8 @@ def concatenate_files(file1,file2):
 
 def create_bidir_interval_file(filelist,filedir,condition1bam,condition2bam):
     os.system("cat " + " ".join(filelist) + " > " + filedir + "all_preliminary_bidir.bed")
-    os.system("bedtools merge -i " + filedir + "all_preliminary_bidir.bed > all_preliminary_bidir.merge.bed")
+    os.system("sort -k1,1 -k2,2n " + filedir + "all_preliminary_bidir.bed > " + filedir + "all_preliminary_bidir.sort.bed")
+    os.system("bedtools merge -i " + filedir + "all_preliminary_bidir.sort.bed > all_preliminary_bidir.merge.bed")
     os.system("sort -k1,1 -k2,2n " + filedir + "all_preliminary_bidir.merge.bed > " + filedir + "all_preliminary_bidir.merge.sort.bed")
     os.system("bedtools multicov -bams " + condition1bam + " " + condition2bam + " -bed " + filedir + "all_preliminary_bidir.merge.sort.bed >" + filedir + "all_preliminary_bidir.merge.sort.count.bed")
 
