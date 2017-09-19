@@ -34,9 +34,9 @@ def plot_MA(x,y,sig1,sig2,sig3,sig4,savedir,siglist1,siglist2,name1,name2,geneli
     #         ax.annotate(siglist1[i],xy=(sig1[i],sig2[i]),xytext = (3.7,0.1),arrowprops=dict(facecolor='black', shrink=0.1,width = 1,headwidth=5))
     #     if siglist1[i] == 'RARA':
     #         ax.annotate(siglist1[i],xy=(sig1[i],sig2[i]),xytext = (5.2,0.09),arrowprops=dict(facecolor='black', shrink=0.1,width = 1,headwidth=5))
-    for i in range(len(genelist)):
-        if genelist[i] =='CPEB1' and x[i] > 3:
-            ax.annotate(genelist[i],xy=(x[i],y[i]),xytext = (5.5,0.05),arrowprops=dict(facecolor='black', shrink=0.1,width = 1,headwidth=5))
+    # for i in range(len(genelist)):
+    #     if genelist[i] =='CPEB1' and x[i] > 3:
+    #         ax.annotate(genelist[i],xy=(x[i],y[i]),xytext = (5.5,0.05),arrowprops=dict(facecolor='black', shrink=0.1,width = 1,headwidth=5))
         # if genelist[i] =='RARG' and x[i] > 3:
         #     ax.annotate(genelist[i],xy=(x[i],y[i]),xytext = (4.5,0.1),arrowprops=dict(facecolor='black', shrink=0.1,width = 1,headwidth=5))
         # if genelist[i] =='RARB' and x[i] > 3:
@@ -72,14 +72,16 @@ def run(MDS1,MDS2,savedir):
     with open(MDS1) as F:
         F.readline()
         for line in F:
-            line = line.strip().split(',')
+            # line = line.strip().split(',')
+            line = line.strip().split('\t')
             md,H = compute_MDS([int(x) for x in line[1:]])
             d[line[0]] = [md,H]
 
     with open(MDS2) as F:
         F.readline()
         for line in F:
-            line = line.strip().split(',')
+            # line = line.strip().split(',')
+            line = line.strip().split('\t')
             md,H = compute_MDS([int(x) for x in line[1:]])
             d[line[0]].append(md)
             d[line[0]].append(H)
@@ -141,7 +143,7 @@ if __name__ == "__main__":
 
     #File directory
     filedir = parent_dir(homedir) + '/files/'
-    MDS1 = parent_dir(homedir) + '/MDS_files/A2N_MDS.csv'
-    MDS2 = parent_dir(homedir) + '/MDS_files/ACN_MDS.csv'
+    MDS1 = parent_dir(homedir) + '/MDS_files/ACN_MDS.csv'
+    MDS2 = parent_dir(homedir) + '/MDS_files/ACD_MDS.csv'
     savedir = parent_dir(homedir) + '/figures/'
     run(MDS2,MDS1,savedir)

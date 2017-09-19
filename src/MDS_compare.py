@@ -15,21 +15,24 @@ def parent_dir(directory):
 
 def plot_MA(x,y,sig1,sig2,sig3,sig4,name,savedir,siglist1,siglist2,cond1,cond2,genelist):
 
-    name1 = 'A2780'
-    if cond1[1] == 'C':
-        name1 = name1 + 'cis'
-    if cond1[2] == 'C':
-        name1 = name1 + '+C'
-    if cond1[2] == 'D':
-        name1 = name1 + '+D'
+    # name1 = 'A2780'
+    # if cond1[1] == 'C':
+    #     name1 = name1 + 'cis'
+    # if cond1[2] == 'C':
+    #     name1 = name1 + '+C'
+    # if cond1[2] == 'D':
+    #     name1 = name1 + '+D'
 
-    name2 = 'A2780'
-    if cond2[1] == 'C':
-        name2 = name2 + 'cis'
-    if cond2[2] == 'C':
-        name2 = name2 + '+C'
-    if cond2[2] == 'D':
-        name2 = name2 + '+D'
+    # name2 = 'A2780'
+    # if cond2[1] == 'C':
+    #     name2 = name2 + 'cis'
+    # if cond2[2] == 'C':
+    #     name2 = name2 + '+C'
+    # if cond2[2] == 'D':
+    #     name2 = name2 + '+D'
+
+    name1 = cond1
+    name2 = cond2
 
     F = plt.figure() 
     ax = F.add_subplot(111)
@@ -51,15 +54,15 @@ def plot_MA(x,y,sig1,sig2,sig3,sig4,name,savedir,siglist1,siglist2,cond1,cond2,g
     #         ax.annotate(siglist1[i],xy=(sig1[i],sig2[i]),xytext = (3.5,0.07),arrowprops=dict(facecolor='black', shrink=0.1,width = 1,headwidth=5))
     #     if siglist1[i] == 'RARA':
     #         ax.annotate(siglist1[i],xy=(sig1[i],sig2[i]),xytext = (4.25,0.09),arrowprops=dict(facecolor='black', shrink=0.1,width = 1,headwidth=5))
-    for i in range(len(genelist)):
-        if genelist[i] =='VDR' and x[i] > 3:
-            ax.annotate(genelist[i],xy=(x[i],y[i]),xytext = (4.6,0.06),arrowprops=dict(facecolor='black', shrink=0.1,width = 1,headwidth=5))
-        if genelist[i] =='RARG' and x[i] > 3:
-            ax.annotate(genelist[i],xy=(x[i],y[i]),xytext = (3.7,0.1),arrowprops=dict(facecolor='black', shrink=0.1,width = 1,headwidth=5))
-        if genelist[i] =='RARB' and x[i] > 3:
-            ax.annotate(genelist[i],xy=(x[i],y[i]),xytext = (3.5,0.07),arrowprops=dict(facecolor='black', shrink=0.1,width = 1,headwidth=5))
-        if genelist[i] =='RARA' and x[i] > 3:
-            ax.annotate(genelist[i],xy=(x[i],y[i]),xytext = (4.25,0.09),arrowprops=dict(facecolor='black', shrink=0.1,width = 1,headwidth=5))
+    # for i in range(len(genelist)):
+    #     if genelist[i] =='VDR' and x[i] > 3:
+    #         ax.annotate(genelist[i],xy=(x[i],y[i]),xytext = (4.6,0.06),arrowprops=dict(facecolor='black', shrink=0.1,width = 1,headwidth=5))
+    #     if genelist[i] =='RARG' and x[i] > 3:
+    #         ax.annotate(genelist[i],xy=(x[i],y[i]),xytext = (3.7,0.1),arrowprops=dict(facecolor='black', shrink=0.1,width = 1,headwidth=5))
+    #     if genelist[i] =='RARB' and x[i] > 3:
+    #         ax.annotate(genelist[i],xy=(x[i],y[i]),xytext = (3.5,0.07),arrowprops=dict(facecolor='black', shrink=0.1,width = 1,headwidth=5))
+    #     if genelist[i] =='RARA' and x[i] > 3:
+    #         ax.annotate(genelist[i],xy=(x[i],y[i]),xytext = (4.25,0.09),arrowprops=dict(facecolor='black', shrink=0.1,width = 1,headwidth=5))
 
 
 
@@ -70,7 +73,7 @@ def plot_MA(x,y,sig1,sig2,sig3,sig4,name,savedir,siglist1,siglist2,cond1,cond2,g
     for item in siglist2:
         print item
     # plt.show()
-    plt.savefig(savedir + 'MA_plot_JDR_' + name1 + '-' + name2 + '_annotated.png',dpi=1200)
+    plt.savefig(savedir + 'MA_plot_JDR_' + name1 + '-' + name2 + '.png',dpi=1200)
 
 
 
@@ -170,7 +173,7 @@ def run(MDS1,MDS2,savedir):
                         Y3.append(mdj-mdk-mean)
                         siglist2.append(key.split('.')[0].split('_')[1])
                         print 'down', key.split('.')[0].split('_')[1], math.log((Nj+Nk)/2.0,10), mdj-mdk-mean
-        if name == 'NON':
+        if name == 'BOTH':
             plot_MA(X,Y,X2,Y2,X3,Y3,name,savedir,siglist,siglist2,name1,name2,genelist)
 
     # print genelist
@@ -181,8 +184,8 @@ if __name__ == "__main__":
 
     #File directory
     filedir = parent_dir(homedir) + '/files/'
-    MDS1 = parent_dir(homedir) + '/MDS_files/A2N_MDS.tsv'
-    MDS2 = parent_dir(homedir) + '/MDS_files/A2D_MDS.tsv'
+    MDS1 = parent_dir(homedir) + '/MDS_files/MDS_run2/J2C01_MDS.tsv'
+    MDS2 = parent_dir(homedir) + '/MDS_files/MDS_run2/J22_MDS.tsv'
     savedir = parent_dir(homedir) + '/figures/'
     run(MDS2,MDS1,savedir)
 
