@@ -57,7 +57,6 @@ def sort_intersect_file(intersect_file,filedir):
     with open(intersect_file) as F:
         TFnames = F.readline().strip('\n').split('\t')[5:]
         TFvals = [[] for i in range(len(TFnames))]
-        print TFvals
         for line in F:
             line = line.strip('\n').split('\t')
             intervals.append('\t'.join(line[:3]))
@@ -75,7 +74,7 @@ def sort_intersect_file(intersect_file,filedir):
 
     indices = [i[0] for i in sorted(enumerate(fcs), key=lambda x:x[1],reverse=True)]
 
-    outfile = open(filedir + filedir + "all_preliminary_bidir.merge.sort.count.intersect.sorted.bed",'w')
+    outfile = open(filedir + "all_preliminary_bidir.merge.sort.count.intersect.sorted.bed",'w')
     outfile.write('chrom\tstart\tstop\tlog2foldchange\t' + '\t'.join(TFnames) + '\n')
     for i in indices:
         outfile.write(intervals[i] + '\t' + str(fcs[i]))
