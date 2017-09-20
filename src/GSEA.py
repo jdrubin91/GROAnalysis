@@ -63,7 +63,7 @@ def sort_intersect_file(intersect_file,filedir):
             try:
                 log2fc = math.log(float(line[3])/float(line[4]),2)
                 fcs.append(log2fc)
-            else:
+            except:
                 fcs.append(0)
             for i in range(len(line[5:])):
                 val = line[5+i]
