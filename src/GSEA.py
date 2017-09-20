@@ -1,5 +1,8 @@
 __author__ = 'Jonathan Rubin'
 
+import matplotlib
+matplotlib.use('Agg')
+import matplotlib.pyplot as plt
 import os
 import sys
 import math
@@ -82,6 +85,26 @@ def sort_intersect_file(intersect_file,filedir):
             outfile.write('\t' + str(vals[i]))
         outfile.write('\n')
 
+def gsea_analysis(sorted_intersect_file,figuredir):
+    with open(intersect_file) as F:
+        TFnames = F.readline().strip('\n').split('\t')[4:]
+        TFvals = [[] for i in range(len(TFnames))]
+        for line in F:
+            line = line.strip('\n').split('\t')
+            for i in range(len(line[5:])):
+                val = line[5+i]
+                TFvals[i].append(val)
+
+    for i in range(len(TFnames)):
+        TF = TFnames[i]
+        vals = TFvals[i]
+        F = plt.figure()
+        plt.imshow(vals)
+
+                
+                    
+
+
 
 
 
@@ -116,6 +139,9 @@ if __name__ == "__main__":
 
 
     intersect_file = filedir + "all_preliminary_bidir.merge.sort.count.intersect.bed"
-    sort_intersect_file(intersect_file,filedir)
+    # sort_intersect_file(intersect_file,filedir)
+
+
+    sorted_intersect_file = filedir + "all_preliminary_bidir.merge.sort.count.intersect.sorted.bed"
 
 
