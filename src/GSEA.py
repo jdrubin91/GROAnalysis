@@ -67,7 +67,9 @@ def sort_intersect_file(intersect_file,filedir):
             except:
                 fcs.append(0)
             for i in range(len(line[5:])):
-                val = line[4+i]
+                print i
+                print len(TFvals)
+                val = line[5+i]
                 if val != 0:
                     TFvals[i].append(1)
                 else:
