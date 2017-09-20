@@ -93,7 +93,7 @@ def gsea_analysis(sorted_intersect_file,figuredir):
             line = line.strip('\n').split('\t')
             for i in range(len(line[5:])):
                 val = line[5+i]
-                TFvals[i].append(val)
+                TFvals[i].append(float(val))
 
     for i in range(len(TFnames)):
         TF = TFnames[i]
