@@ -6,6 +6,7 @@ import matplotlib.pyplot as plt
 import os
 import sys
 import math
+import numpy as np
 
 def add_header(header,file1):
     lines = list()
@@ -95,11 +96,14 @@ def gsea_analysis(sorted_intersect_file,figuredir):
                 val = line[5+i]
                 TFvals[i].append(float(val))
 
+    bins = np.arange(0,len(TFnames))
     for i in range(len(TFnames)):
         TF = TFnames[i]
         vals = TFvals[i]
+        hist, edges = np.histogram(vals, bins)
+        hist=hist[np.newaxis,:]
         F = plt.figure()
-        plt.imshow(vals)
+        plt.imshow(hist)
         plt.savefig(figuredir + TF + '.png')
 
                 
