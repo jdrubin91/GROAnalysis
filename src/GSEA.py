@@ -144,5 +144,6 @@ if __name__ == "__main__":
 
 
     sorted_intersect_file = filedir + "all_preliminary_bidir.merge.sort.count.intersect.sorted.bed"
+    gsea_analysis(sorted_intersect_file,figuredir)
 
 
