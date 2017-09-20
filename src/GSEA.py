@@ -56,7 +56,7 @@ def sort_intersect_file(intersect_file,filedir):
     intervals = list()
     with open(intersect_file) as F:
         TFnames = F.readline().strip('\n').split('\t')[5:]
-        TFvals = [[]*len(TFnames)]
+        TFvals = [[] for i in range(len(TFnames))]
         print TFvals
         for line in F:
             line = line.strip('\n').split('\t')
