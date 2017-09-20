@@ -100,6 +100,7 @@ def gsea_analysis(sorted_intersect_file,figuredir):
         vals = TFvals[i]
         F = plt.figure()
         plt.imshow(vals)
+        plt.savefig(figuredir + TF + '.png')
 
                 
                     
