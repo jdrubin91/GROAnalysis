@@ -79,7 +79,7 @@ def sort_intersect_file(intersect_file,filedir):
     for i in indices:
         outfile.write(intervals[i] + '\t' + str(fcs[i]))
         for vals in TFvals:
-            outfile.write('\t' + vals[i])
+            outfile.write('\t' + str(vals[i]))
         outfile.write('\n')
 
 
