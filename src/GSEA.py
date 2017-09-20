@@ -59,7 +59,7 @@ def sort_intersect_file(intersect_file,filedir):
         TFvals = [[]*len(TFnames)]
         for line in F:
             line = line.strip('\n').split('\t')
-            interval.append('\t'.join(line[:3]))
+            intervals.append('\t'.join(line[:3]))
             try:
                 log2fc = math.log(float(line[3])/float(line[4]),2)
                 fcs.append(log2fc)
