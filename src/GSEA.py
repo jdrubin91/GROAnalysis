@@ -50,7 +50,7 @@ def create_intersect_file(interval_file,path_to_PSSMs,filedir):
             concatenate_files(filedir + "all_preliminary_bidir.merge.sort.count.intersect.bed", filedir + "temp.bed")
         i += 1
 
-    add_header(header, filedir + "all_preliminary_bidir.merge.sort.count.intersect.bed")
+    add_header('\t'.join(header)+'\n', filedir + "all_preliminary_bidir.merge.sort.count.intersect.bed")
 
 
 
