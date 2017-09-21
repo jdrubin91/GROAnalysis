@@ -70,7 +70,7 @@ def sort_intersect_file(intersect_file,filedir):
             except:
                 fcs.append(0)
             for i in range(len(line[5:])):
-                val = line[5+i]
+                val = int(line[5+i])
                 if val != 0:
                     TFvals[i].append(1)
                 else:
@@ -143,7 +143,7 @@ if __name__ == "__main__":
 
 
     intersect_file = filedir + "all_preliminary_bidir.merge.sort.count.intersect.bed"
-    # sort_intersect_file(intersect_file,filedir)
+    sort_intersect_file(intersect_file,filedir)
 
 
     sorted_intersect_file = filedir + "all_preliminary_bidir.merge.sort.count.intersect.sorted.bed"
