@@ -100,10 +100,9 @@ def gsea_analysis(sorted_intersect_file,figuredir):
     for i in range(len(TFnames)):
         TF = TFnames[i]
         vals = TFvals[i]
-        hist, edges = np.histogram(vals, bins)
-        hist=hist[np.newaxis,:]
+        x = [x*y for x,y in zip(vals,bins)]
         F = plt.figure()
-        plt.imshow(hist)
+        plt.hist(x,bins=len(TFnames))
         plt.savefig(figuredir + TF + '.png')
 
                 
