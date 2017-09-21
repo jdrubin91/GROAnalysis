@@ -88,7 +88,7 @@ def sort_intersect_file(intersect_file,filedir):
 
 def gsea_analysis(sorted_intersect_file,figuredir):
     with open(intersect_file) as F:
-        TFnames = F.readline().strip('\n').split('\t')[4:]
+        TFnames = F.readline().strip('\n').split('\t')[5:]
         TFvals = [[] for i in range(len(TFnames))]
         for line in F:
             line = line.strip('\n').split('\t')
@@ -96,14 +96,12 @@ def gsea_analysis(sorted_intersect_file,figuredir):
                 val = line[5+i]
                 TFvals[i].append(float(val))
 
-    bins = np.arange(0,len(TFvals[0]))
-    print len(bins)
+    ind = np.arange(0,len(TFvals[0]))
     for i in range(len(TFnames)):
         TF = TFnames[i]
         vals = TFvals[i]
-        x = [x*y for x,y in zip(vals,bins)]
         F = plt.figure()
-        plt.hist(x,bins=len(TFnames))
+        plt.bar(ind,vals)
         plt.savefig(figuredir + TF + '.png')
         plt.close()
 
