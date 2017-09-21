@@ -87,19 +87,20 @@ def sort_intersect_file(intersect_file,filedir):
         outfile.write('\n')
 
 def gsea_analysis(sorted_intersect_file,figuredir):
-    with open(intersect_file) as F:
-        TFnames = F.readline().strip('\n').split('\t')[5:]
+    with open(sorted_intersect_file) as F:
+        TFnames = F.readline().strip('\n').split('\t')[4:]
         TFvals = [[] for i in range(len(TFnames))]
         for line in F:
             line = line.strip('\n').split('\t')
-            for i in range(len(line[5:])):
-                val = line[5+i]
+            for i in range(len(line[4:])):
+                val = line[4+i]
                 TFvals[i].append(float(val))
 
     ind = np.arange(0,len(TFvals[0]))
-    for i in range(len(TFnames)):
+    for i in range(len(TFnames[0:2])):
         TF = TFnames[i]
         vals = TFvals[i]
+        print vals
         F = plt.figure()
         plt.bar(ind,vals)
         plt.savefig(figuredir + TF + '.png')
@@ -142,8 +143,8 @@ if __name__ == "__main__":
 
 
 
-    intersect_file = filedir + "all_preliminary_bidir.merge.sort.count.intersect.bed"
-    sort_intersect_file(intersect_file,filedir)
+    # intersect_file = filedir + "all_preliminary_bidir.merge.sort.count.intersect.bed"
+    # sort_intersect_file(intersect_file,filedir)
 
 
     sorted_intersect_file = filedir + "all_preliminary_bidir.merge.sort.count.intersect.sorted.bed"
