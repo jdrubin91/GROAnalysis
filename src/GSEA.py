@@ -96,8 +96,8 @@ def gsea_analysis(sorted_intersect_file,figuredir):
                 val = line[5+i]
                 TFvals[i].append(float(val))
 
-    bins = np.arange(0,len(TFnames))
-    print bins
+    bins = np.arange(0,len(TFvals[0]))
+    print len(bins)
     for i in range(len(TFnames)):
         TF = TFnames[i]
         vals = TFvals[i]
