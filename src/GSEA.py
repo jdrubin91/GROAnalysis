@@ -97,11 +97,11 @@ def gsea_analysis(sorted_intersect_file,figuredir):
                 TFvals[i].append(float(val))
 
     bins = np.arange(0,len(TFnames))
+    print bins
     for i in range(len(TFnames)):
         TF = TFnames[i]
         vals = TFvals[i]
         x = [x*y for x,y in zip(vals,bins)]
-        print x
         F = plt.figure()
         plt.hist(x,bins=len(TFnames))
         plt.savefig(figuredir + TF + '.png')
