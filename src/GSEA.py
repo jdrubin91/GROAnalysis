@@ -118,33 +118,48 @@ def gsea_analysis(sorted_intersect_file,figuredir):
 if __name__ == "__main__":
     folder1 = '/projects/dowellLab/Taatjes/170825_NB501447_0152_fastq/Demux/cat/trimmed/flipped/bowtie2/sortedbam/genomecoveragebed/fortdf/Tfit/'
     folder2 = '/projects/dowellLab/Taatjes/170207_K00262_0069_AHHMHVBBXX/cat/trimmed/flipped/bowtie2/sortedbam/genomecoveragebed/fortdf/Tfit_run2/'
-    filelist = [folder1+'foot_print_testing-1_prelim_bidir_hits.bed',
-                folder1+'foot_print_testing-2_prelim_bidir_hits.bed',
-                folder1+'foot_print_testing-3_prelim_bidir_hits.bed',
-                folder1+'foot_print_testing-4_prelim_bidir_hits.bed',
-                folder1+'foot_print_testing-5_prelim_bidir_hits.bed',
-                folder1+'foot_print_testing-6_prelim_bidir_hits.bed',
-                folder2+'foot_print_testing-1_prelim_bidir_hits.bed',
-                folder2+'foot_print_testing-2_prelim_bidir_hits.bed',
-                folder2+'foot_print_testing-3_prelim_bidir_hits.bed',
-                folder2+'foot_print_testing-4_prelim_bidir_hits.bed',
-                folder2+'foot_print_testing-5_prelim_bidir_hits.bed',
-                folder2+'foot_print_testing-6_prelim_bidir_hits.bed']
-    filedir = "/Users/joru1876/scratch_backup/GROAnalysis/files/"
-    figuredir = "/Users/joru1876/scratch_backup/GROAnalysis/figures/"
+    # filelist = [folder1+'foot_print_testing-1_prelim_bidir_hits.bed',
+    #             folder1+'foot_print_testing-2_prelim_bidir_hits.bed',
+    #             folder1+'foot_print_testing-3_prelim_bidir_hits.bed',
+    #             folder1+'foot_print_testing-4_prelim_bidir_hits.bed',
+    #             folder1+'foot_print_testing-5_prelim_bidir_hits.bed',
+    #             folder1+'foot_print_testing-6_prelim_bidir_hits.bed',
+    #             folder2+'foot_print_testing-1_prelim_bidir_hits.bed',
+    #             folder2+'foot_print_testing-2_prelim_bidir_hits.bed',
+    #             folder2+'foot_print_testing-3_prelim_bidir_hits.bed',
+    #             folder2+'foot_print_testing-4_prelim_bidir_hits.bed',
+    #             folder2+'foot_print_testing-5_prelim_bidir_hits.bed',
+    #             folder2+'foot_print_testing-6_prelim_bidir_hits.bed']
+
+    filelist = [folder1+'foot_print_testing-7_bidir_predictions.bed',
+                folder1+'foot_print_testing-8_bidir_predictions.bed',
+                folder1+'foot_print_testing-9_bidir_predictions.bed',
+                folder1+'foot_print_testing-10_bidir_predictions.bed',
+                folder1+'foot_print_testing-11_bidir_predictions.bed',
+                folder1+'foot_print_testing-12_bidir_predictions.bed',
+                folder2+'foot_print_testing-7_bidir_predictions.bed',
+                folder2+'foot_print_testing-8_bidir_predictions.bed',
+                folder2+'foot_print_testing-9_bidir_predictions.bed',
+                folder2+'foot_print_testing-10_bidir_predictions.bed',
+                folder2+'foot_print_testing-11_bidir_predictions.bed',
+                folder2+'foot_print_testing-12_bidir_predictions.bed']
+    # filedir = "/Users/joru1876/scratch_backup/GROAnalysis/files/"
+    filedir = "/Users/joru1876/scratch_backup/GSEA_files/"
+    # figuredir = "/Users/joru1876/scratch_backup/GROAnalysis/figures/"
+    figuredir = "/Users/joru1876/scratch_backup/GSEA_plots/"
     bamfolder = '/projects/dowellLab/Taatjes/170207_K00262_0069_AHHMHVBBXX/cat/trimmed/flipped/bowtie2/sortedbam/'
     condition1bam = bamfolder + 'J52_trimmed.flip.fastq.bowtie2.sorted.bam'
     condition2bam = bamfolder + 'J62_trimmed.flip.fastq.bowtie2.sorted.bam'
     path_to_PSSMs = '/scratch/Shares/dowell/md_score_paper/PSSM_hits_genome_wide/pval-7/'
 
-    # create_bidir_interval_file(filelist,filedir,condition1bam,condition2bam)
-    # interval_file = filedir + "all_preliminary_bidir.merge.sort.count.bed"
-    # create_intersect_file(interval_file,path_to_PSSMs,filedir)
+    create_bidir_interval_file(filelist,filedir,condition1bam,condition2bam)
+    interval_file = filedir + "all_preliminary_bidir.merge.sort.count.bed"
+    create_intersect_file(interval_file,path_to_PSSMs,filedir)
 
 
 
-    # intersect_file = filedir + "all_preliminary_bidir.merge.sort.count.intersect.bed"
-    # sort_intersect_file(intersect_file,filedir)
+    intersect_file = filedir + "all_preliminary_bidir.merge.sort.count.intersect.bed"
+    sort_intersect_file(intersect_file,filedir)
 
 
     sorted_intersect_file = filedir + "all_preliminary_bidir.merge.sort.count.intersect.sorted.bed"

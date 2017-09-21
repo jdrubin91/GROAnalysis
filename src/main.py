@@ -47,7 +47,7 @@ filedir = parent_dir(homedir) + '/files'
 figuredir = parent_dir(homedir) + '/figures'
 
 
-def run(DMSO,CA):
+def run():
     # #Specify DMSO treated bedgraph directory
     # DMSO = '/projects/dowellLab/Taatjes/170207_K00262_0069_AHHMHVBBXX/cat/trimmed/flipped/bowtie2/sortedbam/genomecoveragebed/fortdf/J32_trimmed.flip.fastq.bowtie2.sorted.BedGraph.mp.BedGraph'
 
