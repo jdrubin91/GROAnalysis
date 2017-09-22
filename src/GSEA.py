@@ -143,8 +143,12 @@ if __name__ == "__main__":
                 folder2+'foot_print_testing-10_bidir_predictions.bed',
                 folder2+'foot_print_testing-11_bidir_predictions.bed',
                 folder2+'foot_print_testing-12_bidir_predictions.bed']
-    # filedir = "/Users/joru1876/scratch_backup/GROAnalysis/files/"
-    filedir = "/Users/joru1876/scratch_backup/GSEA_files/"
+
+
+
+    filedir = "/Users/joru1876/scratch_backup/GROAnalysis/files/"
+    filelist = [filedir+'DMSO_t45_rep1and2_intersect.bed', filedir + 'CA_t45_rep1and2_intersect.bed']
+    # filedir = "/Users/joru1876/scratch_backup/GSEA_files/"
     # figuredir = "/Users/joru1876/scratch_backup/GROAnalysis/figures/"
     figuredir = "/Users/joru1876/scratch_backup/GSEA_plots/"
     bamfolder = '/projects/dowellLab/Taatjes/170207_K00262_0069_AHHMHVBBXX/cat/trimmed/flipped/bowtie2/sortedbam/'
