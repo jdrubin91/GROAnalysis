@@ -66,6 +66,6 @@ if __name__ == "__main__":
     bam1 = bamfolder1 + 'J52_trimmed.flip.fastq.bowtie2.sorted.bam'
     bam2 = bamfolder1 + 'J62_trimmed.flip.fastq.bowtie2.sorted.bam'
     bamfolder2 = '/projects/dowellLab/Taatjes/170825_NB501447_0152_fastq/Demux/cat/trimmed/flipped/bowtie2/sortedbam/'
-    bam3 = 'J5D451_GTCCGC_S3_L007and8_R1_001_trimmed.flip.fastq.bowtie2.sorted.bam'
-    bam4 = 'J6C451_GTGAAA_S4_L007and8_R1_001_trimmed.flip.fastq.bowtie2.sorted.bam'
+    bam3 = bamfolder2 + 'J5D451_GTCCGC_S3_L007and8_R1_001_trimmed.flip.fastq.bowtie2.sorted.bam'
+    bam4 = bamfolder2 + 'J6C451_GTGAAA_S4_L007and8_R1_001_trimmed.flip.fastq.bowtie2.sorted.bam'
     run(bam1,bam2,bam3,bam4,chip,filedir,figuredir)
