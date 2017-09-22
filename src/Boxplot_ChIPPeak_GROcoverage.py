@@ -46,14 +46,14 @@ def run(bam1,bam2,bam3,bam4,chip,filedir,figuredir):
 
     F = plt.figure()
     ax = F.add_subplot(111)
-    ax.set_title('Log2 Fold-Change over SRF Peaks')
+    ax.set_title('Log2 Fold-Change over JUND Peaks')
     ax.set_ylabel('Log2 Fold-Change t45 DMSO/CA')
     ax.get_xaxis().tick_bottom()
     ax.get_yaxis().tick_left()
     plt.axhline(0, color='black', alpha=0.5)
     bp = ax.boxplot(boxplot, patch_artist=True)
     format_bp(bp)
-    F.savefig(figuredir + 'FoldChange_SRF_t45.png', dpi=1200)
+    F.savefig(figuredir + 'FoldChange_JUND_t45.png', dpi=1200)
 
 
 
@@ -62,8 +62,8 @@ if __name__ == "__main__":
     filedir = "/Users/joru1876/scratch_backup/GROAnalysis/files/"
     figuredir = "/Users/joru1876/scratch_backup/GROAnalysis/figures/"
     # chip = filedir + 'ATF3_ChIP_rep1and2.bed'
-    # chip = filedir + 'JUND_ChIP.bed'
-    chip = filedir + 'SRF_ChIP_rep1and2.bed'
+    chip = filedir + 'JUND_ChIP.bed'
+    # chip = filedir + 'SRF_ChIP_rep1and2.bed'
     bamfolder1 = '/projects/dowellLab/Taatjes/170207_K00262_0069_AHHMHVBBXX/cat/trimmed/flipped/bowtie2/sortedbam/'
     bam1 = bamfolder1 + 'J52_trimmed.flip.fastq.bowtie2.sorted.bam'
     bam2 = bamfolder1 + 'J62_trimmed.flip.fastq.bowtie2.sorted.bam'
