@@ -53,7 +53,7 @@ def run(bam1,bam2,bam3,bam4,chip,filedir,figuredir):
     plt.axhline(0, color='black', alpha=0.5)
     bp = ax.boxplot(boxplot, patch_artist=True)
     format_bp(bp)
-    F.savefig(figuredir + 'FoldChange_t45_rep1.png', dpi=1200)
+    F.savefig(figuredir + 'FoldChange_JUND_t45.png', dpi=1200)
 
 
 
