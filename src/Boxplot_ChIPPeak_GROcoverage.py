@@ -61,7 +61,8 @@ def run(bam1,bam2,bam3,bam4,chip,filedir,figuredir):
 if __name__ == "__main__":
     filedir = "/Users/joru1876/scratch_backup/GROAnalysis/files/"
     figuredir = "/Users/joru1876/scratch_backup/GROAnalysis/figures/"
-    chip = filedir + 'ATF3_ChIP_rep1and2.bed'
+    # chip = filedir + 'ATF3_ChIP_rep1and2.bed'
+    chip = filedir + 'JUND_ChIP.bed'
     bamfolder1 = '/projects/dowellLab/Taatjes/170207_K00262_0069_AHHMHVBBXX/cat/trimmed/flipped/bowtie2/sortedbam/'
     bam1 = bamfolder1 + 'J52_trimmed.flip.fastq.bowtie2.sorted.bam'
     bam2 = bamfolder1 + 'J62_trimmed.flip.fastq.bowtie2.sorted.bam'
