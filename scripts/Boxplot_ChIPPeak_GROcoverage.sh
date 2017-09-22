@@ -4,10 +4,12 @@
 #PBS -l nodes=1:ppn=1
 
 ### Allocate the amount of memory needed
-#PBS -l mem=10gb
+#PBS -l mem=4gb
 
 ### Set your expected walltime
 #PBS -l walltime=100:00:00
+
+#PBS -q short4gb
 
 ### Setting to mail when the job is complete
 #PBS -e /Users/joru1876/qsub_errors/
