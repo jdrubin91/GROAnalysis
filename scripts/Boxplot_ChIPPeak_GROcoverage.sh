@@ -7,7 +7,7 @@
 #PBS -l mem=4gb
 
 ### Set your expected walltime
-#PBS -l walltime=100:00:00
+#PBS -l walltime=5:00:00
 
 #PBS -q short4gb
 
