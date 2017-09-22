@@ -18,17 +18,18 @@ def parent_dir(directory):
     
     return newdir
 
-def run(rep1,rep2, figuredir):
+def run(rep1,rep2, figuredir,filedir):
     rep1 = BedTool(rep1)
     rep2 = BedTool(rep2)
 
     AB = len(rep1+rep2)
     aB = len(rep2) - AB
     Ab = len(rep1) - AB
+    # (rep1+rep2).saveas(filedir + 'CA_t45_rep1and2_intersect.bed')
     plt.figure()
-    v = venn2(subsets(Ab,aB,AB), set_labels = ('Rep1','Rep2'))
-    plt.title("Promoter Overlap")
-    plt.savefig(figuredir + 'Bidirectional_t45_DMSO_rep1_rep2_overlap.png',dpi=1200)
+    v = venn2(subsets=(Ab,aB,AB), set_labels = ('DMSO','CA'))
+    plt.title("Bidirectional Overlap DMSO CA Rep1 and Rep2 t=45")
+    plt.savefig(figuredir + 'Bidirectional_t45_DMSO_CA_rep1and2_overlap.png',dpi=1200)
 
 
 def example():
@@ -54,9 +55,10 @@ if __name__ == "__main__":
 
     #Figure directory
     figuredir = parent_dir(homedir) + '/figures/'
+    filedir = parent_dir(homedir) + '/files/'
 
-    folder1 = '/projects/dowellLab/Taatjes/170825_NB501447_0152_fastq/Demux/cat/trimmed/flipped/bowtie2/sortedbam/genomecoveragebed/fortdf/Tfit/'
-    folder2 = '/projects/dowellLab/Taatjes/170207_K00262_0069_AHHMHVBBXX/cat/trimmed/flipped/bowtie2/sortedbam/genomecoveragebed/fortdf/Tfit_run2/'
+    folder1 = '../../SerumResponseCA_REP1GROSEQ/Tfit_rep1/'
+    folder2 = '../../SerumResponseCA_REP1GROSEQ/Tfit_rep2/'
     filelist = [folder1+'foot_print_testing-7_bidir_predictions.bed',
                 folder1+'foot_print_testing-8_bidir_predictions.bed',
                 folder1+'foot_print_testing-9_bidir_predictions.bed',
@@ -70,9 +72,12 @@ if __name__ == "__main__":
                 folder2+'foot_print_testing-11_bidir_predictions.bed',
                 folder2+'foot_print_testing-12_bidir_predictions.bed']
 
-    rep1=filelist[4]
-    rep2=filelist[10]
+    rep1=filelist[10]
+    rep2=filelist[11]
+
+    rep1=filedir + 'DMSO_t45_rep1and2_intersect.bed'
+    rep2=filedir + 'CA_t45_rep1and2_intersect.bed'
     print rep1
     print rep2
-    run(rep1,rep2,figuredir)
+    run(rep1,rep2,figuredir,filedir)
 
