@@ -54,7 +54,7 @@ def parse_chipdir(chipdir):
     filelist = list()
     for name in names:
         for filename in d:
-            if d[filename] == name:
+            if d[filename][0] == name:
                 templist.append(chipdir + filename + '.bed')
         os.system("bedtools intersect -a " + templist[0] + " -b " + " ".join(templist[1:]) + " > " + chipdir + name + ".all_intersect.bed")
         filelist.append(chipdir + name + ".all_intersect.bed")
