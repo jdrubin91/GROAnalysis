@@ -46,7 +46,7 @@ def parse_chipdir(chipdir):
                 name = line[16].split('-')[0]
                 rep = line[29]
                 techrep = line[30]
-                if fileformat == 'peaks' and genome == 'hg19' and 'POLR' not in name and 'CTCF' not in name:
+                if fileformat == 'peaks' and genome == 'hg19' and 'POLR' not in name and 'CTCF' not in name and 'bed' in filetype:
                     names.append(name)
                     d[filename] = [name,rep,techrep,genome,filetype,fileformat]
     names = list(set(names))
@@ -88,8 +88,8 @@ def plot(boxplot,names,figuredir):
     ax.get_xaxis().tick_bottom()
     ax.get_yaxis().tick_left()
     plt.axhline(0, color='black', alpha=0.5)
-    bp = ax.boxplot(boxplot, positions=arange(len(boxplot)),patch_artist=True)
-    plt.xticks(arange(len(boxplot)),names)
+    bp = ax.boxplot(boxplot, positions=np.arange(len(boxplot)),patch_artist=True)
+    plt.xticks(np.arange(len(boxplot)),names)
     format_bp(bp)
     F.savefig(figuredir + 'FoldChange_HCT116_ChIP_t45.png', dpi=1200)
 
