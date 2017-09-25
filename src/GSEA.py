@@ -159,9 +159,9 @@ if __name__ == "__main__":
     condition2bam = bamfolder + 'J62_trimmed.flip.fastq.bowtie2.sorted.bam'
     path_to_PSSMs = '/scratch/Shares/dowell/md_score_paper/PSSM_hits_genome_wide/pval-7/'
 
-    # create_bidir_interval_file(filelist,filedir,condition1bam,condition2bam)
-    # interval_file = filedir + "all_preliminary_bidir.merge.sort.count.bed"
-    # create_intersect_file(interval_file,path_to_PSSMs,filedir)
+    create_bidir_interval_file(filelist,filedir,condition1bam,condition2bam)
+    interval_file = filedir + "all_preliminary_bidir.merge.sort.count.bed"
+    create_intersect_file(interval_file,path_to_PSSMs,filedir)
 
 
 
