@@ -63,18 +63,21 @@ def sort_intersect_file(intersect_file,filedir):
         TFvals = [[] for i in range(len(TFnames))]
         for line in F:
             line = line.strip('\n').split('\t')
-            intervals.append('\t'.join(line[:3]))
-            try:
-                log2fc = math.log(float(line[3])/float(line[4]),2)
-                fcs.append(log2fc)
-            except:
-                fcs.append(0)
-            for i in range(len(line[5:])):
-                val = int(line[5+i])
-                if val != 0:
-                    TFvals[i].append(1)
-                else:
-                    TFvals[i].append(0)
+            val1 = float(line[3])
+            val2 = float(line[4])
+            if (val1+val2)/2 > 10:
+                intervals.append('\t'.join(line[:3]))
+                try:
+                    log2fc = math.log(float(line[3])/float(line[4]),2)
+                    fcs.append(log2fc)
+                except:
+                    fcs.append(0)
+                for i in range(len(line[5:])):
+                    val = int(line[5+i])
+                    if val != 0:
+                        TFvals[i].append(1)
+                    else:
+                        TFvals[i].append(0)
 
     indices = [i[0] for i in sorted(enumerate(fcs), key=lambda x:x[1],reverse=True)]
 
@@ -156,9 +159,9 @@ if __name__ == "__main__":
     condition2bam = bamfolder + 'J62_trimmed.flip.fastq.bowtie2.sorted.bam'
     path_to_PSSMs = '/scratch/Shares/dowell/md_score_paper/PSSM_hits_genome_wide/pval-7/'
 
-    create_bidir_interval_file(filelist,filedir,condition1bam,condition2bam)
-    interval_file = filedir + "all_preliminary_bidir.merge.sort.count.bed"
-    create_intersect_file(interval_file,path_to_PSSMs,filedir)
+    # create_bidir_interval_file(filelist,filedir,condition1bam,condition2bam)
+    # interval_file = filedir + "all_preliminary_bidir.merge.sort.count.bed"
+    # create_intersect_file(interval_file,path_to_PSSMs,filedir)
 
 
 
