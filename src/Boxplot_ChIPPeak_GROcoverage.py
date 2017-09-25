@@ -31,6 +31,38 @@ def format_bp(bp):
     for flier in bp['fliers']:
         flier.set(marker='o', color='#e7298a', alpha=0.5)
 
+def parse_chipdir(chipdir):
+    d = dict()
+    file1 = chipdir + 'metadata.tsv'
+    names = list()
+    with open(file1) as F:
+        header = F.readline().strip('\n').split('\t')
+        for line in F:
+                line = line.strip('\n').split('\t')
+                genome = line[-8]
+                filename = line[0]
+                fileformat = line[2]
+                filetype = line[1]
+                name = line[16].split('-')[0]
+                rep = line[29]
+                techrep = line[30]
+                if fileformat == 'peaks' and genome == 'hg19' and 'POLR' not in name and 'CTCF' not in name:
+                    names.append(name)
+                    d[filename] = [name,rep,techrep,genome,filetype,fileformat]
+    names = list(set(names))
+    templist = list()
+    filelist = list()
+    for name in names:
+        for filename in d:
+            if d[filename] == name:
+                templist.append(chipdir + filename + '.bed')
+        os.system("bedtools intersect -a " + templist[0] + " -b " + " ".join(templist[1:]) + " > " + chipdir + name + ".all_intersect.bed")
+        filelist.append(chipdir + name + ".all_intersect.bed")
+
+    return filelist,names
+
+
+
 def run(bam1,bam2,bam3,bam4,chip,filedir,figuredir):
     os.system("sort -k1,1 -k2,2n " + chip + " > " + chip + ".sorted.bed")
     os.system("bedtools multicov -bams " + bam1 + " " + bam2 + " " + bam3 + " " + bam4 + " -bed " + chip + ".sorted.bed >" + filedir + "Boxplot_ChIPPeak_GROcoverage.counts.bed")
@@ -44,16 +76,20 @@ def run(bam1,bam2,bam3,bam4,chip,filedir,figuredir):
             except:
                 pass
 
+    return boxplot
+
+def plot(boxplot,names,figuredir):
     F = plt.figure()
     ax = F.add_subplot(111)
-    ax.set_title('Log2 Fold-Change over SRF Peaks')
+    ax.set_title('Log2 Fold-Change over HCT116 Encode ChIP Peaks')
     ax.set_ylabel('Log2 Fold-Change t45 DMSO/CA')
     ax.get_xaxis().tick_bottom()
     ax.get_yaxis().tick_left()
     plt.axhline(0, color='black', alpha=0.5)
-    bp = ax.boxplot(boxplot, patch_artist=True)
+    bp = ax.boxplot(boxplot, positions=arange(len(boxplot)),patch_artist=True)
+    plt.xticks(arange(len(boxplot)),names)
     format_bp(bp)
-    F.savefig(figuredir + 'FoldChange_SRF_t45.png', dpi=1200)
+    F.savefig(figuredir + 'FoldChange_HCT116_ChIP_t45.png', dpi=1200)
 
 
 
@@ -63,11 +99,16 @@ if __name__ == "__main__":
     figuredir = "/Users/joru1876/scratch_backup/GROAnalysis/figures/"
     # chip = filedir + 'ATF3_ChIP_rep1and2.bed'
     # chip = filedir + 'JUND_ChIP.bed'
-    chip = filedir + 'SRF_ChIP_rep1and2.bed'
+    # chip = filedir + 'SRF_ChIP_rep1and2.bed'
     bamfolder1 = '/projects/dowellLab/Taatjes/170207_K00262_0069_AHHMHVBBXX/cat/trimmed/flipped/bowtie2/sortedbam/'
     bam1 = bamfolder1 + 'J52_trimmed.flip.fastq.bowtie2.sorted.bam'
     bam2 = bamfolder1 + 'J62_trimmed.flip.fastq.bowtie2.sorted.bam'
     bamfolder2 = '/projects/dowellLab/Taatjes/170825_NB501447_0152_fastq/Demux/cat/trimmed/flipped/bowtie2/sortedbam/'
     bam3 = bamfolder2 + 'J5D451_GTCCGC_S3_L007and8_R1_001_trimmed.flip.fastq.bowtie2.sorted.bam'
     bam4 = bamfolder2 + 'J6C451_GTGAAA_S4_L007and8_R1_001_trimmed.flip.fastq.bowtie2.sorted.bam'
-    run(bam1,bam2,bam3,bam4,chip,filedir,figuredir)
+    chipdir = '/Users/joru1876/scratch_backup/HCT116_ChIP/'
+    filelist,names = parse_chipdir(chipdir)
+    boxplot = list()
+    for chip in filelist:
+        boxplot.append(run(bam1,bam2,bam3,bam4,chip,filedir,figuredir))
+    plot(boxplot,names,figuredir)
