@@ -50,6 +50,8 @@ def parse_chipdir(chipdir):
                     names.append(name)
                     d[filename] = [name,rep,techrep,genome,filetype,fileformat]
     names = list(set(names))
+    print names
+    print d
     templist = list()
     filelist = list()
     for name in names:
