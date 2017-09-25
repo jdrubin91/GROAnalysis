@@ -81,6 +81,9 @@ def run(bam1,bam2,bam3,bam4,chip,filedir,figuredir):
     return boxplot
 
 def plot(boxplot,names,figuredir):
+    means = [np.mean(x) for x in boxplot]
+    indices = [i[0] for i in sorted(enumerate(means), key=lambda x:x[1], reverse=True)]
+    boxplot = [boxplot[i] for i in indices]
     F = plt.figure()
     ax = F.add_subplot(111)
     ax.set_title('Log2 Fold-Change over HCT116 Encode ChIP Peaks')

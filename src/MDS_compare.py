@@ -45,15 +45,15 @@ def plot_MA(x,y,sig1,sig2,sig3,sig4,name,savedir,siglist1,siglist2,cond1,cond2,g
     ax.get_xaxis().tick_bottom()
     ax.get_yaxis().tick_left()
     ax.set_ylim([-0.25,0.25])
-    # for i in range(len(siglist1)):
-    #     if siglist1[i] == 'VDR' and x[i] > 3:
-    #         ax.annotate(siglist1[i],xy=(sig1[i],sig2[i]),xytext = (4.6,0.06),arrowprops=dict(facecolor='black', shrink=0.1,width = 1,headwidth=5))
-    #     if siglist1[i] == 'RARG':
-    #         ax.annotate(siglist1[i],xy=(sig1[i],sig2[i]),xytext = (3.7,0.1),arrowprops=dict(facecolor='black', shrink=0.1,width = 1,headwidth=5))
-    #     if siglist1[i] == 'RARB':
-    #         ax.annotate(siglist1[i],xy=(sig1[i],sig2[i]),xytext = (3.5,0.07),arrowprops=dict(facecolor='black', shrink=0.1,width = 1,headwidth=5))
-    #     if siglist1[i] == 'RARA':
-    #         ax.annotate(siglist1[i],xy=(sig1[i],sig2[i]),xytext = (4.25,0.09),arrowprops=dict(facecolor='black', shrink=0.1,width = 1,headwidth=5))
+    for i in range(len(siglist2)):
+        if siglist2[i] == 'JUND':
+            ax.annotate(siglist2[i],xy=(sig3[i],sig4[i]),xytext = (2.25,-0.15),arrowprops=dict(facecolor='black', shrink=0.1,width = 1,headwidth=5))
+        if siglist2[i] == 'FOSL1':
+            ax.annotate(siglist2[i],xy=(sig3[i],sig4[i]),xytext = (2.75,-0.15),arrowprops=dict(facecolor='black', shrink=0.1,width = 1,headwidth=5))
+        # if siglist1[i] == 'RARB':
+        #     ax.annotate(siglist1[i],xy=(sig1[i],sig2[i]),xytext = (3.5,0.07),arrowprops=dict(facecolor='black', shrink=0.1,width = 1,headwidth=5))
+        # if siglist1[i] == 'RARA':
+        #     ax.annotate(siglist1[i],xy=(sig1[i],sig2[i]),xytext = (4.25,0.09),arrowprops=dict(facecolor='black', shrink=0.1,width = 1,headwidth=5))
     # for i in range(len(genelist)):
     #     if genelist[i] =='VDR' and x[i] > 3:
     #         ax.annotate(genelist[i],xy=(x[i],y[i]),xytext = (4.6,0.06),arrowprops=dict(facecolor='black', shrink=0.1,width = 1,headwidth=5))
@@ -73,7 +73,7 @@ def plot_MA(x,y,sig1,sig2,sig3,sig4,name,savedir,siglist1,siglist2,cond1,cond2,g
     for item in siglist2:
         print item
     # plt.show()
-    plt.savefig(savedir + 'MA_plot_JDR_' + name1 + '-' + name2 + '.png',dpi=1200)
+    plt.savefig(savedir + 'MA_plot_JDR_' + name1 + '-' + name2 + '_annotated.png',dpi=1200)
 
 
 
@@ -184,8 +184,8 @@ if __name__ == "__main__":
 
     #File directory
     filedir = parent_dir(homedir) + '/files/'
-    MDS1 = parent_dir(homedir) + '/MDS_files/MDS_run2/J2C01_MDS.tsv'
-    MDS2 = parent_dir(homedir) + '/MDS_files/MDS_run2/J22_MDS.tsv'
+    MDS1 = parent_dir(homedir) + '/MDS_files/D45_MDS.tsv'
+    MDS2 = parent_dir(homedir) + '/MDS_files/CA45_MDS.tsv'
     savedir = parent_dir(homedir) + '/figures/'
     run(MDS2,MDS1,savedir)
 
