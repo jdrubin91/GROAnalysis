@@ -86,6 +86,7 @@ def run(bam1,bam2,bam3,bam4,chip,filedir,figuredir):
             for norm in total_mapped:
                 line[-4+i] = str(float(line[-4+i])/norm)
                 i += 1
+            outfile.write('\t'.join(line) + '\n')
 
 
 
