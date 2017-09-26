@@ -28,21 +28,21 @@ def run(rep1,rep2,rep1bam,rep2bam,figuredir,filedir):
     for file1 in filelist:
         with open(file1) as F:
             for line in F:
-            line = line.strip('\n').split('\t')
-            i = 0
-            for val in line[-2:]:
-                total_mapped[j][i] += float(val)
-                i += 1
+                line = line.strip('\n').split('\t')
+                i = 0
+                for val in line[-2:]:
+                    total_mapped[j][i] += float(val)
+                    i += 1
         j += 1
 
     j = 0
     for file1 in filelist:
         with open(file1) as F:
-        for line in F:
-            line = line.strip('\n').split('\t')
-            val1 = float(line[-2])/total_mapped[j][0]
-            val2 = float(line[-1])/total_mapped[j][1]
-            boxplot[j].append(val1-val2)
+            for line in F:
+                line = line.strip('\n').split('\t')
+                val1 = float(line[-2])/total_mapped[j][0]
+                val2 = float(line[-1])/total_mapped[j][1]
+                boxplot[j].append(val1-val2)
         j += 1
 
     names = ["Rep1 Only", "Rep1 and 2", "Rep2 Only"]
