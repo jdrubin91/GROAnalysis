@@ -10,6 +10,12 @@ from matplotlib import pyplot as plt
 # rcParams.update({'figure.autolayout': True})
 import numpy as np
 
+def parent_dir(directory):
+    pathlist = directory.split('/')
+    newdir = '/'.join(pathlist[0:len(pathlist)-1])
+    
+    return newdir
+
 def run(rep1,rep2,rep1bam,rep2bam,figuredir,filedir):
     boxplots = [[],[],[]]
 
