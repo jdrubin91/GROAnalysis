@@ -69,8 +69,28 @@ def run(bam1,bam2,bam3,bam4,chip,filedir,figuredir):
     os.system("sort -k1,1 -k2,2n " + chip + " > " + chip + ".sorted.bed")
     os.system("bedtools multicov -bams " + bam1 + " " + bam2 + " " + bam3 + " " + bam4 + " -bed " + chip + ".sorted.bed >" + filedir + "Boxplot_ChIPPeak_GROcoverage.counts.bed")
 
-    boxplot = list()
+    total_mapped = [0,0,0,0]
     with open(filedir + "Boxplot_ChIPPeak_GROcoverage.counts.bed") as F:
+        for line in F:
+            line = line.strip('\n').split('\t')
+            i = 0
+            for val in line[-4:]:
+                total_mapped[i] += float(val)
+                i += 1
+
+    outfile = open(filedir + "Boxplot_ChIPPeak_GROcoverage.counts.normalized.bed",'w')
+    with open(filedir + "Boxplot_ChIPPeak_GROcoverage.counts.bed") as F:
+        for line in F:
+            line = strip('\n').split('\t')
+            i=0
+            for norm in total_mapped:
+                line[-4+i] = str(float(line[-4+i])/norm)
+                i += 1
+
+
+
+    boxplot = list()
+    with open(filedir + "Boxplot_ChIPPeak_GROcoverage.counts.normalized.bed") as F:
         for line in F:
             line = line.strip('\n').split('\t')
             try:
@@ -92,7 +112,7 @@ def plot(boxplot,names,figuredir):
     ax.get_yaxis().tick_left()
     plt.axhline(0, color='black', alpha=0.5)
     bp = ax.boxplot(boxplot, positions=np.arange(len(boxplot)),patch_artist=True)
-    plt.xticks(np.arange(len(boxplot)),names)
+    plt.xticks(np.arange(len(boxplot)),names,rotation=45)
     format_bp(bp)
     F.savefig(figuredir + 'FoldChange_HCT116_ChIP_t45.png', dpi=1200)
 

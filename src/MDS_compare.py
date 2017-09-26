@@ -47,20 +47,20 @@ def plot_MA(x,y,sig1,sig2,sig3,sig4,name,savedir,siglist1,siglist2,cond1,cond2,g
     ax.set_ylim([-0.25,0.25])
     for i in range(len(siglist2)):
         if siglist2[i] == 'JUND':
-            ax.annotate(siglist2[i],xy=(sig3[i],sig4[i]),xytext = (2.25,-0.15),arrowprops=dict(facecolor='black', shrink=0.1,width = 1,headwidth=5))
+            ax.annotate(siglist2[i],xy=(sig3[i],sig4[i]),xytext = (2.5,-0.2),arrowprops=dict(facecolor='black', shrink=0.1,width = 1,headwidth=5))
         if siglist2[i] == 'FOSL1':
-            ax.annotate(siglist2[i],xy=(sig3[i],sig4[i]),xytext = (2.75,-0.15),arrowprops=dict(facecolor='black', shrink=0.1,width = 1,headwidth=5))
+            ax.annotate(siglist2[i],xy=(sig3[i],sig4[i]),xytext = (2.9,-0.15),arrowprops=dict(facecolor='black', shrink=0.1,width = 1,headwidth=5))
         # if siglist1[i] == 'RARB':
         #     ax.annotate(siglist1[i],xy=(sig1[i],sig2[i]),xytext = (3.5,0.07),arrowprops=dict(facecolor='black', shrink=0.1,width = 1,headwidth=5))
         # if siglist1[i] == 'RARA':
         #     ax.annotate(siglist1[i],xy=(sig1[i],sig2[i]),xytext = (4.25,0.09),arrowprops=dict(facecolor='black', shrink=0.1,width = 1,headwidth=5))
-    # for i in range(len(genelist)):
-    #     if genelist[i] =='VDR' and x[i] > 3:
-    #         ax.annotate(genelist[i],xy=(x[i],y[i]),xytext = (4.6,0.06),arrowprops=dict(facecolor='black', shrink=0.1,width = 1,headwidth=5))
-    #     if genelist[i] =='RARG' and x[i] > 3:
-    #         ax.annotate(genelist[i],xy=(x[i],y[i]),xytext = (3.7,0.1),arrowprops=dict(facecolor='black', shrink=0.1,width = 1,headwidth=5))
-    #     if genelist[i] =='RARB' and x[i] > 3:
-    #         ax.annotate(genelist[i],xy=(x[i],y[i]),xytext = (3.5,0.07),arrowprops=dict(facecolor='black', shrink=0.1,width = 1,headwidth=5))
+    for i in range(len(genelist)):
+        if genelist[i] =='FOSL2':
+            ax.annotate(genelist[i],xy=(x[i],y[i]),xytext = (3.25,-0.1),arrowprops=dict(facecolor='black', shrink=0.1,width = 1,headwidth=5))
+        if genelist[i] =='BATF' and x[i] > 2.5:
+            ax.annotate(genelist[i],xy=(x[i],y[i]),xytext = (2.0,-0.1),arrowprops=dict(facecolor='black', shrink=0.1,width = 1,headwidth=5))
+        if genelist[i] =='JUN':
+            ax.annotate(genelist[i],xy=(x[i],y[i]),xytext = (2.25,-0.15),arrowprops=dict(facecolor='black', shrink=0.1,width = 1,headwidth=5))
     #     if genelist[i] =='RARA' and x[i] > 3:
     #         ax.annotate(genelist[i],xy=(x[i],y[i]),xytext = (4.25,0.09),arrowprops=dict(facecolor='black', shrink=0.1,width = 1,headwidth=5))
 
