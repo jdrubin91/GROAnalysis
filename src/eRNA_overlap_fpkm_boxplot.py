@@ -21,25 +21,45 @@ def run(rep1,rep2,rep1bam,rep2bam,figuredir,filedir):
     (r2-r1).multi_bam_coverage(b1,b2).saveas(filedir + "rep2onlyeRNAs_DMSOt45.counts.bed")
     (r1+r2).multi_bam_coverage(b1,b2).saveas(filedir + "rep1and2eRNAs_DMSOt45.counts.bed")
 
-    for file1 in [filedir + "rep1onlyeRNAs_DMSOt45.counts.bed",filedir + "rep2onlyeRNAs_DMSOt45.counts.bed",filedir + "rep1and2eRNAs_DMSOt45.counts.bed"]:
-        outfile = open(file1+".normalized.bed",'w')
+    filelist = [filedir + "rep1onlyeRNAs_DMSOt45.counts.bed",filedir + "rep1and2eRNAs_DMSOt45.counts.bed",filedir + "rep2onlyeRNAs_DMSOt45.counts.bed"]
+    total_mapped = [[0,0],[0,0],[0,0]]
+
+    j = 0
+    for file1 in filelist:
         with open(file1) as F:
             for line in F:
             line = line.strip('\n').split('\t')
-            i=0
-            for norm in total_mapped:
-                line[-4+i] = str(float(line[-4+i])/norm)
+            i = 0
+            for val in line[-2:]:
+                total_mapped[j][i] += float(val)
                 i += 1
-            outfile.write('\t'.join(line) + '\n')
+        j += 1
 
-    outfile = open(filedir + "Boxplot_ChIPPeak_GROcoverage.counts.normalized.bed",'w')
-    with open(filedir + "Boxplot_ChIPPeak_GROcoverage.counts.bed") as F:
+    j = 0
+    for file1 in filelist:
+        with open(file1) as F:
         for line in F:
             line = line.strip('\n').split('\t')
-            i=0
-            for norm in total_mapped:
-                line[-4+i] = str(float(line[-4+i])/norm)
-                i += 1
+            val1 = float(line[-2])/total_mapped[j][0]
+            val2 = float(line[-1])/total_mapped[j][1]
+            boxplot[j].append(val1-val2)
+        j += 1
+
+    names = ["Rep1 Only", "Rep1 and 2", "Rep2 Only"]
+    F = plt.figure()
+    ax = F.add_subplot(111)
+    ax.set_title('FPKM difference between replicate subsets DMSO')
+    ax.set_ylabel('Difference in FPKM (rep1-rep2)')
+    ax.set_xlabel('Subset')
+    bp = ax.boxplot(boxplot, positions=np.arange(len(boxplot)),patch_artist=True)
+    bp['boxes'][0].set( facecolor = 'red' )
+    bp['boxes'][1].set( facecolor = 'yellow' )
+    bp['boxes'][2].set( facecolor = 'green' )
+    plt.xticks(np.arange(len(boxplot)),names,rotation=45)
+    ax.get_xaxis().tick_bottom()
+    ax.get_yaxis().tick_left()
+    plt.savefig(figuredir + "eRNA_overlap_fpkm_boxplot_DMSOt45.png")
+    
 
 
 if __name__ == "__main__":
@@ -50,8 +70,8 @@ if __name__ == "__main__":
     figuredir = parent_dir(homedir) + '/figures/'
     filedir = parent_dir(homedir) + '/files/'
 
-    folder1 = '../../SerumResponseCA_REP1GROSEQ/Tfit_rep1/'
-    folder2 = '../../SerumResponseCA_REP1GROSEQ/Tfit_rep2/'
+    folder1 = '/projects/dowellLab/Taatjes/170207_K00262_0069_AHHMHVBBXX/cat/trimmed/flipped/bowtie2/sortedbam/genomecoveragebed/fortdf/Tfit_run2/'
+    folder2 = '/projects/dowellLab/Taatjes/170825_NB501447_0152_fastq/Demux/cat/trimmed/flipped/bowtie2/sortedbam/genomecoveragebed/fortdf/Tfit/'
     filelist = [folder1+'foot_print_testing-7_bidir_predictions.bed',
                 folder1+'foot_print_testing-8_bidir_predictions.bed',
                 folder1+'foot_print_testing-9_bidir_predictions.bed',
@@ -72,8 +92,8 @@ if __name__ == "__main__":
     bam3 = bamfolder2 + 'J5D451_GTCCGC_S3_L007and8_R1_001_trimmed.flip.fastq.bowtie2.sorted.bam'
     bam4 = bamfolder2 + 'J6C451_GTGAAA_S4_L007and8_R1_001_trimmed.flip.fastq.bowtie2.sorted.bam'
 
-    rep1=filelist[10]
-    rep2=filelist[11]
+    rep1=filelist[4]
+    rep2=filelist[10]
     rep1bam = bam1
     rep2bam = bam3
 
