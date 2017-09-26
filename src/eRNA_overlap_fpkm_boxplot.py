@@ -23,9 +23,9 @@ def run(rep1,rep2,rep1bam,rep2bam,figuredir,filedir):
     r2 = BedTool(rep2)
     b1 = BedTool(rep1bam)
     b2 = BedTool(rep2bam)
-    (r1-r2).multi_bam_coverage(b1,b2).saveas(filedir + "rep1onlyeRNAs_DMSOt45.counts.bed")
-    (r2-r1).multi_bam_coverage(b1,b2).saveas(filedir + "rep2onlyeRNAs_DMSOt45.counts.bed")
-    (r1+r2).multi_bam_coverage(b1,b2).saveas(filedir + "rep1and2eRNAs_DMSOt45.counts.bed")
+    (r1-r2).multi_bam_coverage(bams=[b1,b2]).saveas(filedir + "rep1onlyeRNAs_DMSOt45.counts.bed")
+    (r2-r1).multi_bam_coverage(bams=[b1,b2]).saveas(filedir + "rep2onlyeRNAs_DMSOt45.counts.bed")
+    (r1+r2).multi_bam_coverage(bams=[b1,b2]).saveas(filedir + "rep1and2eRNAs_DMSOt45.counts.bed")
 
     filelist = [filedir + "rep1onlyeRNAs_DMSOt45.counts.bed",filedir + "rep1and2eRNAs_DMSOt45.counts.bed",filedir + "rep2onlyeRNAs_DMSOt45.counts.bed"]
     total_mapped = [[0,0],[0,0],[0,0]]
