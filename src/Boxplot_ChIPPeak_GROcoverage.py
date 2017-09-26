@@ -81,7 +81,7 @@ def run(bam1,bam2,bam3,bam4,chip,filedir,figuredir):
     outfile = open(filedir + "Boxplot_ChIPPeak_GROcoverage.counts.normalized.bed",'w')
     with open(filedir + "Boxplot_ChIPPeak_GROcoverage.counts.bed") as F:
         for line in F:
-            line = strip('\n').split('\t')
+            line = line.strip('\n').split('\t')
             i=0
             for norm in total_mapped:
                 line[-4+i] = str(float(line[-4+i])/norm)
