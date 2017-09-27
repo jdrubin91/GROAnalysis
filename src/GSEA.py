@@ -99,15 +99,27 @@ def gsea_analysis(sorted_intersect_file,figuredir):
                 val = line[4+i]
                 TFvals[i].append(float(val))
 
-    ES = list()
+    ESlist = list()
+    outfile = open(filedir + "GSEA_results.txt")
     ind = np.arange(0,len(TFvals[0]))
     for i in range(len(TFnames)):
         TF = TFnames[i]
         vals = TFvals[i]
-        F = plt.figure()
-        plt.bar(ind,vals)
-        plt.savefig(figuredir + TF + '.png')
-        plt.close()
+        a = 1
+        b = -(float(sum(vals))/float(len(vals)))
+        ES = 0
+        for tick in vals:
+            if tick == 0:
+                ES += b
+            else:
+                ES += a
+            ESlist.append(ES)
+        ES = max([max(ESlist),math.fabs(min(ESlist))])
+
+        # F = plt.figure()
+        # plt.bar(ind,vals)
+        # plt.savefig(figuredir + TF + '.png')
+        # plt.close()
 
                 
                     
