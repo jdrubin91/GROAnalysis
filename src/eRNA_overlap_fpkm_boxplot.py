@@ -64,7 +64,7 @@ def run(rep1,rep2,rep1bam,rep2bam,figuredir,filedir):
     bp['boxes'][0].set( facecolor = 'red' )
     bp['boxes'][1].set( facecolor = 'yellow' )
     bp['boxes'][2].set( facecolor = 'green' )
-    plt.xticks(np.arange(len(boxplot)),names,rotation=45)
+    plt.xticks(np.arange(len(boxplots)),names,rotation=45)
     ax.get_xaxis().tick_bottom()
     ax.get_yaxis().tick_left()
     plt.savefig(figuredir + "eRNA_overlap_fpkm_boxplot_DMSOt45.png")
