@@ -115,6 +115,7 @@ def gsea_analysis(sorted_intersect_file,figuredir):
                 ES += a
             ESlist.append(ES)
         ES = max([max(ESlist),math.fabs(min(ESlist))])
+        print TF,ES
 
         # F = plt.figure()
         # plt.bar(ind,vals)
