@@ -51,7 +51,7 @@ def run(rep1,rep2,rep1bam,rep2bam,figuredir,filedir):
                 line = line.strip('\n').split('\t')
                 val1 = float(line[-2])/total_mapped[j][0]
                 val2 = float(line[-1])/total_mapped[j][1]
-                boxplot[j].append(val1-val2)
+                boxplots[j].append(val1-val2)
         j += 1
 
     names = ["Rep1 Only", "Rep1 and 2", "Rep2 Only"]
