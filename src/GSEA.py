@@ -99,10 +99,11 @@ def gsea_analysis(sorted_intersect_file,figuredir):
                 val = line[4+i]
                 TFvals[i].append(float(val))
 
-    ESlist = list()
+    
     # outfile = open(filedir + "GSEA_results.txt",'w')
     ind = np.arange(0,len(TFvals[0]))
     for i in range(len(TFnames)):
+        ESlist = list()
         TF = TFnames[i]
         vals = TFvals[i]
         a = 1
