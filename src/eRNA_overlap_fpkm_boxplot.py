@@ -23,11 +23,14 @@ def run(rep1,rep2,rep1bam,rep2bam,figuredir,filedir):
     r2 = BedTool(rep2)
     b1 = BedTool(rep1bam)
     b2 = BedTool(rep2bam)
-    (r1-r2).multi_bam_coverage(bams=[b1,b2]).saveas(filedir + "rep1onlyeRNAs_DMSOt45.counts.bed")
-    (r2-r1).multi_bam_coverage(bams=[b1,b2]).saveas(filedir + "rep2onlyeRNAs_DMSOt45.counts.bed")
-    (r1+r2).multi_bam_coverage(bams=[b1,b2]).saveas(filedir + "rep1and2eRNAs_DMSOt45.counts.bed")
+    (r1-r2).saveas(filedir + "rep1onlyeRNAs_DMSOt45.bed")
+    os.system("bedtools multicov -bams " + rep1bam + " " + rep2bam + " -bed " + filedir + "rep1onlyeRNAs_DMSOt45.bed > " + filedir + "rep1onlyeRNAs_DMSOt45.counts.bed")
+    (r2-r1).saveas(filedir + "rep2onlyeRNAs_DMSOt45.bed")
+    os.system("bedtools multicov -bams " + rep1bam + " " + rep2bam + " -bed " + filedir + "rep2onlyeRNAs_DMSOt45.bed > " + filedir + "rep2onlyeRNAs_DMSOt45.counts.bed")
+    (r1+r2).saveas(filedir + "rep1and2eRNAs_DMSOt45.bed")
+    os.system("bedtools multicov -bams " + rep1bam + " " + rep2bam + " -bed " + filedir + "rep1and2eRNAs_DMSOt45.bed > " + filedir + "rep1and2eRNAs_DMSOt45.counts.bed")
 
-    filelist = [filedir + "rep1onlyeRNAs_DMSOt45.counts.bed",filedir + "rep1and2eRNAs_DMSOt45.counts.bed",filedir + "rep2onlyeRNAs_DMSOt45.counts.bed"]
+    filelist = [filedir+"rep1onlyeRNAs_DMSOt45.counts.bed",filedir+"rep1and2eRNAs_DMSOt45.counts.bed",filedir+"rep2onlyeRNAs_DMSOt45.counts.bed"]
     total_mapped = [[0,0],[0,0],[0,0]]
 
     j = 0
@@ -89,7 +92,7 @@ if __name__ == "__main__":
                 folder2+'foot_print_testing-9_bidir_predictions.bed',
                 folder2+'foot_print_testing-10_bidir_predictions.bed',
                 folder2+'foot_print_testing-11_bidir_predictions.bed',
-                folder2+'foot_print_testing-12_bidir_predictions.bed']
+                folder2+'foot_print_testing-12_bidir_predictions.bed',]
 
     bamfolder1 = '/projects/dowellLab/Taatjes/170207_K00262_0069_AHHMHVBBXX/cat/trimmed/flipped/bowtie2/sortedbam/'
     bam1 = bamfolder1 + 'J52_trimmed.flip.fastq.bowtie2.sorted.bam'

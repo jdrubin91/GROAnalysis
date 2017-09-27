@@ -27,9 +27,9 @@ def run(rep1,rep2, figuredir,filedir):
     Ab = len(rep1) - AB
     # (rep1+rep2).saveas(filedir + 'CA_t45_rep1and2_intersect.bed')
     plt.figure()
-    v = venn2(subsets=(Ab,aB,AB), set_labels = ('DMSO','CA'))
-    plt.title("Bidirectional Overlap DMSO CA Rep1 and Rep2 t=45")
-    plt.savefig(figuredir + 'Bidirectional_t45_DMSO_CA_rep1and2_overlap.png',dpi=1200)
+    v = venn2(subsets=(Ab,aB,AB), set_labels = ('run1','run2'))
+    plt.title("Bidirectional Overlap DMSO Rep1 Run1 and Run2 t=45")
+    plt.savefig(figuredir + 'Bidirectional_t45_DMSO_rep1run1and2.png',dpi=1200)
 
 
 def example():
@@ -70,14 +70,15 @@ if __name__ == "__main__":
                 folder2+'foot_print_testing-9_bidir_predictions.bed',
                 folder2+'foot_print_testing-10_bidir_predictions.bed',
                 folder2+'foot_print_testing-11_bidir_predictions.bed',
-                folder2+'foot_print_testing-12_bidir_predictions.bed']
+                folder2+'foot_print_testing-12_bidir_predictions.bed',
+                folder1+'DMSO45_first_run.bed']
 
-    rep1=filelist[10]
-    rep2=filelist[11]
+    rep1=filelist[4]
+    rep2=filelist[-1]
 
-    rep1=filedir + 'DMSO_t45_rep1and2_intersect.bed'
-    rep2=filedir + 'CA_t45_rep1and2_intersect.bed'
-    print rep1
-    print rep2
+    # rep1=filedir + 'DMSO_t45_rep1and2_intersect.bed'
+    # rep2=filedir + 'CA_t45_rep1and2_intersect.bed'
+    # print rep1
+    # print rep2
     run(rep1,rep2,figuredir,filedir)
 
