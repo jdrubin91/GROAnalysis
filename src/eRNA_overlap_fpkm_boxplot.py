@@ -60,7 +60,7 @@ def run(rep1,rep2,rep1bam,rep2bam,figuredir,filedir):
     ax.set_title('FPKM difference between replicate subsets DMSO')
     ax.set_ylabel('Difference in FPKM (rep1-rep2)')
     ax.set_xlabel('Subset')
-    bp = ax.boxplot(boxplot, positions=np.arange(len(boxplot)),patch_artist=True)
+    bp = ax.boxplot(boxplots, positions=np.arange(len(boxplot)),patch_artist=True)
     bp['boxes'][0].set( facecolor = 'red' )
     bp['boxes'][1].set( facecolor = 'yellow' )
     bp['boxes'][2].set( facecolor = 'green' )
