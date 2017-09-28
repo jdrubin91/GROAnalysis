@@ -56,6 +56,7 @@ def create_intersect_file(interval_file,path_to_PSSMs,filedir):
     add_header('\t'.join(header)+'\n', filedir + "all_preliminary_bidir.merge.sort.count.intersect.bed")
 
 def sort_intersect_file(intersect_file,filedir):
+    H = 1500
     fcs = list()
     intervals = list()
     with open(intersect_file) as F:
@@ -77,7 +78,7 @@ def sort_intersect_file(intersect_file,filedir):
                         val = int(line[11+i])
                         TFvals[i].append(val)
                     except ValueError:
-                        print i, TFnames[i], line
+                        TFvals[i].append(H+1)
                     # if val > 1500:
                     #     TFvals[i].append(0)
                     # else:
