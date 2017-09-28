@@ -65,15 +65,15 @@ def sort_intersect_file(intersect_file,filedir):
             line = line.strip('\n').split('\t')
             val1 = float(line[3])+0.0000001
             val2 = float(line[4])-0.0000001
-            if (val1+val2)/2 > 10:
+            if (val1+val2) > 10:
                 intervals.append('\t'.join(line[:3]))
                 try:
                     log2fc = math.log(val1/val2,2)
                     fcs.append(log2fc)
                 except:
                     fcs.append(0)
-                for i in range(len(line[5:])):
-                    val = int(line[5+i])
+                for i in range(len(line[11:])):
+                    val = int(line[11+i])
                     TFvals[i].append(val)
                     # if val > 1500:
                     #     TFvals[i].append(0)
