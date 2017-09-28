@@ -127,14 +127,16 @@ def gsea_analysis(sorted_intersect_file,figuredir):
             ESlist.append(ES)
         ES = max([max(ESlist),math.fabs(min(ESlist))])
         sortedlist.append((TF,ES))
+
+        F = plt.figure()
+        plt.scatter(np.arange(0,len(ESlist)),ESlist)
+        plt.savefig(figuredir + TF + '.png')
+        plt.close()
     
     for TF,ES in sorted(sortedlist, key=lambda x: x[1],reverse=True):
         print TF,ES
 
-        # F = plt.figure()
-        # plt.bar(ind,vals)
-        # plt.savefig(figuredir + TF + '.png')
-        # plt.close()
+        
 
                 
                     
