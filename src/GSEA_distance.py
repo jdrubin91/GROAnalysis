@@ -73,8 +73,11 @@ def sort_intersect_file(intersect_file,filedir):
                 except:
                     fcs.append(0)
                 for i in range(len(line[11:])):
-                    val = int(line[11+i])
-                    TFvals[i].append(val)
+                    try:
+                        val = int(line[11+i])
+                        TFvals[i].append(val)
+                    except ValueError:
+                        print line
                     # if val > 1500:
                     #     TFvals[i].append(0)
                     # else:
