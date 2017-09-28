@@ -77,7 +77,7 @@ def sort_intersect_file(intersect_file,filedir):
                         val = int(line[11+i])
                         TFvals[i].append(val)
                     except ValueError:
-                        print line
+                        print i, TFnames[i]
                     # if val > 1500:
                     #     TFvals[i].append(0)
                     # else:
