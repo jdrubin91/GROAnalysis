@@ -121,7 +121,7 @@ def gsea_analysis(sorted_intersect_file,figuredir):
         ES = 0
         for tick in vals:
             if tick > H:
-                ES += -1/neg
+                ES += -1/negs
             else:
                 ES += (H - tick)/TFsum
             ESlist.append(ES)
