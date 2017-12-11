@@ -30,7 +30,7 @@ def split_bed(gene_annotations,split_bed_file,upstream,downstream):
 def run(split_bed,bam):
     countsfile = split_bed + ".counts.bed"
     os.system("bedtools multicov -bams " + bam + " -bed " + split_bed + " > " + countsfile)
-    pausing_indexes = list()
+    pausing_indexes = dict()
     with open(countsfile) as F:
         oldgene = 'none'
         for line in F:
@@ -39,7 +39,7 @@ def run(split_bed,bam):
             if gene == oldgene:
                 denominator = float(line[-1])
                 try:
-                    pausing_indexes.append((gene,numerator/denominator))
+                    pausing_indexes[gene]=numerator/denominator
                 except:
                     pass
             else:
@@ -49,8 +49,12 @@ def run(split_bed,bam):
     return pausing_indexes
 
 def plot_vs(pausing_indexes1,pausing_indexes2,figuredir):
-    x = [l[1] for l in pausing_indexes1]
-    y = [l[1] for l in pausing_indexes2]
+    genes = set(pausing_indexes1.keys()) & set(pausing_indexes2.keys())
+    x = list()
+    y = list()
+    for gene in genes:
+        x.append(pausing_indexes1[gene])
+        y.append(pausing_indexes2[gene])
     print x,y
     F = plt.figure()
     ax = F.add_subplot(111)
