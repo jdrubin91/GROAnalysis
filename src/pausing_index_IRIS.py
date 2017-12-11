@@ -5,6 +5,8 @@ matplotlib.use('Agg')
 from matplotlib import rcParams
 rcParams.update({'figure.autolayout': True})
 import matplotlib.pyplot as plt
+from scipy.stats import gaussian_kde
+import numpy as np
 import os
 
 #This script takes 
@@ -58,7 +60,9 @@ def plot_vs(pausing_indexes1,pausing_indexes2,figuredir):
     print x,y
     F = plt.figure()
     ax = F.add_subplot(111)
-    plt.scatter(x,y)
+    xy = np.vstack([x,y])
+    z = gaussian_kde(xy)(xy)
+    ax.scatter(x,y,c=z,edgecolor="",s=14)
     plt.xlabel("30 min IFN + DMSO")
     plt.ylabel("30 min IFN + CA")
     plt.ylim((0,100))
