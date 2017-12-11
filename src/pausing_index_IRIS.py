@@ -29,7 +29,7 @@ def split_bed(gene_annotations,split_bed_file,upstream,downstream):
 
 def run(split_bed,bam):
     countsfile = split_bed + ".counts.bed"
-    os.system("bedtools mutlibamcov -bams " + bam + " -bed " + split_bed + " > " + countsfile)
+    os.system("bedtools multicov -bams " + bam + " -bed " + split_bed + " > " + countsfile)
     pausing_indexes = list()
     with open(countsfile) as F:
         oldgene = 'none'
