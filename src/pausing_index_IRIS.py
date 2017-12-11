@@ -9,8 +9,9 @@ import os
 
 #This script takes 
 
-def split_bed(gene_annotations,outfile,upstream,downstream):
+def split_bed(gene_annotations,split_bed_file,upstream,downstream):
     minlength = (upstream+downstream)*2
+    outfile = open(split_bed_file,'w')
     with open(gene_annotations) as F:
         for line in F:
             line = line.strip('\n').split('\t')
