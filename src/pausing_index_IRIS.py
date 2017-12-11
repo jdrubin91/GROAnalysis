@@ -50,7 +50,9 @@ def run(split_bed,bam):
 def plot_vs(pausing_indexes1,pausing_indexes2,figuredir):
     x = [l[1] for l in pausing_indexes1]
     y = [l[1] for l in pausing_indexes2]
+    print x,y
     F = plt.figure()
+    ax = F.add_subplot(111)
     plt.scatter(x,y)
     plt.savefig(figuredir + 'pausing_indexes_IRIS.png')
 
