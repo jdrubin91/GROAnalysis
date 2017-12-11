@@ -62,15 +62,15 @@ if __name__ == "__main__":
     upstream = 200
     downstream = 500
     gene_annotations = '/scratch/Users/joru1876/mm10/mm10.refFlat.bed'
-    split_bed = '/scratch/Users/joru1876/GROAnalysis/files/pausing_index_IRIS_split_bed.bed'
-    split_bed(gene_annotations,split_bed,upstream,downstream)
+    split_bed_file = '/scratch/Users/joru1876/GROAnalysis/files/pausing_index_IRIS_split_bed.bed'
+    split_bed(gene_annotations,split_bed_file,upstream,downstream)
 
     bamdir = '/scratch/Users/joru1876/Taatjes/171026_NB501447_0180_fastq_IRISREP2/Demux/Taatjes-374/trimmed/flipped/bowtie2/sortedbam'
     bam1 = bamdir + '30_2_S3_R1_001_trimmed.flip.fastq.bowtie2.sorted.bam'
-    pausing_indexes1 = run(split_bed,bam1)
+    pausing_indexes1 = run(split_bed_file,bam1)
 
     bam2 = bamdir + '30_CA_2_S4_R1_001_trimmed.flip.fastq.bowtie2.sorted.bam'
-    pausing_indexes2 = run(split_bed,bam2)
+    pausing_indexes2 = run(split_bed_file,bam2)
 
     figuredir = '/scratch/Users/joru1876/GROAnalysis/figures/'
     plot_vs(pausing_indexes1,pausing_indexes2,figuredir)
