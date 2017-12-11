@@ -2,6 +2,8 @@ __author__ = 'Jonathan Rubin'
 
 import matplotlib
 matplotlib.use('Agg')
+from matplotlib import rcParams
+rcParams.update({'figure.autolayout': True})
 import matplotlib.pyplot as plt
 import os
 
