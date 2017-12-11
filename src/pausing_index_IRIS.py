@@ -44,6 +44,7 @@ def run(split_bed,bam):
                     pass
             else:
                 numerator = float(line[-1])
+            oldgene = gene
 
     return pausing_indexes
 
