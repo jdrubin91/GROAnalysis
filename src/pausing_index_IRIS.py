@@ -55,8 +55,9 @@ def plot_vs(pausing_indexes1,pausing_indexes2,figuredir):
     x = list()
     y = list()
     for gene in genes:
-        x.append(pausing_indexes1[gene])
-        y.append(pausing_indexes2[gene])
+        if gene in ['Apof', 'Pdlim5', 'Plekhg6', 'Lima1', 'Gm12216', 'Nfkbiz', 'Irf1', 'Arid5b', 'Fas', 'Irf9', 'Irf8', 'Clec2d', 'Rhoj', 'Zfp36', '2310001H17Rik', 'Gpx4', 'Helz2', 'Serpina3f', 'Bcl3', 'Nfic', 'Adar', 'Thbs1', 'Stambpl1', 'Car9', 'Olfr56', 'Agfg2', 'Cttnbp2nl', 'Serpina3i', 'Cebpd', 'Plxna3', 'Tubb3', 'Msrb3', 'Serpina3g', 'Stat5a', 'Mgat3', 'Ly6c1', 'Actn1', 'Socs3', 'Ifnar2', 'Anxa3', 'Crem', 'Psmb9', 'Fosl2', 'Bvht', 'Relb', 'Cbx2', 'Stat1', 'Filip1l', 'Tnfrsf1a', 'Arf2', 'Eif2ak2', 'Impa2', 'Eid3', 'Tmem173', 'Ifi47', 'Syn3', 'Tap1', 'Stat3', 'Stat2', 'Ly6a', 'Mb', 'Mir143hg', 'Ap3m1', 'Osmr', 'Tgfb1i1', 'Csrp1', 'Fblim1', 'Il1r1', 'Tagln', 'Fermt2', 'Gm4285', 'Gm16675', 'Parp3', 'Mob3c', 'Mob3a', 'Palm', 'Frmd6', 'Txnrd1', 'Sbno2', 'Litaf', 'Gbp7', 'Pcsk7', 'Mnda', 'Ccrn4l', 'Ttc39b', 'Alpk1', 'Wdr1', 'Actg2', 'Klf6', 'Tldc2', 'Junb', 'Ntn4', 'Agpat4', 'Nlrc5', 'Rnf31', 'Spata13', 'Trerf1', 'Tspan11', 'Azin2', '9330175E14Rik', 'Wdfy1', 'Irgm2', 'Serpine1', 'Irgm1', 'F3', 'Timp3', 'Trim25', 'Trim21', 'Fhl2', 'Palld', 'Fhl1', 'Noc4l', 'Oas1b', 'Dact1', '4930562C15Rik', 'Pls3', 'Myl12b', 'Vcl', 'Apol6', 'Gyltl1b', 'Gm15910', 'Xaf1', 'Gnptab', 'Tgtp1', 'Tgtp2', 'Shisa4', 'Rnf19b', 'Il23a', 'Cdc42ep3', 'Gm12185', 'Cish', 'Btg2', 'A530013C23Rik', '9930111J21Rik2', '9930111J21Rik1', 'Rbm47', 'Prss48', 'Ripk1', 'Taf10', 'Igtp', 'Jak3', 'Bst2']:
+            x.append(pausing_indexes1[gene])
+            y.append(pausing_indexes2[gene])
     print x,y
     F = plt.figure()
     ax = F.add_subplot(111)
