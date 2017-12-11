@@ -44,23 +44,28 @@ def plot_MA(x,y,sig1,sig2,sig3,sig4,name,savedir,siglist1,siglist2,cond1,cond2,g
     ax.set_xlabel('Mean Overlap Events (log10)')
     ax.get_xaxis().tick_bottom()
     ax.get_yaxis().tick_left()
-    ax.set_ylim([-0.25,0.25])
-    for i in range(len(siglist2)):
-        if siglist2[i] == 'JUND':
-            ax.annotate(siglist2[i],xy=(sig3[i],sig4[i]),xytext = (2.5,-0.2),arrowprops=dict(facecolor='black', shrink=0.1,width = 1,headwidth=5))
-        if siglist2[i] == 'FOSL1':
-            ax.annotate(siglist2[i],xy=(sig3[i],sig4[i]),xytext = (2.9,-0.15),arrowprops=dict(facecolor='black', shrink=0.1,width = 1,headwidth=5))
-        # if siglist1[i] == 'RARB':
-        #     ax.annotate(siglist1[i],xy=(sig1[i],sig2[i]),xytext = (3.5,0.07),arrowprops=dict(facecolor='black', shrink=0.1,width = 1,headwidth=5))
+    ax.set_ylim([-0.15,0.15])
+    for i in range(len(siglist1)):
+        if siglist1[i] == 'HMGA1':
+            ax.annotate(siglist1[i],xy=(sig1[i],sig2[i]),xytext = (3.25,0.07),arrowprops=dict(facecolor='black', shrink=0.1,width = 1,headwidth=5))
+        # if siglist1[i] == 'JUND':
+        #     ax.annotate(siglist1[i],xy=(sig1[i],sig2[i]),xytext = (3,0.1),arrowprops=dict(facecolor='black', shrink=0.1,width = 1,headwidth=5))
+        if siglist1[i] == 'SP3':
+            ax.annotate(siglist1[i],xy=(sig1[i],sig2[i]),xytext = (4,0.1),arrowprops=dict(facecolor='black', shrink=0.1,width = 1,headwidth=5))
         # if siglist1[i] == 'RARA':
         #     ax.annotate(siglist1[i],xy=(sig1[i],sig2[i]),xytext = (4.25,0.09),arrowprops=dict(facecolor='black', shrink=0.1,width = 1,headwidth=5))
-    for i in range(len(genelist)):
-        if genelist[i] =='FOSL2':
-            ax.annotate(genelist[i],xy=(x[i],y[i]),xytext = (3.25,-0.1),arrowprops=dict(facecolor='black', shrink=0.1,width = 1,headwidth=5))
-        if genelist[i] =='BATF' and x[i] > 2.5:
-            ax.annotate(genelist[i],xy=(x[i],y[i]),xytext = (2.0,-0.1),arrowprops=dict(facecolor='black', shrink=0.1,width = 1,headwidth=5))
-        if genelist[i] =='JUN':
-            ax.annotate(genelist[i],xy=(x[i],y[i]),xytext = (2.25,-0.15),arrowprops=dict(facecolor='black', shrink=0.1,width = 1,headwidth=5))
+    for i in range(len(siglist2)):
+        if siglist2[i] == 'JUND':
+            ax.annotate(siglist2[i],xy=(sig3[i],sig4[i]),xytext = (2.5,-0.125),arrowprops=dict(facecolor='black', shrink=0.1,width = 1,headwidth=5))
+        if siglist2[i] == 'FOSL1':
+            ax.annotate(siglist2[i],xy=(sig3[i],sig4[i]),xytext = (3,-0.1),arrowprops=dict(facecolor='black', shrink=0.1,width = 1,headwidth=5))
+    # for i in range(len(genelist)):
+    #     if genelist[i] =='FOSL2':
+    #         ax.annotate(genelist[i],xy=(x[i],y[i]),xytext = (3.25,-0.1),arrowprops=dict(facecolor='black', shrink=0.1,width = 1,headwidth=5))
+    #     if genelist[i] =='BATF' and x[i] > 2.5:
+    #         ax.annotate(genelist[i],xy=(x[i],y[i]),xytext = (2.0,-0.1),arrowprops=dict(facecolor='black', shrink=0.1,width = 1,headwidth=5))
+    #     if genelist[i] =='JUN':
+    #         ax.annotate(genelist[i],xy=(x[i],y[i]),xytext = (2.25,-0.15),arrowprops=dict(facecolor='black', shrink=0.1,width = 1,headwidth=5))
     #     if genelist[i] =='RARA' and x[i] > 3:
     #         ax.annotate(genelist[i],xy=(x[i],y[i]),xytext = (4.25,0.09),arrowprops=dict(facecolor='black', shrink=0.1,width = 1,headwidth=5))
 
@@ -73,7 +78,7 @@ def plot_MA(x,y,sig1,sig2,sig3,sig4,name,savedir,siglist1,siglist2,cond1,cond2,g
     for item in siglist2:
         print item
     # plt.show()
-    plt.savefig(savedir + 'MA_plot_JDR_' + name1 + '-' + name2 + '_annotated.png',dpi=1200)
+    plt.savefig(savedir + 'MA_plot_JDR_' + name1 + '-' + name2 + '_annotated.svg')
 
 
 
@@ -167,12 +172,14 @@ def run(MDS1,MDS2,savedir):
                         X2.append(math.log((Nj+Nk)/2.0,10))
                         Y2.append(mdj-mdk-mean)
                         siglist.append(key.split('.')[0].split('_')[1])
-                        print 'up', key.split('.')[0].split('_')[1], math.log((Nj+Nk)/2.0,10), mdj-mdk-mean
+                        # print 'up', key.split('.')[0].split('_')[1], math.log((Nj+Nk)/2.0,10), mdj-mdk-mean
+                        print 'up', key.split('.')[0].split('_')[1], "%.4f" % p
                     else:
                         X3.append(math.log((Nj+Nk)/2.0,10))
                         Y3.append(mdj-mdk-mean)
                         siglist2.append(key.split('.')[0].split('_')[1])
-                        print 'down', key.split('.')[0].split('_')[1], math.log((Nj+Nk)/2.0,10), mdj-mdk-mean
+                        # print 'down', key.split('.')[0].split('_')[1], math.log((Nj+Nk)/2.0,10), mdj-mdk-mean
+                        print 'down', key.split('.')[0].split('_')[1], "%.4f" % p
         if name == 'BOTH':
             plot_MA(X,Y,X2,Y2,X3,Y3,name,savedir,siglist,siglist2,name1,name2,genelist)
 

@@ -101,42 +101,51 @@ def run(DMSO,CA):
     print "done"
 
 if __name__ == "__main__":
-    # datadir = '/projects/dowellLab/Taatjes/170825_NB501447_0152_fastq/Demux/cat/trimmed/flipped/bowtie2/sortedbam/genomecoveragebed/fortdf/'
+    datadir = '/projects/dowellLab/Taatjes/170825_NB501447_0152_fastq/Demux/cat/trimmed/flipped/bowtie2/sortedbam/genomecoveragebed/fortdf/'
 
-    # DMSO = datadir + 'J1DO1_AGTCAA_S1_L007and8_R1_001_trimmed.flip.fastq.bowtie2.sorted.BedGraph.mp.BedGraph'
-    # CA = datadir + 'J2CO1_AGTTCC_S2_L007and8_R1_001_trimmed.flip.fastq.bowtie2.sorted.BedGraph.mp.BedGraph'
-    # d1 = run(DMSO,CA)
+    DMSO = datadir + 'J1DO1_AGTCAA_S1_L007and8_R1_001_trimmed.flip.fastq.bowtie2.sorted.BedGraph.mp.BedGraph'
+    CA = datadir + 'J2CO1_AGTTCC_S2_L007and8_R1_001_trimmed.flip.fastq.bowtie2.sorted.BedGraph.mp.BedGraph'
+    d1 = run(DMSO,CA)
 
-    # DMSO = datadir + 'D301_CGTACG_S5_L007and8_R1_001_trimmed.flip.fastq.bowtie2.sorted.BedGraph.mp.BedGraph'
-    # CA = datadir + 'C301_GAGTGG_S6_L007and8_R1_001_trimmed.flip.fastq.bowtie2.sorted.BedGraph.mp.BedGraph'
-    # d2 = run(DMSO,CA)
+    datadir2 = '/scratch/Users/joru1876/Taatjes/170207_K00262_0069_AHHMHVBBXX_SERCAREP1/cat/trimmed/flipped/bowtie2/sortedbam/genomecoveragebed/fortdf/'
+    DMSO = datadir2 + 'J12_trimmed.flip.fastq.bowtie2.sorted.BedGraph.mp.BedGraph'
+    CA = datadir2 + 'J22_trimmed.flip.fastq.bowtie2.sorted.BedGraph.mp.BedGraph'
+    d2 = run(DMSO,CA)
 
-    # DMSO = datadir + 'J5D451_GTCCGC_S3_L007and8_R1_001_trimmed.flip.fastq.bowtie2.sorted.BedGraph.mp.BedGraph'
-    # CA = datadir + 'J6C451_GTGAAA_S4_L007and8_R1_001_trimmed.flip.fastq.bowtie2.sorted.BedGraph.mp.BedGraph'
-    # d3 = run(DMSO,CA)
+    DMSO = datadir + 'D301_CGTACG_S5_L007and8_R1_001_trimmed.flip.fastq.bowtie2.sorted.BedGraph.mp.BedGraph'
+    CA = datadir + 'C301_GAGTGG_S6_L007and8_R1_001_trimmed.flip.fastq.bowtie2.sorted.BedGraph.mp.BedGraph'
+    d3 = run(DMSO,CA)
 
-    # outfile = open(filedir + '/all_timepoints.txt','w')
-    # for key in d1:
-    #     outfile.write('d1' + '\t' + key + '\t' + str(d1[key]) + '\n')
-    # for key in d2:
-    #     outfile.write('d2' + '\t' + key + '\t' + str(d2[key]) + '\n')
-    # for key in d3:
-    #     outfile.write('d3' + '\t' + key + '\t' + str(d3[key]) + '\n')
+    DMSO = datadir + 'J5D451_GTCCGC_S3_L007and8_R1_001_trimmed.flip.fastq.bowtie2.sorted.BedGraph.mp.BedGraph'
+    CA = datadir + 'J6C451_GTGAAA_S4_L007and8_R1_001_trimmed.flip.fastq.bowtie2.sorted.BedGraph.mp.BedGraph'
+    d4 = run(DMSO,CA)
 
-
-    d1,d2,d3 = dict(),dict(),dict()
-    with open('/Users/jonathanrubin/Google Drive/Colorado University/Jonathan/GROAnalysis/files' + '/all_timepoints.txt') as F:
-        for line in F:
-            line = line.strip().split()
-            if 'd1' == line[0]:
-                d1[line[1]] = float(line[2])
-            if 'd2' == line[0]:
-                d2[line[1]] = float(line[2])
-            if 'd3' == line[0]:
-                d3[line[1]] = float(line[2])
+    outfile = open(filedir + '/all_timepoints.txt','w')
+    for key in d1:
+        outfile.write('d1' + '\t' + key + '\t' + str(d1[key]) + '\n')
+    for key in d2:
+        outfile.write('d2' + '\t' + key + '\t' + str(d2[key]) + '\n')
+    for key in d3:
+        outfile.write('d3' + '\t' + key + '\t' + str(d3[key]) + '\n')
+    for key in d4:
+        outfile.write('d4' + '\t' + key + '\t' + str(d3[key]) + '\n')
 
 
-    pausing_index_boxplots.run(d1,d2,d3,figuredir)
+    # d1,d2,d3 = dict(),dict(),dict()
+    # with open('/Users/jonathanrubin/Google Drive/Colorado University/Jonathan/GROAnalysis/files' + '/all_timepoints.txt') as F:
+    #     for line in F:
+    #         line = line.strip().split()
+    #         if 'd1' == line[0]:
+    #             d1[line[1]] = float(line[2])
+    #         if 'd2' == line[0]:
+    #             d2[line[1]] = float(line[2])
+    #         if 'd3' == line[0]:
+    #             d3[line[1]] = float(line[2])
+    #         if 'd4' == line[0]:
+    #             d4[line[1]] = float(line[2])
+
+
+    # pausing_index_boxplots.run(d1,d2,d3,figuredir)
 
 
     
