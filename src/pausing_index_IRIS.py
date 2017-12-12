@@ -50,7 +50,7 @@ def run(split_bed,bam,outfile):
 
     ofile = open(outfile,'w')
     for gene in pausing_indexes:
-        outfile.write(gene+'\t'+pausing_indexes[gene]+'\n')
+        ofile.write(gene+'\t'+pausing_indexes[gene]+'\n')
 
 def parse_count_file(file1):
     results = dict()
@@ -96,7 +96,7 @@ if __name__ == "__main__":
     split_bed_file = '/scratch/Users/joru1876/GROAnalysis/files/pausing_index_IRIS_split_bed.bed'
     split_bed(gene_annotations,split_bed_file,upstream,downstream)
 
-    outdir = '/scratch/Users/joru1876/GROAnalysis/figures/files/'
+    outdir = '/scratch/Users/joru1876/GROAnalysis/files/'
     bamdir = '/scratch/Users/joru1876/Taatjes/171026_NB501447_0180_fastq_IRISREP2/Demux/Taatjes-374/trimmed/flipped/bowtie2/sortedbam/'
     bam1 = bamdir + '30_2_S3_R1_001_trimmed.flip.fastq.bowtie2.sorted.bam'
     run(split_bed_file,bam1,outdir+'30_2.counts.bed')
