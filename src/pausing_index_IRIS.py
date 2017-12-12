@@ -68,6 +68,7 @@ def plot_vs(pausing_indexes1,pausing_indexes2,figuredir):
     plt.ylabel("30 min IFN + CA")
     plt.ylim((0,3.5))
     plt.xlim((0,3.5))
+    ax.plot([0,50.0],[0,50.0],color='k')
     plt.savefig(figuredir + 'pausing_indexes_IRIS.png')
 
 def plot_boxplots(array_of_pausing_indexes):
