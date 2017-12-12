@@ -29,7 +29,7 @@ def split_bed(gene_annotations,split_bed_file,upstream,downstream):
                     outfile.write('\t'.join([chrom,str(start),str(stop-downstream),gene,val,strand]) + '\n')
 
 
-def run(split_bed,bam):
+def run(split_bed,bam,outfile):
     countsfile = split_bed + ".counts.bed"
     os.system("bedtools multicov -bams " + bam + " -bed " + split_bed + " > " + countsfile)
     pausing_indexes = dict()
@@ -48,9 +48,22 @@ def run(split_bed,bam):
                 numerator = float(line[-1])
             oldgene = gene
 
-    return pausing_indexes
+    ofile = open(outfile,'w')
+    for gene in pausing_indexes:
+        outfile.write(gene+'\t'+pausing_indexes[gene]+'\n')
 
-def plot_vs(pausing_indexes1,pausing_indexes2,figuredir):
+def parse_count_file(file1):
+    results = dict()
+    with open(file1) as F:
+        for line in F:
+            line = line.strip('\n').split('\t')
+            results[line[0]] = results[line[1]]
+
+    return results
+
+def plot_vs(pausing_file1,pausing_file2,figuredir):
+    pausing_indexes1 = parse_count_file(pausing_file1)
+    pausing_indexes2 = parse_count_file(pausing_file2)
     genes = set(pausing_indexes1.keys()) & set(pausing_indexes2.keys())
     x = list()
     y = list()
@@ -83,15 +96,36 @@ if __name__ == "__main__":
     split_bed_file = '/scratch/Users/joru1876/GROAnalysis/files/pausing_index_IRIS_split_bed.bed'
     split_bed(gene_annotations,split_bed_file,upstream,downstream)
 
+    outdir = '/scratch/Users/joru1876/GROAnalysis/figures/files/'
     bamdir = '/scratch/Users/joru1876/Taatjes/171026_NB501447_0180_fastq_IRISREP2/Demux/Taatjes-374/trimmed/flipped/bowtie2/sortedbam/'
     bam1 = bamdir + '30_2_S3_R1_001_trimmed.flip.fastq.bowtie2.sorted.bam'
-    pausing_indexes1 = run(split_bed_file,bam1)
+    run(split_bed_file,bam1,outdir+'30_2.counts.bed')
 
     bam2 = bamdir + '30_CA_2_S4_R1_001_trimmed.flip.fastq.bowtie2.sorted.bam'
-    pausing_indexes2 = run(split_bed_file,bam2)
+    run(split_bed_file,bam2,outdir+'30_CA_2.counts.bed')
 
-    figuredir = '/scratch/Users/joru1876/GROAnalysis/figures/'
-    plot_vs(pausing_indexes1,pausing_indexes2,figuredir)
+    bam3 = bamdir + '0_2_S1_R1_001_trimmed.flip.fastq.bowtie2.sorted.bam'
+    run(split_bed_file,bam3,outdir+'0_2.counts.bed')
+
+    bam4 = bamdir + '0_CA_2_S2_R1_001_trimmed.flip.fastq.bowtie2.sorted.bam'
+    run(split_bed_file,bam4,outdir+'0_CA_2.counts.bed')
+
+    bam2dir = '/scratch/Users/joru1876/Taatjes/161220_K00262_0062_BHH7CHBBXX_IRISREP1/trimmed/flipped/bowtie2/sortedbam/'
+    bam5 = bam2dir + '0-1_S11_L006_R1_001_trimmed.flip.fastq.bowtie2.sorted.bam'
+    run(split_bed_file,bam5,outdir+'0_1.counts.bed')
+
+    bam6 = bam2dir + 'O-CA-1_S12_L006_R1_001_trimmed.flip.fastq.bowtie2.sorted.bam'
+    run(split_bed_file,bam6,outdir+'0_CA_1.counts.bed')
+
+    bam7 = bam2dir + '30-1_S15_L007_R1_001_trimmed.flip.fastq.bowtie2.sorted.bam'
+    run(split_bed_file,bam7,outdir+'30_1.counts.bed')
+
+    bam8 = bam2dir + '30-CA-1_S16_L007_R1_001_trimmed.flip.fastq.bowtie2.sorted.bam'
+    run(split_bed_file,bam8,outdir+'30_CA_1.counts.bed')
+
+
+    # figuredir = '/scratch/Users/joru1876/GROAnalysis/figures/'
+    # plot_vs(outdir+'30_2.counts.bed',outdir+'30_CA_2.counts.bed',figuredir)
 
 
 
