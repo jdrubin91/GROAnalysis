@@ -50,14 +50,14 @@ def run(split_bed,bam,outfile):
 
     ofile = open(outfile,'w')
     for gene in pausing_indexes:
-        ofile.write(gene+'\t'+pausing_indexes[gene]+'\n')
+        ofile.write(gene+'\t'+str(pausing_indexes[gene])+'\n')
 
 def parse_count_file(file1):
     results = dict()
     with open(file1) as F:
         for line in F:
             line = line.strip('\n').split('\t')
-            results[line[0]] = results[line[1]]
+            results[line[0]] = float(results[line[1]])
 
     return results
 
